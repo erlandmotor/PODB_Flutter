@@ -9,7 +9,7 @@ class Boxbesar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 380),
+      margin: EdgeInsets.only(bottom: 307),
       child: Card(
         elevation: 1,
        // margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),

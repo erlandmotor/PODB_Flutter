@@ -1,8 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ppodb_2/page/akun/akun.dart';
+import 'package:ppodb_2/page/faq/faq.dart';
 import 'package:ppodb_2/page/home/background.dart';
 import 'package:ppodb_2/page/produk/pulsa.dart';
+import 'package:ppodb_2/page/riwayat/riwayat.dart';
+import 'package:ppodb_2/page/widgets/botton_navigation_box.dart';
 import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
 import 'package:ppodb_2/page/widgets/box_besar.dart';
 import 'package:ppodb_2/page/widgets/box_kecil.dart';
@@ -17,15 +21,44 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+ 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(      
+    return Scaffold(         
       body: Background(
         child:  
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Container(
+                      height: 50,
+                      width: double.infinity,
+                      child: Row(
+                       
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Image.asset("assets/icon/c.png",
+                            height: 30,
+                            ),
+                          ),
+                          Image.asset("assets/icon/MYCUAN.png",
+                          height: 15,
+                          ),
+                      
+                          Padding(
+                            padding: const EdgeInsets.only(left: 170),
+                            child: Image.asset("assets/icon/lonceng.png",
+                            height: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ),
                 Boxkecil(                    
                    child: ListTile(                        
                      title: Column(
@@ -41,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                          ),
                           Padding(
                        padding: const EdgeInsets.only(top: 5),
-                       child: Text("Rp. 15.000",
+                       child: Text("Rp. 0",
                        style: GoogleFonts.inter(
                          color: Colors.black,
                          fontWeight: FontWeight.w500,
@@ -49,21 +82,17 @@ class _HomePageState extends State<HomePage> {
                        )
                        ),
                      ),
-                     Row(
+                     
+                       ],
+                     ), 
+                     trailing: Column(
                      mainAxisAlignment: MainAxisAlignment.end,
                      crossAxisAlignment: CrossAxisAlignment.center,
                      children: [
-                     Text("Top Up",
-                           style: GoogleFonts.inter(
-                             color: Colors.black,
-                             fontWeight: FontWeight.w500,
-                             fontSize: 12
-                           )
-                           ),
-                             SizedBox(width: 5,),
+                   
                            Container(
-                             height: 25,
-                             width: 25,
+                             height: 33,
+                             width: 33,
                              decoration: BoxDecoration(
                                color: primaryColor,
                                borderRadius: BorderRadius.circular(400)
@@ -71,14 +100,20 @@ class _HomePageState extends State<HomePage> {
                              child: IconButton(
                                onPressed: () {
                                  
-                               }, icon: Image.asset("assets/icon/panah_kanan.png"),
+                               }, icon: Image.asset("assets/icon/Plus.png"),
                              )
                            ),
-                         
+                             SizedBox(width: 5,),
+                           Text("Top Up",
+                           style: GoogleFonts.inter(
+                             color: Colors.black,
+                             fontWeight: FontWeight.w500,
+                             fontSize: 12
+                           )
+                           ),
+                           
                          ],
-                       ),
-                       ],
-                     ),                              
+                       ),                           
                    )),
                    Expanded(
                      child: Padding(
