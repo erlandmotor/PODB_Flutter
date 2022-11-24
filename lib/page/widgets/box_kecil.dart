@@ -11,7 +11,7 @@ class Boxkecil extends StatelessWidget {
     return Container(
       //margin: EdgeInsets.only(bottom: 510,),
       child: Padding(
-        padding: EdgeInsets.only(left: 30,right: 30,bottom: 70,top: 70),
+        padding: EdgeInsets.only(left: 30,right: 30,top: 70),
         child: Card(
           elevation: 5,
           margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),

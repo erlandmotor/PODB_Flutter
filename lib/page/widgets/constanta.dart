@@ -8,8 +8,12 @@ import 'package:flutter/material.dart';
   const buttonOFFColor = Color.fromRGBO(177, 180, 186, 1);
   
   List iconModul = [
-    "assets/icon/pulsa.png","assets/icon/data.png","assets/icon/PDAM.png","assets/icon/listrik.png", 
+    "assets/icon/Pulsa.png","assets/icon/data.png","assets/icon/PDAM.png","assets/icon/listrik.png", 
     "assets/icon/BPJS.png", "assets/icon/Indihome.png","assets/icon/game.png", "assets/icon/more.png",     
+  ];
+
+  List modulName = [
+      "Pulsa","Paket Data","PDAM","Listrik","BPJS","Indihome","Voucher Game","Lainnya",
   ];
 
   List iconNavbar = [
