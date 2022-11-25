@@ -21,7 +21,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
- 
+ late PageController _pageController;
+ int activePage =1;
+ @override
+  void initState() {
+    _pageController = PageController(viewportFraction: 0.8);
+    super.initState();
+  }
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(         
@@ -117,10 +128,10 @@ class _HomePageState extends State<HomePage> {
                    )),
                    Expanded(
                      child: Padding(
-                       padding: const EdgeInsets.only(left: 28,right: 28,bottom: 10,top: 15),
+                       padding: const EdgeInsets.only(left: 28,right: 28,top: 20,bottom: 30),
                        child: Boxbesar(
                         child: GridView.builder(
-                          padding: EdgeInsets.only(top: 15),
+                          padding: EdgeInsets.only(top: 15,),
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4,
                           // childAspectRatio: 5 ,
@@ -198,13 +209,46 @@ class _HomePageState extends State<HomePage> {
                         )),
                      ),
                    ),
-
+                   Padding(
+                     padding: const EdgeInsets.only(left: 40),
+                     child: Text("Promo",
+                                  style: GoogleFonts.inter(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600
+                                  )),
+                   ),
+                      Expanded(
+                        child: PageView.builder(
+                          itemCount: gambarPromo.length,
+                          pageSnapping: true,
+                          controller: _pageController,
+                          onPageChanged: (page) {
+                            setState(() {
+                              activePage = page;
+                            });
+                          },
+                          itemBuilder: (context, pagePosition) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                
+                                InkWell(
+                                  child: Container(
+                                    margin: EdgeInsets.only(right: 20,top: 5,bottom: 20),
+                                    child: Image.asset(gambarPromo[pagePosition]))),
+                              ],
+                            );
+                          }),
+                      ),
+                  
                 //  Container(
                 //    child: Text("Promo",style: GoogleFonts.inter(
                 //     fontSize: 14,
                 //     fontWeight: FontWeight.w600
                 //    ),),
                 //  )
+              
               ],
             ),
           

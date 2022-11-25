@@ -19,3 +19,7 @@ import 'package:flutter/material.dart';
   List iconNavbar = [
     "assets/icon/home.png","assets/icon/jam.png","assets/icon/tanda_tanya.png","assets/icon/orang.png",   
   ];
+  
+  List gambarPromo = [
+    "assets/image/admin.png","assets/image/cashback.png","assets/image/listrik.png",
+  ];
