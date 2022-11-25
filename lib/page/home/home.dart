@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
  int activePage =1;
  @override
   void initState() {
-    _pageController = PageController(viewportFraction: 0.8);
+    _pageController = PageController(viewportFraction: 0.8,initialPage: 1);
     super.initState();
   }
   @override
@@ -33,6 +33,19 @@ class _HomePageState extends State<HomePage> {
     _pageController.dispose();
     super.dispose();
   }
+  List<Widget> indicators(imagesLength,currentIndex) {
+  return List<Widget>.generate(imagesLength, (index) {
+    return Container(
+      margin: EdgeInsets.all(3),
+      width: 10,
+      height: 10,
+      decoration: BoxDecoration(
+          color: currentIndex == index ? primaryColor : offIndikartor,
+          shape: BoxShape.circle),
+    );
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(         
@@ -43,7 +56,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(15),
+                  padding: const EdgeInsets.only(left: 15,right: 15,top: 10),
                   child: Container(
                       height: 50,
                       width: double.infinity,
@@ -128,10 +141,10 @@ class _HomePageState extends State<HomePage> {
                    )),
                    Expanded(
                      child: Padding(
-                       padding: const EdgeInsets.only(left: 28,right: 28,top: 20,bottom: 30),
+                       padding: const EdgeInsets.only(left: 28,right: 28,),
                        child: Boxbesar(
                         child: GridView.builder(
-                          padding: EdgeInsets.only(top: 15,),
+                          padding: EdgeInsets.only(top: 2,),
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4,
                           // childAspectRatio: 5 ,
@@ -210,7 +223,7 @@ class _HomePageState extends State<HomePage> {
                      ),
                    ),
                    Padding(
-                     padding: const EdgeInsets.only(left: 40),
+                     padding: const EdgeInsets.only(left: 40,top: 10),
                      child: Text("Promo",
                                   style: GoogleFonts.inter(
                                     fontSize: 20,
@@ -235,13 +248,24 @@ class _HomePageState extends State<HomePage> {
                                 
                                 InkWell(
                                   child: Container(
-                                    margin: EdgeInsets.only(right: 20,top: 5,bottom: 20),
+                                    margin: EdgeInsets.only(right: 20,top: 15),
                                     child: Image.asset(gambarPromo[pagePosition]))),
                               ],
                             );
                           }),
                       ),
-                  
+                      Padding(
+                        padding: const EdgeInsets.only(left: 50,bottom: 5),
+                        child: Row(
+                        
+                          children: indicators(gambarPromo.length,activePage)),
+                      ),
+
+                 InkWell(
+                                  child: Image.asset("assets/image/Bantuan.png",
+                                  height: 150,
+                                  width: 450,)),
+                              ],
                 //  Container(
                 //    child: Text("Promo",style: GoogleFonts.inter(
                 //     fontSize: 14,
@@ -249,7 +273,7 @@ class _HomePageState extends State<HomePage> {
                 //    ),),
                 //  )
               
-              ],
+              
             ),
           
              )

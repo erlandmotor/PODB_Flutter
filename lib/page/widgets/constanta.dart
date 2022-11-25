@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
   const colorBox = Color.fromRGBO(255, 255, 255, 1);
   const sideColorBox = Color.fromRGBO(134, 159, 226, 1);
   const buttonOFFColor = Color.fromRGBO(177, 180, 186, 1);
+  const offIndikartor = Color.fromRGBO(182, 198, 238, 1);
   
   List iconModul = [
     "assets/icon/Pulsa.png","assets/icon/data.png","assets/icon/PDAM.png","assets/icon/listrik.png", 
