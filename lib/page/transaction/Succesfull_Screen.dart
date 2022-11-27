@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/page/detail_product.dart';
-import 'package:ppodb_2/page/product_screen.dart';
+import 'package:ppodb_2/page/transaction/detail_product.dart';
+import 'package:ppodb_2/page/transaction/product_screen.dart';
 
 class SuccesPage extends StatefulWidget {
   const SuccesPage({super.key});
@@ -13,9 +13,9 @@ class _SuccesPageState extends State<SuccesPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Container(
-      color: Colors.white,
-      child: Padding(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
         padding:
             EdgeInsets.only(right: size.width * .044, left: size.width * .044),
         child: Column(
@@ -25,8 +25,31 @@ class _SuccesPageState extends State<SuccesPage> {
             ),
             Container(
               width: size.width * .9138,
-              height: size.height * .39,
-              child: Image.asset("assets/image/Frame.png"),
+              child: Column(
+                children: [
+                  Image.asset("assets/image/cuate.png"),
+                  Text.rich(
+                      textAlign: TextAlign.center,
+                      TextSpan(
+                          text: "Pembayaran Berhasil!",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 24,
+                              color: Colors.black))),
+                  SizedBox(
+                    height: size.height * .02,
+                  ),
+                  Text.rich(
+                      textAlign: TextAlign.center,
+                      TextSpan(
+                          text:
+                              "Tekan Transaksi lagi untuk melakukan \ntransaksi lain atau Kembali ke beranda",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16,
+                              color: Colors.black))),
+                ],
+              ),
             ),
             SizedBox(
               height: size.height * .1575,
@@ -46,10 +69,11 @@ class _SuccesPageState extends State<SuccesPage> {
                             backgroundColor: Color(0xff0D40C6),
                             shape: StadiumBorder()),
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => DetailProduct()));
+                                  builder: (context) => DetailProduct()),
+                              (route) => route.isFirst);
                         },
                         child: Text.rich(
                           TextSpan(
@@ -75,10 +99,11 @@ class _SuccesPageState extends State<SuccesPage> {
                       height: size.height * .07,
                       child: TextButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => homeScreen()));
+                                  builder: (context) => homeScreen()),
+                              ((route) => route.isFirst));
                         },
                         child: Text.rich(
                           TextSpan(

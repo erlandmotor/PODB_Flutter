@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/page/product_screen.dart';
+import 'package:ppodb_2/page/transaction/product_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      theme: ThemeData(fontFamily: "inter"),
       home: homeScreen(),
     );
   }
