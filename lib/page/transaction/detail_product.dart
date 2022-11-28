@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/pembayaran.dart';
 
 class DetailProduct extends StatefulWidget {
@@ -10,6 +11,19 @@ class DetailProduct extends StatefulWidget {
 
 class _DetailProductState extends State<DetailProduct> {
   String koko = "";
+  List<ProductDummyModel> fafa = [
+    ProductDummyModel(
+        id: 1, name: "5.000", diskon: 2000, harga: 6000, status: "diskon"),
+    ProductDummyModel(
+        id: 2, name: "10.000", diskon: 0, harga: 10200, status: "tersedia"),
+    ProductDummyModel(
+        id: 3, name: "20.000", diskon: 0, harga: 22000, status: "tersedia"),
+    ProductDummyModel(
+        id: 4, name: "50.000", diskon: 0, harga: 51000, status: "tersedia"),
+    ProductDummyModel(
+        id: 1, name: "100.000", diskon: 2000, harga: 100000, status: "diskon"),
+  ];
+  String status = "";
   TextEditingController bambang = TextEditingController();
   //color=0xff
   @override
@@ -18,7 +32,9 @@ class _DetailProductState extends State<DetailProduct> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: koko.length < 10 || koko.length > 13 || koko == ""
+          ? Colors.white
+          : Color(0xfff2f3f6),
       appBar: AppBar(
         title: Text(
           "Pulsa",
@@ -36,49 +52,18 @@ class _DetailProductState extends State<DetailProduct> {
         ),
         child: Stack(children: [
           Padding(
-            padding: EdgeInsets.only(
-              left: size.width * .016,
-              right: size.width * .016,
-            ),
-            child: Container(
-                alignment: Alignment.bottomCenter,
-                child: SizedBox(
-                    width: size.width * 3.28,
-                    height: size.height * .14,
-                    child: Container(
-                      color: Colors.white,
-                    ))),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                left: size.width * .016,
-                right: size.width * .016,
-                bottom: size.height * .08),
-            child: Container(
-                alignment: Alignment.bottomCenter,
-                child: SizedBox(
-                  width: size.width * 3.28,
-                  height: size.height * .07,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff0D40C6),
-                        shape: StadiumBorder()),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Pembayaranscreen()));
-                    },
-                    child: Text.rich(
-                      TextSpan(
-                        text: "Lanjutkan",
-                      ),
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                    ),
-                  ),
-                )),
-          ),
+              padding: EdgeInsets.only(
+                  left: size.width * .016, right: size.width * .016),
+              child: Column(children: [
+                SizedBox(
+                  height: size.height * .0575,
+                ),
+                Container(
+                  color: Colors.white,
+                  width: size.width * .93,
+                  height: size.height * .08,
+                )
+              ])),
           Padding(
             padding: EdgeInsets.only(
                 left: size.width * .016, right: size.width * .016),
@@ -101,32 +86,39 @@ class _DetailProductState extends State<DetailProduct> {
                 SizedBox(
                   height: size.height * .012,
                 ),
-                TextField(
-                  decoration: koko == ""
-                      ? InputDecoration(
-                          prefixIcon: Icon(Icons.phone_android),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          hintText: "0853xxxxxxxx")
-                      : InputDecoration(
-                          suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  koko = "";
-                                  bambang.clear();
-                                });
-                              },
-                              icon: Icon(Icons.cancel)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                  onChanged: ((value) {
-                    setState(() {
-                      koko = value;
-                    });
-                  }),
-                  controller: bambang,
-                  keyboardType: TextInputType.phone,
+                Stack(
+                  children: [
+                    Container(
+                      color: Colors.white,
+                    ),
+                    TextField(
+                      decoration: koko == ""
+                          ? InputDecoration(
+                              prefixIcon: Icon(Icons.phone_android),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              hintText: "0853xxxxxxxx")
+                          : InputDecoration(
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      koko = "";
+                                      bambang.clear();
+                                    });
+                                  },
+                                  icon: Icon(Icons.cancel)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                      onChanged: ((value) {
+                        setState(() {
+                          koko = value;
+                        });
+                      }),
+                      controller: bambang,
+                      keyboardType: TextInputType.phone,
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: size.height * .005,
@@ -227,269 +219,151 @@ class _DetailProductState extends State<DetailProduct> {
                   height: size.height * .02,
                 ),
                 Align(
-                  alignment: Alignment.topLeft,
-                  child: Text.rich(
-                      textAlign: TextAlign.left,
-                      TextSpan(
-                          text: "Nominal Pulsa",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                          ))),
+                  alignment: koko.length < 10 || koko.length > 13 || koko == ""
+                      ? Alignment.center
+                      : Alignment.topLeft,
+                  child: koko.length < 10 && koko.length > 0 || koko.length > 13
+                      ? CircularProgressIndicator()
+                      : koko == ""
+                          ? Container()
+                          : Text.rich(
+                              textAlign: TextAlign.left,
+                              TextSpan(
+                                  text: "Nominal Pulsa",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20,
+                                  ))),
                 ),
                 SizedBox(
                   height: size.height * .01,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: size.height * .135,
-                      width: size.width * .4333,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(
-                            color: Colors.black38, // Set border color
-                            width: 1.0),
-                        color: Colors.white,
-                      ),
-                      child: Column(children: [
-                        Container(
-                            height: size.height * .075,
-                            width: size.width * .433,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                    "assets/image/Normal_Rounded.png",
-                                  ),
-                                  fit: BoxFit.fill),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                left: size.width * .03636,
-                                top: size.height * .01,
-                                bottom: size.height * .01,
-                              ),
-                              child: Text.rich(
-                                  textAlign: TextAlign.left,
-                                  TextSpan(
-                                      text: "Rp\n5.000",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 16,
-                                          color: Colors.white))),
-                            )),
-                        SizedBox(
-                          height: size.height * .015,
+                Expanded(
+                  child: koko.length < 10 || koko.length > 13 || koko == ""
+                      ? Container()
+                      : GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: size.width * .0444,
+                                  mainAxisSpacing: size.height * .02,
+                                  mainAxisExtent: 100),
+                          itemBuilder: (context, index) {
+                            return RawMaterialButton(
+                                onPressed: () {
+                                  setState(() {
+                                    status = fafa[index].name;
+                                  });
+                                },
+                                child: Container(
+                                    height: size.height * .135,
+                                    width: size.width * .4333,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      border: fafa[index].name != status
+                                          ? Border.all(
+                                              color: Colors
+                                                  .black38, // Set border color
+                                              width: 1.0)
+                                          : Border.all(
+                                              color: Colors
+                                                  .blue, // Set border color
+                                              width: 3.0),
+                                      color: Colors.white,
+                                    ),
+                                    child: Column(children: [
+                                      Container(
+                                        height: size.height * .075,
+                                        width: size.width * .433,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                "assets/image/Promo_Rounded.png",
+                                              ),
+                                              fit: BoxFit.fill),
+                                        ),
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                            left: size.width * .03636,
+                                            top: size.height * .01,
+                                            bottom: size.height * .01,
+                                          ),
+                                          child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text.rich(
+                                                textAlign: TextAlign.left,
+                                                TextSpan(
+                                                    text: fafa[index].name,
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 20,
+                                                        color: Colors.white))),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: size.height * .015,
+                                      ),
+                                      Padding(
+                                          padding: EdgeInsets.only(
+                                            left: size.width * .0333,
+                                          ),
+                                          child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text.rich(TextSpan(
+                                                text:
+                                                    "Bayar:${fafa[index].harga - fafa[index].diskon}",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 14,
+                                                ))),
+                                          )),
+                                    ])));
+                          },
+                          itemCount: fafa.length,
                         ),
-                        Padding(
-                            padding: EdgeInsets.only(
-                              left: size.width * .0333,
-                            ),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text.rich(TextSpan(
-                                  text: "Bayar: Rp7.000",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                  ))),
-                            ))
-                      ]),
-                    ),
-                    Container(
-                      height: size.height * .135,
-                      width: size.width * .4333,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(
-                            color: Colors.black38, // Set border color
-                            width: 1.0),
-                        color: Colors.white,
-                      ),
-                      child: Column(children: [
-                        Container(
-                          height: size.height * .075,
-                          width: size.width * .433,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(
-                                  "assets/image/Promo_Rounded.png",
-                                ),
-                                fit: BoxFit.fill),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              left: size.width * .03636,
-                              top: size.height * .01,
-                              bottom: size.height * .01,
-                            ),
-                            child: Text.rich(
-                                textAlign: TextAlign.left,
-                                TextSpan(
-                                    text: "Rp\n10.000",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 16,
-                                        color: Colors.white))),
-                          ),
-                        ),
-                        SizedBox(
-                          height: size.height * .015,
-                        ),
-                        Padding(
-                            padding: EdgeInsets.only(
-                              left: size.width * .0333,
-                            ),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text.rich(TextSpan(
-                                  text: "Bayar: Rp10.200",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                  ))),
-                            )),
-                      ]),
-                    ),
-                  ],
                 ),
                 SizedBox(
-                  height: size.height * .02,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: size.height * .135,
-                      width: size.width * .4333,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(
-                            color: Colors.black38, // Set border color
-                            width: 1.0),
-                        color: Colors.white,
-                      ),
-                      child: Column(children: [
-                        Stack(children: [
-                          Container(
-                              height: size.height * .075,
-                              width: size.width * .433,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10.0),
-                                    topRight: Radius.circular(10.0)),
-                                color: Color(0xff0D40C6),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                  left: size.width * .03636,
-                                  top: size.height * .01,
-                                  bottom: size.height * .01,
-                                ),
-                                child: Text.rich(
-                                    textAlign: TextAlign.left,
-                                    TextSpan(
-                                        text: "Rp\n5.000",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 16,
-                                            color: Colors.white))),
-                              )),
-                          Container(
-                            height: size.height * .075,
-                            width: size.width * .433,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10.0),
-                                  topRight: Radius.circular(10.0)),
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  "assets/image/Ellipse.png",
-                                ),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                        ]),
-                        SizedBox(
-                          height: size.height * .015,
-                        ),
-                        Padding(
-                            padding: EdgeInsets.only(
-                              left: size.width * .0333,
-                            ),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text.rich(TextSpan(
-                                  text: "Bayar: Rp7.000",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                  ))),
-                            ))
-                      ]),
-                    ),
-                    Container(
-                      height: size.height * .135,
-                      width: size.width * .4333,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(
-                            color: Colors.black38, // Set border color
-                            width: 1.0),
-                        color: Colors.white,
-                      ),
-                      child: Column(children: [
-                        Container(
-                          height: size.height * .075,
-                          width: size.width * .433,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(
-                                  "assets/image/Promo_Rounded.png",
-                                ),
-                                fit: BoxFit.fill),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              left: size.width * .03636,
-                              top: size.height * .01,
-                              bottom: size.height * .01,
-                            ),
-                            child: Text.rich(
-                                textAlign: TextAlign.left,
-                                TextSpan(
-                                    text: "Rp\n10.000",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 16,
-                                        color: Colors.white))),
-                          ),
-                        ),
-                        SizedBox(
-                          height: size.height * .015,
-                        ),
-                        Padding(
-                            padding: EdgeInsets.only(
-                              left: size.width * .0333,
-                            ),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text.rich(TextSpan(
-                                  text: "Bayar: Rp10.200",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                  ))),
-                            )),
-                      ]),
-                    ),
-                  ],
+                  height: size.height * .1,
                 ),
               ],
             ),
-          )
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                left: size.width * .044,
+                right: size.width * .044,
+                bottom: size.height * .025),
+            child: Container(
+                alignment: Alignment.bottomCenter,
+                child: SizedBox(
+                  width: size.width * .9111,
+                  height: size.height * .06,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            Color(status != "" ? 0xff0D40C6 : 0xffD9DCE3),
+                        shape: StadiumBorder()),
+                    onPressed: () {
+                      if (status != "") {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Pembayaranscreen()),
+                        );
+                      }
+                    },
+                    child: Text.rich(
+                      TextSpan(
+                        text: "Lanjutkan",
+                      ),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                    ),
+                  ),
+                )),
+          ),
         ]),
       ),
     );

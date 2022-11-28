@@ -7,7 +7,7 @@ class Pembayaranscreen extends StatefulWidget {
 
   @override
   State<Pembayaranscreen> createState() => _PembayaranscreenState();
-}
+} //radiolisten
 
 class _PembayaranscreenState extends State<Pembayaranscreen> {
   String status = "";
@@ -471,38 +471,17 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                   height: size.height * .06,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff0D40C6),
+                        backgroundColor:
+                            Color(status != "" ? 0xff0D40C6 : 0xffD9DCE3),
                         shape: StadiumBorder()),
                     onPressed: () {
-                      status == ""
-                          ? showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: const Text('Kamu belum nentuin'),
-                                  content: SingleChildScrollView(
-                                    child: ListBody(
-                                      children: const <Widget>[
-                                        Text(
-                                            'Kamu lupa nentuin metode pembayaran kamu lhoo'),
-                                      ],
-                                    ),
-                                  ),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: const Text('Oke'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              })
-                          : Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SuccesPage()),
-                              (route) => false);
+                      if (status != "") {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SuccesPage()),
+                            (route) => false);
+                      }
                     },
                     child: Text.rich(
                       TextSpan(
