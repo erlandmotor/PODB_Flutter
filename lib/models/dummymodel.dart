@@ -24,3 +24,15 @@ final List<ProductDummyModel> dummydata = [
   ProductDummyModel(
       id: 1, name: "100.000", diskon: 2000, harga: 100000, status: "diskon"),
 ];
+
+class Dummypaket {
+  int id;
+  String name;
+  String desc;
+  int harga;
+  Dummypaket(
+      {required this.desc,
+      required this.harga,
+      required this.id,
+      required this.name});
+}

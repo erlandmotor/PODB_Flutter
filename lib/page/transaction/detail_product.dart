@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/pembayaran.dart';
 
@@ -21,7 +22,9 @@ class _DetailProductState extends State<DetailProduct> {
     ProductDummyModel(
         id: 4, name: "50.000", diskon: 0, harga: 51000, status: "tersedia"),
     ProductDummyModel(
-        id: 1, name: "100.000", diskon: 2000, harga: 100000, status: "diskon"),
+        id: 5, name: "100.000", diskon: 2000, harga: 100000, status: "diskon"),
+    ProductDummyModel(
+        id: 5, name: "200.000", diskon: 0, harga: 200000, status: "habis"),
   ];
   String status = "";
   TextEditingController bambang = TextEditingController();
@@ -32,7 +35,11 @@ class _DetailProductState extends State<DetailProduct> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: koko.length < 10 || koko.length > 13 || koko == ""
+      backgroundColor: koko.length < 10 ||
+              koko.length > 13 ||
+              koko == "" ||
+              koko[0] != "0" ||
+              koko[1] != "8"
           ? Colors.white
           : Color(0xfff2f3f6),
       appBar: AppBar(
@@ -47,14 +54,11 @@ class _DetailProductState extends State<DetailProduct> {
       ),
       body: Padding(
         padding: EdgeInsets.only(
-          left: size.width * .016,
-          right: size.width * .016,
+          left: size.width * .0444,
+          right: size.width * .044,
         ),
         child: Stack(children: [
-          Padding(
-              padding: EdgeInsets.only(
-                  left: size.width * .016, right: size.width * .016),
-              child: Column(children: [
+         Column(children: [
                 SizedBox(
                   height: size.height * .0575,
                 ),
@@ -63,11 +67,8 @@ class _DetailProductState extends State<DetailProduct> {
                   width: size.width * .93,
                   height: size.height * .08,
                 )
-              ])),
-          Padding(
-            padding: EdgeInsets.only(
-                left: size.width * .016, right: size.width * .016),
-            child: Column(
+              ]),
+          Column(
               children: [
                 SizedBox(
                   height: size.height * .016,
@@ -113,6 +114,7 @@ class _DetailProductState extends State<DetailProduct> {
                       onChanged: ((value) {
                         setState(() {
                           koko = value;
+                          status = "";
                         });
                       }),
                       controller: bambang,
@@ -224,7 +226,7 @@ class _DetailProductState extends State<DetailProduct> {
                       : Alignment.topLeft,
                   child: koko.length < 10 && koko.length > 0 || koko.length > 13
                       ? CircularProgressIndicator()
-                      : koko == ""
+                      : koko == "" || koko[0] != "0" || koko[1] != "8"
                           ? Container()
                           : Text.rich(
                               textAlign: TextAlign.left,
@@ -239,7 +241,11 @@ class _DetailProductState extends State<DetailProduct> {
                   height: size.height * .01,
                 ),
                 Expanded(
-                  child: koko.length < 10 || koko.length > 13 || koko == ""
+                  child: koko.length < 10 ||
+                          koko.length > 13 ||
+                          koko == "" ||
+                          koko[0] != "0" ||
+                          koko[1] != "8"
                       ? Container()
                       : GridView.builder(
                           gridDelegate:
@@ -252,7 +258,10 @@ class _DetailProductState extends State<DetailProduct> {
                             return RawMaterialButton(
                                 onPressed: () {
                                   setState(() {
-                                    status = fafa[index].name;
+                                    if (fafa[index].status != "habis") {
+                                      status = fafa[index].name;
+                                    }
+                                    ;
                                   });
                                 },
                                 child: Container(
@@ -278,7 +287,12 @@ class _DetailProductState extends State<DetailProduct> {
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
-                                                "assets/image/Promo_Rounded.png",
+                                                fafa[index].status == "diskon"
+                                                    ? "assets/image/Promo_Rounded.png"
+                                                    : fafa[index].status ==
+                                                            "tersedia"
+                                                        ? "assets/image/Normal_Rounded.png"
+                                                        : "assets/image/Habis_Rounded v2.png",
                                               ),
                                               fit: BoxFit.fill),
                                         ),
@@ -313,7 +327,7 @@ class _DetailProductState extends State<DetailProduct> {
                                             alignment: Alignment.centerLeft,
                                             child: Text.rich(TextSpan(
                                                 text:
-                                                    "Bayar:${fafa[index].harga - fafa[index].diskon}",
+                                                    "Bayar: ${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(fafa[index].harga - fafa[index].diskon)}",
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 14,
@@ -329,7 +343,7 @@ class _DetailProductState extends State<DetailProduct> {
                 ),
               ],
             ),
-          ),
+          
           Padding(
             padding: EdgeInsets.only(
                 left: size.width * .044,
@@ -342,11 +356,20 @@ class _DetailProductState extends State<DetailProduct> {
                   height: size.height * .06,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Color(status != "" ? 0xff0D40C6 : 0xffD9DCE3),
+                        backgroundColor: Color(status != "" &&
+                                koko.length > 9 &&
+                                koko.length < 13 &&
+                                koko[0] == "0" &&
+                                koko[1] == "8"
+                            ? 0xff0D40C6
+                            : 0xffD9DCE3),
                         shape: StadiumBorder()),
                     onPressed: () {
-                      if (status != "") {
+                      if (status != "" &&
+                          koko.length > 9 &&
+                          koko.length < 13 &&
+                          koko[0] == "0" &&
+                          koko[1] == "8") {
                         Navigator.push(
                           context,
                           MaterialPageRoute(

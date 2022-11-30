@@ -235,7 +235,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                               fontSize: 14,
                                             ))),
                                         Text.rich(TextSpan(
-                                            text: "Rp0",
+                                            text: "Gratis !",
                                             style: TextStyle(
                                               fontWeight: FontWeight.w700,
                                               fontSize: 14,
@@ -352,12 +352,15 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                     status = saldo;
                                   });
                                 },
-                                icon: Icon(
-                                  status != saldo
-                                      ? Icons.radio_button_unchecked
-                                      : Icons.radio_button_checked,
-                                  color: Colors.black,
-                                ),
+                                icon: status != saldo
+                                    ? Icon(
+                                        Icons.radio_button_unchecked,
+                                        color: Colors.black,
+                                      )
+                                    : Icon(
+                                        Icons.radio_button_checked,
+                                        color: Colors.blue,
+                                      ),
                               ),
                             ),
                             Divider(
@@ -387,12 +390,15 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                     status = dana;
                                   });
                                 },
-                                icon: Icon(
-                                  status != dana
-                                      ? Icons.radio_button_unchecked
-                                      : Icons.radio_button_checked,
-                                  color: Colors.black,
-                                ),
+                                icon: status != saldo
+                                    ? Icon(
+                                        Icons.radio_button_unchecked,
+                                        color: Colors.black,
+                                      )
+                                    : Icon(
+                                        Icons.radio_button_checked,
+                                        color: Colors.blue,
+                                      ),
                               ),
                             ),
                             SizedBox(
@@ -425,12 +431,15 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                     status = gopay;
                                   });
                                 },
-                                icon: Icon(
-                                  status != gopay
-                                      ? Icons.radio_button_unchecked
-                                      : Icons.radio_button_checked,
-                                  color: Colors.black,
-                                ),
+                                icon: status != saldo
+                                    ? Icon(
+                                        Icons.radio_button_unchecked,
+                                        color: Colors.black,
+                                      )
+                                    : Icon(
+                                        Icons.radio_button_checked,
+                                        color: Colors.blue,
+                                      ),
                               ),
                             ),
                             SizedBox(

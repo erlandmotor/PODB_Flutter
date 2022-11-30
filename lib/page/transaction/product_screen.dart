@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ppodb_2/page/transaction/categoryhome.dart';
 import 'package:ppodb_2/page/transaction/detail_product.dart';
+import 'package:ppodb_2/page/transaction/paketdata.dart';
 
 class homeScreen extends StatefulWidget {
   const homeScreen({super.key});
@@ -22,7 +24,21 @@ class _homeScreenState extends State<homeScreen> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => DetailProduct()));
                 },
-                child: Text("kita pergi ke pulsa"))
+                child: Text("kita pergi ke pulsa")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Paketdata()));
+                },
+                child: Text("kita pergi ke paketdata")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CategoryProduct()));
+                },
+                child: Text("Kategori"))
           ],
         ),
       ),
