@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart';
 
-class Boxkecil extends StatelessWidget {
-  const Boxkecil({super.key,required this.child});
+class Boxsaldo extends StatelessWidget {
+  const Boxsaldo({super.key,required this.child});
   final Widget child;
 
   @override
@@ -19,12 +19,12 @@ class Boxkecil extends StatelessWidget {
           borderRadius: BorderRadius.circular(40),
           side: const BorderSide(
             width: 0.5,
-            color: primaryColor
+            color: colorSaldo
           )
         ),
         
         child: Padding(
-          padding: EdgeInsets.only(top: widthh*12/328,bottom: widthh*12/328,left: widthh*5/328,right: widthh*5/328),
+          padding: EdgeInsets.only(top: widthh*12/328,bottom: widthh*12/328,),
           child: child,
           
         ),
