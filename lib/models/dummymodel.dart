@@ -36,3 +36,25 @@ class Dummypaket {
       required this.id,
       required this.name});
 }
+
+class Dummycate {
+  int id;
+  String gmbr;
+  String name;
+  Dummycate({required this.id, required this.name, required this.gmbr});
+}
+
+class Dummypro {
+  int id;
+  String name;
+  List<Dummycate> pro;
+  Dummypro({required this.id, required this.name, required this.pro});
+}
+
+class Dummywilayah {
+  int id;
+  String provinsi;
+  List wilayah;
+  Dummywilayah(
+      {required this.id, required this.provinsi, required this.wilayah});
+}

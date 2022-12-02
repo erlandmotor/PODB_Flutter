@@ -77,6 +77,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                         ),
                         keyboardType: TextInputType.phone,
                         controller: nomor,
+                        readOnly: true,
                       ),
                       SizedBox(height: size.height * .02)
                     ],
@@ -113,6 +114,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                           height: size.height * .016,
                         ),
                         TextField(
+                          readOnly: true,
                           decoration: InputDecoration(
                               suffixIcon: IconButton(
                                 icon: Icon(
@@ -390,7 +392,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                     status = dana;
                                   });
                                 },
-                                icon: status != saldo
+                                icon: status != dana
                                     ? Icon(
                                         Icons.radio_button_unchecked,
                                         color: Colors.black,
@@ -431,7 +433,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                     status = gopay;
                                   });
                                 },
-                                icon: status != saldo
+                                icon: status != gopay
                                     ? Icon(
                                         Icons.radio_button_unchecked,
                                         color: Colors.black,
