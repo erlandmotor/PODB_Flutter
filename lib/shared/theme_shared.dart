@@ -1,6 +1,6 @@
 part of 'shared.dart';
 
-double defaultMargin = 24;
+
 
 Color primaryColor = Color(0xff0D40C6);
 Color blackColor = Color(0xff050522);

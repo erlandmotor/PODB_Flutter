@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/page/login_register/welcome_page.dart';
 import 'package:ppodb_2/shared/shared.dart';
+import 'package:ppodb_2/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -13,12 +15,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        backgroundColor: whiteColor,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthViewModel(),)
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          backgroundColor: whiteColor,
+        ),
+        home: WelcomePage(),
       ),
-      home: WelcomePage(),
     );
   }
 }
