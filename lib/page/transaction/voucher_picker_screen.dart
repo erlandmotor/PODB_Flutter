@@ -57,6 +57,7 @@ class _VoucherpickerState extends State<Voucherpicker> {
                           height: size.height * .012,
                         ),
                         TextField(
+                          readOnly: true,
                           decoration: InputDecoration(
                               prefixIcon: Padding(
                                 padding: EdgeInsets.all(8.0),

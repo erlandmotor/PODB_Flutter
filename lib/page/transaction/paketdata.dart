@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/pembayaran.dart';
@@ -104,6 +105,7 @@ class _PaketdataState extends State<Paketdata> {
                     color: Colors.white,
                   ),
                   TextField(
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: koko == ""
                         ? InputDecoration(
                             prefixIcon: Icon(Icons.mail),

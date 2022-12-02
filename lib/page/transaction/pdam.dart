@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/listdaerah.dart';
@@ -102,6 +103,7 @@ class _PDAMscreenState extends State<PDAMscreen> {
                   color: Colors.white,
                 ),
                 TextField(
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   decoration: koko == ""
                       ? InputDecoration(
                           prefixIcon: Icon(Icons.water_drop),

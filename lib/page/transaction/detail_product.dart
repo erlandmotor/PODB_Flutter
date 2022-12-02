@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/pembayaran.dart';
@@ -93,6 +94,7 @@ class _DetailProductState extends State<DetailProduct> {
                     color: Colors.white,
                   ),
                   TextField(
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: koko == ""
                         ? InputDecoration(
                             prefixIcon: Icon(Icons.phone_android),
@@ -356,7 +358,7 @@ class _DetailProductState extends State<DetailProduct> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color(status != "" &&
                                 koko.length > 9 &&
-                                koko.length < 13 &&
+                                koko.length <= 13 &&
                                 koko[0] == "0" &&
                                 koko[1] == "8"
                             ? 0xff0D40C6
@@ -365,7 +367,7 @@ class _DetailProductState extends State<DetailProduct> {
                     onPressed: () {
                       if (status != "" &&
                           koko.length > 9 &&
-                          koko.length < 13 &&
+                          koko.length <= 13 &&
                           koko[0] == "0" &&
                           koko[1] == "8") {
                         Navigator.push(
