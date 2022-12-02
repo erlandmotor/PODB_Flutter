@@ -1,0 +1,73 @@
+ koko == ""
+                              ? "Silahkan Masukkan Nomor Handphone Anda"
+                              : koko.length < 10
+                                  ? "Silahkan Masukkan Nomor Yang Benar"
+                                  : koko.length > 13
+                                      ? "Silahkan Masukkan Nomor Yang Valid"
+                                      : koko[0] != "0" || koko[1] != "8"
+                                          ? "Hanya bisa melakukan transaksi untuk provider Indonesia"
+                                          : koko[2] == "5" && koko[3] == "2" ||
+                                                  koko[2] == "5" &&
+                                                      koko[3] == "3" ||
+                                                  koko[2] == "5" &&
+                                                      koko[3] == "1"
+                                              ? "Kartu As"
+                                              : koko[2] == "1" && koko[3] == "1" ||
+                                                      koko[2] == "1" &&
+                                                          koko[3] == "2" ||
+                                                      koko[2] == "1" &&
+                                                          koko[3] == "3" ||
+                                                      koko[2] == "2" &&
+                                                          koko[3] == "1" ||
+                                                      koko[2] == "2" &&
+                                                          koko[3] == "2"
+                                                  ? "Kartu Simpati"
+                                                  : koko[2] == "1" && koko[3] == "7" ||
+                                                          koko[2] == "1" &&
+                                                              koko[3] == "8" ||
+                                                          koko[2] == "1" &&
+                                                              koko[3] == "9" ||
+                                                          koko[2] == "5" &&
+                                                              koko[3] == "9" ||
+                                                          koko[2] == "7" &&
+                                                              koko[3] == "7" ||
+                                                          koko[2] == "7" &&
+                                                              koko[3] == "8"
+                                                      ? "XL"
+                                                      : koko[2] == "3" && koko[3] == "2" ||
+                                                              koko[2] == "3" &&
+                                                                  koko[3] ==
+                                                                      "3" ||
+                                                              koko[2] == "3" &&
+                                                                  koko[3] == "8"
+                                                          ? "AXIS"
+                                                          : koko[2] == "5" && koko[3] == "7" ||
+                                                                  koko[2] == "5" &&
+                                                                      koko[3] ==
+                                                                          "6"
+                                                              ? "Kartu As"
+                                                              : koko[2] == "9" && koko[3] == "6" ||
+                                                                      koko[2] == "9" &&
+                                                                          koko[3] ==
+                                                                              "5" ||
+                                                                      koko[2] == "9" &&
+                                                                          koko[3] ==
+                                                                              "7" ||
+                                                                      koko[2] == "9" &&
+                                                                          koko[3] ==
+                                                                              "8" ||
+                                                                      koko[2] == "9" &&
+                                                                          koko[3] ==
+                                                                              "9"
+                                                                  ? "Tri"
+                                                                  : koko[2] == "8" && koko[3] == "8" ||
+                                                                          koko[2] == "8" && koko[3] == "1" ||
+                                                                          koko[2] == "8" && koko[3] == "2" ||
+                                                                          koko[2] == "8" && koko[3] == "3" ||
+                                                                          koko[2] == "8" && koko[3] == "4" ||
+                                                                          koko[2] == "8" && koko[3] == "5" ||
+                                                                          koko[2] == "8" && koko[3] == "6" ||
+                                                                          koko[2] == "8" && koko[3] == "7" ||
+                                                                          koko[2] == "8" && koko[3] == "9"
+                                                                      ? "Smartfren"
+                                                                      : "Nomor yang anda masukkan tidak terdaftar di provider Indonesia"
