@@ -30,3 +30,11 @@ import 'package:flutter/material.dart';
   List gambarPromo = [
     "assets/image/admin.png","assets/image/cashback.png","assets/image/listrik.png",
   ];
+
+  List topUPProfil = [
+    "assets/icon/isi_saldo.png","assets/icon/kirim_uang.png","assets/icon/card.png","assets/icon/voucher.png",
+  ];
+
+  List namaTopup = [
+    "Isi Saldo","Kirim Uang","Kartu Saya","Voucher Saya",
+  ];
