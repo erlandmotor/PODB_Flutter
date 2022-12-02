@@ -328,7 +328,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                             ),
                             ListTile(
                               leading: Image.asset(
-                                "assets/image/logo.png",
+                                "assets/icon/c.png",
                                 width: size.width * .1,
                                 height: size.height * .05625,
                               ),

@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:ppodb_2/page/home/home.dart';
 import 'package:ppodb_2/page/login_register/register1_page.dart';
 import 'package:ppodb_2/page/login_register/welcome_page.dart';
 import 'package:ppodb_2/shared/shared.dart';
@@ -24,8 +25,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<AuthViewModel>(context,listen: false);
-     final providerKonfirmasi = Provider.of<AuthViewModel>(context);
+    final provider = Provider.of<AuthViewModel>(context, listen: false);
+    final providerKonfirmasi = Provider.of<AuthViewModel>(context);
     var Size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: whiteColor,
@@ -86,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: Size.height * 0.0125,
               ),
               TextFormField(
-                obscureText: providerKonfirmasi.passVissible,
+                  obscureText: providerKonfirmasi.passVissible,
                   controller: _katasandiController,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -94,11 +95,14 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   },
                   decoration: InputDecoration(
-                    suffixIcon: IconButton(icon: Icon(
-                            providerKonfirmasi.passVissible?
-                            Icons.visibility_off:Icons.visibility),onPressed: () {
-                            provider.setPassVissible();
-                          },),
+                    suffixIcon: IconButton(
+                      icon: Icon(providerKonfirmasi.passVissible
+                          ? Icons.visibility_off
+                          : Icons.visibility),
+                      onPressed: () {
+                        provider.setPassVissible();
+                      },
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -127,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                             email: _emailController.text,
                             katasandi: _katasandiController.text);
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => WelcomePage(),
+                          builder: (context) => HomePage(),
                         ));
                       }
                     },
