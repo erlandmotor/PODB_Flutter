@@ -67,12 +67,12 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 26,
+                height: heightt*26/910,
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 10),
+                padding:  EdgeInsets.only(top:heightt*10/910),
                 child: SizedBox(
-                  height: 50,
+                  height:heightt*50/910,
                   width: double.infinity,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                               fontWeight: FontWeight.w500,
                               fontSize: 12)),
                       Padding(
-                        padding: const EdgeInsets.only(top: 5),
+                        padding:  EdgeInsets.only(top:heightt*5/910),
                         child: Text("Rp. 0",
                             style: GoogleFonts.inter(
                                 color: Colors.black,
@@ -128,8 +128,8 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                          height: 33,
-                          width: 33,
+                          height: heightt*40/910,
+                          width:widthh*33/360,
                           decoration: BoxDecoration(
                               color: primaryColor,
                               borderRadius: BorderRadius.circular(400)),
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           )),
                       SizedBox(
-                        width: 5,
+                        width:widthh*5/360,
                       ),
                       Text("Top Up",
                           style: GoogleFonts.inter(
@@ -155,11 +155,11 @@ class _HomePageState extends State<HomePage> {
               Boxbesar(
                   child: Container(
                 width: double.infinity,
-                height: 204,
+                height:heightt*237/910,
                 child: GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.only(
-                    top: 16,
+                    top:heightt*17/910,
                   ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
@@ -275,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                                   margin:
                                       EdgeInsets.only(right: widthh * 20 / 360),
                                   width: widthh,
-                                  height: 140,
+                                  height:heightt*160/910,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           image: AssetImage(
@@ -286,7 +286,7 @@ class _HomePageState extends State<HomePage> {
                           }),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: widthh * 35 / 328),
+                      padding: EdgeInsets.only(left: widthh * 35 / 328,bottom:heightt*5/910),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -296,7 +296,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: widthh * 24 / 360, bottom: 8),
+                padding: EdgeInsets.only(left: widthh * 24 / 360, bottom:heightt*10/910,top: heightt*24/910),
                 child: Text("Butuh Bantuan ?",
                     style: GoogleFonts.inter(
                         fontSize: 20, fontWeight: FontWeight.w600)),
@@ -306,7 +306,7 @@ class _HomePageState extends State<HomePage> {
                 child: InkWell(
                     child: Container(
                   width: widthh * 328 / 360,
-                  height: 120,
+                  height:heightt*140/910,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
