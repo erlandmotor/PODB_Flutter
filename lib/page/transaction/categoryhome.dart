@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
-import 'package:ppodb_2/page/transaction/detail_product.dart';
-import 'package:ppodb_2/page/transaction/paketdata.dart';
+
+import 'detail_product.dart';
 
 class CategoryProduct extends StatefulWidget {
   const CategoryProduct({super.key});
@@ -24,27 +24,26 @@ class _CategoryProductState extends State<CategoryProduct> {
       Dummycate(
           id: 5, name: "Listrik", gmbr: "assets/image/Tagihan listrik.png"),
       Dummycate(
-          id: 5, name: "Token Listrik", gmbr: "assets/image/Token listrik.png"),
-      Dummycate(id: 6, name: "PDAM", gmbr: "assets/image/PDAM.png")
+          id: 6, name: "Token Listrik", gmbr: "assets/image/Token listrik.png"),
+      Dummycate(id: 7, name: "PDAM", gmbr: "assets/image/PDAM.png")
     ]),
     Dummypro(id: 3, name: "Voucher", pro: [
       Dummycate(
-          id: 7, name: "Voucher Game", gmbr: "assets/image/Voucher game.png"),
+          id: 8, name: "Voucher Game", gmbr: "assets/image/Voucher game.png"),
       Dummycate(
-          id: 8, name: "Google Play", gmbr: "assets/image/Google Play.png"),
+          id: 9, name: "Google Play", gmbr: "assets/image/Google Play.png"),
     ]),
     Dummypro(id: 4, name: "Keuangan", pro: [
-      Dummycate(id: 9, name: "Shopeepay", gmbr: "assets/image/shopee.png"),
-      Dummycate(id: 10, name: "Dana", gmbr: "assets/image/dana.png"),
-      Dummycate(id: 11, name: "Gopay", gmbr: "assets/image/gopay.png"),
-      Dummycate(id: 12, name: "Linkaja", gmbr: "assets/image/LinkAja.png"),
-      Dummycate(id: 13, name: "Ovo", gmbr: "assets/image/ovo.png")
+      Dummycate(id: 10, name: "Shopeepay", gmbr: "assets/image/shopee.png"),
+      Dummycate(id: 11, name: "Dana", gmbr: "assets/image/dana.png"),
+      Dummycate(id: 12, name: "Gopay", gmbr: "assets/image/gopay.png"),
+      Dummycate(id: 13, name: "Linkaja", gmbr: "assets/image/LinkAja.png"),
+      Dummycate(id: 14, name: "Ovo", gmbr: "assets/image/ovo.png")
     ]),
   ];
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -151,7 +150,16 @@ class _CategoryProductState extends State<CategoryProduct> {
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return RawMaterialButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailProduct(
+                                                    code: prod[i].pro[index].id,
+                                                  )),
+                                        );
+                                      },
                                       child: Container(
                                         width: size.width * .2111,
                                         child: Column(
@@ -226,7 +234,18 @@ class _CategoryProductState extends State<CategoryProduct> {
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return RawMaterialButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DetailProduct(
+                                                        code: prod[i]
+                                                            .pro[index]
+                                                            .id,
+                                                      )),
+                                            );
+                                          },
                                           child: Container(
                                             width: size.width * .2111,
                                             child: Column(
