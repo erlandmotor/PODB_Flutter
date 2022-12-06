@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
+import 'package:ppodb_2/page/widgets/pdams.dart';
 
 class Wilayahpicker extends StatefulWidget {
   Wilayahpicker({super.key});
@@ -160,6 +161,9 @@ class _WilayahpickerState extends State<Wilayahpicker> {
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return ListTile(
+                                      onTap: () {
+                                        Navigator.pop(context, wilayah[index]);
+                                      },
                                       title: Text(daerah[i].wilayah[index]),
                                     );
                                   },
@@ -181,17 +185,19 @@ class _WilayahpickerState extends State<Wilayahpicker> {
                             ),
                           ),
                           child: ListView.separated(
-                            separatorBuilder: (context, index) {
-                              return Divider();
-                            },
-                            shrinkWrap: true,
-                            itemCount: wilayahs.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return ListTile(
-                                title: Text(wilayahs[index]),
-                              );
-                            },
-                          ),
+                              separatorBuilder: (context, index) {
+                                return Divider();
+                              },
+                              shrinkWrap: true,
+                              itemCount: wilayahs.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return ListTile(
+                                  onTap: () {
+                                    Navigator.pop(context, wilayahs[index]);
+                                  },
+                                  title: Text(wilayahs[index]),
+                                );
+                              }),
                         )
                       ])),
               SizedBox(

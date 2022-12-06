@@ -6,7 +6,7 @@ import 'package:ppodb_2/page/faq/faq.dart';
 import 'package:ppodb_2/page/home/background.dart';
 import 'package:ppodb_2/page/produk/pulsa.dart';
 import 'package:ppodb_2/page/riwayat/riwayat.dart';
-import 'package:ppodb_2/page/transaction/product_screen.dart';
+import 'package:ppodb_2/page/transaction/categoryhome.dart';
 import 'package:ppodb_2/page/widgets/botton_navigation_box.dart';
 import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
 import 'package:ppodb_2/page/widgets/box_besar.dart';
@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(bottom: heightt * 24 / 910),
+                padding: EdgeInsets.only(bottom: heightt * 24 / 800),
                 child: Boxkecil(
                     child: ListTile(
                   title: Column(
@@ -196,7 +196,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => homeScreen())));
+                                  builder: ((context) => CategoryProduct())));
                         }
                       },
                       child: Column(
@@ -240,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               )),
               Container(
-                height: heightt * 250 / 910,
+                height: heightt * 250 / 800,
                 width: widthh,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -249,8 +249,8 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: widthh * 24 / 360,
-                          top: heightt * 24 / 910,
-                          bottom: heightt * 8 / 910),
+                          top: heightt * 24 / 800,
+                          bottom: heightt * 8 / 800),
                       child: Text("Promo",
                           style: GoogleFonts.inter(
                               fontSize: 20, fontWeight: FontWeight.w600)),
@@ -316,7 +316,7 @@ class _HomePageState extends State<HomePage> {
                 )),
               ),
               SizedBox(
-                height: heightt * 24 / 910,
+                height: heightt * 24 / 800,
               )
             ],
             //  Container(

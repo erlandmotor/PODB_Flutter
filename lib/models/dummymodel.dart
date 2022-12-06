@@ -58,3 +58,36 @@ class Dummywilayah {
   Dummywilayah(
       {required this.id, required this.provinsi, required this.wilayah});
 }
+
+class DummyVoucher {
+  int id;
+  String nama;
+  String kode;
+  String valid;
+  int diskon;
+  String provider;
+  DummyVoucher(
+      {required this.id,
+      required this.nama,
+      required this.kode,
+      required this.diskon,
+      required this.provider,
+      required this.valid});
+}
+
+class DummyTransTelekom {
+  int? id;
+  int nomor;
+  String provider;
+  String nama;
+  int harga;
+  int biayaadmin;
+  String? voucher;
+  int? nilaivoucher;
+  DummyTransTelekom(
+      {required this.nomor,
+      required this.nama,
+      required this.provider,
+      required this.harga,
+      required this.biayaadmin});
+}

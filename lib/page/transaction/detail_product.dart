@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
+import 'package:ppodb_2/page/transaction/categoryhome.dart';
 import 'package:ppodb_2/page/transaction/pembayaran.dart';
+import 'package:ppodb_2/page/widgets/listrik_pln.dart';
+
+import 'package:ppodb_2/page/widgets/paketdata.dart';
+import 'package:ppodb_2/page/widgets/pdams.dart';
+import 'package:ppodb_2/page/widgets/pulsa.dart';
+import 'package:ppodb_2/page/widgets/token_listrik.dart';
 
 class DetailProduct extends StatefulWidget {
-  const DetailProduct({super.key});
+  int code;
+  DetailProduct({super.key, required this.code});
 
   @override
   State<DetailProduct> createState() => _DetailProductState();
@@ -13,6 +21,37 @@ class DetailProduct extends StatefulWidget {
 
 class _DetailProductState extends State<DetailProduct> {
   String koko = "";
+  List<Dummypaket> dummy = [
+    Dummypaket(
+        desc:
+            "Langganan Disney+ Hotstar 1 bulan (Kuota Maxstream 3GB). Masa berlaku 30 hari. Jika kuota MAXstream habis pelanggan dapat membeli kuota tambahan. \n\nJika masa aktif paket ini belum berakhir, pembelian paket Disney+ Hotstar selanjutnya akan gagal dan tidak menambah masa aktif paket yang sudah ada.",
+        harga: 22000,
+        id: 1,
+        name: "Paket Disney+ Hotstar (30 Hari)"),
+    Dummypaket(
+        desc:
+            "Kuota 1,5GB untuk akses aplikasi Zoom. Langganan akun Zoom Pro berlaku untuk 3 hari. Akun Zoom Pro bisa melakukan hostmeeting lebih dari 40 menit dengan partisipan hingga 300 orang. Kuota internet Zoom dan akun Zoom Pro berlaku berlaku hingga pukul 23.59 pada hari terakhir masa aktif paket.",
+        harga: 25000,
+        id: 2,
+        name: "Paket Zoom Pro 1.5GB (3 Hari)"),
+    Dummypaket(
+        desc: "Kuota MaxStream 12GB + Kuota Utama 3GB. Masa Berlaku 30 Hari.",
+        harga: 50000,
+        id: 3,
+        name: "Paket Gigamax Basic 15GB"),
+    Dummypaket(
+        desc:
+            "Kuota utama mulai 3.3 GB hingga 7GB + 1GB OMG! dengan masa berlaku 30 hari. (Kuota internet sesuai zona user, silahkan cek di *363*46#)",
+        harga: 54000,
+        id: 3,
+        name: "Paket Internet Bulanan OMG! 55rb"),
+    Dummypaket(
+        desc:
+            "Kuota Utama mulai 3.3GB hingga 7GB + 1GB OMG!. Bonus berlangganan Vidio. Masa berlaku 30 hari. Kuota internet sesuai zona user, silahkan cek di *363*46#",
+        harga: 64000,
+        id: 4,
+        name: "[New] Paket Internet Bulanan OMG + Vidio 65K")
+  ];
   List<ProductDummyModel> fafa = [
     ProductDummyModel(
         id: 1, name: "5.000", diskon: 2000, harga: 6000, status: "diskon"),
@@ -34,361 +73,150 @@ class _DetailProductState extends State<DetailProduct> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: koko.length < 10 ||
-              koko.length > 13 ||
-              koko == "" ||
-              koko[0] != "0" ||
-              koko[1] != "8"
-          ? Colors.white
-          : Color(0xfff2f3f6),
-      appBar: AppBar(
-        title: Text(
-          "Pulsa",
-          selectionColor: Color(0xff5C5D61),
-        ),
-        centerTitle: true,
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: EdgeInsets.only(
-          left: size.width * .0444,
-          right: size.width * .044,
-        ),
-        child: Stack(children: [
-          Column(children: [
-            SizedBox(
-              height: size.height * .0575,
-            ),
-            Container(
-              color: Colors.white,
-              width: size.width * .93,
-              height: size.height * .08,
-            )
-          ]),
-          Column(
-            children: [
-              SizedBox(
-                height: size.height * .016,
-              ),
-              Container(
-                alignment: Alignment.topLeft,
-                child: Text.rich(
-                    textAlign: TextAlign.left,
-                    TextSpan(
-                        text: "Nomor Handphone",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                        ))),
-              ),
-              SizedBox(
-                height: size.height * .012,
-              ),
-              Stack(
-                children: [
-                  Container(
-                    color: Colors.white,
-                  ),
-                  TextField(
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    decoration: koko == ""
-                        ? InputDecoration(
-                            prefixIcon: Icon(Icons.phone_android),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            hintText: "0853xxxxxxxx")
-                        : InputDecoration(
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    koko = "";
-                                    bambang.clear();
-                                  });
-                                },
-                                icon: Icon(Icons.cancel)),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-                    onChanged: ((value) {
-                      setState(() {
-                        koko = value;
-                        status = "";
-                      });
-                    }),
-                    controller: bambang,
-                    keyboardType: TextInputType.phone,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: size.height * .005,
-              ),
-              Container(
-                alignment: Alignment.topLeft,
-                child: Text.rich(
-                    textAlign: TextAlign.left,
-                    TextSpan(
-                        text: koko == ""
-                            ? "Silahkan Masukkan Nomor Handphone Anda"
-                            : koko.length < 10
-                                ? "Silahkan Masukkan Nomor Yang Benar"
-                                : koko.length > 13
-                                    ? "Silahkan Masukkan Nomor Yang Valid"
-                                    : koko[0] != "0" || koko[1] != "8"
-                                        ? "Hanya bisa melakukan transaksi untuk provider Indonesia"
-                                        : koko[2] == "5" && koko[3] == "2" ||
-                                                koko[2] == "5" &&
-                                                    koko[3] == "3" ||
-                                                koko[2] == "5" && koko[3] == "1"
-                                            ? "Kartu As"
-                                            : koko[2] == "1" && koko[3] == "1" ||
-                                                    koko[2] == "1" &&
-                                                        koko[3] == "2" ||
-                                                    koko[2] == "1" &&
-                                                        koko[3] == "3" ||
-                                                    koko[2] == "2" &&
-                                                        koko[3] == "1" ||
-                                                    koko[2] == "2" &&
-                                                        koko[3] == "2"
-                                                ? "Kartu Simpati"
-                                                : koko[2] == "1" && koko[3] == "7" ||
-                                                        koko[2] == "1" &&
-                                                            koko[3] == "8" ||
-                                                        koko[2] == "1" &&
-                                                            koko[3] == "9" ||
-                                                        koko[2] == "5" &&
-                                                            koko[3] == "9" ||
-                                                        koko[2] == "7" &&
-                                                            koko[3] == "7" ||
-                                                        koko[2] == "7" &&
-                                                            koko[3] == "8"
-                                                    ? "XL"
-                                                    : koko[2] == "3" && koko[3] == "2" ||
-                                                            koko[2] == "3" &&
-                                                                koko[3] ==
-                                                                    "3" ||
-                                                            koko[2] == "3" &&
-                                                                koko[3] == "8"
-                                                        ? "AXIS"
-                                                        : koko[2] == "5" && koko[3] == "7" ||
-                                                                koko[2] == "5" &&
-                                                                    koko[3] ==
-                                                                        "6"
-                                                            ? "Kartu As"
-                                                            : koko[2] == "9" && koko[3] == "6" ||
-                                                                    koko[2] == "9" &&
-                                                                        koko[3] ==
-                                                                            "5" ||
-                                                                    koko[2] == "9" &&
-                                                                        koko[3] ==
-                                                                            "7" ||
-                                                                    koko[2] == "9" &&
-                                                                        koko[3] ==
-                                                                            "8" ||
-                                                                    koko[2] == "9" &&
-                                                                        koko[3] ==
-                                                                            "9"
-                                                                ? "Tri"
-                                                                : koko[2] == "8" && koko[3] == "8" ||
-                                                                        koko[2] == "8" &&
-                                                                            koko[3] == "1" ||
-                                                                        koko[2] == "8" && koko[3] == "2" ||
-                                                                        koko[2] == "8" && koko[3] == "3" ||
-                                                                        koko[2] == "8" && koko[3] == "4" ||
-                                                                        koko[2] == "8" && koko[3] == "5" ||
-                                                                        koko[2] == "8" && koko[3] == "6" ||
-                                                                        koko[2] == "8" && koko[3] == "7" ||
-                                                                        koko[2] == "8" && koko[3] == "9"
-                                                                    ? "Smartfren"
-                                                                    : "Nomor yang anda masukkan tidak terdaftar di provider Indonesia",
-                        style: koko == ""
-                            ? TextStyle(
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff5C5D61),
-                                fontSize: 12,
-                              )
-                            : koko.length < 10 || koko.length > 13 || koko[0] != "0" || koko[1] != "8"
-                                ? TextStyle(fontWeight: FontWeight.w800, color: Colors.red, fontSize: 12)
-                                : TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xff5C5D61),
-                                    fontSize: 12,
-                                  ))),
-              ),
-              SizedBox(
-                height: size.height * .02,
-              ),
-              Align(
-                alignment: koko.length < 10 || koko.length > 13 || koko == ""
-                    ? Alignment.center
-                    : Alignment.topLeft,
-                child: koko.length < 10 && koko.length > 0 || koko.length > 13
-                    ? CircularProgressIndicator()
-                    : koko == "" || koko[0] != "0" || koko[1] != "8"
-                        ? Container()
-                        : Text.rich(
-                            textAlign: TextAlign.left,
-                            TextSpan(
-                                text: "Nominal Pulsa",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20,
-                                ))),
-              ),
-              SizedBox(
-                height: size.height * .01,
-              ),
-              Expanded(
-                child: koko.length < 10 ||
-                        koko.length > 13 ||
-                        koko == "" ||
-                        koko[0] != "0" ||
-                        koko[1] != "8"
-                    ? Container()
-                    : GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: size.width * .0444,
-                            mainAxisSpacing: size.height * .02,
-                            mainAxisExtent: 100),
-                        itemBuilder: (context, index) {
-                          return RawMaterialButton(
-                              onPressed: () {
-                                setState(() {
-                                  if (fafa[index].status != "habis") {
-                                    status = fafa[index].name;
-                                  }
-                                  ;
-                                });
-                              },
-                              child: Container(
-                                  height: size.height * .135,
-                                  width: size.width * .4333,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    border: fafa[index].name != status
-                                        ? Border.all(
-                                            color: Colors
-                                                .black38, // Set border color
-                                            width: 1.0)
-                                        : Border.all(
-                                            color:
-                                                Colors.blue, // Set border color
-                                            width: 3.0),
-                                    color: Colors.white,
+    return widget.code == 1
+        ? Pulsa_provider(
+            popo: fafa,
+            type: widget.code,
+          )
+        : widget.code == 2
+            ? Paketdatas(
+                popo: dummy,
+                type: widget.code,
+              )
+            : widget.code == 5
+                ? Listrik_Pln_screen(
+                    tipe: widget.code,
+                  )
+                : widget.code == 6
+                    ? Token_listrik(
+                        tipe: widget.code,
+                      )
+                    : widget.code == 7
+                        ? PDAMS(
+                            type: widget.code,
+                          )
+                        : Scaffold(
+                            extendBodyBehindAppBar: true,
+                            appBar: AppBar(
+                              leading: BackButton(
+                                color: Colors.black,
+                              ),
+                              elevation: 0,
+                              backgroundColor: Colors.transparent,
+                            ),
+                            backgroundColor: Colors.white,
+                            body: Padding(
+                              padding: EdgeInsets.only(
+                                  right: size.width * .044,
+                                  left: size.width * .044),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: size.height * .2125,
                                   ),
-                                  child: Column(children: [
-                                    Container(
-                                      height: size.height * .075,
-                                      width: size.width * .433,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                              fafa[index].status == "diskon"
-                                                  ? "assets/image/Promo_Rounded.png"
-                                                  : fafa[index].status ==
-                                                          "tersedia"
-                                                      ? "assets/image/Normal_Rounded.png"
-                                                      : "assets/image/Habis_Rounded v2.png",
+                                  Container(
+                                    width: size.width * .9138,
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                          "assets/image/amico.png",
+                                          height: size.height * .3,
+                                        ),
+                                        Text.rich(
+                                            textAlign: TextAlign.center,
+                                            TextSpan(
+                                                text: "Fitur Belum Tersedia!",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 24,
+                                                    color: Colors.black))),
+                                        SizedBox(
+                                          height: size.height * .02,
+                                        ),
+                                        Text.rich(
+                                            textAlign: TextAlign.center,
+                                            TextSpan(
+                                                text:
+                                                    "Fitur belum tersedia nih !! Stay tune ya ",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 16,
+                                                    color: Colors.black))),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * .1575,
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.only(
+                                        left: size.width * .016,
+                                        right: size.width * .016,
+                                      ),
+                                      child: Container(
+                                          alignment: Alignment.bottomCenter,
+                                          child: SizedBox(
+                                            width: size.width * 3.28,
+                                            height: size.height * .07,
+                                            child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      Color(0xff0D40C6),
+                                                  shape: StadiumBorder()),
+                                              onPressed: () {
+                                                Navigator.pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            CategoryProduct()),
+                                                    (route) => route.isFirst);
+                                              },
+                                              child: Text.rich(
+                                                TextSpan(
+                                                  text: "Transaksi Lain",
+                                                ),
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 16),
+                                              ),
                                             ),
-                                            fit: BoxFit.fill),
+                                          ))),
+                                  SizedBox(
+                                    height: size.height * .03625,
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.only(
+                                        left: size.width * .016,
+                                        right: size.width * .016,
                                       ),
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                          left: size.width * .03636,
-                                          top: size.height * .01,
-                                          bottom: size.height * .01,
-                                        ),
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text.rich(
-                                              textAlign: TextAlign.left,
-                                              TextSpan(
-                                                  text: fafa[index].name,
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      fontSize: 20,
-                                                      color: Colors.white))),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: size.height * .015,
-                                    ),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                          left: size.width * .0333,
-                                        ),
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text.rich(TextSpan(
-                                              text:
-                                                  "Bayar: ${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(fafa[index].harga - fafa[index].diskon)}",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 14,
-                                              ))),
-                                        )),
-                                  ])));
-                        },
-                        itemCount: fafa.length,
-                      ),
-              ),
-              SizedBox(
-                height: size.height * .1,
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                left: size.width * .044,
-                right: size.width * .044,
-                bottom: size.height * .025),
-            child: Container(
-                alignment: Alignment.bottomCenter,
-                child: SizedBox(
-                  width: size.width * .9111,
-                  height: size.height * .06,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(status != "" &&
-                                koko.length > 9 &&
-                                koko.length <= 13 &&
-                                koko[0] == "0" &&
-                                koko[1] == "8"
-                            ? 0xff0D40C6
-                            : 0xffD9DCE3),
-                        shape: StadiumBorder()),
-                    onPressed: () {
-                      if (status != "" &&
-                          koko.length > 9 &&
-                          koko.length <= 13 &&
-                          koko[0] == "0" &&
-                          koko[1] == "8") {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Pembayaranscreen()),
-                        );
-                      }
-                    },
-                    child: Text.rich(
-                      TextSpan(
-                        text: "Lanjutkan",
-                      ),
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                    ),
-                  ),
-                )),
-          ),
-        ]),
-      ),
-    );
+                                      child: Container(
+                                          alignment: Alignment.bottomCenter,
+                                          child: SizedBox(
+                                            width: size.width * 3.28,
+                                            height: size.height * .07,
+                                            child: TextButton(
+                                              onPressed: () {
+                                                Navigator.pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            CategoryProduct()),
+                                                    ((route) => route.isFirst));
+                                              },
+                                              child: Text.rich(
+                                                TextSpan(
+                                                  text: "Kembali ke beranda",
+                                                ),
+                                                style: TextStyle(
+                                                    color: Color(0xff0D40C6),
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 16),
+                                              ),
+                                            ),
+                                          ))),
+                                ],
+                              ),
+                            ),
+                          );
   }
 }
