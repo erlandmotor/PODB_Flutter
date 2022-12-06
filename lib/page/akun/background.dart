@@ -12,7 +12,7 @@ class BackgroundAkun extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          height: heightt * 260 / 800,
+          height: heightt * 230 / 800,
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/image/FAQ.png"), fit: BoxFit.cover),
