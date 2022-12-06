@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:ppodb_2/page/home/home.dart';
 import 'package:ppodb_2/page/login_register/register1_page.dart';
 import 'package:ppodb_2/page/login_register/welcome_page.dart';
+import 'package:ppodb_2/page/main_page/main_page.dart';
 import 'package:ppodb_2/shared/shared.dart';
 import 'package:ppodb_2/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
