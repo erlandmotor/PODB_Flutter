@@ -118,7 +118,7 @@ class _ProfilState extends State<Profil> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height:heightt* 41/800,),
+              SizedBox(height:heightt* 40/800,),
               Padding(
                 padding:  EdgeInsets.only(left: widthh*16/360,right: widthh*16/360),
                 child: Row(
