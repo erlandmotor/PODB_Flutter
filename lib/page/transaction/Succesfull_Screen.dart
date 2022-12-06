@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/page/home/home.dart';
 import 'package:ppodb_2/page/transaction/detail_product.dart';
-import 'package:ppodb_2/page/transaction/product_screen.dart';
+import 'package:ppodb_2/page/login_register/welcome_page.dart';
 
 class SuccesPage extends StatefulWidget {
   const SuccesPage({super.key});
@@ -73,7 +73,9 @@ class _SuccesPageState extends State<SuccesPage> {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => DetailProduct()),
+                                  builder: (context) => DetailProduct(
+                                        code: 1,
+                                      )),
                               (route) => route.isFirst);
                         },
                         child: Text.rich(

@@ -6,7 +6,7 @@ import 'package:ppodb_2/page/faq/faq.dart';
 import 'package:ppodb_2/page/home/background.dart';
 import 'package:ppodb_2/page/produk/pulsa.dart';
 import 'package:ppodb_2/page/riwayat/riwayat.dart';
-import 'package:ppodb_2/page/transaction/product_screen.dart';
+import 'package:ppodb_2/page/transaction/categoryhome.dart';
 import 'package:ppodb_2/page/widgets/botton_navigation_box.dart';
 import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
 import 'package:ppodb_2/page/widgets/box_besar.dart';
@@ -196,7 +196,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => homeScreen())));
+                                  builder: ((context) => CategoryProduct())));
                         }
                       },
                       child: Column(

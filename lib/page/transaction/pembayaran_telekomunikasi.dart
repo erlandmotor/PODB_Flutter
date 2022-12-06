@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/Succesfull_Screen.dart';
 import 'package:ppodb_2/page/transaction/voucher_picker_screen.dart';
+import 'package:ppodb_2/page/widgets/checkstatus.dart';
 
-class Pembayaranscreen extends StatefulWidget {
-  Pembayaranscreen({super.key});
+class PembayranTelekScreen extends StatefulWidget {
+  DummyTransTelekom trans;
+  PembayranTelekScreen({super.key, required this.trans});
 
   @override
-  State<Pembayaranscreen> createState() => _PembayaranscreenState();
+  State<PembayranTelekScreen> createState() => _PembayranTelekScreenState();
 } //radiolisten
 
-class _PembayaranscreenState extends State<Pembayaranscreen> {
+class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
   String status = "";
   String gopay = "GOPAY";
   String saldo = "Mycuan saldo";
   String dana = "DANA";
+
   TextEditingController nomor = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    nomor.text = "08123456789";
+    nomor.text = "0${widget.trans.nomor}";
     var size = MediaQuery.of(context).size;
     return Scaffold(
       extendBody: true,
@@ -53,7 +58,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                         child: Text.rich(
                             textAlign: TextAlign.left,
                             TextSpan(
-                                text: "Telkomsel",
+                                text: widget.trans.provider,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
@@ -67,7 +72,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                           prefixIcon: Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Image.asset(
-                              "assets/image/telkomsel1.png",
+                              checkPicprovider(nomor.text),
                               width: size.width * .024,
                               height: size.height * .024,
                             ),
@@ -189,7 +194,8 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                       child: Text.rich(
                                           textAlign: TextAlign.left,
                                           TextSpan(
-                                              text: "Telkomsel 100.000",
+                                              text:
+                                                  "${widget.trans.provider} ${widget.trans.nama}",
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w700,
                                                 fontSize: 14,
@@ -209,7 +215,8 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                               fontSize: 14,
                                             ))),
                                         Text.rich(TextSpan(
-                                            text: "Rp100.000",
+                                            text:
+                                                "${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(widget.trans.harga)}",
                                             style: TextStyle(
                                               fontWeight: FontWeight.w700,
                                               fontSize: 14,
@@ -237,7 +244,9 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                               fontSize: 14,
                                             ))),
                                         Text.rich(TextSpan(
-                                            text: "Gratis !",
+                                            text: widget.trans.biayaadmin == 0
+                                                ? "Gratis !"
+                                                : "${widget.trans.biayaadmin}",
                                             style: TextStyle(
                                               fontWeight: FontWeight.w700,
                                               fontSize: 14,
@@ -271,7 +280,8 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                             fontSize: 14,
                                           ))),
                                       Text.rich(TextSpan(
-                                          text: "Rp101.000",
+                                          text:
+                                              "${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(widget.trans.harga - widget.trans.biayaadmin)}",
                                           style: TextStyle(
                                             fontWeight: FontWeight.w700,
                                             fontSize: 14,
@@ -328,7 +338,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                             ),
                             ListTile(
                               leading: Image.asset(
-                                "assets/icon/c.png",
+                                "assets/image/logo.png",
                                 width: size.width * .1,
                                 height: size.height * .05625,
                               ),
