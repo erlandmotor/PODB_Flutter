@@ -10,6 +10,7 @@ import 'package:ppodb_2/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/data_login_model.dart';
+import '../main_page/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -131,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                             email: _emailController.text,
                             katasandi: _katasandiController.text);
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => HomePage(),
+                          builder: (context) => MainPage(),
                         ));
                       }
                     },

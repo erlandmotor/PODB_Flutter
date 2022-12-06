@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/page/home/home.dart';
+import 'package:ppodb_2/page/main_page/main_page.dart';
 import 'package:ppodb_2/page/transaction/detail_product.dart';
 import 'package:ppodb_2/page/login_register/welcome_page.dart';
 
@@ -105,7 +106,7 @@ class _SuccesPageState extends State<SuccesPage> {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()),
+                                  builder: (context) => MainPage()),
                               ((route) => route.isFirst));
                         },
                         child: Text.rich(
