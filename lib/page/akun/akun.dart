@@ -176,7 +176,7 @@ class _ProfilState extends State<Profil> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding:  EdgeInsets.only(right:widthh* 8/360),
+                        padding:  EdgeInsets.only(right: 8),
                         child: Container(
                     height: 33,
                     width: 33,
