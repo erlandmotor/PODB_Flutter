@@ -9,7 +9,8 @@ import 'package:provider/provider.dart';
 import '../../shared/shared.dart';
 
 class Register2Page extends StatefulWidget {
-  const Register2Page({super.key});
+  Register2Page({required this.register1model, super.key});
+  final Register1Model register1model;
 
   @override
   State<Register2Page> createState() => _Register2PageState();
@@ -47,6 +48,7 @@ class _Register2PageState extends State<Register2Page> {
       ),
       body: SafeArea(
         child: Form(
+          // autovalidateMode: AutovalidateMode.onUserInteraction,
           key: formKey,
           child: Padding(
             padding: EdgeInsets.only(
@@ -273,7 +275,8 @@ class _Register2PageState extends State<Register2Page> {
                               final users = Register2Model(
                                 katasandi: _katasandiController.text,
                                 konfirmasi: _konfirmasiController.text,
-                              );
+                              ); 
+                              Provider.of<AuthViewModel>(context, listen: false).getAllRegister(widget.register1model.namalengkap, widget.register1model.nomortelpon, widget.register1model.email, _katasandiController.text,"");
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => LoginPage(),
                               ));
