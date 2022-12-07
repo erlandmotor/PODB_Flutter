@@ -73,7 +73,7 @@ class EmailBoarding extends StatelessWidget {
             Container(
               height: Size.height * 0.06,
               width: Size.width * 0.911,
-              child: ElevatedButton(
+              child: ElevatedButton(                
                   onPressed: () {
                     // Navigator.of(context).push(MaterialPageRoute(
                     //   builder: (context) => LoginPage(),
@@ -88,8 +88,9 @@ class EmailBoarding extends StatelessWidget {
                   ),
                   style: ElevatedButton.styleFrom(
                       backgroundColor: whiteColor,
+                      elevation: 0,
                       shape: RoundedRectangleBorder(
-                          side: BorderSide(color: primaryColor, width: 1.5),
+                          // side: BorderSide(color: primaryColor, width: 1.5),
                           borderRadius: BorderRadius.circular(30)))),
             ),
             SizedBox(
