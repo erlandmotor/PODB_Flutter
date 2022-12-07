@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         // extendBodyBehindAppBar: ,
 
-        body: BackgroundAkun(
+        body: BackgroundHome(
       child: SizedBox(
         height: heightt,
         width: widthh,
@@ -67,12 +67,12 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: heightt*26/910,
+                height: heightt*26/800,
               ),
               Padding(
-                padding:  EdgeInsets.only(top:heightt*10/910),
+                padding:  EdgeInsets.only(top:heightt*10/800),
                 child: SizedBox(
-                  height:heightt*50/910,
+                  height:heightt*50/800,
                   width: double.infinity,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                         height: 15,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: widthh * 182 / 360),
+                        padding: EdgeInsets.only(left: widthh * 180 / 360),
                         child: Image.asset(
                           "assets/icon/lonceng.png",
                           height: 20,
@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(bottom: heightt * 24 / 800),
+                padding: EdgeInsets.only(bottom: heightt * 16 / 800),
                 child: Boxkecil(
                     child: ListTile(
                   title: Column(
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                               fontWeight: FontWeight.w500,
                               fontSize: 12)),
                       Padding(
-                        padding:  EdgeInsets.only(top:heightt*5/910),
+                        padding:  EdgeInsets.only(top:heightt*5/800),
                         child: Text("Rp. 0",
                             style: GoogleFonts.inter(
                                 color: Colors.black,
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                          height: heightt*40/910,
+                          height: heightt*36/800,
                           width:widthh*33/360,
                           decoration: BoxDecoration(
                               color: primaryColor,
@@ -155,11 +155,11 @@ class _HomePageState extends State<HomePage> {
               Boxbesar(
                   child: Container(
                 width: double.infinity,
-                height:heightt*237/910,
+                height:heightt*205/800,
                 child: GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.only(
-                    top:heightt*17/910,
+                    top:heightt*16/800,
                   ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
@@ -240,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               )),
               Container(
-                height: heightt * 250 / 800,
+                height: heightt * 228 / 800,
                 width: widthh,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -275,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                                   margin:
                                       EdgeInsets.only(right: widthh * 20 / 360),
                                   width: widthh,
-                                  height:heightt*160/910,
+                                  height:heightt*140/800,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           image: AssetImage(
@@ -286,7 +286,7 @@ class _HomePageState extends State<HomePage> {
                           }),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: widthh * 35 / 328,bottom:heightt*5/910),
+                      padding: EdgeInsets.only(left: widthh * 35 / 328,bottom:heightt*5/800),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -296,17 +296,17 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: widthh * 24 / 360, bottom:heightt*10/910,top: heightt*24/910),
+                padding: EdgeInsets.only(left: widthh * 24 / 360, bottom:heightt*10/800,top: heightt*24/800),
                 child: Text("Butuh Bantuan ?",
                     style: GoogleFonts.inter(
                         fontSize: 20, fontWeight: FontWeight.w600)),
               ),
               Padding(
-                padding: EdgeInsets.only(left: widthh * 16 / 360),
+                padding: EdgeInsets.only(left: widthh * 24 / 360,right: widthh * 24 / 360),
                 child: InkWell(
                     child: Container(
                   width: widthh * 328 / 360,
-                  height:heightt*140/910,
+                  height:heightt*140/800,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
@@ -316,7 +316,7 @@ class _HomePageState extends State<HomePage> {
                 )),
               ),
               SizedBox(
-                height: heightt * 24 / 800,
+                height: heightt * 30 / 800,
               )
             ],
             //  Container(

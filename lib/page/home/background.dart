@@ -8,22 +8,20 @@ class BackgroundHome extends StatelessWidget {
   Widget build(BuildContext context) {
     double heightt = MediaQuery.of(context).size.height;
     double widthh = MediaQuery.of(context).size.width;
-    return SizedBox(
-      height: double.infinity,
-      child: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: heightt * 260 / 800,
-            decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(40),
-                    bottomLeft: Radius.circular(40))),
-          ),
-          child
-        ],
-      ),
+   return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          height: heightt * 260 / 800,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/image/FAQ.png"), fit: BoxFit.cover),
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(40),
+                  bottomLeft: Radius.circular(40))),
+        ),
+        child
+      ],
     );
   }
 }
