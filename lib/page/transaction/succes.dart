@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:ppodb_2/page/transaction/categoryhome.dart';
 import 'package:ppodb_2/page/transaction/detail_product.dart';
 
-class SuccesPage extends StatefulWidget {
-  const SuccesPage({super.key});
+class SuccesPages extends StatefulWidget {
+  int type;
+  SuccesPages({super.key, required this.type});
 
   @override
-  State<SuccesPage> createState() => _SuccesPageState();
+  State<SuccesPages> createState() => _SuccesPagesState();
 }
 
-class _SuccesPageState extends State<SuccesPage> {
+class _SuccesPagesState extends State<SuccesPages> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -42,8 +43,9 @@ class _SuccesPageState extends State<SuccesPage> {
                   Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(
-                          text:
-                              "Tekan Transaksi lagi untuk melakukan \ntransaksi lain atau Kembali ke beranda",
+                          text: widget.type == 1
+                              ? "Tekan Transaksi lagi untuk melakukan \ntransaksi lain atau Kembali ke beranda"
+                              : "Paket kamu akan otomatis aktif dalam\nbeberapa menit. Ditunggu ya...",
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 16,
@@ -73,9 +75,9 @@ class _SuccesPageState extends State<SuccesPage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => DetailProduct(
-                                        code: 1,
+                                        code: widget.type,
                                       )),
-                              (route) => route.isFirst);
+                              (route) => route.isCurrent);
                         },
                         child: Text.rich(
                           TextSpan(

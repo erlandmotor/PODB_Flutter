@@ -156,6 +156,7 @@ class _WilayahpickerState extends State<Wilayahpicker> {
                                   separatorBuilder: (context, index) {
                                     return Divider();
                                   },
+                                  physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   itemCount: daerah[i].wilayah.length,
                                   itemBuilder:
