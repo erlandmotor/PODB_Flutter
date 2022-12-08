@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
   const sideError = Color.fromRGBO(248, 183, 183, 1);
   const colorError = Color.fromRGBO(230, 16, 16, 1);
   const warnaHarga = Color.fromRGBO(9, 49, 170, 1);
+  const boxPassword = Color.fromRGBO(255, 245, 231, 1);
+  const boxReset = Color.fromRGBO(13, 64, 198, 0.08);
   
   List iconModul = [
     "assets/icon/Pulsa.png","assets/icon/data.png","assets/icon/PDAM.png","assets/icon/listrik.png", 
@@ -31,10 +33,18 @@ import 'package:flutter/material.dart';
     "assets/image/admin.png","assets/image/cashback.png","assets/image/listrik.png",
   ];
 
+  List gambarRekomdasi = [
+    "assets/image/Recomendasi.png","assets/image/Recomendasi1.png","assets/image/Recomendasi2.png",
+  ];
+
   List topUPProfil = [
     "assets/icon/isi_saldo.png","assets/icon/kirim_uang.png","assets/icon/card.png","assets/icon/voucher.png",
   ];
 
   List namaTopup = [
     "Isi Saldo","Kirim Uang","Kartu Saya","Voucher Saya",
+  ];
+
+  List rating = [
+    "assets/icon/starborder.png","assets/icon/starborder.png""assets/icon/starborder.png","assets/icon/starborder.png","assets/icon/starborder.png",
   ];
