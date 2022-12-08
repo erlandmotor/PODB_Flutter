@@ -44,11 +44,31 @@ class Dummycate {
   Dummycate({required this.id, required this.name, required this.gmbr});
 }
 
+class DummyFilter {
+  int id;
+  String name;
+  DummyFilter({required this.id, required this.name,});
+}
+
 class Dummypro {
   int id;
   String name;
   List<Dummycate> pro;
   Dummypro({required this.id, required this.name, required this.pro});
+}
+
+// class Dummypro {
+//   int id;
+//   String name;
+//   List<Dummycate> pro;
+//   Dummypro({required this.id, required this.name, required this.pro});
+// }
+
+class DummyproFilter {
+  int id;
+  String name;
+  List<DummyFilter> pro;
+  DummyproFilter({required this.id, required this.name, required this.pro});
 }
 
 class Dummywilayah {
