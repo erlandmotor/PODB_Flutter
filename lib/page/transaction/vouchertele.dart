@@ -167,27 +167,51 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                             readOnly: tersedia == false ? true : false,
                             textCapitalization: TextCapitalization.characters,
                             controller: pakai,
-                            decoration: InputDecoration(
-                                prefixIcon: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Image.asset(
-                                    "assets/image/mdi_voucher.png",
-                                    width: size.width * .02,
-                                    height: size.height * .016,
-                                  ),
-                                ),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                hintText: tersedia == true
-                                    ? "Silahkan Pilih Kode Voucher"
-                                    : "Maaf Voucher Sudah Habis"),
+                            decoration: pakai.text == ""
+                                ? InputDecoration(
+                                    prefixIcon: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Image.asset(
+                                        "assets/image/mdi_voucher.png",
+                                        width: size.width * .02,
+                                        height: size.height * .016,
+                                      ),
+                                    ),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    hintText: tersedia == true
+                                        ? "Silahkan Pilih Kode Voucher"
+                                        : "Maaf Voucher Sudah Habis")
+                                : InputDecoration(
+                                    prefixIcon: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Image.asset(
+                                        "assets/image/mdi_voucher.png",
+                                        width: size.width * .02,
+                                        height: size.height * .016,
+                                      ),
+                                    ),
+                                    suffixIcon: IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            pakai.clear();
+                                          });
+                                        },
+                                        icon: Icon(Icons.cancel)),
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    hintText: tersedia == true
+                                        ? "Silahkan Pilih Kode Voucher"
+                                        : "Maaf Voucher Sudah Habis"),
                             keyboardType: TextInputType.text,
-                          ),
-                          SizedBox(
-                            height: size.height * .02,
                           ),
                           tersedia == true
                               ? Column(children: [
+                                  SizedBox(
+                                    height: size.height * .02,
+                                  ),
                                   Align(
                                     alignment: Alignment.topLeft,
                                     child: Text.rich(
@@ -473,21 +497,22 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                   child: Column(
                                     children: [
                                       SizedBox(
-                                        height: size.height * .02,
+                                        height: size.height * .05,
                                       ),
                                       Container(
                                         width: size.width * .9138,
                                         child: Column(
                                           children: [
                                             Image.asset(
-                                              "assets/image/amico.png",
+                                              "assets/image/Penasaran 2.png",
                                               height: size.height * .3,
+                                              width: size.width * .66666,
                                             ),
                                             Text.rich(
                                                 textAlign: TextAlign.center,
                                                 TextSpan(
                                                     text:
-                                                        "Tidak ada voucher yang tersedia",
+                                                        "Maaf, Belum Ada Voucher\nyang Tersedia!",
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w600,
@@ -500,12 +525,13 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                 textAlign: TextAlign.center,
                                                 TextSpan(
                                                     text:
-                                                        "Voucher antara habis atau kelewatan nih !!\ngood luck next time ^_^ ",
+                                                        "Kamu tetap bisa hemat meskipun tanpa\nvoucher loh. Yuk lanjutin transaksinya!",
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         fontSize: 16,
-                                                        color: Colors.black))),
+                                                        color: Color(
+                                                            0xff5C5D61)))),
                                           ],
                                         ),
                                       ),
@@ -535,7 +561,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                   child: Text.rich(
                                                     TextSpan(
                                                       text:
-                                                          "Balik Ke Pembayaran",
+                                                          "Lanjutkan Transaksi",
                                                     ),
                                                     style: TextStyle(
                                                         fontWeight:

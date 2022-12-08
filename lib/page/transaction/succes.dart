@@ -28,7 +28,11 @@ class _SuccesPagesState extends State<SuccesPages> {
               width: size.width * .9138,
               child: Column(
                 children: [
-                  Image.asset("assets/image/cuate.png"),
+                  Image.asset(
+                    "assets/image/succes.png",
+                    width: size.width * .5556,
+                    height: size.height * .25,
+                  ),
                   Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(
