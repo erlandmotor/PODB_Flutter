@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/page/home/home.dart';
-import 'package:ppodb_2/page/main_page/main_page.dart';
+import 'package:ppodb_2/page/transaction/categoryhome.dart';
 import 'package:ppodb_2/page/transaction/detail_product.dart';
-import 'package:ppodb_2/page/login_register/welcome_page.dart';
 
-class SuccesPage extends StatefulWidget {
-  const SuccesPage({super.key});
+class SuccesPages extends StatefulWidget {
+  int type;
+  SuccesPages({super.key, required this.type});
 
   @override
-  State<SuccesPage> createState() => _SuccesPageState();
+  State<SuccesPages> createState() => _SuccesPagesState();
 }
 
-class _SuccesPageState extends State<SuccesPage> {
+class _SuccesPagesState extends State<SuccesPages> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -29,7 +28,11 @@ class _SuccesPageState extends State<SuccesPage> {
               width: size.width * .9138,
               child: Column(
                 children: [
-                  Image.asset("assets/image/cuate.png"),
+                  Image.asset(
+                    "assets/image/succes.png",
+                    width: size.width * .5556,
+                    height: size.height * .25,
+                  ),
                   Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(
@@ -44,8 +47,9 @@ class _SuccesPageState extends State<SuccesPage> {
                   Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(
-                          text:
-                              "Tekan Transaksi lagi untuk melakukan \ntransaksi lain atau Kembali ke beranda",
+                          text: widget.type == 1
+                              ? "Tekan Transaksi lagi untuk melakukan \ntransaksi lain atau Kembali ke beranda"
+                              : "Paket kamu akan otomatis aktif dalam\nbeberapa menit. Ditunggu ya...",
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 16,
@@ -75,9 +79,9 @@ class _SuccesPageState extends State<SuccesPage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => DetailProduct(
-                                        code: 1,
+                                        code: widget.type,
                                       )),
-                              (route) => route.isFirst);
+                              (route) => route.isCurrent);
                         },
                         child: Text.rich(
                           TextSpan(
@@ -105,7 +109,8 @@ class _SuccesPageState extends State<SuccesPage> {
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => MainPage()),
+                            MaterialPageRoute(
+                                builder: (context) => CategoryProduct()),
                           );
                         },
                         child: Text.rich(

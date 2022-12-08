@@ -1,8 +1,12 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/Succesfull_Screen.dart';
+import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:ppodb_2/page/transaction/voucher_picker_screen.dart';
+import 'package:ppodb_2/page/transaction/vouchertele.dart';
 import 'package:ppodb_2/page/widgets/checkstatus.dart';
 
 class PembayranTelekScreen extends StatefulWidget {
@@ -19,7 +23,9 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
   String saldo = "Mycuan saldo";
   String dana = "DANA";
 
+  late DummyVoucher vou;
   TextEditingController nomor = TextEditingController();
+  TextEditingController voucher = TextEditingController();
   @override
   Widget build(BuildContext context) {
     nomor.text = "0${widget.trans.nomor}";
@@ -58,7 +64,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                         child: Text.rich(
                             textAlign: TextAlign.left,
                             TextSpan(
-                                text: widget.trans.provider,
+                                text: checkprovider(nomor.text),
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
@@ -119,6 +125,19 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                           height: size.height * .016,
                         ),
                         TextField(
+                          onTap: () async {
+                            vou = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Vouchertelepick(
+                                          type: widget.trans.type,
+                                        )));
+                            voucher.text = vou.kode;
+                            setState(() {
+                              widget.trans.diskon = vou.diskon;
+                            });
+                          },
+                          controller: voucher,
                           readOnly: true,
                           decoration: InputDecoration(
                               suffixIcon: IconButton(
@@ -126,12 +145,17 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                   Icons.navigate_next,
                                   color: Color(0xffFF9D0B),
                                 ),
-                                onPressed: () {
-                                  Navigator.push(
+                                onPressed: () async {
+                                  vou = await Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              Voucherpicker()));
+                                          builder: (context) => Vouchertelepick(
+                                                type: widget.trans.type,
+                                              )));
+                                  voucher.text = vou.kode;
+                                  setState(() {
+                                    widget.trans.diskon = vou.diskon;
+                                  });
                                 },
                               ),
                               prefixIcon: Padding(
@@ -191,15 +215,19 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                   children: [
                                     Align(
                                       alignment: Alignment.topLeft,
-                                      child: Text.rich(
-                                          textAlign: TextAlign.left,
-                                          TextSpan(
-                                              text:
-                                                  "${widget.trans.provider} ${widget.trans.nama}",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 14,
-                                              ))),
+                                      child: SizedBox(
+                                        width: size.width * .444583,
+                                        child: Text.rich(
+                                            textAlign: TextAlign.left,
+                                            TextSpan(
+                                                text: widget.trans.type == 1
+                                                    ? "${checkprovider(nomor.text)} ${widget.trans.nama}"
+                                                    : "${widget.trans.nama}",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 14,
+                                                ))),
+                                      ),
                                     ),
                                     SizedBox(
                                       height: size.height * .02,
@@ -256,6 +284,37 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                     SizedBox(
                                       height: size.height * .02,
                                     ),
+                                    widget.trans.diskon != null
+                                        ? Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text.rich(TextSpan(
+                                                      text: "Voucher",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14,
+                                                      ))),
+                                                  Text.rich(TextSpan(
+                                                      text:
+                                                          "-${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(widget.trans.diskon)}",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 14,
+                                                      ))),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: size.height * .02,
+                                              ),
+                                            ],
+                                          )
+                                        : Container()
                                   ],
                                 ),
                               ),
@@ -280,8 +339,20 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                             fontSize: 14,
                                           ))),
                                       Text.rich(TextSpan(
-                                          text:
-                                              "${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(widget.trans.harga - widget.trans.biayaadmin)}",
+                                          text: widget.trans.diskon != null
+                                              ? NumberFormat.currency(
+                                                      locale: 'id',
+                                                      symbol: 'Rp',
+                                                      decimalDigits: 0)
+                                                  .format(widget.trans.harga -
+                                                      widget.trans.biayaadmin -
+                                                      widget.trans.diskon!)
+                                              : NumberFormat.currency(
+                                                      locale: 'id',
+                                                      symbol: 'Rp',
+                                                      decimalDigits: 0)
+                                                  .format(widget.trans.harga -
+                                                      widget.trans.biayaadmin),
                                           style: TextStyle(
                                             fontWeight: FontWeight.w700,
                                             fontSize: 14,
@@ -500,7 +571,9 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SuccesPage()),
+                                builder: (context) => SuccesPages(
+                                      type: widget.trans.type,
+                                    )),
                             (route) => false);
                       }
                     },

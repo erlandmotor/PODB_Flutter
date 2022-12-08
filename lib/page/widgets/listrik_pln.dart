@@ -56,8 +56,9 @@ class _Listrik_Pln_screenState extends State<Listrik_Pln_screen> {
                 child: Text.rich(
                     textAlign: TextAlign.left,
                     TextSpan(
-                        text: "Nomor Handphone",
+                        text: "Nomor Meter/ID Pelanggan",
                         style: TextStyle(
+                          color: Colors.black,
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
                         ))),

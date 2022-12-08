@@ -5,8 +5,6 @@ import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/pembayaran_telekomunikasi.dart';
 import 'package:ppodb_2/page/widgets/checkstatus.dart';
 
-import '../transaction/pembayaran.dart';
-
 class Paketdatas extends StatefulWidget {
   List popo;
   int type;
@@ -19,8 +17,6 @@ class Paketdatas extends StatefulWidget {
 class _PaketdataState extends State<Paketdatas> {
   String status = "";
   late int harga;
-  late String providers;
-
   TextEditingController bambang = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -49,13 +45,8 @@ class _PaketdataState extends State<Paketdatas> {
               height: size.height * .0575,
             ),
             Container(
-              color: status != "" &&
-                      bambang.text.length > 9 &&
-                      bambang.text.length < 13 &&
-                      bambang.text[0] == "0" &&
-                      bambang.text[1] == "8"
-                  ? Colors.white
-                  : Colors.transparent,
+              color:
+                  checkvalid(bambang.text) ? Colors.white : Colors.transparent,
               width: size.width * .93,
               height: size.height * .08,
             )
@@ -81,9 +72,6 @@ class _PaketdataState extends State<Paketdatas> {
               ),
               Stack(
                 children: [
-                  Container(
-                    color: Colors.white,
-                  ),
                   TextField(
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: bambang.text.isEmpty
@@ -96,78 +84,74 @@ class _PaketdataState extends State<Paketdatas> {
                             prefixIcon: Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: bambang.text.length > 0 && bambang.text.length < 4 ||
-                                        bambang.text.length > 13
+                                        bambang.text.length > 13 ||
+                                        bambang.text[0] != "0" ||
+                                        bambang.text[1] != "8"
                                     ? Icon(Icons.phone_android)
                                     : bambang.text[2] == "5" && bambang.text[3] == "2" ||
                                             bambang.text[2] == "5" &&
                                                 bambang.text[3] == "3" ||
                                             bambang.text[2] == "5" &&
-                                                bambang.text[3] == "1" ||
-                                            bambang.text[2] == "5" &&
-                                                bambang.text[3] == "7" ||
-                                            bambang.text[2] == "5" &&
-                                                bambang.text[3] == "6"
+                                                bambang.text[3] == "1"
                                         ? Image.asset(
                                             "assets/image/telkomsel1.png",
                                             width: size.width * .024,
                                             height: size.height * .024,
                                           )
-                                        : bambang.text[2] == "1" && bambang.text[3] == "1" ||
-                                                bambang.text[2] == "1" &&
-                                                    bambang.text[3] == "2" ||
-                                                bambang.text[2] == "1" &&
-                                                    bambang.text[3] == "3" ||
-                                                bambang.text[2] == "2" &&
-                                                    bambang.text[3] == "1" ||
-                                                bambang.text[2] == "2" &&
-                                                    bambang.text[3] == "2"
+                                        : bambang.text[2] == "5" &&
+                                                    bambang.text[3] == "7" ||
+                                                bambang.text[2] == "5" &&
+                                                    bambang.text[3] == "6"
                                             ? Image.asset(
-                                                "assets/image/telkomsel1.png",
+                                                "assets/image/indosat.png",
                                                 width: size.width * .024,
                                                 height: size.height * .024,
                                               )
-                                            : bambang.text[2] == "1" && bambang.text[3] == "7" ||
+                                            : bambang.text[2] == "1" && bambang.text[3] == "1" ||
                                                     bambang.text[2] == "1" &&
                                                         bambang.text[3] ==
-                                                            "8" ||
+                                                            "2" ||
                                                     bambang.text[2] == "1" &&
                                                         bambang.text[3] ==
-                                                            "9" ||
-                                                    bambang.text[2] == "5" &&
+                                                            "3" ||
+                                                    bambang.text[2] == "2" &&
                                                         bambang.text[3] ==
-                                                            "9" ||
-                                                    bambang.text[2] == "7" &&
-                                                        bambang.text[3] ==
-                                                            "7" ||
-                                                    bambang.text[2] == "7" &&
-                                                        bambang.text[3] == "8"
+                                                            "1" ||
+                                                    bambang.text[2] == "2" &&
+                                                        bambang.text[3] == "2"
                                                 ? Image.asset(
-                                                    "assets/image/XL.png",
+                                                    "assets/image/telkomsel1.png",
                                                     width: size.width * .024,
                                                     height: size.height * .024,
                                                   )
-                                                : bambang.text[2] == "3" && bambang.text[3] == "2" ||
-                                                        bambang.text[2] == "3" && bambang.text[3] == "3" ||
-                                                        bambang.text[2] == "3" && bambang.text[3] == "8"
+                                                : bambang.text[2] == "1" && bambang.text[3] == "7" ||
+                                                        bambang.text[2] == "1" &&
+                                                            bambang.text[3] ==
+                                                                "8" ||
+                                                        bambang.text[2] == "1" &&
+                                                            bambang.text[3] == "9" ||
+                                                        bambang.text[2] == "5" && bambang.text[3] == "9" ||
+                                                        bambang.text[2] == "7" && bambang.text[3] == "7" ||
+                                                        bambang.text[2] == "7" && bambang.text[3] == "8"
                                                     ? Image.asset(
-                                                        "assets/image/Axis_logo_2015.png",
+                                                        "assets/image/XL.png",
                                                         width:
                                                             size.width * .024,
                                                         height:
                                                             size.height * .024,
                                                       )
-                                                    : bambang.text[2] == "9" && bambang.text[3] == "6" || bambang.text[2] == "9" && bambang.text[3] == "5" || bambang.text[2] == "9" && bambang.text[3] == "7" || bambang.text[2] == "9" && bambang.text[3] == "8" || bambang.text[2] == "9" && bambang.text[3] == "9"
+                                                    : bambang.text[2] == "3" && bambang.text[3] == "2" || bambang.text[2] == "3" && bambang.text[3] == "3" || bambang.text[2] == "3" && bambang.text[3] == "8"
                                                         ? Image.asset(
-                                                            "assets/image/3-brand.png",
+                                                            "assets/image/Axis_logo_2015.png",
                                                             width: size.width *
                                                                 .024,
                                                             height:
                                                                 size.height *
                                                                     .024,
                                                           )
-                                                        : bambang.text[2] == "8" && bambang.text[3] == "8" || bambang.text[2] == "8" && bambang.text[3] == "1" || bambang.text[2] == "8" && bambang.text[3] == "2" || bambang.text[2] == "8" && bambang.text[3] == "3" || bambang.text[2] == "8" && bambang.text[3] == "4" || bambang.text[2] == "8" && bambang.text[3] == "5" || bambang.text[2] == "8" && bambang.text[3] == "6" || bambang.text[2] == "8" && bambang.text[3] == "7" || bambang.text[2] == "8" && bambang.text[3] == "9"
+                                                        : bambang.text[2] == "9" && bambang.text[3] == "6" || bambang.text[2] == "9" && bambang.text[3] == "5" || bambang.text[2] == "9" && bambang.text[3] == "7" || bambang.text[2] == "9" && bambang.text[3] == "8" || bambang.text[2] == "9" && bambang.text[3] == "9"
                                                             ? Image.asset(
-                                                                "assets/image/smartfren.png",
+                                                                "assets/image/3-brand.png",
                                                                 width:
                                                                     size.width *
                                                                         .024,
@@ -175,7 +159,17 @@ class _PaketdataState extends State<Paketdatas> {
                                                                     size.height *
                                                                         .024,
                                                               )
-                                                            : Icon(Icons.phone_android)),
+                                                            : bambang.text[2] == "8" && bambang.text[3] == "8" || bambang.text[2] == "8" && bambang.text[3] == "1" || bambang.text[2] == "8" && bambang.text[3] == "2" || bambang.text[2] == "8" && bambang.text[3] == "3" || bambang.text[2] == "8" && bambang.text[3] == "4" || bambang.text[2] == "8" && bambang.text[3] == "5" || bambang.text[2] == "8" && bambang.text[3] == "6" || bambang.text[2] == "8" && bambang.text[3] == "7" || bambang.text[2] == "8" && bambang.text[3] == "9"
+                                                                ? Image.asset(
+                                                                    "assets/image/smartfren.png",
+                                                                    width: size
+                                                                            .width *
+                                                                        .024,
+                                                                    height: size
+                                                                            .height *
+                                                                        .024,
+                                                                  )
+                                                                : Icon(Icons.phone_android)),
                             suffixIcon: IconButton(
                                 onPressed: () {
                                   setState(() {
@@ -204,17 +198,14 @@ class _PaketdataState extends State<Paketdatas> {
                 child: Text.rich(
                     textAlign: TextAlign.left,
                     TextSpan(
-                        text: providers = checkprovider(bambang.text),
+                        text: checkprovider(bambang.text),
                         style: bambang.text.isEmpty
                             ? TextStyle(
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xff5C5D61),
                                 fontSize: 12,
                               )
-                            : bambang.text.length < 10 ||
-                                    bambang.text.length > 13 ||
-                                    bambang.text[0] != "0" ||
-                                    bambang.text[1] != "8"
+                            : checkvalid(bambang.text)
                                 ? TextStyle(
                                     fontWeight: FontWeight.w800,
                                     color: Colors.red,
@@ -237,9 +228,7 @@ class _PaketdataState extends State<Paketdatas> {
                 child: bambang.text.length < 10 && bambang.text.length > 0 ||
                         bambang.text.length > 13
                     ? CircularProgressIndicator()
-                    : bambang.text.isEmpty ||
-                            bambang.text[0] != "0" ||
-                            bambang.text[1] != "8"
+                    : checkvalid(bambang.text)
                         ? Container()
                         : Text.rich(
                             textAlign: TextAlign.left,
@@ -254,11 +243,7 @@ class _PaketdataState extends State<Paketdatas> {
                 height: size.height * .01,
               ),
               Expanded(
-                  child: bambang.text.length < 10 ||
-                          bambang.text.length > 13 ||
-                          bambang.text.isEmpty ||
-                          bambang.text[0] != "0" ||
-                          bambang.text[1] != "8"
+                  child: checkvalid(bambang.text)
                       ? Container()
                       : SingleChildScrollView(
                           child: Column(
@@ -368,11 +353,7 @@ class _PaketdataState extends State<Paketdatas> {
                   left: size.width * .044,
                   right: size.width * .044,
                   bottom: size.height * .025),
-              child: status != "" &&
-                      bambang.text.length > 9 &&
-                      bambang.text.length < 14 &&
-                      bambang.text[0] == "0" &&
-                      bambang.text[1] == "8"
+              child: status != "" && !checkvalid(bambang.text)
                   ? Container(
                       alignment: Alignment.bottomCenter,
                       child: SizedBox(
@@ -383,18 +364,14 @@ class _PaketdataState extends State<Paketdatas> {
                               backgroundColor: Color(0xff0D40C6),
                               shape: StadiumBorder()),
                           onPressed: () {
-                            if (status != "" &&
-                                bambang.text.length > 9 &&
-                                bambang.text.length < 13 &&
-                                bambang.text[0] == "0" &&
-                                bambang.text[1] == "8") {
+                            if (status != "" && !checkvalid(bambang.text)) {
                               final DummyTransTelekom kiriman =
                                   DummyTransTelekom(
                                       biayaadmin: 0,
                                       harga: harga,
                                       nama: status,
                                       nomor: int.parse(bambang.text),
-                                      provider: providers);
+                                      type: widget.type);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

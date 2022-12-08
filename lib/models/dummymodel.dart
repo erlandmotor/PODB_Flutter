@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class ProductDummyModel {
   int id;
   String name;
@@ -62,32 +64,36 @@ class Dummywilayah {
 class DummyVoucher {
   int id;
   String nama;
+  String namavoucher;
   String kode;
-  String valid;
+
   int diskon;
-  String provider;
+  int tipe;
+  int stock;
+  String expired;
   DummyVoucher(
       {required this.id,
       required this.nama,
+      required this.namavoucher,
       required this.kode,
       required this.diskon,
-      required this.provider,
-      required this.valid});
+      required this.tipe,
+      required this.stock,
+      required this.expired});
 }
 
 class DummyTransTelekom {
   int? id;
   int nomor;
-  String provider;
+  int type;
   String nama;
   int harga;
   int biayaadmin;
-  String? voucher;
-  int? nilaivoucher;
+  int? diskon;
   DummyTransTelekom(
       {required this.nomor,
       required this.nama,
-      required this.provider,
+      required this.type,
       required this.harga,
       required this.biayaadmin});
 }

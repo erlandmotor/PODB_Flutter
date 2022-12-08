@@ -4,15 +4,15 @@ import 'package:flutter/services.dart';
 import '../../models/dummymodel.dart';
 import '../transaction/pembayaran.dart';
 
-class Token_listrik extends StatefulWidget {
+class BPJSScreen extends StatefulWidget {
   int tipe;
-  Token_listrik({super.key, required this.tipe});
+  BPJSScreen({super.key, required this.tipe});
 
   @override
-  State<Token_listrik> createState() => _Token_listrikState();
+  State<BPJSScreen> createState() => _BPJSScreenState();
 }
 
-class _Token_listrikState extends State<Token_listrik> {
+class _BPJSScreenState extends State<BPJSScreen> {
   TextEditingController bambang = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class _Token_listrikState extends State<Token_listrik> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          "Token Listrik PLN",
+          "BPJS",
           selectionColor: Color(0xff5C5D61),
         ),
         centerTitle: true,
@@ -56,7 +56,7 @@ class _Token_listrikState extends State<Token_listrik> {
                 child: Text.rich(
                     textAlign: TextAlign.left,
                     TextSpan(
-                        text: "Nomor Meter/ID Pelanggan",
+                        text: "Nomor VA Keluarga",
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w500,
@@ -75,7 +75,7 @@ class _Token_listrikState extends State<Token_listrik> {
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: bambang.text.isEmpty
                         ? InputDecoration(
-                            prefixIcon: Icon(Icons.offline_bolt),
+                            prefixIcon: Icon(Icons.family_restroom),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             hintText: "0853xxxxxxxx")
@@ -107,7 +107,7 @@ class _Token_listrikState extends State<Token_listrik> {
                     textAlign: TextAlign.left,
                     TextSpan(
                         text: bambang.text.length == 0
-                            ? "Silahkan masukkan nomor pelanggan anda"
+                            ? "Silahkan masukkan nomor VA keluarga anda"
                             : bambang.text.length < 10 ||
                                     bambang.text.length > 13
                                 ? "Silahkan masukkan nomor yang valid"
@@ -152,36 +152,25 @@ class _Token_listrikState extends State<Token_listrik> {
                             color: Color(0xff0D40C6),
                           )),
                     ),
-                    SizedBox(width: size.width * .0777),
-                    Padding(
-                        padding: EdgeInsets.only(
-                            top: size.height * .015,
-                            bottom: size.height * .015,
-                            right: size.width * .033),
-                        child: RichText(
-                          text: TextSpan(
+                    SizedBox(width: size.width * .0277),
+                    SizedBox(
+                      width: size.width * .7555,
+                      child: Padding(
+                          padding: EdgeInsets.only(
+                              top: size.height * .015,
+                              bottom: size.height * .015,
+                              right: size.width * .033),
+                          child: RichText(
+                            text: TextSpan(
                               text:
-                                  "Transaksi Produk Listrik PLN yang dilakukan\npukul 23:40-OO.20 WIB akan",
+                                  "Status tagihan BPJS akan diperbarui maks. 3x24jam (hari kerja) setelah transaksi berhasil.",
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12),
-                              children: [
-                                TextSpan(
-                                    text:
-                                        "mulai diproses\npada pukul 00.20 WIB",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12)),
-                                TextSpan(
-                                    text: "sesuai kebijakan pihak\nPLN.",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 12))
-                              ]),
-                        )),
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14),
+                            ),
+                          )),
+                    )
                   ],
                 ),
               )
