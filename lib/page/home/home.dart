@@ -12,6 +12,7 @@ import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
 import 'package:ppodb_2/page/widgets/box_besar.dart';
 import 'package:ppodb_2/page/widgets/box_kecil.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart';
+import 'package:ppodb_2/page/widgets/notready.dart';
 import 'package:ppodb_2/page/widgets/textIconMenu.dart';
 
 class HomePage extends StatefulWidget {
@@ -67,12 +68,12 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: heightt*26/800,
+                height: heightt * 26 / 800,
               ),
               Padding(
-                padding:  EdgeInsets.only(top:heightt*10/800),
+                padding: EdgeInsets.only(top: heightt * 10 / 800),
                 child: SizedBox(
-                  height:heightt*50/800,
+                  height: heightt * 50 / 800,
                   width: double.infinity,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -114,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                               fontWeight: FontWeight.w500,
                               fontSize: 12)),
                       Padding(
-                        padding:  EdgeInsets.only(top:heightt*5/800),
+                        padding: EdgeInsets.only(top: heightt * 5 / 800),
                         child: Text("Rp. 0",
                             style: GoogleFonts.inter(
                                 color: Colors.black,
@@ -128,8 +129,8 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                          height: heightt*36/800,
-                          width:widthh*33/360,
+                          height: heightt * 36 / 800,
+                          width: widthh * 33 / 360,
                           decoration: BoxDecoration(
                               color: primaryColor,
                               borderRadius: BorderRadius.circular(400)),
@@ -141,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           )),
                       SizedBox(
-                        width:widthh*5/360,
+                        width: widthh * 5 / 360,
                       ),
                       Text("Top Up",
                           style: GoogleFonts.inter(
@@ -155,42 +156,62 @@ class _HomePageState extends State<HomePage> {
               Boxbesar(
                   child: Container(
                 width: double.infinity,
-                height:heightt*205/800,
+                height: heightt * 205 / 800,
                 child: GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.only(
-                    top:heightt*16/800,
+                    top: heightt * 16 / 800,
                   ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
                     // childAspectRatio: 5 ,
                     crossAxisSpacing: 8,
-                    mainAxisSpacing: 16,
                   ),
                   itemCount: modulName.length,
                   itemBuilder: (BuildContext context, index) {
                     return GestureDetector(
                       onTap: () {
                         if (modulName[index] == "Pulsa") {
-                          // Navigator.push(context, MaterialPageRoute(builder: ((context) => Pulsa())));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => Notready())));
                         }
                         if (modulName[index] == "Paket Data") {
-                          //  / Navigator.push(context, MaterialPageRoute(builder: ((context) => Pulsa())));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => Notready())));
                         }
                         if (modulName[index] == "PDAM") {
-                          //  / Navigator.push(context, MaterialPageRoute(builder: ((context) => Pulsa())));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => Notready())));
                         }
                         if (modulName[index] == "Listrik") {
-                          //  / Navigator.push(context, MaterialPageRoute(builder: ((context) => Pulsa())));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => Notready())));
                         }
                         if (modulName[index] == "BPJS") {
-                          //  / Navigator.push(context, MaterialPageRoute(builder: ((context) => Pulsa())));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => Notready())));
                         }
                         if (modulName[index] == "Indihome") {
-                          //  / Navigator.push(context, MaterialPageRoute(builder: ((context) => Pulsa())));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => Notready())));
                         }
                         if (modulName[index] == "Voucher Game") {
-                          //  / Navigator.push(context, MaterialPageRoute(builder: ((context) => Pulsa())));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => Notready())));
                         }
                         if (modulName[index] == "Lainnya") {
                           Navigator.push(
@@ -275,7 +296,7 @@ class _HomePageState extends State<HomePage> {
                                   margin:
                                       EdgeInsets.only(right: widthh * 20 / 360),
                                   width: widthh,
-                                  height:heightt*140/800,
+                                  height: heightt * 140 / 800,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           image: AssetImage(
@@ -286,7 +307,8 @@ class _HomePageState extends State<HomePage> {
                           }),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: widthh * 35 / 328,bottom:heightt*5/800),
+                      padding: EdgeInsets.only(
+                          left: widthh * 35 / 328, bottom: heightt * 5 / 800),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -296,17 +318,21 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: widthh * 24 / 360, bottom:heightt*10/800,top: heightt*24/800),
+                padding: EdgeInsets.only(
+                    left: widthh * 24 / 360,
+                    bottom: heightt * 10 / 800,
+                    top: heightt * 24 / 800),
                 child: Text("Butuh Bantuan ?",
                     style: GoogleFonts.inter(
                         fontSize: 20, fontWeight: FontWeight.w600)),
               ),
               Padding(
-                padding: EdgeInsets.only(left: widthh * 24 / 360,right: widthh * 24 / 360),
+                padding: EdgeInsets.only(
+                    left: widthh * 24 / 360, right: widthh * 24 / 360),
                 child: InkWell(
                     child: Container(
                   width: widthh * 328 / 360,
-                  height:heightt*140/800,
+                  height: heightt * 140 / 800,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
