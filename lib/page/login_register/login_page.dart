@@ -132,6 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                         final users = LoginModel(
                             email: _emailController.text,
                             katasandi: _katasandiController.text);
+                            Provider.of<AuthViewModel>(context, listen: false).getToken( _emailController.text, _katasandiController.text);
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => MainPage(),
                         ));

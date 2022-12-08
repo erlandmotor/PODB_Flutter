@@ -4,8 +4,10 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:ppodb_2/models/data_register_model.dart';
 import 'package:ppodb_2/page/login_register/login_page.dart';
 import 'package:ppodb_2/page/login_register/register2_page.dart';
+import 'package:provider/provider.dart';
 
 import '../../shared/shared.dart';
+import '../../view_model/auth_view_model.dart';
 
 class Register1Page extends StatefulWidget {
   const Register1Page({super.key});
@@ -19,6 +21,31 @@ class _Register1PageState extends State<Register1Page> {
   final _namalengkapController = TextEditingController();
   final _emailController = TextEditingController();
   final _nomortelponController = TextEditingController();
+
+  void tampilkanBottom(){
+    showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 200,
+                color: Colors.amber,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Text('Modal BottomSheet'),
+                      ElevatedButton(
+                        child: const Text('Close BottomSheet'),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -177,9 +204,17 @@ class _Register1PageState extends State<Register1Page> {
                                   namalengkap: _namalengkapController.text,
                                   email: _emailController.text,
                                   nomortelpon: _nomortelponController.text);
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Register2Page(),
+                                  
+                                  Provider.of<AuthViewModel>(context, listen: false).getAllRegister(_namalengkapController.text,_nomortelponController.text, _emailController.text,"aA1aaaaa","");
+                                 print(Provider.of<AuthViewModel>(context, listen: false).isNext);
+                                  if(Provider.of<AuthViewModel>(context, listen: false).isNext==""){
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Register2Page(register1model: users,),
                               ));
+                                     
+                                  }else{tampilkanBottom();}
+                                 
+                              
                             }
                           },
                           child: Text(
