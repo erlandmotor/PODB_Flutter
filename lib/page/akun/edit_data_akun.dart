@@ -68,12 +68,11 @@ class _EditAkunState extends State<EditAkun> {
         ),
         textAlign: TextAlign.center,),
       ),
-      body: Padding(
-        padding:  EdgeInsets.only(left: widthh*16/360, right: widthh*16/360),
-        child: SizedBox(
-          height: double.infinity,
-          child: Form(
-            key: formKey,
+      body: SafeArea(
+        child: Padding(
+          padding:  EdgeInsets.only(left: widthh*16/360, right: widthh*16/360),
+          child: SizedBox(
+            height: double.infinity,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -82,8 +81,8 @@ class _EditAkunState extends State<EditAkun> {
                    Padding(
                      padding:  EdgeInsets.only(left: widthh*108/360,top: heightt*16/800,),
                      child: Container(
-                              height: heightt*91/800,
-                              width: widthh*112/360,                      
+                              height: 91,
+                              width: 112,                      
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(400),                        
                                 image: DecorationImage(image: NetworkImage("https://plus.unsplash.com/premium_photo-1661767329669-2ff46c34fffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",),)
@@ -101,7 +100,7 @@ class _EditAkunState extends State<EditAkun> {
                           height: heightt * 0.00625,
                         ),
                         TextFormField(
-                            
+                            keyboardType: TextInputType.text,
                             controller: _namalengkapController,
                             validator: (value) {
                               //final nameRegExp = new RegExp(r"^\s([A-Za-z]{1,}([.,] |[-']| ))+[A-Za-z]+.?\s$");
