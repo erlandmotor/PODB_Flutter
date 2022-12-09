@@ -120,177 +120,166 @@ class _CategoryProductState extends State<CategoryProduct> {
                 children: <Widget>[
                   for (var i = 0; i < prod.length; i++)
                     status == ""
-                        ? Container(
-                            child: Column(
-                              children: [
-                                Align(
-                                  child: Text.rich(
-                                      textAlign: TextAlign.left,
-                                      TextSpan(
-                                          text: prod[i].name,
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 16,
-                                          ))),
-                                  alignment: Alignment.topLeft,
+                        ? Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Text.rich(
+                                    textAlign: TextAlign.left,
+                                    TextSpan(
+                                        text: prod[i].name,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16,
+                                        ))),
+                              ),
+                              SizedBox(
+                                height: size.height * .01,
+                              ),
+                              GridView.builder(
+                                shrinkWrap: true,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 4,
+                                  crossAxisSpacing: size.width * .0444,
+                                  mainAxisSpacing: size.height * .02,
                                 ),
-                                SizedBox(
-                                  height: size.height * .01,
-                                ),
-                                GridView.builder(
-                                  shrinkWrap: true,
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 4,
-                                    crossAxisSpacing: size.width * .0444,
-                                    mainAxisSpacing: size.height * .02,
-                                  ),
-                                  itemCount: prod[i].pro.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return RawMaterialButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailProduct(
-                                                    code: prod[i].pro[index].id,
-                                                  )),
-                                        );
-                                      },
-                                      child: Container(
-                                        width: size.width * .2111,
-                                        child: Column(
-                                          children: [
-                                            SizedBox(
-                                              height: size.height * .01375,
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: size.width * .0638,
-                                                  right: size.width * .0638),
-                                              child: SizedBox(
-                                                height: size.height * .0375,
-                                                width: size.width * .08333,
-                                                child: Image.asset(
-                                                    prod[i].pro[index].gmbr),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: size.height * .005,
-                                            ),
-                                            Text.rich(
-                                                textAlign: TextAlign.center,
-                                                TextSpan(
-                                                    text:
-                                                        prod[i].pro[index].name,
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 10,
-                                                    ))),
-                                            SizedBox(
-                                              height: size.height * .01375,
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                          )
-                        : status == prod[i].name
-                            ? Container(
-                                child: Column(
-                                  children: [
-                                    Align(
-                                      child: Text.rich(
-                                          textAlign: TextAlign.left,
-                                          TextSpan(
-                                              text: prod[i].name,
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 16,
-                                              ))),
-                                      alignment: Alignment.topLeft,
-                                    ),
-                                    SizedBox(
-                                      height: size.height * .01,
-                                    ),
-                                    GridView.builder(
-                                      shrinkWrap: true,
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 4,
-                                        crossAxisSpacing: size.width * .0444,
-                                        mainAxisSpacing: size.height * .02,
-                                      ),
-                                      itemCount: prod[i].pro.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return RawMaterialButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      DetailProduct(
-                                                        code: prod[i]
-                                                            .pro[index]
-                                                            .id,
-                                                      )),
-                                            );
-                                          },
-                                          child: Container(
-                                            width: size.width * .2111,
-                                            child: Column(
-                                              children: [
-                                                SizedBox(
-                                                  height: size.height * .01375,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: size.width * .0638,
-                                                      right:
-                                                          size.width * .0638),
-                                                  child: SizedBox(
-                                                    height: size.height * .0375,
-                                                    width: size.width * .08333,
-                                                    child: Image.asset(prod[i]
-                                                        .pro[index]
-                                                        .gmbr),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: size.height * .005,
-                                                ),
-                                                Text.rich(
-                                                    textAlign: TextAlign.center,
-                                                    TextSpan(
-                                                        text: prod[i]
-                                                            .pro[index]
-                                                            .name,
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 10,
-                                                        ))),
-                                                SizedBox(
-                                                  height: size.height * .01375,
-                                                )
-                                              ],
+                                itemCount: prod[i].pro.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return RawMaterialButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DetailProduct(
+                                                  code: prod[i].pro[index].id,
+                                                )),
+                                      );
+                                    },
+                                    child: SizedBox(
+                                      width: size.width * .2111,
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: size.height * .01375,
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                left: size.width * .0638,
+                                                right: size.width * .0638),
+                                            child: SizedBox(
+                                              height: size.height * .0375,
+                                              width: size.width * .08333,
+                                              child: Image.asset(
+                                                  prod[i].pro[index].gmbr),
                                             ),
                                           ),
-                                        );
-                                      },
+                                          SizedBox(
+                                            height: size.height * .005,
+                                          ),
+                                          Text.rich(
+                                              textAlign: TextAlign.center,
+                                              TextSpan(
+                                                  text: prod[i].pro[index].name,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 10,
+                                                  ))),
+                                          SizedBox(
+                                            height: size.height * .01375,
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ],
-                                ),
+                                  );
+                                },
+                              ),
+                            ],
+                          )
+                        : status == prod[i].name
+                            ? Column(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text.rich(
+                                        textAlign: TextAlign.left,
+                                        TextSpan(
+                                            text: prod[i].name,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16,
+                                            ))),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * .01,
+                                  ),
+                                  GridView.builder(
+                                    shrinkWrap: true,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 4,
+                                      crossAxisSpacing: size.width * .0444,
+                                      mainAxisSpacing: size.height * .02,
+                                    ),
+                                    itemCount: prod[i].pro.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return RawMaterialButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailProduct(
+                                                      code:
+                                                          prod[i].pro[index].id,
+                                                    )),
+                                          );
+                                        },
+                                        child: SizedBox(
+                                          width: size.width * .2111,
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                height: size.height * .01375,
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: size.width * .0638,
+                                                    right: size.width * .0638),
+                                                child: SizedBox(
+                                                  height: size.height * .0375,
+                                                  width: size.width * .08333,
+                                                  child: Image.asset(
+                                                      prod[i].pro[index].gmbr),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: size.height * .005,
+                                              ),
+                                              Text.rich(
+                                                  textAlign: TextAlign.center,
+                                                  TextSpan(
+                                                      text: prod[i]
+                                                          .pro[index]
+                                                          .name,
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 10,
+                                                      ))),
+                                              SizedBox(
+                                                height: size.height * .01375,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
                               )
                             : Container()
                 ],
