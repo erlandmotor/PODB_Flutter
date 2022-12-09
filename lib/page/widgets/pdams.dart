@@ -73,6 +73,9 @@ class _PDAMSState extends State<PDAMS> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => Wilayahpicker()));
+                    setState(() {
+                      wilayah.text = wilayah.text;
+                    });
                   },
                   decoration: InputDecoration(
                       suffixIcon: IconButton(
@@ -85,6 +88,9 @@ class _PDAMSState extends State<PDAMS> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Wilayahpicker()));
+                          setState(() {
+                            wilayah.text = wilayah.text;
+                          });
                         },
                       ),
                       border: OutlineInputBorder(

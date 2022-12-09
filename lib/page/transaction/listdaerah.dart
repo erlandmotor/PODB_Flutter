@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
-import 'package:ppodb_2/page/widgets/pdams.dart';
 
 class Wilayahpicker extends StatefulWidget {
   Wilayahpicker({super.key});

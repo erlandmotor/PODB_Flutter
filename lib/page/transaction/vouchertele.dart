@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
-import 'package:ppodb_2/page/transaction/pembayaran.dart';
 import 'package:ppodb_2/page/widgets/checkstatus.dart';
 
 class Vouchertelepick extends StatefulWidget {
@@ -207,6 +206,33 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                         : "Maaf Voucher Sudah Habis"),
                             keyboardType: TextInputType.text,
                           ),
+                          SizedBox(
+                            height: size.height * .005,
+                          ),
+                          Container(
+                              alignment: Alignment.topLeft,
+                              child: Text.rich(
+                                textAlign: TextAlign.left,
+                                TextSpan(
+                                    text: tersedia == true && pakai.text == ""
+                                        ? "Silahkan masukkan kode voucher"
+                                        : checkvou(pakai.text, viewlist)
+                                            ? ""
+                                            : !checkvou(pakai.text, viewlist)
+                                                ? "Kouta voucher habis atau tidak ditemukan"
+                                                : "",
+                                    style: pakai.text == "" ||
+                                            checkvou(pakai.text, viewlist)
+                                        ? TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xff5C5D61),
+                                            fontSize: 12,
+                                          )
+                                        : TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            color: Colors.red,
+                                            fontSize: 12)),
+                              )),
                           tersedia == true
                               ? Column(children: [
                                   SizedBox(
@@ -574,7 +600,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                   ),
                                 ),
                         ])))),
-            tersedia == true
+            tersedia == true && checkvou(pakai.text, viewlist)
                 ? Container(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
@@ -587,7 +613,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                           )),
                     ))
                 : SizedBox(),
-            tersedia == true
+            tersedia == true && checkvou(pakai.text, viewlist)
                 ? Padding(
                     padding: EdgeInsets.only(
                         left: size.width * .044,

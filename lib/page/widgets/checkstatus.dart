@@ -1,3 +1,5 @@
+import 'package:ppodb_2/models/dummymodel.dart';
+
 bool checkvalid(String bambang) {
   bool value;
   value = bambang.isEmpty
@@ -245,5 +247,15 @@ String checkPicprovider(String bambang) {
                                                       bambang[3] == "9"
                                               ? "assets/image/smartfren.png"
                                               : "";
+  return value;
+}
+
+bool checkvou(String vou, List<DummyVoucher> viewlist) {
+  bool value = false;
+  for (int i = 0; i < viewlist.length; i++) {
+    if (vou == viewlist[i].kode) {
+      value = true;
+    }
+  }
   return value;
 }

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class ProductDummyModel {
   int id;
   String name;
@@ -21,12 +19,12 @@ class RiwayatDummyModel {
   String total;
   String status;
   String dompetdigital;
-  String statusTransaksi;  
+  String statusTransaksi;
   RiwayatDummyModel(
       {required this.id,
       required this.title,
       required this.dompetdigital,
-       required this.statusTransaksi,
+      required this.statusTransaksi,
       required this.total,
       required this.nominal,
       required this.status});
@@ -67,7 +65,10 @@ class Dummycate {
 class DummyFilter {
   int id;
   String name;
-  DummyFilter({required this.id, required this.name,});
+  DummyFilter({
+    required this.id,
+    required this.name,
+  });
 }
 
 class Dummypro {
@@ -134,4 +135,12 @@ class DummyTransTelekom {
       required this.type,
       required this.harga,
       required this.biayaadmin});
+}
+
+class Dummymethod {
+  int id;
+  String name;
+  String gambar;
+
+  Dummymethod({required this.id, required this.name, required this.gambar});
 }

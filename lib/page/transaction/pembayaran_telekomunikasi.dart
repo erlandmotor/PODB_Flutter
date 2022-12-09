@@ -1,11 +1,7 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
-import 'package:ppodb_2/page/transaction/Succesfull_Screen.dart';
 import 'package:ppodb_2/page/transaction/succes.dart';
-import 'package:ppodb_2/page/transaction/voucher_picker_screen.dart';
 import 'package:ppodb_2/page/transaction/vouchertele.dart';
 import 'package:ppodb_2/page/widgets/checkstatus.dart';
 
