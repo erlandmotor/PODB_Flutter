@@ -20,13 +20,21 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthViewModel(),
         )
       ],
-      child: MaterialApp(
-        
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          backgroundColor: whiteColor,
+      child: GestureDetector(
+        onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);//???
+        if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+          FocusManager.instance.primaryFocus!.unfocus();
+        }
+      },
+        child: MaterialApp(
+          
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            backgroundColor: whiteColor,
+          ),
+          home: WelcomePage(),
         ),
-        home: WelcomePage(),
       ),
     );
   }

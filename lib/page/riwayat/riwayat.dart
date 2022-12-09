@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
+import 'package:ppodb_2/page/riwayat/detail_riwayat.dart';
 import 'package:ppodb_2/page/transaction/detail_product.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -108,6 +109,15 @@ class _RiwayatState extends State<Riwayat> {
       "Belum Bayar","Berhasil","Dibatalkan"
     ];
 
+    late Color iscolor;
+    if(statusTransaksi == "Belum Bayar"){
+      iscolor = Colors.yellow;
+    }else if(statusTransaksi == "Berhasil"){
+      iscolor = Colors.green;
+    } else{
+      iscolor = Colors.red;
+    }
+
     var size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -204,7 +214,7 @@ class _RiwayatState extends State<Riwayat> {
                                       itemCount: prod[i].pro.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
-                                        return Column(
+                                        return Row(
                                            mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
@@ -421,7 +431,7 @@ class _RiwayatState extends State<Riwayat> {
                           leading: Image.asset("assets/icon/telkomsel.png",
                           height: 24,
                           width: 24,),
-                          title: Text(title[index],
+                          title: Text(title[index]+" "+ nominal[index],
                           style: GoogleFonts.inter(
                             fontWeight: FontWeight.w700,
                             fontSize: 14
@@ -442,6 +452,7 @@ class _RiwayatState extends State<Riwayat> {
                               ),),
                             ],
                           ),
+                          
                           trailing: Padding(
                             padding: EdgeInsets.only(top: 5),
                             child: Column(
@@ -457,11 +468,20 @@ class _RiwayatState extends State<Riwayat> {
                                 style: GoogleFonts.inter(
                                   fontWeight: FontWeight.w400,
                                   fontSize: 12,
-                                  
+                                  color: statusTransaksi[index] == "Berhasil"?Colors.green:statusTransaksi[index] == "Dibatalkan"?Colors.red:Colors.yellow
                                 ),),
                               ],
                             ),
                           ),
+                          onTap: () {
+                             Navigator.push(context, MaterialPageRoute(builder: ((context) => DetailRiwayat(
+                              dompetDigital: dompetDigital[index],
+                              nominal: nominal[index],
+                              statusTransaksi: statusTransaksi[index],
+                              title: title[index],
+                              total: total[index],
+                             ))));
+                          },
                         ),
                       );
                     },

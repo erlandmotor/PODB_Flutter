@@ -14,6 +14,24 @@ class ProductDummyModel {
       required this.status});
 }
 
+class RiwayatDummyModel {
+  int id;
+  String title;
+  String nominal;
+  String total;
+  String status;
+  String dompetdigital;
+  String statusTransaksi;  
+  RiwayatDummyModel(
+      {required this.id,
+      required this.title,
+      required this.dompetdigital,
+       required this.statusTransaksi,
+      required this.total,
+      required this.nominal,
+      required this.status});
+}
+
 final List<ProductDummyModel> dummydata = [
   ProductDummyModel(
       id: 1, name: "5.000", diskon: 2000, harga: 6000, status: "diskon"),
