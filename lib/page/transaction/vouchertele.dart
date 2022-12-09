@@ -111,12 +111,14 @@ class _VouchertelepickState extends State<Vouchertelepick> {
   TextEditingController pakai = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    for (int i = 0; i < voucher.length; i++) {
-      if (widget.type == voucher[i].tipe) {
-        viewlist.add(voucher[i]);
-        tersedia = true;
+    if (viewlist.length == 0) {
+      for (int i = 0; i < voucher.length; i++) {
+        if (widget.type == voucher[i].tipe) {
+          viewlist.add(voucher[i]);
+          tersedia = true;
+        }
+        ;
       }
-      ;
     }
     var size = MediaQuery.of(context).size;
     return Scaffold(
