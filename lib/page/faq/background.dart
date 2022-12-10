@@ -36,9 +36,9 @@ class BackgroundFaq extends StatelessWidget {
                 ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: heightt*230/800),
+            padding: EdgeInsets.only(top: heightt*205/800),
             child: Container(
-              height: heightt*570/800,
+              height: heightt*595/800,
               
               decoration: BoxDecoration(
                  borderRadius: BorderRadius.only(

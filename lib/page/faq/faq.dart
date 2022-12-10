@@ -4,6 +4,7 @@ import 'package:ppodb_2/page/akun/background.dart';
 import 'package:ppodb_2/page/akun/edit_data_akun.dart';
 import 'package:ppodb_2/page/akun/edit_password.dart';
 import 'package:ppodb_2/page/faq/background.dart';
+import 'package:ppodb_2/page/faq/detail_faq.dart';
 import 'package:ppodb_2/page/login_register/login_page.dart';
 import 'package:ppodb_2/page/login_register/register1_page.dart';
 import 'package:ppodb_2/page/widgets/alert.dart';
@@ -67,9 +68,7 @@ class _FAQState extends State<FAQ> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: heightt * 25 / 800,
-                    ),
+                  
                     Padding(
                      padding:  EdgeInsets.only(left: widthh*16/360,right: widthh*16/360),
                       child: Container(
@@ -195,7 +194,7 @@ class _FAQState extends State<FAQ> {
                           Padding(
                              padding:  EdgeInsets.only(top: heightt*48/800,),
                             child: Container(
-                               height: heightt * 350 / 800,
+                               height: heightt * 400 / 800,
                               child: ListView(
                                  shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
@@ -269,11 +268,11 @@ class _FAQState extends State<FAQ> {
                                                           )),
                                                     ),
                                                     onTap: () {
-                                                      // Navigator.push(
-                                                      //     context,
-                                                      //     MaterialPageRoute(
-                                                      //         builder: ((context) =>
-                                                      //             EditAkun())));
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: ((context) =>
+                                                                  DEtailFAQ())));
                                                     },
                                                   ),
                                                   ListTile(
