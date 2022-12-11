@@ -108,43 +108,46 @@ class _DEtailFAQState extends State<DEtailFAQ> {
                           fontSize: 16,
                           fontWeight: FontWeight.w400
                         ),),
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Container(
-                                      height: 33,
-                                      width: 33,
-                                      decoration: BoxDecoration(
-                                          color: sideSukes,
-                                          borderRadius:
-                                              BorderRadius.circular(400)),
-                                      child: IconButton(
-                                        onPressed: () {},
-                                        icon: Image.asset(
-                                          "assets/icon/jatas.png",
-                                          height: 15,
-                                          width: 15,
-                                          color: colorSukses,
-                                        ),
-                                      )),
-                             Container(
-                                      height: 33,
-                                      width: 33,
-                                      decoration: BoxDecoration(
-                                          color: sideError,
-                                          borderRadius:
-                                              BorderRadius.circular(400)),
-                                      child: IconButton(
-                                        onPressed: () {},
-                                        icon: Image.asset(
-                                          "assets/icon/jbawah.png",
-                                          height: 15,
-                                          width: 15,
-                                          color: colorError,
-                                        ),
-                                      )),
-                          ],
+                        title: Padding(
+                          padding:  EdgeInsets.only(right: widthh*5/360),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Container(
+                                        height: 33,
+                                        width: 33,
+                                        decoration: BoxDecoration(
+                                            color: sideSukes,
+                                            borderRadius:
+                                                BorderRadius.circular(400)),
+                                        child: IconButton(
+                                          onPressed: () {},
+                                          icon: Image.asset(
+                                            "assets/icon/jatas.png",
+                                            height: 15,
+                                            width: 15,
+                                            color: colorSukses,
+                                          ),
+                                        )),
+                               Container(
+                                        height: 33,
+                                        width: 33,
+                                        decoration: BoxDecoration(
+                                            color: sideError,
+                                            borderRadius:
+                                                BorderRadius.circular(400)),
+                                        child: IconButton(
+                                          onPressed: () {},
+                                          icon: Image.asset(
+                                            "assets/icon/jbawah.png",
+                                            height: 15,
+                                            width: 15,
+                                            color: colorError,
+                                          ),
+                                        )),
+                            ],
+                          ),
                         ),
                       )),
                        Text("37 Orang terbantu dengan artikel ini.",
