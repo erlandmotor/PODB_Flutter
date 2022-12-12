@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:ppodb_2/page/login_register/welcome_page.dart';
+import 'package:ppodb_2/service/providers/wallet/wallet_provider.dart';
 import 'package:ppodb_2/shared/shared.dart';
 import 'package:ppodb_2/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
@@ -27,13 +28,20 @@ class MyApp extends StatelessWidget {
           FocusManager.instance.primaryFocus!.unfocus();
         }
       },
-        child: MaterialApp(
-          
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            backgroundColor: whiteColor,
+        child: MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+          create: (context) => BalanceProvider(),
+        ),
+          ],
+          child: MaterialApp(
+            
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              backgroundColor: whiteColor,
+            ),
+            home: WelcomePage(),
           ),
-          home: WelcomePage(),
         ),
       ),
     );
