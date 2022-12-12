@@ -4,7 +4,14 @@ import 'package:ppodb_2/page/akun/background.dart';
 import 'package:ppodb_2/page/akun/edit_data_akun.dart';
 import 'package:ppodb_2/page/akun/edit_password.dart';
 import 'package:ppodb_2/page/faq/background.dart';
-import 'package:ppodb_2/page/faq/detail_faq.dart';
+import 'package:ppodb_2/page/faq/detail_faq1.dart';
+import 'package:ppodb_2/page/faq/detail_faq2.dart';
+import 'package:ppodb_2/page/faq/detail_faq3.dart';
+import 'package:ppodb_2/page/faq/detail_faq4.dart';
+import 'package:ppodb_2/page/faq/detail_faq5.dart';
+import 'package:ppodb_2/page/faq/detail_faq6.dart';
+import 'package:ppodb_2/page/faq/detail_faq7.dart';
+import 'package:ppodb_2/page/faq/detail_faq8.dart';
 import 'package:ppodb_2/page/login_register/login_page.dart';
 import 'package:ppodb_2/page/login_register/register1_page.dart';
 import 'package:ppodb_2/page/widgets/alert.dart';
@@ -318,11 +325,11 @@ class _FAQState extends State<FAQ> {
                                                           )),
                                                     ),
                                                     onTap: () {
-                                                      // Navigator.push(
-                                                      //     context,
-                                                      //     MaterialPageRoute(
-                                                      //         builder: ((context) =>
-                                                      //             EditAkun())));
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: ((context) =>
+                                                                  DEtailFAQ2())));
                                                     },
                                                   ),
                                                  
@@ -369,11 +376,11 @@ class _FAQState extends State<FAQ> {
                                                           )),
                                                     ),
                                                     onTap: () {
-                                                      // Navigator.push(
-                                                      //     context,
-                                                      //     MaterialPageRoute(
-                                                      //         builder: ((context) =>
-                                                      //             EditAkun())));
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: ((context) =>
+                                                                  DEtailFAQ3())));
                                                     },
                                                   ),
                                                  ListTile(
@@ -419,11 +426,11 @@ class _FAQState extends State<FAQ> {
                                                           )),
                                                     ),
                                                     onTap: () {
-                                                      // Navigator.push(
-                                                      //     context,
-                                                      //     MaterialPageRoute(
-                                                      //         builder: ((context) =>
-                                                      //             EditAkun())));
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: ((context) =>
+                                                                  DEtailFAQ4())));
                                                     },
                                                   ),
                                                  ListTile(
@@ -469,11 +476,11 @@ class _FAQState extends State<FAQ> {
                                                           )),
                                                     ),
                                                     onTap: () {
-                                                      // Navigator.push(
-                                                      //     context,
-                                                      //     MaterialPageRoute(
-                                                      //         builder: ((context) =>
-                                                      //             EditAkun())));
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: ((context) =>
+                                                                  DEtailFAQ5())));
                                                     },
                                                   ),
                                                    ListTile(
@@ -519,11 +526,11 @@ class _FAQState extends State<FAQ> {
                                                           )),
                                                     ),
                                                     onTap: () {
-                                                      // Navigator.push(
-                                                      //     context,
-                                                      //     MaterialPageRoute(
-                                                      //         builder: ((context) =>
-                                                      //             EditAkun())));
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: ((context) =>
+                                                                  DEtailFAQ6())));
                                                     },
                                                   ),
                                                   ListTile(
@@ -573,7 +580,7 @@ class _FAQState extends State<FAQ> {
                                                       //     context,
                                                       //     MaterialPageRoute(
                                                       //         builder: ((context) =>
-                                                      //             EditAkun())));
+                                                      //             DEtailFAQ7())));
                                                     },
                                                   ),
                                                   ListTile(
@@ -619,11 +626,11 @@ class _FAQState extends State<FAQ> {
                                                           )),
                                                     ),
                                                     onTap: () {
-                                                      // Navigator.push(
-                                                      //     context,
-                                                      //     MaterialPageRoute(
-                                                      //         builder: ((context) =>
-                                                      //             EditAkun())));
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: ((context) =>
+                                                                  DEtailFAQ7())));
                                                     },
                                                   ),
                               
@@ -670,11 +677,11 @@ class _FAQState extends State<FAQ> {
                                                           )),
                                                     ),
                                                     onTap: () {
-                                                      // Navigator.push(
-                                                      //     context,
-                                                      //     MaterialPageRoute(
-                                                      //         builder: ((context) =>
-                                                      //             EditAkun())));
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: ((context) =>
+                                                                  DEtailFAQ8())));
                                                     },
                                                   ),
                                                               Padding(

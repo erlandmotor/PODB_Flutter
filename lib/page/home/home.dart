@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ppodb_2/models/wallet/list_wallet.dart';
 import 'package:ppodb_2/page/akun/akun.dart';
 import 'package:ppodb_2/page/akun/background.dart';
 import 'package:ppodb_2/page/faq/faq.dart';
@@ -12,8 +13,12 @@ import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
 import 'package:ppodb_2/page/widgets/box_besar.dart';
 import 'package:ppodb_2/page/widgets/box_kecil.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart';
+import 'package:ppodb_2/page/widgets/finite_state.dart';
 import 'package:ppodb_2/page/widgets/notready.dart';
 import 'package:ppodb_2/page/widgets/textIconMenu.dart';
+import 'package:ppodb_2/service/database/myCuan_Api.dart';
+import 'package:ppodb_2/service/providers/wallet/wallet_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,6 +33,16 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _pageController = PageController(viewportFraction: 0.8, initialPage: 1);
+    Future.delayed(
+      Duration.zero,
+      () {
+        final _provider = Provider.of<BalanceProvider>(context, listen: false);
+
+        /// Fetch users data
+        _provider.fetchBalance();
+      },
+    );
+   
     super.initState();
   }
 
@@ -114,13 +129,60 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.black,
                               fontWeight: FontWeight.w500,
                               fontSize: 12)),
-                      Padding(
-                        padding: EdgeInsets.only(top: heightt * 5 / 800),
-                        child: Text("Rp. 0",
-                            style: GoogleFonts.inter(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 23)),
+                      Consumer<BalanceProvider>(
+                        builder: (context, provider, _) {
+                          switch (provider.myState) {
+                            case MyState.loading:
+                              return Padding(
+                          padding: EdgeInsets.only(top: heightt * 5 / 800),
+                          child: Text("Rp. 0",
+                              style: GoogleFonts.inter(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 23)),
+                        );
+                        case MyState.loaded:
+                        if(provider.balance==null){
+                          return Padding(
+                          padding: EdgeInsets.only(top: heightt * 5 / 800),
+                          child: Text("Rp. 0",
+                              style: GoogleFonts.inter(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 23)),
+                        );
+                        }else{
+                          return Padding(
+                            padding: EdgeInsets.only(top: heightt * 5 / 800),
+                            child: Text("Rp."+provider.balance!.data!.balance.toString(),
+                                style: GoogleFonts.inter(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 23)),
+                                                  );
+                        }
+                        case MyState.failed:
+                        return Padding(
+                          padding: EdgeInsets.only(top: heightt * 5 / 800),
+                          child: Text("Error",
+                              style: GoogleFonts.inter(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 23)),
+                        );
+                              
+                            default:
+                            return CircularProgressIndicator();
+                          }
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(top: heightt * 5 / 800),
+                          child: Text("Rp. 0",
+                              style: GoogleFonts.inter(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 23)),
+                        ),
                       ),
                     ],
                   ),
