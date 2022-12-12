@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:ppodb_2/models/data_register_model.dart';
 import 'package:ppodb_2/models/register_model.dart';
+import 'package:ppodb_2/page/login_register/register1_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../service/database/auth_service.dart';
@@ -9,7 +12,7 @@ class AuthViewModel with ChangeNotifier {
   Data? dataRegister;
   static final _shared = SharedPreferences.getInstance();
   static const _token = 'token';
-  String _isNext = "";
+  String? isNext;
 
   bool _is8Digit = false;
   bool _isHurufKecil = false;
@@ -18,6 +21,9 @@ class AuthViewModel with ChangeNotifier {
   String _simpanData = '';
   bool _passVissible = true;
   bool _passVissible2 = true;
+  Register1Model? _data1;
+  Register2Model? _data2;
+
 
   bool get is8Digit => _is8Digit;
   bool get isHurufKecil => _isHurufKecil;
@@ -26,20 +32,46 @@ class AuthViewModel with ChangeNotifier {
   String get simpanData => _simpanData;
   bool get passVissible => _passVissible;
   bool get passVissible2 => _passVissible2;
-  String get isNext => _isNext;
+  Register1Model get data1 => _data1!;
+  Register2Model get data2 => _data2!;
+  void saveData1(Register1Model dataRegister1){
+    _data1 = dataRegister1;
+  }
+  void saveData2(Register2Model dataRegister2){
+    _data2 = dataRegister2;
+  }
+  // String get isNext => isNext;
 
   void getAllRegister(String name, String phone_number, String email,
       String password, String image) async {
     try {
+      print("dijalankan");
       final result = await _dioService.getAllRegister(
           name, phone_number, email, password, image);
-          _isNext = "berhasil";
+
       dataRegister = result;
-      print("dijalankan");
-      
+      print("tes$result");
     } catch (e) {
-      
-     _isNext = "gagal"; 
+      if (e is DioError) {
+         print("gagal");
+        print(e.response!.data["message"]);
+       if(e.response!.data["message"] == "email already registered"){
+        isNext = "email";
+        print("response email");
+       }
+       
+       if(e.response!.data["message"] == "Number already registered"){
+        isNext = "number";
+         print("response number");
+       }
+
+
+        
+      } else {
+        //  print(e.response!.data["message"]);
+        print("berhasil");
+        isNext = "berhasil";
+      }
     }
     notifyListeners();
   }
