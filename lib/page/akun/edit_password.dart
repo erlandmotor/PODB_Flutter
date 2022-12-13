@@ -17,6 +17,7 @@ class EditPassword extends StatefulWidget {
 }
 
 class _EditPasswordState extends State<EditPassword> {
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
      Future showAlertDialog(
@@ -49,7 +50,7 @@ class _EditPasswordState extends State<EditPassword> {
       }
     );
   }
-     final formKey = GlobalKey<FormState>();
+     
      double heightt = MediaQuery.of(context).size.height;
    double widthh = MediaQuery.of(context).size.width;
     final _namalengkapController = TextEditingController();

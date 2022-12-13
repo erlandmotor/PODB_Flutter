@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:ppodb_2/page/login_register/welcome_page.dart';
+import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
 import 'package:ppodb_2/service/providers/wallet/wallet_provider.dart';
 import 'package:ppodb_2/shared/shared.dart';
 import 'package:ppodb_2/view_model/auth_view_model.dart';
@@ -19,7 +20,13 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => AuthViewModel(),
-        )
+        ),
+          ChangeNotifierProvider(
+          create: (context) => BalanceProvider(),
+          ),
+          ChangeNotifierProvider(
+          create: (context) => ProfilProvider(),
+          ),
       ],
       child: GestureDetector(
         onTap: () {
@@ -28,13 +35,7 @@ class MyApp extends StatelessWidget {
           FocusManager.instance.primaryFocus!.unfocus();
         }
       },
-        child: MultiProvider(
-          providers: [
-            ChangeNotifierProvider(
-          create: (context) => BalanceProvider(),
-        ),
-          ],
-          child: MaterialApp(
+        child:  MaterialApp(
             
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
             home: WelcomePage(),
           ),
         ),
-      ),
-    );
+      );
+    
   }
 }

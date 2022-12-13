@@ -2,56 +2,83 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ppodb_2/page/akun/akun.dart';
+import 'package:ppodb_2/page/main_page/main_page.dart';
 import 'package:ppodb_2/page/widgets/alert.dart';
+import 'package:ppodb_2/service/database/myCuan_Api.dart';
+import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
 
 import 'package:ppodb_2/shared/shared.dart';
+import 'package:provider/provider.dart';
 
 class EditAkun extends StatefulWidget {
-  const EditAkun({super.key});
-
+  const EditAkun({super.key,required this.emailProfile,required this.namaProfile,required this.noProfile,required this.pass});
+  final String emailProfile;
+  final String namaProfile;
+  final String noProfile;
+  final String pass;
   @override
   State<EditAkun> createState() => _EditAkunState();
 }
 
 class _EditAkunState extends State<EditAkun> {
+  final formKey = GlobalKey<FormState>();
+  final _namalengkapController = TextEditingController();
+     final _emailController = TextEditingController();
+  final _nomortelponController = TextEditingController();
+  @override
+  void initState() {
+    _namalengkapController.text = widget.namaProfile;
+    _emailController.text =widget.emailProfile;
+    _nomortelponController.text =widget.noProfile;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+    
     Future showAlertDialog(
    
     final String label,
     final Color color,
     final String content,
     final String label2,
- 
+    
 
     final String gambar
   ) {
     return showDialog(
       context: context, 
       builder: (BuildContext context) {
-        return Alert(
-          labelButton2: label2,
-          titleColor: color,
-          contentApproval: content,
-          labelButton: label,
-          colorButton: color,
-          gambar: gambar,
-          onClicked: () async {
-           
-            // if (_postProses == "berhasil") {
-            //   Get.offAll(const SuratJalanView());
-            // }
+        return Consumer<ProfilProvider>(
+          builder: (context, provider, _) {
+            return Alert(
+            labelButton2: label2,
+            titleColor: color,
+            contentApproval: content,
+            labelButton: label,
+            colorButton: color,
+            gambar: gambar,
+            onClicked: () async {
+              final users =await MyCuanAPI().updateUser(_namalengkapController.text, _nomortelponController.text, _emailController.text);
+             print(users);
+                 Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => MainPage(),
+                                  )
+                                  );
+                      print(users);
+             
+            },
+          );
           },
+          
         );
       }
     );
   }
-     final formKey = GlobalKey<FormState>();
+     
      double heightt = MediaQuery.of(context).size.height;
    double widthh = MediaQuery.of(context).size.width;
-    final _namalengkapController = TextEditingController();
-     final _emailController = TextEditingController();
-  final _nomortelponController = TextEditingController();
+    
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -69,12 +96,13 @@ class _EditAkunState extends State<EditAkun> {
         textAlign: TextAlign.center,),
       ),
       body: SafeArea(
-        child: Padding(
-          padding:  EdgeInsets.only(left: widthh*16/360, right: widthh*16/360),
-          child: SizedBox(
-            height: double.infinity,
-            child: SingleChildScrollView(
-              child: Column(
+        child: Form(
+          key: formKey,
+          child: Padding(
+            padding:  EdgeInsets.only(left: widthh*16/360, right: widthh*16/360),
+            child: ListView(
+              children: [
+                Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -100,8 +128,8 @@ class _EditAkunState extends State<EditAkun> {
                           height: heightt * 0.00625,
                         ),
                         TextFormField(
-                            keyboardType: TextInputType.text,
-                            controller: _namalengkapController,
+                            //keyboardType: TextInputType.text,
+                            controller: _namalengkapController,                            
                             validator: (value) {
                               //final nameRegExp = new RegExp(r"^\s([A-Za-z]{1,}([.,] |[-']| ))+[A-Za-z]+.?\s$");
                               if (value!.isEmpty) {
@@ -115,7 +143,7 @@ class _EditAkunState extends State<EditAkun> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               hintText: "Nama Lengkap",
-                              labelText: "Nama Lengkap",
+                             // labelText: "Nama Lengkap",
                               prefixIcon: Padding(
                                 padding: EdgeInsets.all( heightt*12/800),
                                 child: Image.asset("assets/icon/person.png",
@@ -128,6 +156,7 @@ class _EditAkunState extends State<EditAkun> {
                                 height: 10,
                                 width: 10,),
                               ),
+                              
                             )),
                         SizedBox(
                           height: heightt * 0.0225,
@@ -139,7 +168,7 @@ class _EditAkunState extends State<EditAkun> {
                     SizedBox(
                       height: heightt * 0.00625,
                     ),
-                    TextFormField(
+                    TextFormField(                   
                         controller: _nomortelponController,
                         validator: (value) {
                           String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
@@ -155,7 +184,7 @@ class _EditAkunState extends State<EditAkun> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           hintText: "Nomor Aktif Kamu",
-                          labelText: "Nomor Aktif Kamu",
+                         // labelText: "Nomor Aktif Kamu",
                             prefixIcon: Padding(
                                 padding: EdgeInsets.all( heightt*12/800),
                                 child: Image.asset("assets/icon/hp.png",
@@ -182,7 +211,7 @@ class _EditAkunState extends State<EditAkun> {
                     SizedBox(
                       height: heightt * 0.00625,
                     ),
-                    TextFormField(
+                    TextFormField(                  
                         controller: _emailController,
                         validator: (email) {
                           if (email != null &&
@@ -195,7 +224,7 @@ class _EditAkunState extends State<EditAkun> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           hintText: "emailkamu@gmail.com",
-                          labelText: "emailkamu@gmail.com",
+                        //  labelText: "emailkamu@gmail.com",
                           prefixIcon: Padding(
                                 padding: EdgeInsets.all( heightt*12/800),
                                 child: Image.asset("assets/icon/mail.png",
@@ -219,23 +248,19 @@ class _EditAkunState extends State<EditAkun> {
                         width: widthh * 0.911,
                         child: ElevatedButton(
                             onPressed: () {
-                              // final isValidForm =
-                              //     formKey.currentState!.validate();
-                              // if (isValidForm) {
-                              //   final users = Register1Model(
-                              //       namalengkap: _namalengkapController.text,
-                              //       email: _emailController.text,
-                              //       nomortelpon: _nomortelponController.text);
-                              //   Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (context) => Register2Page(),
-                              //   ));
-                              // }
-                             showAlertDialog(
+                              final isValidForm =
+                                  formKey.currentState!.validate();
+                              if (isValidForm) {
+                                  showAlertDialog(
                               "Kembali", 
                               primaryColor, 
                               "Yeey, Profil berhasil diperbarui!", 
                               "Selesai",
                                "assets/icon/cuate.png");
+                               
+                              }
+                           
+                               
                             },
                             child: Text(
                               'Simpan Perubahan',
@@ -260,6 +285,8 @@ class _EditAkunState extends State<EditAkun> {
                     // ),
                 ],
               ),
+              ],
+            
             ),
           ),
         ),

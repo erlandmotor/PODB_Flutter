@@ -151,10 +151,19 @@ class _HomePageState extends State<HomePage> {
                                   fontWeight: FontWeight.w500,
                                   fontSize: 23)),
                         );
+                        }else if(provider.balance!.balance == null){
+                         return Padding(
+                          padding: EdgeInsets.only(top: heightt * 5 / 800),
+                          child: Text("Rp. 0",
+                              style: GoogleFonts.inter(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 23)),
+                        );
                         }else{
-                          return Padding(
+                           return Padding(
                             padding: EdgeInsets.only(top: heightt * 5 / 800),
-                            child: Text("Rp."+provider.balance!.data!.balance.toString(),
+                            child: Text("Rp."+ provider.balance!.balance.toString(),
                                 style: GoogleFonts.inter(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
