@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/models/profil/list_profil.dart';
@@ -53,4 +55,26 @@ class ProfilProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void updateGambar(File gambar,
+       ) async {
+    try {
+      final result = await MyCuanAPI().updateGambar(gambar);
+        _isNext = "berhasil";
+      
+      
+      DataProfil profilGambar = DataProfil();     
+      profil = profilGambar;
+      print("dijalankan");
+      print(result);
+      
+    } catch (e) {
+      
+     _isNext = "gagal"; 
+    }
+    notifyListeners();
+  }
 }
+
+
+

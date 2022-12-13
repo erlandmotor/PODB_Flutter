@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -95,6 +96,41 @@ final String token = prefs.getString('token') ?? "";
           _isNext = "berhasil";
           print(dataProfilUpdate);
         return dataProfilUpdate;
+         
+        
+        
+      
+    } on DioError catch (e) {
+      print(e.response!.data['message']);
+      print('data bermasalah');
+       _isNext = "gagal";
+      rethrow;
+    }
+  }
+   Future updateGambar(File gambar,    ) async {
+    final prefs = await SharedPreferences.getInstance();
+final String token = prefs.getString('token') ?? "";
+ 
+    
+    try {
+      String fileName = gambar.path.split('/').last;
+    FormData formData = FormData.fromMap({
+        "image":
+            await MultipartFile.fromFile(gambar.path, filename:fileName),
+    });
+      final response = await _dio
+          .put('/user/image', 
+           options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization":
+                "Bearer $token",
+          }) ,         
+          data: formData);
+             //DataProfil dataProfilUpdate = DataProfil.fromJson(response.data);
+         
+          _isNext = "berhasil";
+          print(response.data);
+        return response.data;
          
         
         

@@ -1,5 +1,8 @@
 
+import 'dart:io';
+
 import 'package:email_validator/email_validator.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ppodb_2/page/akun/akun.dart';
@@ -12,11 +15,12 @@ import 'package:ppodb_2/shared/shared.dart';
 import 'package:provider/provider.dart';
 
 class EditAkun extends StatefulWidget {
-  const EditAkun({super.key,required this.emailProfile,required this.namaProfile,required this.noProfile,required this.pass});
+  const EditAkun({super.key,required this.emailProfile,required this.namaProfile,required this.noProfile,required this.pass,required this.gam});
   final String emailProfile;
   final String namaProfile;
   final String noProfile;
   final String pass;
+  final String gam;
   @override
   State<EditAkun> createState() => _EditAkunState();
 }
@@ -26,6 +30,8 @@ class _EditAkunState extends State<EditAkun> {
   final _namalengkapController = TextEditingController();
      final _emailController = TextEditingController();
   final _nomortelponController = TextEditingController();
+  FilePickerResult? result;
+  late File display;
   @override
   void initState() {
     _namalengkapController.text = widget.namaProfile;
@@ -33,6 +39,7 @@ class _EditAkunState extends State<EditAkun> {
     _nomortelponController.text =widget.noProfile;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     
@@ -59,13 +66,16 @@ class _EditAkunState extends State<EditAkun> {
             colorButton: color,
             gambar: gambar,
             onClicked: () async {
+             
               final users =await MyCuanAPI().updateUser(_namalengkapController.text, _nomortelponController.text, _emailController.text);
+               final gambars = await MyCuanAPI().updateGambar(display);
              print(users);
+              print(gambars);
                  Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => MainPage(),
                                   )
                                   );
-                      print(users);
+                     
              
             },
           );
@@ -108,14 +118,19 @@ class _EditAkunState extends State<EditAkun> {
                 children: [
                    Padding(
                      padding:  EdgeInsets.only(left: widthh*108/360,top: heightt*16/800,),
-                     child: Container(
-                              height: 91,
-                              width: 112,                      
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(400),                        
-                                image: DecorationImage(image: NetworkImage("https://plus.unsplash.com/premium_photo-1661767329669-2ff46c34fffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",),)
+                     child: InkWell(
+                       child: Container(
+                                height: 91,
+                                width: 112,                      
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(400),                        
+                                  image: DecorationImage(image: NetworkImage(widget.gam,),)
+                                ),
                               ),
-                            ),
+                              onTap: () {
+                                 _pickFile();
+                              },
+                     ),
                    ),
                     SizedBox(
                       height: heightt * 16/800,
@@ -293,4 +308,16 @@ class _EditAkunState extends State<EditAkun> {
       ),
     );
   }
+  void _pickFile() async{
+  try {
+    final result = await FilePicker.platform.pickFiles(
+  type: FileType.any   
+  );
+  final file = result!.files.first;
+  display = File(file.path.toString());
+
+  } catch (e) {
+    print(e);
+  }
+}
 }

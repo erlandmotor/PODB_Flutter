@@ -228,16 +228,21 @@ class _ProfilState extends State<Profil> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Container(
-                                height: heightt * 80 / 800,
-                                width: widthh * 80 / 360,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(400),
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                        "https://plus.unsplash.com/premium_photo-1661767329669-2ff46c34fffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-                                      ),
-                                    )),
+                              Consumer<ProfilProvider>(
+                                builder: (context, provider, _) {
+                                  return Container(
+                                  height: heightt * 80 / 800,
+                                  width: widthh * 80 / 360,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(400),
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                          provider.profil!.data!.image.toString(),
+                                        ),
+                                      )),
+                                );
+                                },
+                                
                               ),
                               SizedBox(
                                 width: widthh * 20 / 360,
@@ -667,6 +672,7 @@ class _ProfilState extends State<Profil> {
                                                                 namaProfile: provider.profil!.data!.name.toString(),
                                                                 noProfile: provider.profil!.data!.phoneNumber.toString(),                                                               
                                                                 pass: provider.profil!.data!.password.toString(),
+                                                                gam: provider.profil!.data!.image.toString(),
                                                               ))));
                                                 },
                                               );
