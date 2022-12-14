@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
 import 'package:ppodb_2/page/widgets/button_alert.dart';
 import 'package:ppodb_2/page/widgets/button_confrim.dart';
@@ -78,51 +79,25 @@ class AlertRating extends StatelessWidget {
                 ),
             ),
             Padding(
-              padding:  EdgeInsets.only(left: widthh*16/360,right: widthh*16/360),
+              padding:  EdgeInsets.only(left: widthh*35/360,right: widthh*16/360),
               child: Container(
                 width: widthh*272/360,
                 height: heightt*40/800,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      child:  Container(
-                      height: heightt*40/800,
-                      width: widthh*40/360,
-                      child: Image.asset("assets/icon/starborder.png"),
-                    ),
-                    ),
-                     InkWell(
-                      child:  Container(
-                      height: heightt*40/800,
-                      width: widthh*40/360,
-                      child: Image.asset("assets/icon/starborder.png"),
-                    ),
-                    ),
-                     InkWell(
-                      child:  Container(
-                      height: heightt*40/800,
-                      width: widthh*40/360,
-                      child: Image.asset("assets/icon/starborder.png"),
-                    ),
-                    ),
-                     InkWell(
-                      child:  Container(
-                      height: heightt*40/800,
-                      width: widthh*40/360,
-                      child: Image.asset("assets/icon/starborder.png"),
-                    ),
-                    ),
-                     InkWell(
-                      child:  Container(
-                      height: heightt*40/800,
-                      width: widthh*40/360,
-                      child: Image.asset("assets/icon/starborder.png"),
-                    ),
-                    ),
-                    
-                  ],
+                child: RatingBar.builder(
+                initialRating: 0,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemPadding: EdgeInsets.symmetric(horizontal:widthh* 4/360),
+                itemBuilder: (context, _) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
                 ),
+                onRatingUpdate: (rating) {
+                  print(rating);
+                },
+              )
               ),
             )
             //  Container(

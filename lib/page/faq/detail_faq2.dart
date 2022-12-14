@@ -84,8 +84,8 @@ class _DEtailFAQ2State extends State<DEtailFAQ2> {
                         title: Padding(
                           padding:  EdgeInsets.only(right: widthh*5/360),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
                                         height: 33,

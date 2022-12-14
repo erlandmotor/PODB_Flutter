@@ -5,8 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ppodb_2/page/akun/background.dart';
 import 'package:ppodb_2/page/akun/edit_data_akun.dart';
 import 'package:ppodb_2/page/akun/edit_password.dart';
+import 'package:ppodb_2/page/akun/syarat_dan_ketentuan/syarat_dan_ketentuan.dart';
 import 'package:ppodb_2/page/login_register/login_page.dart';
 import 'package:ppodb_2/page/login_register/register1_page.dart';
+import 'package:ppodb_2/page/transaction/voucher_picker_screen.dart';
 import 'package:ppodb_2/page/widgets/alert.dart';
 
 import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
@@ -15,11 +17,15 @@ import 'package:ppodb_2/page/widgets/box_besar.dart';
 import 'package:ppodb_2/page/widgets/box_kecil.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart';
 import 'package:ppodb_2/page/widgets/finite_state.dart';
+import 'package:ppodb_2/page/widgets/isisaldo.dart';
+import 'package:ppodb_2/page/widgets/notready.dart';
 import 'package:ppodb_2/page/widgets/rating.dart';
 import 'package:ppodb_2/page/widgets/textIconMenu.dart';
 import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
+import 'package:ppodb_2/service/providers/wallet/wallet_provider.dart';
 import 'package:ppodb_2/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profil extends StatefulWidget {
   const Profil({super.key});
@@ -51,10 +57,10 @@ class _ProfilState extends State<Profil> {
       Duration.zero,
       () {
         final _provider = Provider.of<ProfilProvider>(context, listen: false);
-
+         final _balanceprovider = Provider.of<BalanceProvider>(context, listen: false);
         /// Fetch users data
         _provider.fetchProfil();
-     
+        _balanceprovider.fetchBalance();
       },
     );
     super.initState();
@@ -81,6 +87,11 @@ class _ProfilState extends State<Profil> {
               colorButton: color,
               gambar: gambar,
               onClicked: () async {
+                final prefs = await SharedPreferences.getInstance();
+                final String token = prefs.getString('token') ?? "";
+                prefs.remove("token");
+                prefs.setBool("login", false);
+                 Navigator.push(context, MaterialPageRoute(builder: ((context) => LoginPage())));
                 // if (_postProses == "berhasil") {
                 //   Get.offAll(const SuratJalanView());
                 // }
@@ -106,6 +117,7 @@ class _ProfilState extends State<Profil> {
               colorButton: color,
               gambar: gambar,
               onClicked: () async {
+                 
                 // if (_postProses == "berhasil") {
                 //   Get.offAll(const SuratJalanView());
                 // }
@@ -228,16 +240,60 @@ class _ProfilState extends State<Profil> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Container(
+                              Consumer<ProfilProvider>(
+                                builder: (context, provider, _) {
+                                  switch (provider.myState) {
+                                    case MyState.loading:
+                                      return Container(
                                 height: heightt * 80 / 800,
                                 width: widthh * 80 / 360,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(400),
                                     image: DecorationImage(
-                                      image: NetworkImage(
-                                        "https://plus.unsplash.com/premium_photo-1661767329669-2ff46c34fffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-                                      ),
+                                      image: AssetImage("assets/icon/person.png")
                                     )),
+                              );
+                              case MyState.loaded:
+                              if(provider.profil!.data!.image == null){
+                                  return Container(
+                                height: heightt * 80 / 800,
+                                width: widthh * 80 / 360,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(400),
+                                    image: DecorationImage(
+                                      image: AssetImage("assets/icon/person.png")
+                                    )),
+                              );
+                              }else{
+                                 return Container(
+                                  height: heightt * 80 / 800,
+                                  width: widthh * 80 / 360,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(400),
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                          provider.profil!.data!.image.toString(),
+                                        ),
+                                      )),
+                                );
+                              }
+                                case MyState.failed:
+                                      return Container(
+                                height: heightt * 80 / 800,
+                                width: widthh * 80 / 360,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(400),
+                                    image: DecorationImage(
+                                      image: AssetImage("assets/icon/person.png")
+                                    )),
+                              );
+                              
+                                default:
+                            return CircularProgressIndicator();
+                                  }
+                                 
+                                },
+                                
                               ),
                               SizedBox(
                                 width: widthh * 20 / 360,
@@ -323,129 +379,516 @@ class _ProfilState extends State<Profil> {
                           
                         ),
                       ),
-                      Boxsaldo(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: ListTile(
-                              title: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 8),
-                                    child: Container(
-                                        height: 33,
-                                        width: 33,
-                                        decoration: BoxDecoration(
-                                            color: sideSukes,
-                                            borderRadius:
-                                                BorderRadius.circular(400)),
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Image.asset(
-                                            "assets/icon/atas.png",
-                                            height: 15,
-                                            width: 15,
-                                            color: colorSukses,
-                                          ),
-                                        )),
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      //     Text("Total Saldo",
-                                      //     style: GoogleFonts.inter(
-                                      //   color: Colors.black,
-                                      //   fontWeight: FontWeight.w500,
-                                      //   fontSize: 12
-                                      //     )
-                                      //     ),
-    
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text("Uang Masuk",
-                                          style: GoogleFonts.inter(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14)),
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 5),
-                                        child: Text("Rp300.000",
+                      Consumer<BalanceProvider>(
+                        builder: (context, provider, _) {
+                          switch (provider.myState) {
+                            case MyState.loading:
+                              return Boxsaldo(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Container(
+                                          height: 33,
+                                          width: 33,
+                                          decoration: BoxDecoration(
+                                              color: sideSukes,
+                                              borderRadius:
+                                                  BorderRadius.circular(400)),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.asset(
+                                              "assets/icon/atas.png",
+                                              height: 15,
+                                              width: 15,
+                                              color: colorSukses,
+                                            ),
+                                          )),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        //     Text("Total Saldo",
+                                        //     style: GoogleFonts.inter(
+                                        //   color: Colors.black,
+                                        //   fontWeight: FontWeight.w500,
+                                        //   fontSize: 12
+                                        //     )
+                                        //     ),
+                          
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text("Uang Masuk",
                                             style: GoogleFonts.inter(
-                                                color: warnaHarga,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 18)),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14)),
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 5),
+                                          child: Text("Rp.0",
+                                              style: GoogleFonts.inter(
+                                                  color: warnaHarga,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            child: ListTile(
-                              title: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 8),
-                                    child: Container(
-                                        height: 33,
-                                        width: 33,
-                                        decoration: BoxDecoration(
-                                            color: sideError,
-                                            borderRadius:
-                                                BorderRadius.circular(400)),
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Image.asset(
-                                            "assets/icon/bawah.png",
-                                            height: 15,
-                                            width: 15,
-                                            color: colorError,
-                                          ),
-                                        )),
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      //     Text("Total Saldo",
-                                      //     style: GoogleFonts.inter(
-                                      //   color: Colors.black,
-                                      //   fontWeight: FontWeight.w500,
-                                      //   fontSize: 12
-                                      //     )
-                                      //     ),
-    
-                                      SizedBox(width: 5),
-                                      Text("Uang Keluar",
-                                          style: GoogleFonts.inter(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14)),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 5),
-                                        child: Text("Rp300.000",
+                            Expanded(
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Container(
+                                          height: 33,
+                                          width: 33,
+                                          decoration: BoxDecoration(
+                                              color: sideError,
+                                              borderRadius:
+                                                  BorderRadius.circular(400)),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.asset(
+                                              "assets/icon/bawah.png",
+                                              height: 15,
+                                              width: 15,
+                                              color: colorError,
+                                            ),
+                                          )),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        //     Text("Total Saldo",
+                                        //     style: GoogleFonts.inter(
+                                        //   color: Colors.black,
+                                        //   fontWeight: FontWeight.w500,
+                                        //   fontSize: 12
+                                        //     )
+                                        //     ),
+                          
+                                        SizedBox(width: 5),
+                                        Text("Uang Keluar",
                                             style: GoogleFonts.inter(
-                                                color: warnaHarga,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 18)),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14)),
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 5),
+                                          child: Text("Rp.0",
+                                              style: GoogleFonts.inter(
+                                                  color: warnaHarga,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ));
+                        case MyState.loaded:
+                        if(provider.balance!.balance== null&&provider.balance!.historiesWallet== null){
+                          return Boxsaldo(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Container(
+                                          height: 33,
+                                          width: 33,
+                                          decoration: BoxDecoration(
+                                              color: sideSukes,
+                                              borderRadius:
+                                                  BorderRadius.circular(400)),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.asset(
+                                              "assets/icon/atas.png",
+                                              height: 15,
+                                              width: 15,
+                                              color: colorSukses,
+                                            ),
+                                          )),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        //     Text("Total Saldo",
+                                        //     style: GoogleFonts.inter(
+                                        //   color: Colors.black,
+                                        //   fontWeight: FontWeight.w500,
+                                        //   fontSize: 12
+                                        //     )
+                                        //     ),
+                          
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text("Uang Masuk",
+                                            style: GoogleFonts.inter(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14)),
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 5),
+                                          child: Text("Rp.0",
+                                              style: GoogleFonts.inter(
+                                                  color: warnaHarga,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          )
-                        ],
-                      )),
+                            Expanded(
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Container(
+                                          height: 33,
+                                          width: 33,
+                                          decoration: BoxDecoration(
+                                              color: sideError,
+                                              borderRadius:
+                                                  BorderRadius.circular(400)),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.asset(
+                                              "assets/icon/bawah.png",
+                                              height: 15,
+                                              width: 15,
+                                              color: colorError,
+                                            ),
+                                          )),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        //     Text("Total Saldo",
+                                        //     style: GoogleFonts.inter(
+                                        //   color: Colors.black,
+                                        //   fontWeight: FontWeight.w500,
+                                        //   fontSize: 12
+                                        //     )
+                                        //     ),
+                          
+                                        SizedBox(width: 5),
+                                        Text("Uang Keluar",
+                                            style: GoogleFonts.inter(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14)),
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 5),
+                                          child: Text("Rp.0",
+                                              style: GoogleFonts.inter(
+                                                  color: warnaHarga,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ));
+                        }else{
+                          return Boxsaldo(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Container(
+                                          height: 33,
+                                          width: 33,
+                                          decoration: BoxDecoration(
+                                              color: sideSukes,
+                                              borderRadius:
+                                                  BorderRadius.circular(400)),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.asset(
+                                              "assets/icon/atas.png",
+                                              height: 15,
+                                              width: 15,
+                                              color: colorSukses,
+                                            ),
+                                          )),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        //     Text("Total Saldo",
+                                        //     style: GoogleFonts.inter(
+                                        //   color: Colors.black,
+                                        //   fontWeight: FontWeight.w500,
+                                        //   fontSize: 12
+                                        //     )
+                                        //     ),
+                          
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text("Uang Masuk",
+                                            style: GoogleFonts.inter(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14)),
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 5),
+                                          child: Text("Rp."+provider.balance!.balance.toString(),
+                                              style: GoogleFonts.inter(
+                                                  color: warnaHarga,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Container(
+                                          height: 33,
+                                          width: 33,
+                                          decoration: BoxDecoration(
+                                              color: sideError,
+                                              borderRadius:
+                                                  BorderRadius.circular(400)),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.asset(
+                                              "assets/icon/bawah.png",
+                                              height: 15,
+                                              width: 15,
+                                              color: colorError,
+                                            ),
+                                          )),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        //     Text("Total Saldo",
+                                        //     style: GoogleFonts.inter(
+                                        //   color: Colors.black,
+                                        //   fontWeight: FontWeight.w500,
+                                        //   fontSize: 12
+                                        //     )
+                                        //     ),
+                          
+                                        SizedBox(width: 5),
+                                        Text("Uang Keluar",
+                                            style: GoogleFonts.inter(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14)),
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 5),
+                                          child: Text("Rp."+provider.balance!.historiesWallet.toString(),
+                                              style: GoogleFonts.inter(
+                                                  color: warnaHarga,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ));
+                        }
+                        case MyState.failed:
+                        return Boxsaldo(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Container(
+                                          height: 33,
+                                          width: 33,
+                                          decoration: BoxDecoration(
+                                              color: sideSukes,
+                                              borderRadius:
+                                                  BorderRadius.circular(400)),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.asset(
+                                              "assets/icon/atas.png",
+                                              height: 15,
+                                              width: 15,
+                                              color: colorSukses,
+                                            ),
+                                          )),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        //     Text("Total Saldo",
+                                        //     style: GoogleFonts.inter(
+                                        //   color: Colors.black,
+                                        //   fontWeight: FontWeight.w500,
+                                        //   fontSize: 12
+                                        //     )
+                                        //     ),
+                          
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text("Uang Masuk",
+                                            style: GoogleFonts.inter(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14)),
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 5),
+                                          child: Text("Rp.0",
+                                              style: GoogleFonts.inter(
+                                                  color: warnaHarga,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Container(
+                                          height: 33,
+                                          width: 33,
+                                          decoration: BoxDecoration(
+                                              color: sideError,
+                                              borderRadius:
+                                                  BorderRadius.circular(400)),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.asset(
+                                              "assets/icon/bawah.png",
+                                              height: 15,
+                                              width: 15,
+                                              color: colorError,
+                                            ),
+                                          )),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        //     Text("Total Saldo",
+                                        //     style: GoogleFonts.inter(
+                                        //   color: Colors.black,
+                                        //   fontWeight: FontWeight.w500,
+                                        //   fontSize: 12
+                                        //     )
+                                        //     ),
+                          
+                                        SizedBox(width: 5),
+                                        Text("Uang Keluar",
+                                            style: GoogleFonts.inter(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14)),
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 5),
+                                          child: Text("Rp.0",
+                                              style: GoogleFonts.inter(
+                                                  color: warnaHarga,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ));
+                           default:
+                            return CircularProgressIndicator();
+                         
+                           
+                          }
+                         
+                        },
+                     
+                      ),
                       Padding(
                         padding: EdgeInsets.only(
                           left: widthh * 16 / 360,
@@ -453,7 +896,7 @@ class _ProfilState extends State<Profil> {
                         ),
                         child: Container(
                           width: double.infinity,
-                          height: heightt * 90 / 800,
+                          height: heightt * 100 / 800,
                           child: GridView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             padding: EdgeInsets.only(
@@ -471,16 +914,16 @@ class _ProfilState extends State<Profil> {
                               return GestureDetector(
                                 onTap: () {
                                   if (namaTopup[index] == "Isi Saldo") {
-                                    // Navigator.push(context, MaterialPageRoute(builder: ((context) => Pulsa())));
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => Isisaldo())));
                                   }
                                   if (namaTopup[index] == "Kirim Uang") {
-                                    //  / Navigator.push(context, MaterialPageRoute(builder: ((context) => Pulsa())));
+                                      Navigator.push(context, MaterialPageRoute(builder: ((context) => Notready())));
                                   }
                                   if (namaTopup[index] == "Kartu Saya") {
-                                    //  / Navigator.push(context, MaterialPageRoute(builder: ((context) => Pulsa())));
+                                     Navigator.push(context, MaterialPageRoute(builder: ((context) => Notready())));
                                   }
                                   if (namaTopup[index] == "Voucher Saya") {
-                                    //  / Navigator.push(context, MaterialPageRoute(builder: ((context) => Pulsa())));
+                                     Navigator.push(context, MaterialPageRoute(builder: ((context) => Voucherpicker())));
                                   }
                                 },
                                 child: Column(
@@ -667,6 +1110,7 @@ class _ProfilState extends State<Profil> {
                                                                 namaProfile: provider.profil!.data!.name.toString(),
                                                                 noProfile: provider.profil!.data!.phoneNumber.toString(),                                                               
                                                                 pass: provider.profil!.data!.password.toString(),
+                                                                gam: provider.profil!.data!.image.toString(),
                                                               ))));
                                                 },
                                               );
@@ -674,47 +1118,13 @@ class _ProfilState extends State<Profil> {
                                               
                                             ),
                                             ListTile(
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 30, right: 30),
-                                              leading: ShaderMask(
-                                                  shaderCallback: (Rect bounds) {
-                                                    return const LinearGradient(
-                                                      begin: Alignment.centerLeft,
-                                                      end: Alignment.centerRight,
-                                                      colors: <Color>[
-                                                        primaryColor,
-                                                        secondaryColor,
-                                                      ],
-                                                      tileMode: TileMode.mirror,
-                                                    ).createShader(bounds);
-                                                  },
-                                                  child: Container(
-                                                    width: 24,
-                                                    height: 24,
-                                                    decoration: BoxDecoration(
-                                                        image: DecorationImage(
-                                                            image: AssetImage(
-                                                                "assets/icon/lock.png"))),
-                                                  )),
-                                              title: Transform.translate(
-                                                offset: const Offset(-20, 0),
-                                                child: const Text(
-                                                  "Ubah Kata Sandi",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 16),
-                                                ),
-                                              ),
-                                              trailing: Transform.translate(
-                                                offset: const Offset(-12, 0),
-                                                child: ShaderMask(
-                                                    shaderCallback:
-                                                        (Rect bounds) {
+                                                contentPadding: EdgeInsets.only(
+                                                    left: 30, right: 30),
+                                                leading: ShaderMask(
+                                                    shaderCallback: (Rect bounds) {
                                                       return const LinearGradient(
-                                                        begin:
-                                                            Alignment.centerLeft,
-                                                        end:
-                                                            Alignment.centerRight,
+                                                        begin: Alignment.centerLeft,
+                                                        end: Alignment.centerRight,
                                                         colors: <Color>[
                                                           primaryColor,
                                                           secondaryColor,
@@ -728,17 +1138,55 @@ class _ProfilState extends State<Profil> {
                                                       decoration: BoxDecoration(
                                                           image: DecorationImage(
                                                               image: AssetImage(
-                                                                  "assets/icon/kanan.png"))),
+                                                                  "assets/icon/lock.png"))),
                                                     )),
+                                                title: Transform.translate(
+                                                  offset: const Offset(-20, 0),
+                                                  child: const Text(
+                                                    "Ubah Kata Sandi",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 16),
+                                                  ),
+                                                ),
+                                                trailing: Transform.translate(
+                                                  offset: const Offset(-12, 0),
+                                                  child: ShaderMask(
+                                                      shaderCallback:
+                                                          (Rect bounds) {
+                                                        return const LinearGradient(
+                                                          begin:
+                                                              Alignment.centerLeft,
+                                                          end:
+                                                              Alignment.centerRight,
+                                                          colors: <Color>[
+                                                            primaryColor,
+                                                            secondaryColor,
+                                                          ],
+                                                          tileMode: TileMode.mirror,
+                                                        ).createShader(bounds);
+                                                      },
+                                                      child: Container(
+                                                        width: 24,
+                                                        height: 24,
+                                                        decoration: BoxDecoration(
+                                                            image: DecorationImage(
+                                                                image: AssetImage(
+                                                                    "assets/icon/kanan.png"))),
+                                                      )),
+                                                ),
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: ((context) =>
+                                                              EditPassword(
+                                                                
+                                                              ))));
+                                                },
                                               ),
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: ((context) =>
-                                                            EditPassword())));
-                                              },
-                                            ),
+                                              
+                                            
                                             Padding(
                                               padding: EdgeInsets.only(
                                                   left: widthh * 16 / 360,
@@ -828,7 +1276,7 @@ class _ProfilState extends State<Profil> {
                                                     onTap: () {
                                                       showAlertDialog2(
                                                           primaryColor,
-                                                          "Apakah Kamu Yakin Ingin Keluar?",
+                                                          "Berikan Rating Mu",
                                                           "assets/icon/cuate2.png");
                                                     },
                                                   ),
@@ -899,7 +1347,9 @@ class _ProfilState extends State<Profil> {
                                                                         "assets/icon/kanan.png"))),
                                                           )),
                                                     ),
-                                                    onTap: () {},
+                                                    onTap: () {
+                                                        Navigator.push(context, MaterialPageRoute(builder: ((context) => SyaratKetentuan())));
+                                                    },
                                                   ),
                                                   Consumer<AuthViewModel>(
                                                     builder: (context, provider, _) {
@@ -981,7 +1431,7 @@ class _ProfilState extends State<Profil> {
                                                             "Iya",
                                                             "assets/icon/amico.png");
                                                       },
-                                                       //Navigator.push(context, MaterialPageRoute(builder: ((context) => Register1Page())));
+                                                      
                                                     );
                                                     },
                                                     

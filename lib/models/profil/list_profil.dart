@@ -110,7 +110,7 @@ class Wallet {
     final String? noWallet;
     final int? userId;
     final int? balance;
-    final dynamic historiesWallet;
+    final int? historiesWallet;
     final DateTime? createdAt;
     final DateTime? updatedAt;
     final DateTime? deletedAt;
@@ -123,7 +123,7 @@ class Wallet {
         noWallet: json["no_wallet"],
         userId: json["user_id"],
         balance: json["balance"],
-        historiesWallet: json["histories_wallet"]== null ? null : Wallet.fromJson(json["histories_wallet"]),
+        historiesWallet: json["histories_wallet"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"]== null ? null : DateTime.parse(json["deleted_at"]),
@@ -133,7 +133,7 @@ class Wallet {
         "no_wallet": noWallet,
         "user_id": userId,
         "balance": balance,
-        "histories_wallet": historiesWallet== null ? null : historiesWallet!.toJson(),
+        "histories_wallet": historiesWallet,
         "created_at": createdAt == null ? null : createdAt!.toIso8601String(),
         "updated_at": updatedAt == null ? null : updatedAt!.toIso8601String(),
         "deleted_at": deletedAt== null ? null : deletedAt!.toIso8601String(),

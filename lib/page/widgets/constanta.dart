@@ -48,3 +48,7 @@ import 'package:flutter/material.dart';
   List rating = [
     "assets/icon/starborder.png","assets/icon/starborder.png""assets/icon/starborder.png","assets/icon/starborder.png","assets/icon/starborder.png",
   ];
+
+  // List snk = [
+  //   "assets/icon/snk1.png","assets/icon/snk2.png","assets/icon/snk3.png","assets/icon/snk4.png","assets/icon/snk5.png","assets/icon/snk6.png",
+  // ];

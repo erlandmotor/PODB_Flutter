@@ -1,7 +1,9 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/models/profil/list_profil.dart';
-import 'package:ppodb_2/models/wallet/list_wallet.dart';
+
 import 'package:ppodb_2/page/akun/akun.dart';
 import 'package:ppodb_2/page/widgets/finite_state.dart';
 import 'package:ppodb_2/service/database/myCuan_Api.dart';
@@ -53,4 +55,44 @@ class ProfilProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+  void updatePassword(String newPass, String oldPass,
+       ) async {
+    try {
+      final result = await MyCuanAPI()
+      .updatePassowrd(oldPass, newPass);
+          _isNext = "berhasil";
+      
+      DataProfil profilupdate = DataProfil();     
+      profil = profilupdate;
+      print("dijalankan");
+      print(result);
+      
+    } catch (e) {
+      
+     _isNext = "gagal"; 
+    }
+    notifyListeners();
+  }
+
+  void updateGambar(File gambar,
+       ) async {
+    try {
+      final result = await MyCuanAPI().updateGambar(gambar);
+        _isNext = "berhasil";
+      
+      
+      DataProfil profilGambar = DataProfil();     
+      profil = profilGambar;
+      print("dijalankan");
+      print(result);
+      
+    } catch (e) {
+      
+     _isNext = "gagal"; 
+    }
+    notifyListeners();
+  }
 }
+
+
+

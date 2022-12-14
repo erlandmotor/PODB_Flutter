@@ -16,17 +16,17 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-     final formKey = GlobalKey<FormState>();
+     
      double heightt = MediaQuery.of(context).size.height;
    double widthh = MediaQuery.of(context).size.width;
     final _namalengkapController = TextEditingController();
      final _emailController = TextEditingController();
   final _nomortelponController = TextEditingController();
    final _katasandiController = TextEditingController();
-   final provider = Provider.of<AuthViewModel>(context, listen: false);
-    final providerKonfirmasi = Provider.of<AuthViewModel>(context);
+  
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -88,7 +88,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           hintText: "emailkamu@gmail.com",
-                          labelText: "emailkamu@gmail.com",
+                          //labelText: "emailkamu@gmail.com",
                           prefixIcon: Padding(
                                 padding: EdgeInsets.all( heightt*12/800),
                                 child: Image.asset("assets/icon/mail.png",
@@ -112,7 +112,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                         height: heightt * 0.06,
                         width: widthh * 0.911,
                         child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: ()async {
                               // final isValidForm =
                               //     formKey.currentState!.validate();
                               // if (isValidForm) {
@@ -124,6 +124,8 @@ class _ResetPasswordState extends State<ResetPassword> {
                               //     builder: (context) => Register2Page(),
                               //   ));
                               // }
+                              // String emaildata =_emailController.text;
+                              // final  url =await 'mailto:$emaildata';
                               Navigator.push(context, MaterialPageRoute(builder: ((context) => EmailBoarding())));
                             },
                             child: Text(
