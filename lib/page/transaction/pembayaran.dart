@@ -1,9 +1,28 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/page/transaction/Succesfull_Screen.dart';
-import 'package:ppodb_2/page/transaction/voucher_picker_screen.dart';
+import 'package:intl/intl.dart';
+import 'package:ppodb_2/models/dummymodel.dart';
+import 'package:ppodb_2/page/transaction/succes.dart';
+import 'package:ppodb_2/page/transaction/vouchertele.dart';
+
+import '../widgets/qrCode.dart';
 
 class Pembayaranscreen extends StatefulWidget {
-  Pembayaranscreen({super.key});
+  KirimanKonfirm terima;
+  DummyBPJS? bpjs;
+  DummyPDAM? pdam;
+  PelangganToken? token;
+  PelangganListrik? listrik;
+  int? harga;
+  Pembayaranscreen(
+      {super.key,
+      required this.terima,
+      this.bpjs,
+      this.harga,
+      this.listrik,
+      this.pdam,
+      this.token});
 
   @override
   State<Pembayaranscreen> createState() => _PembayaranscreenState();
@@ -11,20 +30,23 @@ class Pembayaranscreen extends StatefulWidget {
 
 class _PembayaranscreenState extends State<Pembayaranscreen> {
   String status = "";
-  String gopay = "GOPAY";
+  String gopay = "Gopay";
   String saldo = "Mycuan saldo";
   String dana = "DANA";
+  String gambar = "";
+  late int total;
   TextEditingController nomor = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    nomor.text = "08123456789";
+    nomor.text = "${widget.terima.nomor}";
+
     var size = MediaQuery.of(context).size;
     return Scaffold(
       extendBody: true,
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xfff2f3f6),
+      backgroundColor: const Color(0xfff2f3f6),
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Pembayaran",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -53,8 +75,13 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                         child: Text.rich(
                             textAlign: TextAlign.left,
                             TextSpan(
-                                text: "Telkomsel",
-                                style: TextStyle(
+                                text: widget.terima.tipe == 4
+                                    ? "Nomor VA Keluarga"
+                                    : widget.terima.tipe == 5 ||
+                                            widget.terima.tipe == 6
+                                        ? "Nomor Meter/ID Pelanggan"
+                                        : "Nomor Pelanggan",
+                                style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                 ))),
@@ -65,9 +92,14 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                       TextField(
                         decoration: InputDecoration(
                           prefixIcon: Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: Image.asset(
-                              "assets/image/telkomsel1.png",
+                              widget.terima.tipe == 4
+                                  ? "assets/image/BPJS-1.png"
+                                  : widget.terima.tipe == 5 ||
+                                          widget.terima.tipe == 6
+                                      ? "assets/image/PLN.png"
+                                      : "assets/image/PDAM-1.png",
                               width: size.width * .024,
                               height: size.height * .024,
                             ),
@@ -101,7 +133,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                         ),
                         Container(
                           alignment: Alignment.topLeft,
-                          child: Text.rich(
+                          child: const Text.rich(
                               textAlign: TextAlign.left,
                               TextSpan(
                                   text: "Voucher",
@@ -117,7 +149,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                           readOnly: true,
                           decoration: InputDecoration(
                               suffixIcon: IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.navigate_next,
                                   color: Color(0xffFF9D0B),
                                 ),
@@ -125,12 +157,13 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              Voucherpicker()));
+                                          builder: (context) => Vouchertelepick(
+                                                type: widget.terima.tipe,
+                                              )));
                                 },
                               ),
                               prefixIcon: Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Image.asset(
                                   "assets/image/mdi_voucher.png",
                                   width: size.width * .02,
@@ -159,7 +192,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                         ),
                         Container(
                           alignment: Alignment.topLeft,
-                          child: Text.rich(
+                          child: const Text.rich(
                               textAlign: TextAlign.left,
                               TextSpan(
                                   text: "Detail Transaksi",
@@ -172,117 +205,843 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                           height: size.height * .01125,
                         ),
                         Container(
-                          alignment: Alignment.topLeft,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              border: Border.all(
-                                  color: Colors.black38, // Set border color
-                                  width: 1.0)),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(12.0),
-                                child: Column(
-                                  children: [
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text.rich(
-                                          textAlign: TextAlign.left,
-                                          TextSpan(
-                                              text: "Telkomsel 100.000",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 14,
-                                              ))),
-                                    ),
-                                    SizedBox(
-                                      height: size.height * .02,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text.rich(TextSpan(
-                                            text: "Harga",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14,
-                                            ))),
-                                        Text.rich(TextSpan(
-                                            text: "Rp100.000",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 14,
-                                            ))),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: size.height * .02,
-                                    ),
-                                    Divider(
-                                      color: Color(0xffD9DCE3),
-                                      thickness: 1,
-                                    ),
-                                    SizedBox(
-                                      height: size.height * .02,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text.rich(TextSpan(
-                                            text: "Biaya admin",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14,
-                                            ))),
-                                        Text.rich(TextSpan(
-                                            text: "Gratis !",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 14,
-                                            ))),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: size.height * .02,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                color: Color(0xff0D40C614),
-                                height: size.height * .0725,
-                                width: size.width * 3.28,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      bottom: size.height * .025,
-                                      top: size.height * .025,
-                                      left: size.width * .033,
-                                      right: size.width * .033),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                            alignment: Alignment.topLeft,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                border: Border.all(
+                                    color: Colors.black38, // Set border color
+                                    width: 1.0)),
+                            child: widget.terima.tipe == 6
+                                ? Column(
                                     children: [
-                                      Text.rich(TextSpan(
-                                          text: "Total Pembayaran",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 14,
-                                          ))),
-                                      Text.rich(TextSpan(
-                                          text: "Rp101.000",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 14,
-                                          ))),
+                                      Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Column(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text.rich(
+                                                  textAlign: TextAlign.left,
+                                                  TextSpan(
+                                                      text:
+                                                          "Token Listrik ${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(widget.harga)}",
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 14,
+                                                      ))),
+                                            ),
+                                            SizedBox(
+                                              height: size.height * .02,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                const Text.rich(TextSpan(
+                                                    text: "Nama Pelanggan",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 14,
+                                                    ))),
+                                                Text.rich(TextSpan(
+                                                    text: widget.token!.name,
+                                                    style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 14,
+                                                    ))),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: size.height * .02,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                const Text.rich(TextSpan(
+                                                    text: "Tarif/Daya",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 14,
+                                                    ))),
+                                                Text.rich(TextSpan(
+                                                    text: widget.token!.daya,
+                                                    style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 14,
+                                                    ))),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: size.height * .02,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                const Text.rich(TextSpan(
+                                                    text: "Harga",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 14,
+                                                    ))),
+                                                Text.rich(TextSpan(
+                                                    text: NumberFormat.currency(
+                                                            locale: 'id',
+                                                            symbol: 'Rp',
+                                                            decimalDigits: 0)
+                                                        .format(widget.harga),
+                                                    style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 14,
+                                                    ))),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: size.height * .02,
+                                            ),
+                                            const Divider(
+                                              color: Color(0xffD9DCE3),
+                                              thickness: 1,
+                                            ),
+                                            SizedBox(
+                                              height: size.height * .02,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                const Text.rich(TextSpan(
+                                                    text: "Biaya admin",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 14,
+                                                    ))),
+                                                Text.rich(TextSpan(
+                                                    text: NumberFormat.currency(
+                                                            locale: 'id',
+                                                            symbol: 'Rp',
+                                                            decimalDigits: 0)
+                                                        .format(widget
+                                                            .terima.biayaadmin),
+                                                    style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      fontSize: 14,
+                                                    ))),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: size.height * .02,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        color: const Color(0xff0d40c614),
+                                        height: size.height * .0725,
+                                        width: size.width * 3.28,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              bottom: size.height * .025,
+                                              top: size.height * .025,
+                                              left: size.width * .033,
+                                              right: size.width * .033),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              const Text.rich(TextSpan(
+                                                  text: "Total Pembayaran",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 14,
+                                                  ))),
+                                              Text.rich(TextSpan(
+                                                  text: NumberFormat.currency(
+                                                          locale: 'id',
+                                                          symbol: 'Rp',
+                                                          decimalDigits: 0)
+                                                      .format(total =
+                                                          widget.harga! +
+                                                              widget.terima
+                                                                  .biayaadmin),
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 14,
+                                                  ))),
+                                            ],
+                                          ),
+                                        ),
+                                      )
                                     ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+                                  )
+                                : widget.terima.tipe == 5
+                                    ? Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: size.height * .02,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    const Text.rich(TextSpan(
+                                                        text: "Periode",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 14,
+                                                        ))),
+                                                    Text.rich(TextSpan(
+                                                        text: widget
+                                                            .listrik!.periode,
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 14,
+                                                        ))),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: size.height * .02,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    const Text.rich(TextSpan(
+                                                        text: "Nama Pelanggan",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 14,
+                                                        ))),
+                                                    Text.rich(TextSpan(
+                                                        text: widget
+                                                            .listrik!.name,
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 14,
+                                                        ))),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: size.height * .02,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    const Text.rich(TextSpan(
+                                                        text: "Tagihan Listrik",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 14,
+                                                        ))),
+                                                    Text.rich(TextSpan(
+                                                        text: NumberFormat
+                                                                .currency(
+                                                                    locale:
+                                                                        'id',
+                                                                    symbol:
+                                                                        'Rp',
+                                                                    decimalDigits:
+                                                                        0)
+                                                            .format(widget
+                                                                .listrik!
+                                                                .tagihan),
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 14,
+                                                        ))),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: size.height * .02,
+                                                ),
+                                                const Divider(
+                                                  color: Color(0xffD9DCE3),
+                                                  thickness: 1,
+                                                ),
+                                                SizedBox(
+                                                  height: size.height * .02,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    const Text.rich(TextSpan(
+                                                        text: "Biaya admin",
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 14,
+                                                        ))),
+                                                    Text.rich(TextSpan(
+                                                        text: NumberFormat
+                                                                .currency(
+                                                                    locale:
+                                                                        'id',
+                                                                    symbol:
+                                                                        'Rp',
+                                                                    decimalDigits:
+                                                                        0)
+                                                            .format(widget
+                                                                .terima
+                                                                .biayaadmin),
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontSize: 14,
+                                                        ))),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: size.height * .02,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            color: const Color(0xff0d40c614),
+                                            height: size.height * .0725,
+                                            width: size.width * 3.28,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  bottom: size.height * .025,
+                                                  top: size.height * .025,
+                                                  left: size.width * .033,
+                                                  right: size.width * .033),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  const Text.rich(TextSpan(
+                                                      text: "Total Pembayaran",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 14,
+                                                      ))),
+                                                  Text.rich(TextSpan(
+                                                      text: NumberFormat
+                                                              .currency(
+                                                                  locale: 'id',
+                                                                  symbol: 'Rp',
+                                                                  decimalDigits:
+                                                                      0)
+                                                          .format(total = widget
+                                                                  .listrik!
+                                                                  .tagihan +
+                                                              widget.terima
+                                                                  .biayaadmin),
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 14,
+                                                      ))),
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    : widget.terima.tipe == 4
+                                        ? Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(12.0),
+                                                child: Column(
+                                                  children: [
+                                                    SizedBox(
+                                                      height: size.height * .02,
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        const Text.rich(
+                                                            TextSpan(
+                                                                text: "Periode",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontSize: 14,
+                                                                ))),
+                                                        Text.rich(TextSpan(
+                                                            text: widget
+                                                                .bpjs!.periode,
+                                                            style:
+                                                                const TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              fontSize: 14,
+                                                            ))),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: size.height * .02,
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        const Text.rich(TextSpan(
+                                                            text: "Nama Pelanggan",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontSize: 14,
+                                                            ))),
+                                                        Text.rich(TextSpan(
+                                                            text: widget
+                                                                .bpjs!.name,
+                                                            style:
+                                                                const TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              fontSize: 14,
+                                                            ))),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: size.height * .02,
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        const Text.rich(TextSpan(
+                                                            text: "Jumlah Peserta",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontSize: 14,
+                                                            ))),
+                                                        Text.rich(TextSpan(
+                                                            text:
+                                                                "${widget.bpjs!.person} Orang",
+                                                            style:
+                                                                const TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              fontSize: 14,
+                                                            ))),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: size.height * .02,
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        const Text.rich(TextSpan(
+                                                            text: "Tagihan BPJS",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontSize: 14,
+                                                            ))),
+                                                        Text.rich(TextSpan(
+                                                            text: NumberFormat
+                                                                    .currency(
+                                                                        locale:
+                                                                            'id',
+                                                                        symbol:
+                                                                            'Rp',
+                                                                        decimalDigits:
+                                                                            0)
+                                                                .format(widget
+                                                                        .bpjs!
+                                                                        .harga *
+                                                                    widget.bpjs!
+                                                                        .person),
+                                                            style:
+                                                                const TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              fontSize: 14,
+                                                            ))),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: size.height * .02,
+                                                    ),
+                                                    const Divider(
+                                                      color: Color(0xffD9DCE3),
+                                                      thickness: 1,
+                                                    ),
+                                                    SizedBox(
+                                                      height: size.height * .02,
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        const Text.rich(TextSpan(
+                                                            text: "Biaya admin",
+                                                            style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontSize: 14,
+                                                            ))),
+                                                        Text.rich(TextSpan(
+                                                            text: NumberFormat
+                                                                    .currency(
+                                                                        locale:
+                                                                            'id',
+                                                                        symbol:
+                                                                            'Rp',
+                                                                        decimalDigits:
+                                                                            0)
+                                                                .format(widget
+                                                                    .terima
+                                                                    .biayaadmin),
+                                                            style:
+                                                                const TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              fontSize: 14,
+                                                            ))),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: size.height * .02,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                color:
+                                                    const Color(0xff0d40c614),
+                                                height: size.height * .0725,
+                                                width: size.width * 3.28,
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      bottom:
+                                                          size.height * .025,
+                                                      top: size.height * .025,
+                                                      left: size.width * .033,
+                                                      right: size.width * .033),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      const Text.rich(TextSpan(
+                                                          text:
+                                                              "Total Pembayaran",
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize: 14,
+                                                          ))),
+                                                      Text.rich(TextSpan(
+                                                          text: NumberFormat
+                                                                  .currency(
+                                                                      locale:
+                                                                          'id',
+                                                                      symbol:
+                                                                          'Rp',
+                                                                      decimalDigits:
+                                                                          0)
+                                                              .format(total = widget
+                                                                          .bpjs!
+                                                                          .harga *
+                                                                      widget
+                                                                          .bpjs!
+                                                                          .person +
+                                                                  widget.terima
+                                                                      .biayaadmin),
+                                                          style:
+                                                              const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            fontSize: 14,
+                                                          ))),
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        : widget.terima.tipe == 7
+                                            ? Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            12.0),
+                                                    child: Column(
+                                                      children: [
+                                                        SizedBox(
+                                                          height:
+                                                              size.height * .02,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            const Text.rich(
+                                                                TextSpan(
+                                                                    text:
+                                                                        "Nama Pelanggan",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontSize:
+                                                                          14,
+                                                                    ))),
+                                                            Text.rich(TextSpan(
+                                                                text: widget
+                                                                    .pdam!.name,
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  fontSize: 14,
+                                                                ))),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height:
+                                                              size.height * .02,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            const Text.rich(
+                                                                TextSpan(
+                                                                    text:
+                                                                        "Wilayah",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontSize:
+                                                                          14,
+                                                                    ))),
+                                                            Text.rich(TextSpan(
+                                                                text: widget
+                                                                    .pdam!
+                                                                    .wilayah,
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  fontSize: 14,
+                                                                ))),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height:
+                                                              size.height * .02,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            const Text.rich(
+                                                                TextSpan(
+                                                                    text:
+                                                                        "Tagihan PDAM",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontSize:
+                                                                          14,
+                                                                    ))),
+                                                            Text.rich(TextSpan(
+                                                                text: NumberFormat.currency(
+                                                                        locale:
+                                                                            'id',
+                                                                        symbol:
+                                                                            'Rp',
+                                                                        decimalDigits:
+                                                                            0)
+                                                                    .format(widget
+                                                                        .pdam!
+                                                                        .harga),
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  fontSize: 14,
+                                                                ))),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height:
+                                                              size.height * .02,
+                                                        ),
+                                                        const Divider(
+                                                          color:
+                                                              Color(0xffD9DCE3),
+                                                          thickness: 1,
+                                                        ),
+                                                        SizedBox(
+                                                          height:
+                                                              size.height * .02,
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            const Text.rich(
+                                                                TextSpan(
+                                                                    text:
+                                                                        "Biaya admin",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      fontSize:
+                                                                          14,
+                                                                    ))),
+                                                            Text.rich(TextSpan(
+                                                                text: NumberFormat.currency(
+                                                                        locale:
+                                                                            'id',
+                                                                        symbol:
+                                                                            'Rp',
+                                                                        decimalDigits:
+                                                                            0)
+                                                                    .format(widget
+                                                                        .terima
+                                                                        .biayaadmin),
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  fontSize: 14,
+                                                                ))),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height:
+                                                              size.height * .02,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    color: const Color(
+                                                        0xff0d40c614),
+                                                    height: size.height * .0725,
+                                                    width: size.width * 3.28,
+                                                    child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          bottom: size.height *
+                                                              .025,
+                                                          top: size.height *
+                                                              .025,
+                                                          left:
+                                                              size.width * .033,
+                                                          right: size.width *
+                                                              .033),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          const Text.rich(
+                                                              TextSpan(
+                                                                  text:
+                                                                      "Total Pembayaran",
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700,
+                                                                    fontSize:
+                                                                        14,
+                                                                  ))),
+                                                          Text.rich(TextSpan(
+                                                              text: NumberFormat.currency(
+                                                                      locale:
+                                                                          'id',
+                                                                      symbol:
+                                                                          'Rp',
+                                                                      decimalDigits:
+                                                                          0)
+                                                                  .format(total = widget
+                                                                          .pdam!
+                                                                          .harga +
+                                                                      widget
+                                                                          .terima
+                                                                          .biayaadmin),
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                fontSize: 14,
+                                                              ))),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              )
+                                            : Container()),
                         SizedBox(
                           height: size.height * .02,
                         ),
@@ -302,7 +1061,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                       ),
                       Container(
                         alignment: Alignment.topLeft,
-                        child: Text.rich(
+                        child: const Text.rich(
                             textAlign: TextAlign.left,
                             TextSpan(
                                 text: "Pilih Metode Pembayaran",
@@ -336,11 +1095,11 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                   textAlign: TextAlign.left,
                                   TextSpan(
                                       text: saldo,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 14,
                                       ))),
-                              subtitle: Text.rich(
+                              subtitle: const Text.rich(
                                   textAlign: TextAlign.left,
                                   TextSpan(
                                       text: "Saldo: Rp800.000",
@@ -355,17 +1114,17 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                   });
                                 },
                                 icon: status != saldo
-                                    ? Icon(
+                                    ? const Icon(
                                         Icons.radio_button_unchecked,
                                         color: Colors.black,
                                       )
-                                    : Icon(
+                                    : const Icon(
                                         Icons.radio_button_checked,
                                         color: Colors.blue,
                                       ),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               color: Color(0xffD9DCE3),
                               thickness: 1,
                             ),
@@ -382,7 +1141,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                   textAlign: TextAlign.left,
                                   TextSpan(
                                       text: dana,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 14,
                                       ))),
@@ -390,14 +1149,15 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                 onPressed: () {
                                   setState(() {
                                     status = dana;
+                                    gambar = "assets/image/dana.png";
                                   });
                                 },
                                 icon: status != dana
-                                    ? Icon(
+                                    ? const Icon(
                                         Icons.radio_button_unchecked,
                                         color: Colors.black,
                                       )
-                                    : Icon(
+                                    : const Icon(
                                         Icons.radio_button_checked,
                                         color: Colors.blue,
                                       ),
@@ -406,7 +1166,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                             SizedBox(
                               height: size.height * .01125,
                             ),
-                            Divider(
+                            const Divider(
                               color: Color(0xffD9DCE3),
                               thickness: 1,
                             ),
@@ -423,7 +1183,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                   textAlign: TextAlign.left,
                                   TextSpan(
                                       text: gopay,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 14,
                                       ))),
@@ -431,14 +1191,15 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                 onPressed: () {
                                   setState(() {
                                     status = gopay;
+                                    gambar = "assets/image/gopay.png";
                                   });
                                 },
                                 icon: status != gopay
-                                    ? Icon(
+                                    ? const Icon(
                                         Icons.radio_button_unchecked,
                                         color: Colors.black,
                                       )
-                                    : Icon(
+                                    : const Icon(
                                         Icons.radio_button_checked,
                                         color: Colors.blue,
                                       ),
@@ -484,17 +1245,32 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor:
                             Color(status != "" ? 0xff0D40C6 : 0xffD9DCE3),
-                        shape: StadiumBorder()),
+                        shape: const StadiumBorder()),
                     onPressed: () {
-                      if (status != "") {
+                      if (status == "Mycuan saldo") {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SuccesPage()),
+                                builder: (context) => SuccesPages(
+                                      type: widget.terima.tipe,
+                                    )),
+                            (route) => false);
+                      } else {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => QRScreen(
+                                      code:
+                                          "${Random().nextInt(899999999) + 100000000}",
+                                      data: Dummymethod(
+                                          name: status, gambar: gambar),
+                                      total: total,
+                                      tipe: widget.terima.tipe,
+                                    )),
                             (route) => false);
                       }
                     },
-                    child: Text.rich(
+                    child: const Text.rich(
                       TextSpan(
                         text: "Bayar Sekarang",
                       ),

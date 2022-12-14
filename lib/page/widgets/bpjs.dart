@@ -13,7 +13,25 @@ class BPJSScreen extends StatefulWidget {
 }
 
 class _BPJSScreenState extends State<BPJSScreen> {
+  List<DummyBPJS> fafa = [
+    DummyBPJS(
+        id: 1,
+        kode: 1234567891011,
+        name: "Arya Fajar",
+        periode: "1 Bulan",
+        harga: 35000,
+        person: 4),
+    DummyBPJS(
+        id: 2,
+        kode: 0001865770942,
+        name: "Lunna Ismi",
+        periode: "1 bulan",
+        harga: 35000,
+        person: 3)
+  ];
+  late DummyBPJS bpjs;
   TextEditingController bambang = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -21,7 +39,7 @@ class _BPJSScreenState extends State<BPJSScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "BPJS",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -53,7 +71,7 @@ class _BPJSScreenState extends State<BPJSScreen> {
               ),
               Container(
                 alignment: Alignment.topLeft,
-                child: Text.rich(
+                child: const Text.rich(
                     textAlign: TextAlign.left,
                     TextSpan(
                         text: "Nomor VA Keluarga",
@@ -75,12 +93,12 @@ class _BPJSScreenState extends State<BPJSScreen> {
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: bambang.text.isEmpty
                         ? InputDecoration(
-                            prefixIcon: Icon(Icons.family_restroom),
+                            prefixIcon: const Icon(Icons.family_restroom),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             hintText: "0853xxxxxxxx")
                         : InputDecoration(
-                            prefixIcon: Padding(
+                            prefixIcon: const Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Icon(Icons.offline_bolt)),
                             suffixIcon: IconButton(
@@ -89,7 +107,7 @@ class _BPJSScreenState extends State<BPJSScreen> {
                                     bambang.clear();
                                   });
                                 },
-                                icon: Icon(Icons.cancel)),
+                                icon: const Icon(Icons.cancel)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10)),
                           ),
@@ -108,23 +126,21 @@ class _BPJSScreenState extends State<BPJSScreen> {
                     TextSpan(
                         text: bambang.text.length == 0
                             ? "Silahkan masukkan nomor VA keluarga anda"
-                            : bambang.text.length < 10 ||
-                                    bambang.text.length > 13
+                            : bambang.text.length != 13
                                 ? "Silahkan masukkan nomor yang valid"
                                 : "Silahkan lanjutkan ke pembayaran",
                         style: bambang.text.isEmpty
-                            ? TextStyle(
+                            ? const TextStyle(
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xff5C5D61),
                                 fontSize: 12,
                               )
-                            : bambang.text.length < 10 ||
-                                    bambang.text.length > 13
-                                ? TextStyle(
+                            : bambang.text.length != 13
+                                ? const TextStyle(
                                     fontWeight: FontWeight.w800,
                                     color: Colors.red,
                                     fontSize: 12)
-                                : TextStyle(
+                                : const TextStyle(
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xff5C5D61),
                                     fontSize: 12,
@@ -136,7 +152,7 @@ class _BPJSScreenState extends State<BPJSScreen> {
               Container(
                 width: size.width * 9111,
                 height: size.height * .11,
-                color: Color(0xff0D40C614),
+                color: const Color(0xff0D40C614),
                 child: Row(
                   children: [
                     Padding(
@@ -147,7 +163,7 @@ class _BPJSScreenState extends State<BPJSScreen> {
                       child: SizedBox(
                           height: size.height * .025,
                           width: size.width * .0555,
-                          child: Icon(
+                          child: const Icon(
                             Icons.info,
                             color: Color(0xff0D40C6),
                           )),
@@ -161,7 +177,7 @@ class _BPJSScreenState extends State<BPJSScreen> {
                               bottom: size.height * .015,
                               right: size.width * .033),
                           child: RichText(
-                            text: TextSpan(
+                            text: const TextSpan(
                               text:
                                   "Status tagihan BPJS akan diperbarui maks. 3x24jam (hari kerja) setelah transaksi berhasil.",
                               style: TextStyle(
@@ -181,7 +197,7 @@ class _BPJSScreenState extends State<BPJSScreen> {
                   left: size.width * .044,
                   right: size.width * .044,
                   bottom: size.height * .025),
-              child: bambang.text.length > 10 && bambang.text.length < 14
+              child: bambang.text.length == 13
                   ? Container(
                       alignment: Alignment.bottomCenter,
                       child: SizedBox(
@@ -189,27 +205,64 @@ class _BPJSScreenState extends State<BPJSScreen> {
                         height: size.height * .06,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xff0D40C6),
-                              shape: StadiumBorder()),
+                              backgroundColor: const Color(0xff0D40C6),
+                              shape: const StadiumBorder()),
                           onPressed: () {
-                            if (bambang.text.length > 10 &&
-                                bambang.text.length < 13 &&
-                                bambang.text[0] == "0") {
-                              // final DummyTransTelekom kiriman =
-                              //     DummyTransTelekom(
-                              //         biayaadmin: 0,
-                              //         harga: harga,
-                              //         nama: status,
-                              //         nomor: int.parse(bambang.text),
-                              //         provider: providers);
+                            for (int i = 0; i < fafa.length; i++) {
+                              if (fafa[i].kode == int.parse(bambang.text)) {
+                                bpjs = fafa[i];
+                              }
+                            }
+                            var contain = fafa.indexWhere((element) =>
+                                element.kode == int.parse(bambang.text));
+                            if (contain >= 0) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Pembayaranscreen()),
+                                    builder: (context) => Pembayaranscreen(
+                                          terima: KirimanKonfirm(
+                                              tipe: widget.tipe,
+                                              biayaadmin: 2500,
+                                              nomor: int.parse(bambang.text)),
+                                          bpjs: bpjs,
+                                        )),
                               );
+                            } else {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      content: SingleChildScrollView(
+                                        child: Column(
+                                          children: <Widget>[
+                                            Image.asset(
+                                              "assets/image/Penasaran 2.png",
+                                              height: size.height * .15,
+                                              width: size.width * .416,
+                                            ),
+                                            const Text(
+                                                'yhaa. kode tidak ditemukan nih'),
+                                            const Text(
+                                                'coba deh perhatiin lagi'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('Oke'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  });
                             }
                           },
-                          child: Text.rich(
+                          child: const Text.rich(
                             TextSpan(
                               text: "Lanjutkan",
                             ),

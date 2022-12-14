@@ -84,9 +84,77 @@ class DummyTransTelekom {
 }
 
 class Dummymethod {
-  int id;
+  int? id;
   String name;
   String gambar;
 
-  Dummymethod({required this.id, required this.name, required this.gambar});
+  Dummymethod({this.id, required this.name, required this.gambar});
+}
+
+class PelangganListrik {
+  int id;
+  String name;
+  int nomorpelanggan;
+  int tagihan;
+  String periode;
+  PelangganListrik(
+      {required this.id,
+      required this.name,
+      required this.nomorpelanggan,
+      required this.periode,
+      required this.tagihan});
+}
+
+class PelangganToken {
+  int id;
+  String name;
+  int nomorpelanggan;
+  String daya;
+  PelangganToken(
+      {required this.id,
+      required this.daya,
+      required this.name,
+      required this.nomorpelanggan});
+}
+
+class DummyBPJS {
+  int id;
+  String name;
+  int kode;
+  String periode;
+  int person;
+  int harga;
+  DummyBPJS(
+      {required this.id,
+      required this.kode,
+      required this.name,
+      required this.periode,
+      required this.harga,
+      required this.person});
+}
+
+class DummyPDAM {
+  int id;
+  String name;
+  int kode;
+  int harga;
+  String wilayah;
+  DummyPDAM(
+      {required this.id,
+      required this.name,
+      required this.kode,
+      required this.harga,
+      required this.wilayah});
+}
+
+class KirimanKonfirm {
+  int tipe;
+  int biayaadmin;
+  int nomor;
+
+  KirimanKonfirm({
+    required this.tipe,
+    required this.biayaadmin,
+    required this.nomor,
+  });
 }

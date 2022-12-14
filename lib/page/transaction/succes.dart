@@ -22,18 +22,21 @@ class _SuccesPagesState extends State<SuccesPages> {
         child: Column(
           children: [
             SizedBox(
-              height: size.height * .2125,
+              height: size.height * .225,
             ),
-            Container(
+            SizedBox(
               width: size.width * .9138,
               child: Column(
                 children: [
                   Image.asset(
                     "assets/image/succes.png",
-                    width: size.width * .5556,
-                    height: size.height * .25,
+                    width: size.width * .667,
+                    height: size.height * .3,
                   ),
-                  Text.rich(
+                  SizedBox(
+                    height: size.height * .02,
+                  ),
+                  const Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(
                           text: "Pembayaran Berhasil!",
@@ -48,9 +51,17 @@ class _SuccesPagesState extends State<SuccesPages> {
                       textAlign: TextAlign.center,
                       TextSpan(
                           text: widget.type == 1
-                              ? "Tekan Transaksi lagi untuk melakukan \ntransaksi lain atau Kembali ke beranda"
-                              : "Paket kamu akan otomatis aktif dalam\nbeberapa menit. Ditunggu ya...",
-                          style: TextStyle(
+                              ? "TSebentar lagi pulsa kamu otomatis masuk!\nSambil nunggu, yuk transaksi tagihan\nlainnya."
+                              : widget.type == 2
+                                  ? "Sebentar lagi paket kamu otomatis aktif!\nSambil nunggu, yuk transaksi tagihan\nlainnya."
+                                  : widget.type == 4
+                                      ? "Yeay... tagihan BPJS kamu sudah terbayar!\nYuk transaksi tagihan lainnya."
+                                      : widget.type == 5
+                                          ? "Yeay... tagihan Listrik kamu sudah terbayar!\nYuk transaksi tagihan lainnya."
+                                          : widget.type == 7
+                                              ? "Yeay... tagihan PDAM kamu sudah\nterbayar! Yuk transaksi tagihan lainnya."
+                                              : "",
+                          style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 16,
                               color: Colors.black))),
@@ -58,7 +69,7 @@ class _SuccesPagesState extends State<SuccesPages> {
               ),
             ),
             SizedBox(
-              height: size.height * .1575,
+              height: size.height * .1175,
             ),
             Padding(
                 padding: EdgeInsets.only(
@@ -72,8 +83,8 @@ class _SuccesPagesState extends State<SuccesPages> {
                       height: size.height * .07,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff0D40C6),
-                            shape: StadiumBorder()),
+                            backgroundColor: const Color(0xff0D40C6),
+                            shape: const StadiumBorder()),
                         onPressed: () {
                           Navigator.pushAndRemoveUntil(
                               context,
@@ -83,7 +94,7 @@ class _SuccesPagesState extends State<SuccesPages> {
                                       )),
                               (route) => route.isCurrent);
                         },
-                        child: Text.rich(
+                        child: const Text.rich(
                           TextSpan(
                             text: "Transaksi lagi",
                           ),
@@ -110,10 +121,10 @@ class _SuccesPagesState extends State<SuccesPages> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CategoryProduct()),
+                                builder: (context) => const CategoryProduct()),
                           );
                         },
-                        child: Text.rich(
+                        child: const Text.rich(
                           TextSpan(
                             text: "Kembali ke beranda",
                           ),
