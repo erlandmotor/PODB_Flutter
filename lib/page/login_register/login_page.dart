@@ -24,19 +24,19 @@ class _LoginPageState extends State<LoginPage> {
   final _katasandiController = TextEditingController();
 
 
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-       if(Provider.of<AuthViewModel>(context, listen: false).data1 != null){
-      _emailController.text = Provider.of<AuthViewModel>(context).data1.email;
-    }
-    if(Provider.of<AuthViewModel>(context, listen: false).data2 != null){
-      _katasandiController.text = Provider.of<AuthViewModel>(context).data2.katasandi;
-    }
-    });
+  // @override
+  // void initState() {
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //      if(Provider.of<AuthViewModel>(context, listen: false).data1 != null){
+  //     _emailController.text = Provider.of<AuthViewModel>(context).data1.email;
+  //   }
+  //   if(Provider.of<AuthViewModel>(context, listen: false).data2 != null){
+  //     _katasandiController.text = Provider.of<AuthViewModel>(context).data2.katasandi;
+  //   }
+  //   });
    
-    super.initState();
-  }
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {

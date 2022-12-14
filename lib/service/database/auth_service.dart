@@ -31,7 +31,7 @@ class RegisterDioService {
       
     } on DioError catch (e) {
       print(e.response!.data['message']);
-      print('data bermasalah');
+      // print('data bermasalah');
        _isNext = "gagal";
       rethrow;
     }

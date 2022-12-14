@@ -28,25 +28,116 @@ class _Register2PageState extends State<Register2Page> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: 500,
-          color: whiteColor,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(40),
+              topLeft: Radius.circular(40),
+            ),
+          ),
+          height: 300,
           child: Center(
             child: Column(
-            
-              // mainAxisAlignment: MainAxisAlignment.center,
-              // mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                // SizedBox(height: 10,),
-                Image.asset("assets/Indikator.png",),
+                SizedBox(
+                  height: 5,
+                ),
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset(
+                      "assets/Indikator.png",
+                    ),
+                  ),
+                ),
                 Image.asset("assets/pop_up_email.png"),
+                
                 Text(
-                  "${errorText} sudah terdaftar",
+                  "${errorText} ",
                   style: blackTextStyle.copyWith(fontSize: 20),
                 ),
+                SizedBox(
+                  height: 5,
+                ),
                 Text(
-                  "Email ini sudah terdaftar di MyCuan, kamu bisa menggunakan email ini untuk masuk",
+                  "Email ini sudah terdaftar di MyCuan, kamu \nbisa menggunakan email ini untuk masuk",
                   style: dengerTextStyle.copyWith(fontSize: 16),
                   textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    'Masuk ke Akun MyCuan',
+                    style: whiteTextStyle.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: whiteColor),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void tampilkanBottom2(String errorText) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          decoration: BoxDecoration(
+            // color: Colors.transparent,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(40),
+              topLeft: Radius.circular(40),
+            ),
+          ),
+          height: 350,
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 5,
+                ),
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset(
+                      "assets/Indikator.png",
+                    ),
+                  ),
+                ),
+                Image.asset("assets/pop_up_number.png"),
+                Text(
+                  "${errorText} ",
+                  style: blackTextStyle.copyWith(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  "Nomor handphone sudah terdaftar di \nMyCuan, kamu bisa menggunakan email ini \nuntuk masuk",
+                  style: dengerTextStyle.copyWith(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 5,
                 ),
                 ElevatedButton(
                   onPressed: () => Navigator.pop(context),
@@ -155,20 +246,15 @@ class _Register2PageState extends State<Register2Page> {
                             provider.setIfValueNotEmpty();
                             if (!karakterRegExp.hasMatch(value)) {
                               provider.setIf8DigitNotMatch();
-                              // return 'harus 8 karakter';
                             }
                             if (!hurufkecilRegExp.hasMatch(value)) {
                               provider.setIfHurufKecilNotMatch();
-                              // return 'harus ada huruf kecil';
                             }
                             if (!kapitalRegExp.hasMatch(value)) {
                               provider.setIfHurufKapitalNotMatch();
-                              // return 'harus ada huruf kapital';
                             }
                             if (!angkaRegExp.hasMatch(value)) {
                               provider.setIfAngkaNotMatch();
-
-                              // return 'harus ada angka';
                             }
                           }
                           _simpanData = value;
@@ -339,27 +425,24 @@ class _Register2PageState extends State<Register2Page> {
                                       _katasandiController.text,
                                       "");
 
-                              await Future.delayed(const Duration(seconds: 2));
+                              await Future.delayed(const Duration(seconds: 1));
                               if (providerKonfirmasi.isNext == "berhasil") {
                                 if (!mounted) return;
                                 Provider.of<AuthViewModel>(context,
                                         listen: false)
                                     .saveData2(users);
 
-                                print("pindah halaman");
+                                // print("pindah halaman");
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => LoginPage(),
                                 ));
                               }
                               if (providerKonfirmasi.isNext == "email") {
-                                tampilkanBottom("Email");
+                                tampilkanBottom("Email sudah terdaftar");
                               }
                               if (providerKonfirmasi.isNext == "number") {
-                                tampilkanBottom("Number");
-                              }
-                              if (providerKonfirmasi.isNext == "email&number") {
-                                print("hasil${providerKonfirmasi.isNext}");
-                                tampilkanBottom("email&number");
+                                tampilkanBottom2(
+                                    "Nomor handphone \nsudah terdaftar");
                               }
                             }
                           },

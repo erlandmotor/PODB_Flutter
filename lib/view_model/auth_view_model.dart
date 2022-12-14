@@ -53,7 +53,7 @@ class AuthViewModel with ChangeNotifier {
       print("tes$result");
     } catch (e) {
       if (e is DioError) {
-         print("gagal");
+        //  print("gagal");
         print(e.response!.data["message"]);
        if(e.response!.data["message"] == "email already registered"){
         isNext = "email";
