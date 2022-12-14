@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/page/transaction/categoryhome.dart';
-import 'package:ppodb_2/page/transaction/detail_product.dart';
+import 'package:ppodb_2/page/product/categoryhome.dart';
+import 'package:ppodb_2/page/product/detail_product.dart';
 
 class SuccesPages extends StatefulWidget {
   int type;
@@ -60,7 +60,7 @@ class _SuccesPagesState extends State<SuccesPages> {
                                           ? "Yeay... tagihan Listrik kamu sudah terbayar!\nYuk transaksi tagihan lainnya."
                                           : widget.type == 7
                                               ? "Yeay... tagihan PDAM kamu sudah\nterbayar! Yuk transaksi tagihan lainnya."
-                                              : "",
+                                              : "Yeay... uangnya udah kekirim!\nYuk transaksi lagi.",
                           style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 16,

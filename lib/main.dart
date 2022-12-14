@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/page/transaction/categoryhome.dart';
+import 'package:ppodb_2/page/product/categoryhome.dart';
 
 void main() {
   runApp(const MyApp());

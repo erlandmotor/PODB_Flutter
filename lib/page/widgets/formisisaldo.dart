@@ -154,8 +154,7 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
               height: size.height * .01,
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  top: size.height * .02, bottom: size.height * .02, left: 0),
+              padding: EdgeInsets.only(top: size.height * .02, left: 0),
               child: ListTile(
                 leading: Image.asset(
                   widget.metod.gambar,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/Succesfull_Screen.dart';
-import 'package:ppodb_2/page/transaction/categoryhome.dart';
+import 'package:ppodb_2/page/product/categoryhome.dart';
 import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:slide_countdown/slide_countdown.dart';
@@ -31,7 +31,7 @@ class _QRScreenState extends State<QRScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
-              top: size.height * .06,
+              top: size.height * .065625,
               right: size.width * .044,
               left: size.width * .0444),
           child: Column(children: [

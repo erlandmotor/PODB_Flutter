@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/page/transaction/categoryhome.dart';
+import 'package:ppodb_2/page/product/categoryhome.dart';
 // ignore: unused_import
-import 'package:ppodb_2/page/transaction/detail_product.dart';
+import 'package:ppodb_2/page/product/detail_product.dart';
 
 class SuccesPage extends StatefulWidget {
   const SuccesPage({super.key});

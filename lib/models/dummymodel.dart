@@ -158,3 +158,10 @@ class KirimanKonfirm {
     required this.nomor,
   });
 }
+
+class Dummylangganan {
+  int id;
+  String name;
+  int nomor;
+  Dummylangganan({required this.id, required this.name, required this.nomor});
+}
