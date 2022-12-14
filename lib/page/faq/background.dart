@@ -17,7 +17,7 @@ class BackgroundFaq extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         title: Text(
-          "Riwayat Transaksi",
+          "FAQ",
           selectionColor: Color(0xff5C5D61),
         ),
         centerTitle: true,

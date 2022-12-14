@@ -3,21 +3,28 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ppodb_2/page/akun/reset_password.dart';
+import 'package:ppodb_2/page/main_page/main_page.dart';
 import 'package:ppodb_2/page/widgets/alert.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart' as color;
+import 'package:ppodb_2/service/database/myCuan_Api.dart';
 import 'package:ppodb_2/shared/shared.dart';
 import 'package:ppodb_2/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
 class EditPassword extends StatefulWidget {
-  const EditPassword({super.key});
+  const EditPassword({super.key,});
 
   @override
   State<EditPassword> createState() => _EditPasswordState();
 }
 
 class _EditPasswordState extends State<EditPassword> {
-  final formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
+  final _pastPassController = TextEditingController();
+   final _katasandiController = TextEditingController();
+    final _katasandibaruController = TextEditingController();
+  
+
   @override
   Widget build(BuildContext context) {
      Future showAlertDialog(
@@ -41,7 +48,12 @@ class _EditPasswordState extends State<EditPassword> {
           colorButton: color,
           gambar: gambar,
           onClicked: () async {
-           
+           final passUpdate =await MyCuanAPI().updatePassowrd(_pastPassController.text, _katasandibaruController.text);
+            print(passUpdate);
+            Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => MainPage(),
+                                  )
+                                  );
             // if (_postProses == "berhasil") {
             //   Get.offAll(const SuratJalanView());
             // }
@@ -53,10 +65,7 @@ class _EditPasswordState extends State<EditPassword> {
      
      double heightt = MediaQuery.of(context).size.height;
    double widthh = MediaQuery.of(context).size.width;
-    final _namalengkapController = TextEditingController();
-     final _emailController = TextEditingController();
-  final _nomortelponController = TextEditingController();
-   final _katasandiController = TextEditingController();
+    
    final provider = Provider.of<AuthViewModel>(context, listen: false);
     final providerKonfirmasi = Provider.of<AuthViewModel>(context);
     return Scaffold(
@@ -98,7 +107,7 @@ class _EditPasswordState extends State<EditPassword> {
                         ),
                         TextFormField(
                             
-                            controller: _namalengkapController,
+                            controller: _pastPassController,
                             validator: (value) {
                               //final nameRegExp = new RegExp(r"^\s([A-Za-z]{1,}([.,] |[-']| ))+[A-Za-z]+.?\s$");
                               if (value!.isEmpty) {
@@ -112,7 +121,7 @@ class _EditPasswordState extends State<EditPassword> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               hintText: "Kata Sandi",
-                              labelText: "Kata Sandi",
+                              // labelText: "Kata Sandi",
                               prefixIcon: Padding(
                                 padding: EdgeInsets.all( heightt*12/800),
                                 child: Image.asset("assets/icon/lock.png",
@@ -148,7 +157,7 @@ class _EditPasswordState extends State<EditPassword> {
               ),
               TextFormField(
                   obscureText: providerKonfirmasi.passVissible,
-                  controller: _katasandiController,
+                  controller: _katasandibaruController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Sandi salah";

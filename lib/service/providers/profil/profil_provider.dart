@@ -55,6 +55,24 @@ class ProfilProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+  void updatePassword(String newPass, String oldPass,
+       ) async {
+    try {
+      final result = await MyCuanAPI()
+      .updatePassowrd(oldPass, newPass);
+          _isNext = "berhasil";
+      
+      DataProfil profilupdate = DataProfil();     
+      profil = profilupdate;
+      print("dijalankan");
+      print(result);
+      
+    } catch (e) {
+      
+     _isNext = "gagal"; 
+    }
+    notifyListeners();
+  }
 
   void updateGambar(File gambar,
        ) async {

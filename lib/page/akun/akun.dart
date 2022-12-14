@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ppodb_2/page/akun/background.dart';
 import 'package:ppodb_2/page/akun/edit_data_akun.dart';
 import 'package:ppodb_2/page/akun/edit_password.dart';
+import 'package:ppodb_2/page/akun/syarat_dan_ketentuan/syarat_dan_ketentuan.dart';
 import 'package:ppodb_2/page/login_register/login_page.dart';
 import 'package:ppodb_2/page/login_register/register1_page.dart';
 import 'package:ppodb_2/page/widgets/alert.dart';
@@ -230,7 +231,30 @@ class _ProfilState extends State<Profil> {
                             children: [
                               Consumer<ProfilProvider>(
                                 builder: (context, provider, _) {
+                                  switch (provider.myState) {
+                                    case MyState.loading:
+                                      return Container(
+                                height: heightt * 80 / 800,
+                                width: widthh * 80 / 360,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(400),
+                                    image: DecorationImage(
+                                      image: AssetImage("assets/icon/person.png")
+                                    )),
+                              );
+                              case MyState.loaded:
+                              if(provider.profil!.data!.image == null){
                                   return Container(
+                                height: heightt * 80 / 800,
+                                width: widthh * 80 / 360,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(400),
+                                    image: DecorationImage(
+                                      image: AssetImage("assets/icon/person.png")
+                                    )),
+                              );
+                              }else{
+                                 return Container(
                                   height: heightt * 80 / 800,
                                   width: widthh * 80 / 360,
                                   decoration: BoxDecoration(
@@ -241,6 +265,22 @@ class _ProfilState extends State<Profil> {
                                         ),
                                       )),
                                 );
+                              }
+                                case MyState.failed:
+                                      return Container(
+                                height: heightt * 80 / 800,
+                                width: widthh * 80 / 360,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(400),
+                                    image: DecorationImage(
+                                      image: AssetImage("assets/icon/person.png")
+                                    )),
+                              );
+                              
+                                default:
+                            return CircularProgressIndicator();
+                                  }
+                                 
                                 },
                                 
                               ),
@@ -680,47 +720,13 @@ class _ProfilState extends State<Profil> {
                                               
                                             ),
                                             ListTile(
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 30, right: 30),
-                                              leading: ShaderMask(
-                                                  shaderCallback: (Rect bounds) {
-                                                    return const LinearGradient(
-                                                      begin: Alignment.centerLeft,
-                                                      end: Alignment.centerRight,
-                                                      colors: <Color>[
-                                                        primaryColor,
-                                                        secondaryColor,
-                                                      ],
-                                                      tileMode: TileMode.mirror,
-                                                    ).createShader(bounds);
-                                                  },
-                                                  child: Container(
-                                                    width: 24,
-                                                    height: 24,
-                                                    decoration: BoxDecoration(
-                                                        image: DecorationImage(
-                                                            image: AssetImage(
-                                                                "assets/icon/lock.png"))),
-                                                  )),
-                                              title: Transform.translate(
-                                                offset: const Offset(-20, 0),
-                                                child: const Text(
-                                                  "Ubah Kata Sandi",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 16),
-                                                ),
-                                              ),
-                                              trailing: Transform.translate(
-                                                offset: const Offset(-12, 0),
-                                                child: ShaderMask(
-                                                    shaderCallback:
-                                                        (Rect bounds) {
+                                                contentPadding: EdgeInsets.only(
+                                                    left: 30, right: 30),
+                                                leading: ShaderMask(
+                                                    shaderCallback: (Rect bounds) {
                                                       return const LinearGradient(
-                                                        begin:
-                                                            Alignment.centerLeft,
-                                                        end:
-                                                            Alignment.centerRight,
+                                                        begin: Alignment.centerLeft,
+                                                        end: Alignment.centerRight,
                                                         colors: <Color>[
                                                           primaryColor,
                                                           secondaryColor,
@@ -734,17 +740,55 @@ class _ProfilState extends State<Profil> {
                                                       decoration: BoxDecoration(
                                                           image: DecorationImage(
                                                               image: AssetImage(
-                                                                  "assets/icon/kanan.png"))),
+                                                                  "assets/icon/lock.png"))),
                                                     )),
+                                                title: Transform.translate(
+                                                  offset: const Offset(-20, 0),
+                                                  child: const Text(
+                                                    "Ubah Kata Sandi",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 16),
+                                                  ),
+                                                ),
+                                                trailing: Transform.translate(
+                                                  offset: const Offset(-12, 0),
+                                                  child: ShaderMask(
+                                                      shaderCallback:
+                                                          (Rect bounds) {
+                                                        return const LinearGradient(
+                                                          begin:
+                                                              Alignment.centerLeft,
+                                                          end:
+                                                              Alignment.centerRight,
+                                                          colors: <Color>[
+                                                            primaryColor,
+                                                            secondaryColor,
+                                                          ],
+                                                          tileMode: TileMode.mirror,
+                                                        ).createShader(bounds);
+                                                      },
+                                                      child: Container(
+                                                        width: 24,
+                                                        height: 24,
+                                                        decoration: BoxDecoration(
+                                                            image: DecorationImage(
+                                                                image: AssetImage(
+                                                                    "assets/icon/kanan.png"))),
+                                                      )),
+                                                ),
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: ((context) =>
+                                                              EditPassword(
+                                                                
+                                                              ))));
+                                                },
                                               ),
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: ((context) =>
-                                                            EditPassword())));
-                                              },
-                                            ),
+                                              
+                                            
                                             Padding(
                                               padding: EdgeInsets.only(
                                                   left: widthh * 16 / 360,
@@ -905,7 +949,9 @@ class _ProfilState extends State<Profil> {
                                                                         "assets/icon/kanan.png"))),
                                                           )),
                                                     ),
-                                                    onTap: () {},
+                                                    onTap: () {
+                                                        Navigator.push(context, MaterialPageRoute(builder: ((context) => SyaratKetentuan())));
+                                                    },
                                                   ),
                                                   Consumer<AuthViewModel>(
                                                     builder: (context, provider, _) {

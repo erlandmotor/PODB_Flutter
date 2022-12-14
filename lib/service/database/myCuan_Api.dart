@@ -142,6 +142,36 @@ final String token = prefs.getString('token') ?? "";
       rethrow;
     }
   }
+  Future updatePassowrd(String oldPass, String newPass   ) async {
+    final prefs = await SharedPreferences.getInstance();
+final String token = prefs.getString('token') ?? "";
+    try {
+      final response = await _dio.put('/user/password', 
+           options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization":
+                "Bearer $token",
+          }) ,         
+          data: {            
+            "new_password":newPass, 
+            "old_password":oldPass, 
+            });
+            
+         
+          _isNext = "berhasil";
+          
+        return response.data;
+         
+        
+        
+      
+    } on DioError catch (e) {
+      print(e.response!.data['message']);
+      print('data bermasalah');
+       _isNext = "gagal";
+      rethrow;
+    }
+  }
   Future getToken(String email, String password) async {
     try {
       final response = await _dio
