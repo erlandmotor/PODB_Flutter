@@ -21,6 +21,7 @@ import 'package:ppodb_2/page/widgets/textIconMenu.dart';
 import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
 import 'package:ppodb_2/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profil extends StatefulWidget {
   const Profil({super.key});
@@ -82,6 +83,11 @@ class _ProfilState extends State<Profil> {
               colorButton: color,
               gambar: gambar,
               onClicked: () async {
+                final prefs = await SharedPreferences.getInstance();
+                final String token = prefs.getString('token') ?? "";
+                prefs.remove("token");
+                prefs.setBool("login", false);
+                 Navigator.push(context, MaterialPageRoute(builder: ((context) => LoginPage())));
                 // if (_postProses == "berhasil") {
                 //   Get.offAll(const SuratJalanView());
                 // }
@@ -107,6 +113,7 @@ class _ProfilState extends State<Profil> {
               colorButton: color,
               gambar: gambar,
               onClicked: () async {
+                 
                 // if (_postProses == "berhasil") {
                 //   Get.offAll(const SuratJalanView());
                 // }
@@ -1033,7 +1040,7 @@ class _ProfilState extends State<Profil> {
                                                             "Iya",
                                                             "assets/icon/amico.png");
                                                       },
-                                                       //Navigator.push(context, MaterialPageRoute(builder: ((context) => Register1Page())));
+                                                      
                                                     );
                                                     },
                                                     

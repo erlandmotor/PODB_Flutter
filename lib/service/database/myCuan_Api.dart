@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ppodb_2/models/profil/list_profil.dart';
 import 'package:ppodb_2/models/register_model.dart';
+import 'package:ppodb_2/models/riwayat/rmodel_riwayat.dart';
 
 import 'package:ppodb_2/page/akun/akun.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -68,6 +69,31 @@ final String token = prefs.getString('token') ?? "";
          _isNext = "berhasil";
           DataProfil dataProfil = DataProfil.fromJson(response.data);
         return dataProfil;
+      
+    } on DioError catch (e) {
+      print(e.response!.data['message']);
+      print('data bermasalah');
+       _isNext = "gagal";
+      rethrow;
+    }
+  }
+   Future<RiwayatData> getHistory() async {
+    final prefs = await SharedPreferences.getInstance();
+final String token = prefs.getString('token') ?? "";
+    try {
+      final response = await _dio
+          .get('/users/transactions/history',
+           options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization":
+                "Bearer $token",
+          })
+          );
+         print(response.data);
+      print(response.statusCode);
+         _isNext = "berhasil";
+          RiwayatData datariwayat = RiwayatData.fromJson(response.data);
+        return datariwayat;
       
     } on DioError catch (e) {
       print(e.response!.data['message']);

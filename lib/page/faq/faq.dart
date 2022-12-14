@@ -24,6 +24,8 @@ import 'package:ppodb_2/page/widgets/box_search.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart';
 import 'package:ppodb_2/page/widgets/rating.dart';
 import 'package:ppodb_2/page/widgets/textIconMenu.dart';
+import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
+import 'package:provider/provider.dart';
 
 class FAQ extends StatefulWidget {
   const FAQ({super.key});
@@ -51,6 +53,16 @@ class _FAQState extends State<FAQ> {
   @override
   void initState() {
     _pageController = PageController(viewportFraction: 0.8, initialPage: 1);
+    Future.delayed(
+      Duration.zero,
+      () {
+        final _provider = Provider.of<ProfilProvider>(context, listen: false);
+
+        /// Fetch users data
+        _provider.fetchProfil();
+     
+      },
+    );
     super.initState();
   }
 
@@ -75,29 +87,34 @@ class _FAQState extends State<FAQ> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                 
-                  Padding(
-                   padding:  EdgeInsets.only(left: widthh*16/360,right: widthh*16/360),
-                    child: Container(
-                      height: heightt*71/800,
-                      width: widthh*271/360,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Halo "+nama,
-                          style: GoogleFonts.inter(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white
-                          ),),
-                          Text("ada yang bisa dibantu?",
-                          style: GoogleFonts.inter(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white
-                          )),
-                        ],
-                      )),
+                  Consumer<ProfilProvider>(
+                    builder: (context, provider, _) {
+                      return Padding(
+                     padding:  EdgeInsets.only(left: widthh*16/360,right: widthh*16/360),
+                      child: Container(
+                        height: heightt*71/800,
+                        width: widthh*271/360,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Halo "+provider.profil!.data!.name.toString(),
+                            style: GoogleFonts.inter(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white
+                            ),),
+                            Text("ada yang bisa dibantu?",
+                            style: GoogleFonts.inter(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white
+                            )),
+                          ],
+                        )),
+                    );
+                    },
+                    
                   ),
                    Padding(
                    padding:  EdgeInsets.only(left: widthh*16/360,right: widthh*16/360),
