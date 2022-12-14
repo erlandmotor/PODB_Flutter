@@ -89,7 +89,7 @@ class AlertRating extends StatelessWidget {
                 direction: Axis.horizontal,
                 allowHalfRating: true,
                 itemCount: 5,
-                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                itemPadding: EdgeInsets.symmetric(horizontal:widthh* 4/360),
                 itemBuilder: (context, _) => Icon(
                   Icons.star,
                   color: Colors.amber,

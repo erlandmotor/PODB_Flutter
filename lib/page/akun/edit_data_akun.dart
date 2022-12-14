@@ -69,8 +69,7 @@ class _EditAkunState extends State<EditAkun> {
              
               final users =await MyCuanAPI().updateUser(_namalengkapController.text, _nomortelponController.text, _emailController.text);
                final gambars = await MyCuanAPI().updateGambar(display);
-             print(users);
-              print(gambars);
+           
                  Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => MainPage(),
                                   )

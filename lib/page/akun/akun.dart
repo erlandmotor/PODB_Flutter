@@ -896,7 +896,7 @@ class _ProfilState extends State<Profil> {
                         ),
                         child: Container(
                           width: double.infinity,
-                          height: heightt * 90 / 800,
+                          height: heightt * 100 / 800,
                           child: GridView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             padding: EdgeInsets.only(
@@ -1276,7 +1276,7 @@ class _ProfilState extends State<Profil> {
                                                     onTap: () {
                                                       showAlertDialog2(
                                                           primaryColor,
-                                                          "Apakah Kamu Yakin Ingin Keluar?",
+                                                          "Berikan Rating Mu",
                                                           "assets/icon/cuate2.png");
                                                     },
                                                   ),
