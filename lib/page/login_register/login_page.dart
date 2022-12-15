@@ -2,7 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:ppodb_2/page/home/home.dart';
+import 'package:ppodb_2/page/home.dart';
 import 'package:ppodb_2/page/login_register/register1_page.dart';
 import 'package:ppodb_2/page/login_register/welcome_page.dart';
 import 'package:ppodb_2/page/main_page/main_page.dart';
@@ -24,6 +24,20 @@ class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _katasandiController = TextEditingController();
+
+  // @override
+  // void initState() {
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //      if(Provider.of<AuthViewModel>(context, listen: false).data1 != null){
+  //     _emailController.text = Provider.of<AuthViewModel>(context).data1.email;
+  //   }
+  //   if(Provider.of<AuthViewModel>(context, listen: false).data2 != null){
+  //     _katasandiController.text = Provider.of<AuthViewModel>(context).data2.katasandi;
+  //   }
+  //   });
+
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +146,9 @@ class _LoginPageState extends State<LoginPage> {
                         final users = LoginModel(
                             email: _emailController.text,
                             katasandi: _katasandiController.text);
-                            Provider.of<AuthViewModel>(context, listen: false).getToken( _emailController.text, _katasandiController.text);
+                        Provider.of<AuthViewModel>(context, listen: false)
+                            .getToken(_emailController.text,
+                                _katasandiController.text);
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => MainPage(),
                         ));

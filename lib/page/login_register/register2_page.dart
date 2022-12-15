@@ -21,16 +21,151 @@ class _Register2PageState extends State<Register2Page> {
   final _katasandiController = TextEditingController();
   final _konfirmasiController = TextEditingController();
 
-  // bool is8Digit = false;
-  // bool isHurufKecil = false;
-  // bool isHurufKapital = false;
-  // bool isAngka = false;
-
   String _simpanData = '';
+
+  void tampilkanBottom(String errorText) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(40),
+              topLeft: Radius.circular(40),
+            ),
+          ),
+          height: 300,
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 5,
+                ),
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset(
+                      "assets/Indikator.png",
+                    ),
+                  ),
+                ),
+                Image.asset("assets/pop_up_email.png"),
+                
+                Text(
+                  "${errorText} ",
+                  style: blackTextStyle.copyWith(fontSize: 20),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  "Email ini sudah terdaftar di MyCuan, kamu \nbisa menggunakan email ini untuk masuk",
+                  style: dengerTextStyle.copyWith(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    'Masuk ke Akun MyCuan',
+                    style: whiteTextStyle.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: whiteColor),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void tampilkanBottom2(String errorText) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          decoration: BoxDecoration(
+            // color: Colors.transparent,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(40),
+              topLeft: Radius.circular(40),
+            ),
+          ),
+          height: 350,
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 5,
+                ),
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset(
+                      "assets/Indikator.png",
+                    ),
+                  ),
+                ),
+                Image.asset("assets/pop_up_number.png"),
+                Text(
+                  "${errorText} ",
+                  style: blackTextStyle.copyWith(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  "Nomor handphone sudah terdaftar di \nMyCuan, kamu bisa menggunakan email ini \nuntuk masuk",
+                  style: dengerTextStyle.copyWith(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    'Masuk ke Akun MyCuan',
+                    style: whiteTextStyle.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: whiteColor),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<AuthViewModel>(context,listen: false);
+    final provider = Provider.of<AuthViewModel>(context, listen: false);
     final providerKonfirmasi = Provider.of<AuthViewModel>(context);
     var Size = MediaQuery.of(context).size;
 
@@ -97,7 +232,7 @@ class _Register2PageState extends State<Register2Page> {
                       height: Size.height * 0.00625,
                     ),
                     TextFormField(
-                      obscureText: providerKonfirmasi.passVissible,
+                        obscureText: providerKonfirmasi.passVissible,
                         controller: _katasandiController,
                         validator: (value) {
                           final karakterRegExp = new RegExp(r'^.{8,}$');
@@ -108,35 +243,32 @@ class _Register2PageState extends State<Register2Page> {
                             provider.setIfValueEmpty();
                             return "Harus diisi";
                           } else {
-                            
                             provider.setIfValueNotEmpty();
                             if (!karakterRegExp.hasMatch(value)) {
                               provider.setIf8DigitNotMatch();
-                              // return 'harus 8 karakter';
                             }
                             if (!hurufkecilRegExp.hasMatch(value)) {
-                             provider.setIfHurufKecilNotMatch();
-                              // return 'harus ada huruf kecil';
+                              provider.setIfHurufKecilNotMatch();
                             }
                             if (!kapitalRegExp.hasMatch(value)) {
                               provider.setIfHurufKapitalNotMatch();
-                              // return 'harus ada huruf kapital';
                             }
                             if (!angkaRegExp.hasMatch(value)) {
                               provider.setIfAngkaNotMatch();
-
-                              // return 'harus ada angka';
                             }
                           }
                           _simpanData = value;
                           print(value);
                         },
                         decoration: InputDecoration(
-                          suffixIcon: IconButton(icon: Icon(
-                            providerKonfirmasi.passVissible?
-                            Icons.visibility_off:Icons.visibility),onPressed: () {
-                            provider.setPassVissible();
-                          },),
+                          suffixIcon: IconButton(
+                            icon: Icon(providerKonfirmasi.passVissible
+                                ? Icons.visibility_off
+                                : Icons.visibility),
+                            onPressed: () {
+                              provider.setPassVissible();
+                            },
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -154,7 +286,7 @@ class _Register2PageState extends State<Register2Page> {
                       height: Size.height * 0.00625,
                     ),
                     TextFormField(
-                       obscureText: providerKonfirmasi.passVissible2,
+                        obscureText: providerKonfirmasi.passVissible2,
                         controller: _konfirmasiController,
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -164,11 +296,14 @@ class _Register2PageState extends State<Register2Page> {
                           }
                         },
                         decoration: InputDecoration(
-                           suffixIcon: IconButton(icon: Icon(
-                            providerKonfirmasi.passVissible2?
-                            Icons.visibility_off:Icons.visibility),onPressed: () {
-                            provider.setPassVissible2();
-                          },),
+                          suffixIcon: IconButton(
+                            icon: Icon(providerKonfirmasi.passVissible2
+                                ? Icons.visibility_off
+                                : Icons.visibility),
+                            onPressed: () {
+                              provider.setPassVissible2();
+                            },
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -184,7 +319,9 @@ class _Register2PageState extends State<Register2Page> {
                         Column(
                           children: [
                             Badge(
-                              badgeColor: providerKonfirmasi.is8Digit ? Colors.green : Colors.red,
+                              badgeColor: providerKonfirmasi.is8Digit
+                                  ? Colors.green
+                                  : Colors.red,
                               badgeContent: providerKonfirmasi.is8Digit
                                   ? Icon(
                                       Icons.check_outlined,
@@ -203,8 +340,9 @@ class _Register2PageState extends State<Register2Page> {
                         Column(
                           children: [
                             Badge(
-                              badgeColor:
-                                  providerKonfirmasi.isHurufKecil ? Colors.green : Colors.red,
+                              badgeColor: providerKonfirmasi.isHurufKecil
+                                  ? Colors.green
+                                  : Colors.red,
                               badgeContent: providerKonfirmasi.isHurufKecil
                                   ? Icon(
                                       Icons.check_outlined,
@@ -223,8 +361,9 @@ class _Register2PageState extends State<Register2Page> {
                         Column(
                           children: [
                             Badge(
-                              badgeColor:
-                                  providerKonfirmasi.isHurufKapital ? Colors.green : Colors.red,
+                              badgeColor: providerKonfirmasi.isHurufKapital
+                                  ? Colors.green
+                                  : Colors.red,
                               badgeContent: providerKonfirmasi.isHurufKapital
                                   ? Icon(
                                       Icons.check_outlined,
@@ -243,7 +382,9 @@ class _Register2PageState extends State<Register2Page> {
                         Column(
                           children: [
                             Badge(
-                              badgeColor: providerKonfirmasi.isAngka ? Colors.green : Colors.red,
+                              badgeColor: providerKonfirmasi.isAngka
+                                  ? Colors.green
+                                  : Colors.red,
                               badgeContent: providerKonfirmasi.isAngka
                                   ? Icon(
                                       Icons.check_outlined,
@@ -268,18 +409,41 @@ class _Register2PageState extends State<Register2Page> {
                       height: Size.height * 0.06,
                       width: Size.width * 0.911,
                       child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             final isValidForm =
                                 formKey.currentState!.validate();
                             if (isValidForm) {
                               final users = Register2Model(
                                 katasandi: _katasandiController.text,
                                 konfirmasi: _konfirmasiController.text,
-                              ); 
-                              Provider.of<AuthViewModel>(context, listen: false).getAllRegister(widget.register1model.namalengkap, widget.register1model.nomortelpon, widget.register1model.email, _katasandiController.text,"");
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LoginPage(),
-                              ));
+                              );
+                              Provider.of<AuthViewModel>(context, listen: false)
+                                  .getAllRegister(
+                                      widget.register1model.namalengkap,
+                                      widget.register1model.nomortelpon,
+                                      widget.register1model.email,
+                                      _katasandiController.text,
+                                      "");
+
+                              await Future.delayed(const Duration(seconds: 1));
+                              if (providerKonfirmasi.isNext == "berhasil") {
+                                if (!mounted) return;
+                                Provider.of<AuthViewModel>(context,
+                                        listen: false)
+                                    .saveData2(users);
+
+                                // print("pindah halaman");
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => LoginPage(),
+                                ));
+                              }
+                              if (providerKonfirmasi.isNext == "email") {
+                                tampilkanBottom("Email sudah terdaftar");
+                              }
+                              if (providerKonfirmasi.isNext == "number") {
+                                tampilkanBottom2(
+                                    "Nomor handphone \nsudah terdaftar");
+                              }
                             }
                           },
                           child: Text(
