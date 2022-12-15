@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ppodb_2/page/widgets/isisaldo.dart';
 
 import '../../models/dummymodel.dart';
 import '../transaction/pembayaran.dart';
@@ -14,6 +15,21 @@ class Listrik_Pln_screen extends StatefulWidget {
 
 class _Listrik_Pln_screenState extends State<Listrik_Pln_screen> {
   TextEditingController bambang = TextEditingController();
+  List<PelangganListrik> fafa = [
+    PelangganListrik(
+        id: 1,
+        name: "Arya Fajar",
+        nomorpelanggan: 123456789101,
+        periode: "December 2022",
+        tagihan: 21150000),
+    PelangganListrik(
+        id: 2,
+        name: "malika",
+        nomorpelanggan: 522540682236,
+        periode: "Desmber 2022",
+        tagihan: 58000)
+  ];
+  late PelangganListrik listrik;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -21,7 +37,7 @@ class _Listrik_Pln_screenState extends State<Listrik_Pln_screen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Listrik PLN",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -53,7 +69,7 @@ class _Listrik_Pln_screenState extends State<Listrik_Pln_screen> {
               ),
               Container(
                 alignment: Alignment.topLeft,
-                child: Text.rich(
+                child: const Text.rich(
                     textAlign: TextAlign.left,
                     TextSpan(
                         text: "Nomor Meter/ID Pelanggan",
@@ -75,12 +91,12 @@ class _Listrik_Pln_screenState extends State<Listrik_Pln_screen> {
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: bambang.text.isEmpty
                         ? InputDecoration(
-                            prefixIcon: Icon(Icons.offline_bolt),
+                            prefixIcon: const Icon(Icons.offline_bolt),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             hintText: "0853xxxxxxxx")
                         : InputDecoration(
-                            prefixIcon: Padding(
+                            prefixIcon: const Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Icon(Icons.offline_bolt)),
                             suffixIcon: IconButton(
@@ -89,7 +105,7 @@ class _Listrik_Pln_screenState extends State<Listrik_Pln_screen> {
                                     bambang.clear();
                                   });
                                 },
-                                icon: Icon(Icons.cancel)),
+                                icon: const Icon(Icons.cancel)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10)),
                           ),
@@ -106,25 +122,25 @@ class _Listrik_Pln_screenState extends State<Listrik_Pln_screen> {
                 child: Text.rich(
                     textAlign: TextAlign.left,
                     TextSpan(
-                        text: bambang.text.length == 0
+                        text: bambang.text.isEmpty
                             ? "Silahkan masukkan nomor pelanggan anda"
                             : bambang.text.length < 10 ||
                                     bambang.text.length > 13
                                 ? "Silahkan masukkan nomor yang valid"
-                                : "Silahkan lanjutkan ke pembayaran",
+                                : "",
                         style: bambang.text.isEmpty
-                            ? TextStyle(
+                            ? const TextStyle(
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xff5C5D61),
                                 fontSize: 12,
                               )
                             : bambang.text.length < 10 ||
                                     bambang.text.length > 13
-                                ? TextStyle(
+                                ? const TextStyle(
                                     fontWeight: FontWeight.w800,
                                     color: Colors.red,
                                     fontSize: 12)
-                                : TextStyle(
+                                : const TextStyle(
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xff5C5D61),
                                     fontSize: 12,
@@ -139,8 +155,8 @@ class _Listrik_Pln_screenState extends State<Listrik_Pln_screen> {
               padding: EdgeInsets.only(
                   left: size.width * .044,
                   right: size.width * .044,
-                  bottom: size.height * .025),
-              child: bambang.text.length > 10 && bambang.text.length < 14
+                  bottom: size.height * .1),
+              child: bambang.text.length > 9 && bambang.text.length < 14
                   ? Container(
                       alignment: Alignment.bottomCenter,
                       child: SizedBox(
@@ -148,27 +164,66 @@ class _Listrik_Pln_screenState extends State<Listrik_Pln_screen> {
                         height: size.height * .06,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xff0D40C6),
-                              shape: StadiumBorder()),
+                              backgroundColor: const Color(0xff0D40C6),
+                              shape: const StadiumBorder()),
                           onPressed: () {
-                            if (bambang.text.length > 10 &&
-                                bambang.text.length < 13 &&
-                                bambang.text[0] == "0") {
-                              // final DummyTransTelekom kiriman =
-                              //     DummyTransTelekom(
-                              //         biayaadmin: 0,
-                              //         harga: harga,
-                              //         nama: status,
-                              //         nomor: int.parse(bambang.text),
-                              //         provider: providers);
+                            for (int i = 0; i < fafa.length; i++) {
+                              if (fafa[i].nomorpelanggan ==
+                                  int.parse(bambang.text)) {
+                                listrik = fafa[i];
+                              }
+                            }
+                            var contain = fafa.indexWhere((element) =>
+                                element.nomorpelanggan ==
+                                int.parse(bambang.text));
+                            if (contain >= 0) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Pembayaranscreen()),
+                                    builder: (context) => Pembayaranscreen(
+                                          terima: KirimanKonfirm(
+                                              tipe: widget.tipe,
+                                              biayaadmin: 2500,
+                                              nomor: int.parse(bambang.text)),
+                                          listrik: listrik,
+                                        )),
                               );
+                            } else {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      content: SingleChildScrollView(
+                                        child: Column(
+                                          children: <Widget>[
+                                            Image.asset(
+                                              "assets/image/Penasaran 2.png",
+                                              height: size.height * .15,
+                                              width: size.width * .416,
+                                            ),
+                                            const Text(
+                                                'yhaa. kode tidak ditemukan nih'),
+                                            const Text(
+                                                'coba deh perhatiin lagi'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('Oke'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  });
                             }
                           },
-                          child: Text.rich(
+                          child: const Text.rich(
                             TextSpan(
                               text: "Lanjutkan",
                             ),

@@ -11,7 +11,7 @@ class Isisaldo extends StatefulWidget {
 
 class _IsisaldoState extends State<Isisaldo> {
   List<Dummymethod> pembayaran = [
-    Dummymethod(id: 1, name: "Dana", gambar: "assets/image/dana.png"),
+    Dummymethod(id: 1, name: "DANA", gambar: "assets/image/dana.png"),
     Dummymethod(id: 2, name: "Gopay", gambar: "assets/image/gopay.png"),
     Dummymethod(id: 3, name: "OVO", gambar: "assets/image/ovo.png"),
     Dummymethod(id: 4, name: "LinkAja", gambar: "assets/image/LinkAja.png"),
@@ -25,7 +25,7 @@ class _IsisaldoState extends State<Isisaldo> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Isi Saldo",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -41,7 +41,7 @@ class _IsisaldoState extends State<Isisaldo> {
             right: size.width * .0444),
         child: Column(
           children: [
-            Align(
+            const Align(
               alignment: Alignment.topLeft,
               child: Text.rich(
                   textAlign: TextAlign.left,
@@ -73,7 +73,7 @@ class _IsisaldoState extends State<Isisaldo> {
                       width: 24,
                       height: 24,
                     ),
-                    trailing: Icon(
+                    trailing: const Icon(
                       Icons.navigate_next_rounded,
                       color: Colors.black,
                     ),
@@ -81,14 +81,14 @@ class _IsisaldoState extends State<Isisaldo> {
                         textAlign: TextAlign.left,
                         TextSpan(
                             text: pembayaran[index].name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 14,
                             ))),
                   );
                 }),
                 separatorBuilder: ((context, index) {
-                  return Divider();
+                  return const Divider();
                 }),
                 itemCount: pembayaran.length)
           ],

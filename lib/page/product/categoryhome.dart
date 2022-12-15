@@ -48,7 +48,7 @@ class _CategoryProductState extends State<CategoryProduct> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Kategori",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -97,7 +97,7 @@ class _CategoryProductState extends State<CategoryProduct> {
                                       textAlign: TextAlign.left,
                                       TextSpan(
                                           text: prod[i].name,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Color(0xff5C5D61),
                                             fontWeight: FontWeight.w500,
                                             fontSize: 16,
@@ -128,7 +128,7 @@ class _CategoryProductState extends State<CategoryProduct> {
                                     textAlign: TextAlign.left,
                                     TextSpan(
                                         text: prod[i].name,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
                                           fontSize: 16,
@@ -182,7 +182,7 @@ class _CategoryProductState extends State<CategoryProduct> {
                                               textAlign: TextAlign.center,
                                               TextSpan(
                                                   text: prod[i].pro[index].name,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                     fontSize: 10,
                                                   ))),
@@ -206,7 +206,7 @@ class _CategoryProductState extends State<CategoryProduct> {
                                         textAlign: TextAlign.left,
                                         TextSpan(
                                             text: prod[i].name,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w600,
                                               fontSize: 16,
@@ -265,7 +265,7 @@ class _CategoryProductState extends State<CategoryProduct> {
                                                       text: prod[i]
                                                           .pro[index]
                                                           .name,
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         fontSize: 10,

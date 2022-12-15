@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:ppodb_2/page/transaction/vouchertele.dart';
 import 'package:ppodb_2/page/widgets/checkstatus.dart';
+import 'package:ppodb_2/page/widgets/qrCode.dart';
 
 class PembayranTelekScreen extends StatefulWidget {
   DummyTransTelekom trans;
@@ -15,10 +18,11 @@ class PembayranTelekScreen extends StatefulWidget {
 
 class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
   String status = "";
-  String gopay = "GOPAY";
+  String gopay = "Gopay";
   String saldo = "Mycuan saldo";
   String dana = "DANA";
-
+  String gambar = "";
+  late int total;
   late DummyVoucher vou;
   TextEditingController nomor = TextEditingController();
   TextEditingController voucher = TextEditingController();
@@ -29,9 +33,9 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
     return Scaffold(
       extendBody: true,
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xfff2f3f6),
+      backgroundColor: const Color(0xfff2f3f6),
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Pembayaran",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -61,7 +65,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                             textAlign: TextAlign.left,
                             TextSpan(
                                 text: checkprovider(nomor.text),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                 ))),
@@ -72,7 +76,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                       TextField(
                         decoration: InputDecoration(
                           prefixIcon: Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: Image.asset(
                               checkPicprovider(nomor.text),
                               width: size.width * .024,
@@ -108,7 +112,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                         ),
                         Container(
                           alignment: Alignment.topLeft,
-                          child: Text.rich(
+                          child: const Text.rich(
                               textAlign: TextAlign.left,
                               TextSpan(
                                   text: "Voucher",
@@ -137,7 +141,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                           readOnly: true,
                           decoration: InputDecoration(
                               suffixIcon: IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.navigate_next,
                                   color: Color(0xffFF9D0B),
                                 ),
@@ -155,7 +159,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                 },
                               ),
                               prefixIcon: Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Image.asset(
                                   "assets/image/mdi_voucher.png",
                                   width: size.width * .02,
@@ -184,7 +188,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                         ),
                         Container(
                           alignment: Alignment.topLeft,
-                          child: Text.rich(
+                          child: const Text.rich(
                               textAlign: TextAlign.left,
                               TextSpan(
                                   text: "Detail Transaksi",
@@ -206,7 +210,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                           child: Column(
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.all(12.0),
                                 child: Column(
                                   children: [
                                     Align(
@@ -218,8 +222,8 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                             TextSpan(
                                                 text: widget.trans.type == 1
                                                     ? "${checkprovider(nomor.text)} ${widget.trans.nama}"
-                                                    : "${widget.trans.nama}",
-                                                style: TextStyle(
+                                                    : widget.trans.nama,
+                                                style: const TextStyle(
                                                   fontWeight: FontWeight.w700,
                                                   fontSize: 14,
                                                 ))),
@@ -232,16 +236,19 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text.rich(TextSpan(
+                                        const Text.rich(TextSpan(
                                             text: "Harga",
                                             style: TextStyle(
                                               fontWeight: FontWeight.w400,
                                               fontSize: 14,
                                             ))),
                                         Text.rich(TextSpan(
-                                            text:
-                                                "${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(widget.trans.harga)}",
-                                            style: TextStyle(
+                                            text: NumberFormat.currency(
+                                                    locale: 'id',
+                                                    symbol: 'Rp',
+                                                    decimalDigits: 0)
+                                                .format(widget.trans.harga),
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.w700,
                                               fontSize: 14,
                                             ))),
@@ -250,7 +257,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                     SizedBox(
                                       height: size.height * .02,
                                     ),
-                                    Divider(
+                                    const Divider(
                                       color: Color(0xffD9DCE3),
                                       thickness: 1,
                                     ),
@@ -261,7 +268,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text.rich(TextSpan(
+                                        const Text.rich(TextSpan(
                                             text: "Biaya admin",
                                             style: TextStyle(
                                               fontWeight: FontWeight.w400,
@@ -271,7 +278,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                             text: widget.trans.biayaadmin == 0
                                                 ? "Gratis !"
                                                 : "${widget.trans.biayaadmin}",
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.w700,
                                               fontSize: 14,
                                             ))),
@@ -288,7 +295,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Text.rich(TextSpan(
+                                                  const Text.rich(TextSpan(
                                                       text: "Voucher",
                                                       style: TextStyle(
                                                         fontWeight:
@@ -298,7 +305,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                                   Text.rich(TextSpan(
                                                       text:
                                                           "-${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(widget.trans.diskon)}",
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.w700,
                                                         fontSize: 14,
@@ -315,7 +322,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                 ),
                               ),
                               Container(
-                                color: Color(0xff0D40C614),
+                                color: const Color(0xff0D40C614),
                                 height: size.height * .0725,
                                 width: size.width * 3.28,
                                 child: Padding(
@@ -328,7 +335,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text.rich(TextSpan(
+                                      const Text.rich(TextSpan(
                                           text: "Total Pembayaran",
                                           style: TextStyle(
                                             fontWeight: FontWeight.w700,
@@ -340,16 +347,18 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                                       locale: 'id',
                                                       symbol: 'Rp',
                                                       decimalDigits: 0)
-                                                  .format(widget.trans.harga -
+                                                  .format(total = widget
+                                                          .trans.harga -
                                                       widget.trans.biayaadmin -
                                                       widget.trans.diskon!)
                                               : NumberFormat.currency(
                                                       locale: 'id',
                                                       symbol: 'Rp',
                                                       decimalDigits: 0)
-                                                  .format(widget.trans.harga -
+                                                  .format(total = widget
+                                                          .trans.harga -
                                                       widget.trans.biayaadmin),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontWeight: FontWeight.w700,
                                             fontSize: 14,
                                           ))),
@@ -379,7 +388,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                       ),
                       Container(
                         alignment: Alignment.topLeft,
-                        child: Text.rich(
+                        child: const Text.rich(
                             textAlign: TextAlign.left,
                             TextSpan(
                                 text: "Pilih Metode Pembayaran",
@@ -405,7 +414,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                             ),
                             ListTile(
                               leading: Image.asset(
-                                "assets/image/logo.png",
+                                "assets/icon/c.png",
                                 width: size.width * .1,
                                 height: size.height * .05625,
                               ),
@@ -413,11 +422,11 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                   textAlign: TextAlign.left,
                                   TextSpan(
                                       text: saldo,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 14,
                                       ))),
-                              subtitle: Text.rich(
+                              subtitle: const Text.rich(
                                   textAlign: TextAlign.left,
                                   TextSpan(
                                       text: "Saldo: Rp800.000",
@@ -432,17 +441,17 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                   });
                                 },
                                 icon: status != saldo
-                                    ? Icon(
+                                    ? const Icon(
                                         Icons.radio_button_unchecked,
                                         color: Colors.black,
                                       )
-                                    : Icon(
+                                    : const Icon(
                                         Icons.radio_button_checked,
                                         color: Colors.blue,
                                       ),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               color: Color(0xffD9DCE3),
                               thickness: 1,
                             ),
@@ -459,7 +468,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                   textAlign: TextAlign.left,
                                   TextSpan(
                                       text: dana,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 14,
                                       ))),
@@ -467,14 +476,15 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                 onPressed: () {
                                   setState(() {
                                     status = dana;
+                                    gambar = "assets/image/dana.png";
                                   });
                                 },
                                 icon: status != dana
-                                    ? Icon(
+                                    ? const Icon(
                                         Icons.radio_button_unchecked,
                                         color: Colors.black,
                                       )
-                                    : Icon(
+                                    : const Icon(
                                         Icons.radio_button_checked,
                                         color: Colors.blue,
                                       ),
@@ -483,7 +493,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                             SizedBox(
                               height: size.height * .01125,
                             ),
-                            Divider(
+                            const Divider(
                               color: Color(0xffD9DCE3),
                               thickness: 1,
                             ),
@@ -500,7 +510,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                   textAlign: TextAlign.left,
                                   TextSpan(
                                       text: gopay,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 14,
                                       ))),
@@ -508,14 +518,15 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                 onPressed: () {
                                   setState(() {
                                     status = gopay;
+                                    gambar = "assets/image/dana.png";
                                   });
                                 },
                                 icon: status != gopay
-                                    ? Icon(
+                                    ? const Icon(
                                         Icons.radio_button_unchecked,
                                         color: Colors.black,
                                       )
-                                    : Icon(
+                                    : const Icon(
                                         Icons.radio_button_checked,
                                         color: Colors.blue,
                                       ),
@@ -561,9 +572,9 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor:
                             Color(status != "" ? 0xff0D40C6 : 0xffD9DCE3),
-                        shape: StadiumBorder()),
+                        shape: const StadiumBorder()),
                     onPressed: () {
-                      if (status != "") {
+                      if (status == "Mycuan saldo") {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
@@ -571,9 +582,22 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                       type: widget.trans.type,
                                     )),
                             (route) => false);
+                      } else {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => QRScreen(
+                                      code:
+                                          "${Random().nextInt(899999999) + 100000000}",
+                                      data: Dummymethod(
+                                          name: status, gambar: gambar),
+                                      total: total,
+                                      tipe: 2,
+                                    )),
+                            (route) => false);
                       }
                     },
-                    child: Text.rich(
+                    child: const Text.rich(
                       TextSpan(
                         text: "Bayar Sekarang",
                       ),
