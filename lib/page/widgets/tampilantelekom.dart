@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ppodb_2/page/widgets/detailTelekom.dart';
 import 'package:ppodb_2/page/widgets/nominalpulsa.dart';
+import 'package:ppodb_2/service/providers/product/product_list_provider.dart';
+import 'package:provider/provider.dart';
 
 class Tampilan_telekom extends StatefulWidget {
   int type;
@@ -18,13 +21,17 @@ class _Tampilan_telekomState extends State<Tampilan_telekom> {
   TextEditingController bambang = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final isloading = Provider.of<ProductListProviders>(context).state ==
+        Productstate.loading;
+    final isError =
+        Provider.of<ProductListProviders>(context).state == Productstate.error;
     var size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          widget.type == 1 ? "Pulsa" : "Paket Data",
+          widget.type == 7 ? "Pulsa" : "Paket Data",
           selectionColor: const Color(0xff5C5D61),
         ),
         centerTitle: true,
@@ -75,7 +82,7 @@ class _Tampilan_telekomState extends State<Tampilan_telekom> {
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: bambang.text == ""
                           ? InputDecoration(
-                              prefixIcon: Icon(widget.type == 1
+                              prefixIcon: Icon(widget.type == 7
                                   ? Icons.phone_android
                                   : Icons.mail),
                               border: OutlineInputBorder(
@@ -84,9 +91,9 @@ class _Tampilan_telekomState extends State<Tampilan_telekom> {
                           : InputDecoration(
                               prefixIcon: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Icon(widget.type == 1
+                                  child: Icon(widget.type == 7
                                       ? Icons.phone_android
-                                      : Icons.mail)),
+                                      : Icons.phone_android)),
                               suffixIcon: IconButton(
                                   onPressed: () {
                                     bambang.clear();
@@ -155,12 +162,17 @@ class _Tampilan_telekomState extends State<Tampilan_telekom> {
                             onPressed: () {
                               final valid = formKey.currentState!.validate();
                               if (valid) {
+                                Provider.of<ProductListProviders>(context,
+                                        listen: false)
+                                    .kirimData(widget.type, bambang.text);
+
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Detail_telekom(
-                                            type: widget.type,
-                                            nomor: bambang.text)));
+                                        builder: (context) =>
+                                            Detail_telkomwithproviders(
+                                                type: widget.type,
+                                                nomor: bambang.text)));
                               }
                             },
                             child: const Text.rich(

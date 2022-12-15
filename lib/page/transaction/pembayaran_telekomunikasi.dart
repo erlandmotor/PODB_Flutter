@@ -220,7 +220,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                         child: Text.rich(
                                             textAlign: TextAlign.left,
                                             TextSpan(
-                                                text: widget.trans.type == 1
+                                                text: widget.trans.type == 7
                                                     ? "${checkprovider(nomor.text)} ${widget.trans.nama}"
                                                     : widget.trans.nama,
                                                 style: const TextStyle(

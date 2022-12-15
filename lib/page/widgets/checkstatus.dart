@@ -148,33 +148,33 @@ String checktipe(int bambang) {
   String value;
   value = bambang == 0
       ? ""
-      : bambang == 1
+      : bambang == 7
           ? "Pulsa"
-          : bambang == 2
+          : bambang == 6
               ? "Paket Data"
-              : bambang == 3
+              : bambang == 5
                   ? "Indihome"
-                  : bambang == 4
+                  : bambang == 8
                       ? "BPJS"
-                      : bambang == 5
+                      : bambang == 9
                           ? "Listrik"
-                          : bambang == 6
+                          : bambang == 10
                               ? "Token Listrik"
-                              : bambang == 7
+                              : bambang == 11
                                   ? "PDAM"
-                                  : bambang == 8
+                                  : bambang == 12
                                       ? "Voucher Game"
-                                      : bambang == 9
+                                      : bambang == 13
                                           ? "Google Play"
-                                          : bambang == 10
+                                          : bambang == 14
                                               ? "Shopeepay"
-                                              : bambang == 11
+                                              : bambang == 15
                                                   ? "Dana"
-                                                  : bambang == 12
+                                                  : bambang == 16
                                                       ? "Gopay"
-                                                      : bambang == 13
+                                                      : bambang == 17
                                                           ? "Linkaja"
-                                                          : bambang == 14
+                                                          : bambang == 18
                                                               ? "Ovo"
                                                               : "Tidak tersedia";
   return value;

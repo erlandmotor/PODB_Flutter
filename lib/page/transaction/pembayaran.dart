@@ -76,10 +76,10 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                         child: Text.rich(
                             textAlign: TextAlign.left,
                             TextSpan(
-                                text: widget.terima.tipe == 4
+                                text: widget.terima.tipe == 8
                                     ? "Nomor VA Keluarga"
-                                    : widget.terima.tipe == 5 ||
-                                            widget.terima.tipe == 6
+                                    : widget.terima.tipe == 9 ||
+                                            widget.terima.tipe == 10
                                         ? "Nomor Meter/ID Pelanggan"
                                         : "Nomor Pelanggan",
                                 style: const TextStyle(
@@ -95,10 +95,10 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Image.asset(
-                              widget.terima.tipe == 4
+                              widget.terima.tipe == 8
                                   ? "assets/image/BPJS-1.png"
-                                  : widget.terima.tipe == 5 ||
-                                          widget.terima.tipe == 6
+                                  : widget.terima.tipe == 9 ||
+                                          widget.terima.tipe == 10
                                       ? "assets/image/PLN.png"
                                       : "assets/image/PDAM-1.png",
                               width: size.width * .024,
@@ -212,7 +212,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                 border: Border.all(
                                     color: Colors.black38, // Set border color
                                     width: 1.0)),
-                            child: widget.terima.tipe == 6
+                            child: widget.terima.tipe == 10
                                 ? Column(
                                     children: [
                                       Padding(
@@ -389,7 +389,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                       )
                                     ],
                                   )
-                                : widget.terima.tipe == 5
+                                : widget.terima.tipe == 9
                                     ? Column(
                                         children: [
                                           Padding(
@@ -572,7 +572,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                           )
                                         ],
                                       )
-                                    : widget.terima.tipe == 4
+                                    : widget.terima.tipe == 8
                                         ? Column(
                                             children: [
                                               Padding(
@@ -809,7 +809,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                                               )
                                             ],
                                           )
-                                        : widget.terima.tipe == 7
+                                        : widget.terima.tipe == 11
                                             ? Column(
                                                 children: [
                                                   Padding(
@@ -1249,7 +1249,7 @@ class _PembayaranscreenState extends State<Pembayaranscreen> {
                         shape: const StadiumBorder()),
                     onPressed: () {
                       if (status == "Mycuan saldo") {
-                        if (widget.terima.tipe != 6) {
+                        if (widget.terima.tipe != 10) {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
