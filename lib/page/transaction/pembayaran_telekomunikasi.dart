@@ -14,8 +14,11 @@ import 'package:provider/provider.dart';
 
 class PembayranTelekScreen extends StatefulWidget {
   DummyTransTelekom trans;
+  String? gambar;
+  String? provider;
   int? tipe;
-  PembayranTelekScreen({super.key, required this.trans, this.tipe});
+  PembayranTelekScreen(
+      {super.key, required this.trans, this.tipe, this.gambar, this.provider});
 
   @override
   State<PembayranTelekScreen> createState() => _PembayranTelekScreenState();
@@ -74,7 +77,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                         child: Text.rich(
                             textAlign: TextAlign.left,
                             TextSpan(
-                                text: checkprovider(nomor.text),
+                                text: widget.provider,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
@@ -87,8 +90,8 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                         decoration: InputDecoration(
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(
-                              checkPicprovider(nomor.text),
+                            child: Image.network(
+                              widget.gambar!,
                               width: size.width * .024,
                               height: size.height * .024,
                             ),

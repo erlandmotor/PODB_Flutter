@@ -198,6 +198,10 @@ class _Detail_telkomwithprovidersState
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     PembayranTelekScreen(
+                                                      gambar:
+                                                          product.data!.image,
+                                                      provider:
+                                                          product.data!.name,
                                                       tipe: product.data!
                                                           .products![index].id,
                                                       trans: kiriman,
@@ -339,6 +343,10 @@ class _Detail_telkomwithprovidersState
                                                     MaterialPageRoute(
                                                         builder: (context) =>
                                                             PembayranTelekScreen(
+                                                              gambar: product
+                                                                  .data!.image,
+                                                              provider: product
+                                                                  .data!.name,
                                                               tipe: product
                                                                   .data!
                                                                   .products![i]
