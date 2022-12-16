@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/riwayat/detail_riwayat.dart';
@@ -22,12 +21,7 @@ class Riwayat extends StatefulWidget {
 }
 
 class _RiwayatState extends State<Riwayat> {
-
- void initState() {
-  initializeDateFormatting();
-
-  
-
+  void initState() {
     Future.delayed(
       Duration.zero,
       () {
@@ -450,95 +444,54 @@ class _RiwayatState extends State<Riwayat> {
                                       togglePanel();
                                     },
                                   ),
-
-                                  SizedBox(
-                                    width: size.width * .044,
-                                  ),
-                                ],
-                              )),
-                      ],
-                    ),
-                    scrollDirection: Axis.horizontal,
-                  ),
-                  SizedBox(
-                    height: size.height * .02,
-                  ),
-                  Container(
-                    height: heightt*500/800,
-                    width: widthh,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding:  EdgeInsets.only( bottom: heightt*16/800),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.all(16),
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(color: Colors.grey, ),
-                            borderRadius: BorderRadius.circular(15),
-                          ), 
-                            leading: Image.asset("assets/icon/c.png",
-                            height: 24,
-                            width: 24,),
-                            title: Text(provider.riwayat!.data![index].productName!+" "+ provider.riwayat!.data![index].productPrice.toString(),
-                            style: GoogleFonts.inter(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14
-                            ),),
-                            subtitle: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Melalui MyCuan Saldo",
-                                style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12
-                                ),),
-                                 Text(DateFormat(
-                                    'EEEE, dd MMMM yyyy', 'id').format(
-                                      DateTime.parse(provider.riwayat!.data![index].transactionDate.toString()
-                                    )
-                                  ).toString(),
-                                style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12
-                                ),),
+                                ),
+                                for (int i = 0; i < prods.length; i++)
+                                  InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          status == prods[i].name
+                                              ? status = ""
+                                              : status = prods[i].name;
+                                        });
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        100.0),
+                                                border: Border.all(
+                                                    color: Colors
+                                                        .black38, // Set border color
+                                                    width: 1)),
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: size.width * .044,
+                                                  right: size.width * .044,
+                                                  bottom: size.height * .00625,
+                                                  top: size.height * .00625),
+                                              child: Text.rich(
+                                                  textAlign: TextAlign.left,
+                                                  TextSpan(
+                                                      text: prods[i].name,
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xff5C5D61),
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 16,
+                                                      ))),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * .044,
+                                          ),
+                                        ],
+                                      )),
                               ],
                             ),
-                            
-                            trailing: Padding(
-                              padding: EdgeInsets.only(top: 5),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                   Text("Rp "+provider.riwayat!.data![index].totalPrice.toString(),
-                                  style: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12
-                                  ),),
-                                   Text("Berhasil",
-                                  style: GoogleFonts.inter(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12,
-                                    color: Colors.green
-                                  ),),
-                                ],
-                              ),
-                            ),
-                            onTap: () {
-                               Navigator.push(context, MaterialPageRoute(builder: ((context) => DetailRiwayat(
-                                dompetDigital: "MyCuan Saldo",
-                                nominal: provider.riwayat!.data![index].productPrice.toString(),
-                                statusTransaksi: "Berhasil",
-                                title: provider.riwayat!.data![index].productName.toString(),
-                                total: provider.riwayat!.data![index].totalPrice.toString(),
-                                feeAdmin: provider.riwayat!.data![index].adminFee.toString(),
-                                tgl: provider.riwayat!.data![index].transactionDate,
-                               ))));
-                            },
-
-                              
+                            scrollDirection: Axis.horizontal,
                           ),
                           SizedBox(
                             height: size.height * .02,
