@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/kirimuang.dart';
 
-import '../widgets/nominalpulsa.dart';
-
 class Topupwallet extends StatefulWidget {
   int type;
   Topupwallet({super.key, required this.type});

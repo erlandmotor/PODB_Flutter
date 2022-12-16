@@ -62,13 +62,13 @@ class _PembayaranWalletState extends State<PembayaranWallet> {
                             fontSize: 16,
                           )),
                       TextSpan(
-                        text: widget.type == 10
+                        text: widget.type == 14
                             ? "\nShopeePay"
-                            : widget.type == 11
+                            : widget.type == 15
                                 ? "\nDana"
-                                : widget.type == 12
+                                : widget.type == 16
                                     ? "\nGopay"
-                                    : widget.type == 13
+                                    : widget.type == 17
                                         ? "\nlinkaja"
                                         : "\nOvo",
                         style: const TextStyle(

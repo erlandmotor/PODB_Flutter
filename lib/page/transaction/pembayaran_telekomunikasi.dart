@@ -3,14 +3,19 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
+import 'package:ppodb_2/models/wallet/data_wallet.dart';
 import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:ppodb_2/page/transaction/vouchertele.dart';
 import 'package:ppodb_2/page/widgets/checkstatus.dart';
 import 'package:ppodb_2/page/widgets/qrCode.dart';
+import 'package:ppodb_2/service/providers/product/product_list_provider.dart';
+
+import 'package:provider/provider.dart';
 
 class PembayranTelekScreen extends StatefulWidget {
   DummyTransTelekom trans;
-  PembayranTelekScreen({super.key, required this.trans});
+  int? tipe;
+  PembayranTelekScreen({super.key, required this.trans, this.tipe});
 
   @override
   State<PembayranTelekScreen> createState() => _PembayranTelekScreenState();
@@ -24,10 +29,15 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
   String gambar = "";
   late int total;
   late DummyVoucher vou;
+
   TextEditingController nomor = TextEditingController();
   TextEditingController voucher = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final isloading = Provider.of<ProductListProviders>(context).state ==
+        Productstate.loading;
+    final isError =
+        Provider.of<ProductListProviders>(context).state == Productstate.error;
     nomor.text = "0${widget.trans.nomor}";
     var size = MediaQuery.of(context).size;
     return Scaffold(
@@ -220,7 +230,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                         child: Text.rich(
                                             textAlign: TextAlign.left,
                                             TextSpan(
-                                                text: widget.trans.type == 1
+                                                text: widget.trans.type == 7
                                                     ? "${checkprovider(nomor.text)} ${widget.trans.nama}"
                                                     : widget.trans.nama,
                                                 style: const TextStyle(
@@ -426,10 +436,11 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                         fontWeight: FontWeight.w700,
                                         fontSize: 14,
                                       ))),
-                              subtitle: const Text.rich(
+                              subtitle: Text.rich(
                                   textAlign: TextAlign.left,
                                   TextSpan(
-                                      text: "Saldo: Rp800.000",
+                                      text:
+                                          "Saldo: ${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(80000)}",
                                       style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 12,
@@ -573,20 +584,27 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                         backgroundColor:
                             Color(status != "" ? 0xff0D40C6 : 0xffD9DCE3),
                         shape: const StadiumBorder()),
-                    onPressed: () {
+                    onPressed: () async {
                       if (status == "Mycuan saldo") {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SuccesPages(
-                                      type: widget.trans.type,
-                                    )),
-                            (route) => false);
+                        await Provider.of<ProductListProviders>(context,
+                                listen: false)
+                            .addtransaksi(widget.tipe!, nomor.text);
+                        isloading || isError
+                            ? print("tunggu")
+                            : Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SuccesPages(
+                                          type: widget.trans.type,
+                                        )),
+                                (route) => false);
                       } else {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => QRScreen(
+                                      type: widget.tipe,
+                                      nomor: nomor.text,
                                       code:
                                           "${Random().nextInt(899999999) + 100000000}",
                                       data: Dummymethod(

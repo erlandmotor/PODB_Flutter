@@ -5,7 +5,9 @@ import 'package:ppodb_2/page/akun/akun.dart';
 import 'package:ppodb_2/page/akun/background.dart';
 import 'package:ppodb_2/page/faq/faq.dart';
 import 'package:ppodb_2/page/home/background.dart';
+import 'package:ppodb_2/page/product/category_withprovider.dart';
 import 'package:ppodb_2/page/product/categoryhome.dart';
+import 'package:ppodb_2/page/product/detail_product.dart';
 import 'package:ppodb_2/page/produk/pulsa.dart';
 import 'package:ppodb_2/page/riwayat/riwayat.dart';
 import 'package:ppodb_2/page/product/categoryhome.dart';
@@ -298,37 +300,37 @@ class _HomePageState extends State<HomePage> {
                               context,
                               MaterialPageRoute(
                                   builder: ((context) =>
-                                      Tampilan_telekom(type: 1))));
+                                      Tampilan_telekom(type: 7))));
                         }
                         if (modulName[index] == "Paket Data") {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: ((context) =>
-                                      Tampilan_telekom(type: 2))));
+                                      Tampilan_telekom(type: 6))));
                         }
                         if (modulName[index] == "PDAM") {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => PDAMS(
-                                        type: 7,
+                                  builder: ((context) => DetailProduct(
+                                        code: 11,
                                       ))));
                         }
                         if (modulName[index] == "Listrik") {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => Listrik_Pln_screen(
-                                        tipe: 5,
+                                  builder: ((context) => DetailProduct(
+                                        code: 9,
                                       ))));
                         }
                         if (modulName[index] == "BPJS") {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => BPJSScreen(
-                                        tipe: 4,
+                                  builder: ((context) => DetailProduct(
+                                        code: 8,
                                       ))));
                         }
                         if (modulName[index] == "Indihome") {
@@ -347,7 +349,8 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => CategoryProduct())));
+                                  builder: ((context) =>
+                                      CategoryProductprovider())));
                         }
                       },
                       child: Column(

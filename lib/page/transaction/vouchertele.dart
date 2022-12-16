@@ -21,7 +21,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
         namavoucher: "Pulsa Corner Potongan Rp.2.000",
         kode: "MYCUANBERKAH",
         diskon: 2000,
-        tipe: 1,
+        tipe: 7,
         stock: 12,
         expired: "20.9.2023"),
     DummyVoucher(
@@ -30,7 +30,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
         namavoucher: "Pulsa Corner Potongan Rp.3.000",
         kode: "MYCUANBERKAH6653",
         diskon: 3000,
-        tipe: 1,
+        tipe: 7,
         stock: 12,
         expired: "21.9.2023"),
     DummyVoucher(
@@ -39,7 +39,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
         namavoucher: "Pulsa Corner Potongan Rp.2.000",
         kode: "MYCUANBERKAH4214",
         diskon: 2000,
-        tipe: 1,
+        tipe: 7,
         stock: 12,
         expired: "23.9.2023"),
     DummyVoucher(
@@ -48,7 +48,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
         namavoucher: "Pulsa Corner Potongan Rp.2.000",
         kode: "MYCUANBERKAH1512",
         diskon: 2000,
-        tipe: 1,
+        tipe: 7,
         stock: 12,
         expired: "24.9.2023"),
     DummyVoucher(
@@ -57,7 +57,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
         namavoucher: "Pulsa Corner Potongan Rp.2.000",
         kode: "MYCUANBERKAH155",
         diskon: 2000,
-        tipe: 1,
+        tipe: 7,
         stock: 12,
         expired: "25.10.2023"),
     DummyVoucher(
@@ -66,7 +66,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
         namavoucher: "Paket Data Corner Potongan Rp.3.000",
         kode: "MYCUANBERKAH125",
         diskon: 3000,
-        tipe: 2,
+        tipe: 6,
         stock: 12,
         expired: "3.2.2024"),
     DummyVoucher(
@@ -75,7 +75,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
         namavoucher: "Pulsa Corner Potongan Rp.4.000",
         kode: "MYCUANBERKAH124",
         diskon: 4000,
-        tipe: 2,
+        tipe: 6,
         stock: 12,
         expired: "20.9.2023"),
     DummyVoucher(
@@ -84,7 +84,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
         namavoucher: "Pulsa Corner Potongan Rp.5.000",
         kode: "MYCUANBERKAH123",
         diskon: 5000,
-        tipe: 2,
+        tipe: 6,
         stock: 12,
         expired: "20.9.2023"),
     DummyVoucher(
@@ -93,7 +93,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
         namavoucher: "Pulsa Corner Potongan Rp.6.000",
         kode: "MYCUANBERKAH12",
         diskon: 6000,
-        tipe: 2,
+        tipe: 6,
         stock: 12,
         expired: "20.9.2023"),
     DummyVoucher(
@@ -102,7 +102,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
         namavoucher: "Pulsa Corner Potongan Rp.7.000",
         kode: "MYCUANBERKAH141252",
         diskon: 7000,
-        tipe: 2,
+        tipe: 6,
         stock: 0,
         expired: "20.9.2023"),
   ];

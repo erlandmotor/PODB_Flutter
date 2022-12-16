@@ -51,15 +51,15 @@ class _SuccesPagesState extends State<SuccesPages> {
                   Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(
-                          text: widget.type == 1
+                          text: widget.type == 7
                               ? "TSebentar lagi pulsa kamu otomatis masuk!\nSambil nunggu, yuk transaksi tagihan\nlainnya."
-                              : widget.type == 2
+                              : widget.type == 6
                                   ? "Sebentar lagi paket kamu otomatis aktif!\nSambil nunggu, yuk transaksi tagihan\nlainnya."
-                                  : widget.type == 4
+                                  : widget.type == 8
                                       ? "Yeay... tagihan BPJS kamu sudah terbayar!\nYuk transaksi tagihan lainnya."
-                                      : widget.type == 5
+                                      : widget.type == 9
                                           ? "Yeay... tagihan Listrik kamu sudah terbayar!\nYuk transaksi tagihan lainnya."
-                                          : widget.type == 7
+                                          : widget.type == 11
                                               ? "Yeay... tagihan PDAM kamu sudah\nterbayar! Yuk transaksi tagihan lainnya."
                                               : "Yeay... uangnya udah kekirim!\nYuk transaksi lagi.",
                           style: const TextStyle(

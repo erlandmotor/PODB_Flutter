@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/pembayranwallet.dart';
 
-import '../widgets/nominalpulsa.dart';
-
 class KirimUang extends StatefulWidget {
   int type;
   String keys;
