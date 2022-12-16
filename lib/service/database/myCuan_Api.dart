@@ -41,12 +41,9 @@ class MyCuanAPI {
             "Authorization": "Bearer $token",
           }));
       _isNext = "berhasil";
-
-      List<Datacate> isi = List<Datacate>.from(response.data["data"]
+      return List<Datacate>.from(response.data["data"]
           .map((data) => Datacate.fromJson(data))
           .toList());
-      print(isi);
-      return isi;
     } on DioError catch (e) {
       print(e.response!.data['message']);
       print('category bermasalah');
@@ -67,15 +64,14 @@ class MyCuanAPI {
                 "Authorization": "Bearer $token",
               }),
               data: formdata);
-      _isNext = "berhasil";
-      print("wibawa ${response.data["data"]}");
-      List<DataProduct> bambang = await List<DataProduct>.from(response
-          .data["data"]
-          .map((DataProduct) => DataProduct.fromJson(DataProduct))
+      print("Sebelum ${response.data["data"]}");
+      final jaja = List<DataProduct>.from(response.data["data"]
+          .map((data) => DataProduct.fromJson(data))
           .toList());
 
-      print("bambang $bambang");
-      return bambang;
+      print("Sesudah $jaja");
+
+      return jaja;
     } on DioError catch (e) {
       print(e.response!.data['message']);
       print('data bermasalah');

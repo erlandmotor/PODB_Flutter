@@ -11,6 +11,7 @@ import '../main_page/main_page.dart';
 
 class QRScreen extends StatefulWidget {
   int? tipe;
+  int? type;
   int total;
   String code;
   Dummymethod data;
@@ -19,7 +20,8 @@ class QRScreen extends StatefulWidget {
       required this.code,
       required this.data,
       required this.total,
-      this.tipe});
+      this.tipe,
+      this.type});
 
   @override
   State<QRScreen> createState() => _QRScreenState();

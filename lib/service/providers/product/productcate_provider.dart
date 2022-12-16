@@ -7,6 +7,7 @@ class ProductcateProviders extends ChangeNotifier {
   List<Datacate> category = [];
   Catestate _state = Catestate.none;
   Catestate get state => _state;
+
   ProductcateProviders() {
     _fetchcate();
   }

@@ -25,6 +25,7 @@ class Detail_telkomwithproviders extends StatefulWidget {
 class _Detail_telkomwithprovidersState
     extends State<Detail_telkomwithproviders> {
   late List<DataProduct> product;
+  late List<DataProduct> products;
   String status = "";
   late int harga;
   TextEditingController bambang = TextEditingController();

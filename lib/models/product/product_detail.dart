@@ -23,7 +23,8 @@ class Productmodel {
   factory Productmodel.fromJson(Map<String, dynamic> json) => Productmodel(
         status: json["status"],
         message: json["message"],
-        data: DataProduct.fromJson(json["data"]),
+        data: DataProduct.fromJson(
+            json["data"].map((x) => DataProduct.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,7 +51,7 @@ class DataProduct {
   List<Product> products;
   DateTime createdAt;
   DateTime updatedAt;
-  String? deletedAt;
+  DateTime? deletedAt;
 
   factory DataProduct.fromJson(Map<String, dynamic> json) => DataProduct(
         id: json["id"],
@@ -60,7 +61,7 @@ class DataProduct {
             json["products"].map((x) => Product.fromJson(x))),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        deletedAt: json["deleted_at"],
+        deletedAt: DateTime.parse(json["deleted_at"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -70,7 +71,7 @@ class DataProduct {
         "products": List<dynamic>.from(products.map((x) => x.toJson())),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "deleted_at": deletedAt,
+        "deleted_at": deletedAt == null ? null : deletedAt!.toIso8601String(),
       };
 }
 
@@ -82,15 +83,15 @@ class Product {
     required this.price,
     required this.providerId,
     required this.stock,
-    this.status,
+    required this.status,
     required this.totalPurchased,
-    this.additionalInformation,
+    required this.additionalInformation,
     required this.isAvailable,
-    this.priceStatus,
+    required this.priceStatus,
     required this.isPromoActive,
     required this.discount,
-    this.promoStartDate,
-    this.promoEndDate,
+    required this.promoStartDate,
+    required this.promoEndDate,
     required this.createdAt,
     required this.updatedAt,
     this.deletedAt,
@@ -102,7 +103,7 @@ class Product {
   int price;
   int providerId;
   int stock;
-  String? status;
+  String status;
   int totalPurchased;
   String? additionalInformation;
   bool isAvailable;
@@ -113,7 +114,7 @@ class Product {
   String? promoEndDate;
   DateTime createdAt;
   DateTime updatedAt;
-  String? deletedAt;
+  DateTime? deletedAt;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
@@ -154,6 +155,6 @@ class Product {
         "promo_end_date": promoEndDate,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "deleted_at": deletedAt,
+        "deleted_at": deletedAt == null ? null : deletedAt!.toIso8601String(),
       };
 }

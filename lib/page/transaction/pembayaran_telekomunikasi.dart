@@ -10,7 +10,8 @@ import 'package:ppodb_2/page/widgets/qrCode.dart';
 
 class PembayranTelekScreen extends StatefulWidget {
   DummyTransTelekom trans;
-  PembayranTelekScreen({super.key, required this.trans});
+  int? tipe;
+  PembayranTelekScreen({super.key, required this.trans, this.tipe});
 
   @override
   State<PembayranTelekScreen> createState() => _PembayranTelekScreenState();

@@ -162,17 +162,22 @@ class _Tampilan_telekomState extends State<Tampilan_telekom> {
                             onPressed: () {
                               final valid = formKey.currentState!.validate();
                               if (valid) {
-                                Provider.of<ProductListProviders>(context,
-                                        listen: false)
-                                    .kirimData(widget.type, bambang.text);
-
-                                Navigator.push(
+                                var prov = Provider.of<ProductListProviders>(
                                     context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            Detail_telkomwithproviders(
-                                                type: widget.type,
-                                                nomor: bambang.text)));
+                                    listen: false);
+
+                                prov.kirimData(widget.type, bambang.text);
+                                isloading
+                                    ? print("loading")
+                                    : isError
+                                        ? print("error")
+                                        : Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Detail_telkomwithproviders(
+                                                        type: widget.type,
+                                                        nomor: bambang.text)));
                               }
                             },
                             child: const Text.rich(
