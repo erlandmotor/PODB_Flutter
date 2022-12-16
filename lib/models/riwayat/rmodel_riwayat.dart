@@ -38,7 +38,6 @@ class Datum {
         this.productName,
         this.userEmail,
         this.productPrice,
-        this.discount,
         this.adminFee,
         this.totalPrice,
         this.transactionDate,
@@ -48,7 +47,6 @@ class Datum {
     final String? productName;
     final String? userEmail;
     final int? productPrice;
-    final int? discount;
     final int? adminFee;
     final int? totalPrice;
     final DateTime? transactionDate;
@@ -62,7 +60,6 @@ class Datum {
         productName: json["product_name"],
         userEmail: json["user_email"],
         productPrice: json["product_price"],
-        discount: json["discount"],
         adminFee: json["admin_fee"],
         totalPrice: json["total_price"],
         transactionDate: json["transaction_date"] == null ? null : DateTime.parse(json["transaction_date"]),
@@ -73,7 +70,6 @@ class Datum {
         "product_name": productName,
         "user_email": userEmail,
         "product_price": productPrice,
-        "discount": discount,
         "admin_fee": adminFee,
         "total_price": totalPrice,
         "transaction_date": transactionDate == null ? null : transactionDate!.toIso8601String(),
