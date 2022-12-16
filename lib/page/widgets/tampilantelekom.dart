@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ppodb_2/page/widgets/detailTelekom.dart';
-import 'package:ppodb_2/page/widgets/nominalpulsa.dart';
 import 'package:ppodb_2/service/providers/product/product_list_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -21,10 +20,6 @@ class _Tampilan_telekomState extends State<Tampilan_telekom> {
   TextEditingController bambang = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final isloading = Provider.of<ProductListProviders>(context).state ==
-        Productstate.loading;
-    final isError =
-        Provider.of<ProductListProviders>(context).state == Productstate.error;
     var size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -166,18 +161,14 @@ class _Tampilan_telekomState extends State<Tampilan_telekom> {
                                     context,
                                     listen: false);
 
-                                prov.kirimData(widget.type, bambang.text);
-                                isloading
-                                    ? print("loading")
-                                    : isError
-                                        ? print("error")
-                                        : Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Detail_telkomwithproviders(
-                                                        type: widget.type,
-                                                        nomor: bambang.text)));
+                                prov.getdatabaru(widget.type, bambang.text);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Detail_telkomwithproviders(
+                                                type: widget.type,
+                                                nomor: bambang.text)));
                               }
                             },
                             child: const Text.rich(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:ppodb_2/models/product/product_data_model.dart';
 import 'package:ppodb_2/models/product/product_detail.dart';
 import 'package:ppodb_2/models/product/productcate.dart';
 import 'package:ppodb_2/page/transaction/pembayaran_telekomunikasi.dart';
@@ -24,8 +25,8 @@ class Detail_telkomwithproviders extends StatefulWidget {
 
 class _Detail_telkomwithprovidersState
     extends State<Detail_telkomwithproviders> {
-  late List<DataProduct> product;
-  late List<DataProduct> products;
+  late Productda product;
+
   String status = "";
   late int harga;
   TextEditingController bambang = TextEditingController();
@@ -38,7 +39,7 @@ class _Detail_telkomwithprovidersState
     product = Provider.of<ProductListProviders>(context).isicategory;
     var size = MediaQuery.of(context).size;
     bambang.text = widget.nomor;
-    return isloading
+    return isloading || product == null
         ? Scaffold(
             body: Center(
             child: CircularProgressIndicator(),
@@ -48,7 +49,7 @@ class _Detail_telkomwithprovidersState
                 body: Container(
                     color: Colors.white,
                     child: Center(
-                      child: Text("Data tidak ditemukan"),
+                      child: Text("Silahkan cek nomor anda lagi"),
                     )),
               )
             : Scaffold(
@@ -112,7 +113,7 @@ class _Detail_telkomwithprovidersState
                                 prefixIcon: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Image.network(
-                                      product[0].image,
+                                      product.data!.image.toString(),
                                       width: size.width * .024,
                                       height: size.height * .024,
                                     )),
@@ -137,7 +138,7 @@ class _Detail_telkomwithprovidersState
                           child: Text.rich(
                               textAlign: TextAlign.left,
                               TextSpan(
-                                  text: product[0].name,
+                                  text: product.data!.name,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xff5C5D61),
@@ -180,12 +181,14 @@ class _Detail_telkomwithprovidersState
                                           final DummyTransTelekom kiriman =
                                               DummyTransTelekom(
                                                   biayaadmin: 0,
-                                                  harga: product[0]
-                                                          .products[index]
-                                                          .price -
-                                                      product[0]
-                                                          .products[index]
-                                                          .discount,
+                                                  harga: product
+                                                          .data!
+                                                          .products![index]
+                                                          .price! -
+                                                      product
+                                                          .data!
+                                                          .products![index]
+                                                          .discount!,
                                                   nama: status,
                                                   nomor:
                                                       int.parse(bambang.text),
@@ -195,6 +198,8 @@ class _Detail_telkomwithprovidersState
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     PembayranTelekScreen(
+                                                      tipe: product.data!
+                                                          .products![index].id,
                                                       trans: kiriman,
                                                     )),
                                           );
@@ -205,6 +210,10 @@ class _Detail_telkomwithprovidersState
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
+                                              border: Border.all(
+                                                  color: Colors
+                                                      .black38, // Set border color
+                                                  width: 1.0),
                                               color: Colors.white,
                                             ),
                                             child: Column(children: [
@@ -214,14 +223,16 @@ class _Detail_telkomwithprovidersState
                                                 decoration: BoxDecoration(
                                                   image: DecorationImage(
                                                       image: AssetImage(
-                                                        product[0]
-                                                                    .products[
+                                                        product
+                                                                    .data!
+                                                                    .products![
                                                                         index]
                                                                     .isPromoActive ==
                                                                 true
                                                             ? "assets/image/Promo_Rounded.png"
-                                                            : product[0]
-                                                                        .products[
+                                                            : product
+                                                                        .data!
+                                                                        .products![
                                                                             index]
                                                                         .stock !=
                                                                     0
@@ -243,9 +254,13 @@ class _Detail_telkomwithprovidersState
                                                         textAlign:
                                                             TextAlign.left,
                                                         TextSpan(
-                                                            text: product[0]
-                                                                .products[index]
-                                                                .name,
+                                                            text: NumberFormat(
+                                                                    '#,###,000')
+                                                                .format(product
+                                                                    .data!
+                                                                    .products![
+                                                                        index]
+                                                                    .price!),
                                                             style: const TextStyle(
                                                                 fontWeight:
                                                                     FontWeight
@@ -269,14 +284,16 @@ class _Detail_telkomwithprovidersState
                                                     child: Text.rich(TextSpan(
                                                         text:
                                                             "Bayar: ${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(
-                                                          product[0]
-                                                                  .products[
+                                                          product
+                                                                  .data!
+                                                                  .products![
                                                                       index]
-                                                                  .price -
-                                                              product[0]
-                                                                  .products[
+                                                                  .price! -
+                                                              product
+                                                                  .data!
+                                                                  .products![
                                                                       index]
-                                                                  .discount,
+                                                                  .discount!,
                                                         )}",
                                                         style: const TextStyle(
                                                           fontWeight:
@@ -286,7 +303,7 @@ class _Detail_telkomwithprovidersState
                                                   )),
                                             ])));
                                   },
-                                  itemCount: product[0].products.length,
+                                  itemCount: product.data!.products!.length,
                                 ),
                               )
                             : Expanded(
@@ -296,7 +313,9 @@ class _Detail_telkomwithprovidersState
                                         child: Column(
                                           children: <Widget>[
                                             for (var i = 0;
-                                                i < product[0].products.length;
+                                                i <
+                                                    product
+                                                        .data!.products!.length;
                                                 i++)
                                               InkWell(
                                                 onTap: () {
@@ -304,12 +323,14 @@ class _Detail_telkomwithprovidersState
                                                       kiriman =
                                                       DummyTransTelekom(
                                                           biayaadmin: 0,
-                                                          harga: product[0]
-                                                              .products[i]
-                                                              .price,
-                                                          nama: product[0]
-                                                              .products[i]
-                                                              .name,
+                                                          harga: product
+                                                              .data!
+                                                              .products![i]
+                                                              .price!,
+                                                          nama: product
+                                                              .data!
+                                                              .products![i]
+                                                              .name!,
                                                           nomor: int.parse(
                                                               bambang.text),
                                                           type: widget.type);
@@ -318,6 +339,10 @@ class _Detail_telkomwithprovidersState
                                                     MaterialPageRoute(
                                                         builder: (context) =>
                                                             PembayranTelekScreen(
+                                                              tipe: product
+                                                                  .data!
+                                                                  .products![i]
+                                                                  .id,
                                                               trans: kiriman,
                                                             )),
                                                   );
@@ -346,9 +371,9 @@ class _Detail_telkomwithprovidersState
                                                                       .topLeft,
                                                               child: Text.rich(
                                                                 TextSpan(
-                                                                    text: product[
-                                                                            0]
-                                                                        .products[
+                                                                    text: product
+                                                                        .data!
+                                                                        .products![
                                                                             i]
                                                                         .name),
                                                                 style: const TextStyle(
@@ -376,9 +401,9 @@ class _Detail_telkomwithprovidersState
                                                             color: Colors.white,
                                                             child: Text.rich(
                                                               TextSpan(
-                                                                  text: product[
-                                                                          0]
-                                                                      .products[
+                                                                  text: product
+                                                                      .data!
+                                                                      .products![
                                                                           i]
                                                                       .description),
                                                               style: const TextStyle(
@@ -403,12 +428,15 @@ class _Detail_telkomwithprovidersState
                                                                               'Rp',
                                                                           decimalDigits:
                                                                               0)
-                                                                      .format(product[
-                                                                              0]
-                                                                          .products[
+                                                                      .format(product
+                                                                          .data!
+                                                                          .products![
                                                                               i]
                                                                           .price)),
                                                               style: const TextStyle(
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .fade,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w700,

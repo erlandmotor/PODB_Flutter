@@ -7,11 +7,13 @@ import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
+import '../../service/providers/product/product_list_provider.dart';
 import '../main_page/main_page.dart';
 
 class QRScreen extends StatefulWidget {
   int? tipe;
   int? type;
+  String? nomor;
   int total;
   String code;
   Dummymethod data;
@@ -21,7 +23,8 @@ class QRScreen extends StatefulWidget {
       required this.data,
       required this.total,
       this.tipe,
-      this.type});
+      this.type,
+      this.nomor});
 
   @override
   State<QRScreen> createState() => _QRScreenState();

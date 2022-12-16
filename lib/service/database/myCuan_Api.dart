@@ -3,11 +3,13 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:ppodb_2/models/product/product_data_model.dart';
 import 'package:ppodb_2/models/product/product_detail.dart';
 import 'package:ppodb_2/models/product/productcate.dart';
 import 'package:ppodb_2/models/profil/list_profil.dart';
 import 'package:ppodb_2/models/register_model.dart';
 import 'package:ppodb_2/models/riwayat/rmodel_riwayat.dart';
+import 'package:ppodb_2/models/wallet/data_wallet.dart';
 
 import 'package:ppodb_2/page/akun/akun.dart';
 import 'package:ppodb_2/page/product/categoryhome.dart';
@@ -52,7 +54,32 @@ class MyCuanAPI {
     }
   }
 
-  Future<List<DataProduct>> getproduct(int tipe, String nomor) async {
+  Future<Productda> getproductbaru(int tipe, String nomor) async {
+    final prefs = await SharedPreferences.getInstance();
+    final String token = prefs.getString('token') ?? "";
+    var formdata = FormData.fromMap({"phone_number": nomor});
+    try {
+      final response =
+          await _dio.post('/users/product-types/$tipe/providers/phone',
+              options: Options(headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer $token",
+              }),
+              data: formdata);
+
+      _isNext = "berhasil";
+      Productda dataWallet = Productda.fromJson(response.data);
+      print("berhasil $dataWallet");
+      return dataWallet;
+    } on DioError catch (e) {
+      print(e.response!.data['message']);
+      print('data bermasalah');
+      _isNext = "gagal";
+      rethrow;
+    }
+  }
+
+  Future<DataProduct> getproduct(int tipe, String nomor) async {
     final prefs = await SharedPreferences.getInstance();
     final String token = prefs.getString('token') ?? "";
     var formdata = FormData.fromMap({"phone_number": nomor});
@@ -65,9 +92,7 @@ class MyCuanAPI {
               }),
               data: formdata);
       print("Sebelum ${response.data["data"]}");
-      final jaja = List<DataProduct>.from(response.data["data"]
-          .map((data) => DataProduct.fromJson(data))
-          .toList());
+      final jaja = DataProduct.fromJson(response.data["data"]);
 
       print("Sesudah $jaja");
 

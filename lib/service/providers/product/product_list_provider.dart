@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/models/product.dart';
+import 'package:ppodb_2/models/product/product_data_model.dart';
 import 'package:ppodb_2/models/product/product_detail.dart';
 import 'package:ppodb_2/models/product/productcate.dart';
 import 'package:ppodb_2/service/database/myCuan_Api.dart';
 
 class ProductListProviders extends ChangeNotifier {
   late MyCuanAPI service;
-  List<Productmodel> status = [];
-  List<DataProduct> product = [];
-  List<DataProduct> products = [];
+  late Productda product;
+  late Productda bambang;
+
   Productstate _state = Productstate.none;
   Productstate get state => _state;
 
@@ -20,18 +21,27 @@ class ProductListProviders extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<DataProduct> get isicategory {
-    var temp = [...products];
+  Productda get isicategory {
+    var temp = product;
     print(temp);
     return temp;
   }
 
-  kirimData(int tipe, String nomor) async {
+  addtransaksi(int tipe, String nomor) async {
     changeState(Productstate.loading);
     try {
-      product = await service.getproduct(tipe, nomor);
+      await service.updatetransaksi(tipe, nomor);
+      changeState(Productstate.none);
+    } catch (error) {
+      changeState(Productstate.error);
+    }
+  }
 
-      products = [...product];
+  getdatabaru(int tipe, String nomor) async {
+    changeState(Productstate.loading);
+    try {
+      bambang = await service.getproductbaru(tipe, nomor);
+      product = bambang;
       changeState(Productstate.none);
     } catch (error) {
       changeState(Productstate.error);
