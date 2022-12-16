@@ -85,7 +85,7 @@ class Alert extends StatelessWidget {
                       label: labelButton,
                       colorisi: primaryColor,                    
                       onClicked: () {
-                       
+                       Navigator.pop(context);
                       }
                     )
                   ),
