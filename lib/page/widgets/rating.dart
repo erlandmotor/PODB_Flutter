@@ -81,7 +81,7 @@ class AlertRating extends StatelessWidget {
             Padding(
               padding:  EdgeInsets.only(left: widthh*35/360,right: widthh*16/360),
               child: Container(
-                width: widthh*272/360,
+                width: widthh*230/360,
                 height: heightt*40/800,
                 child: RatingBar.builder(
                 initialRating: 0,

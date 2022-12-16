@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/riwayat/detail_riwayat.dart';
@@ -24,6 +25,7 @@ class Riwayat extends StatefulWidget {
 
 class _RiwayatState extends State<Riwayat> {
  void initState() {
+  initializeDateFormatting();
     Future.delayed(
       Duration.zero,
       () {
@@ -480,9 +482,10 @@ class _RiwayatState extends State<Riwayat> {
                     height: size.height * .02,
                   ),
                   Container(
-                    height: heightt*600/800,
+                    height: heightt*500/800,
                     width: widthh,
                     child: ListView.builder(
+                      shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding:  EdgeInsets.only( bottom: heightt*16/800),
@@ -536,7 +539,7 @@ class _RiwayatState extends State<Riwayat> {
                                   style: GoogleFonts.inter(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 12,
-                                    color: statusTransaksi[index] == "Berhasil"?Colors.green:statusTransaksi[index] == "Dibatalkan"?Colors.red:Colors.yellow
+                                    color: Colors.green
                                   ),),
                                 ],
                               ),
@@ -548,6 +551,8 @@ class _RiwayatState extends State<Riwayat> {
                                 statusTransaksi: "Berhasil",
                                 title: provider.riwayat!.data![index].productName.toString(),
                                 total: provider.riwayat!.data![index].totalPrice.toString(),
+                                feeAdmin: provider.riwayat!.data![index].adminFee.toString(),
+                                tgl: provider.riwayat!.data![index].transactionDate,
                                ))));
                             },
                           ),

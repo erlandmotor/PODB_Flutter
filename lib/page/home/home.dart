@@ -23,6 +23,7 @@ import 'package:ppodb_2/page/widgets/pdams.dart';
 import 'package:ppodb_2/page/widgets/pulsa.dart';
 import 'package:ppodb_2/page/widgets/textIconMenu.dart';
 import 'package:ppodb_2/service/database/myCuan_Api.dart';
+import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
 import 'package:ppodb_2/service/providers/wallet/wallet_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -180,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.black,
                               fontWeight: FontWeight.w500,
                               fontSize: 12)),
-                      Consumer<BalanceProvider>(
+                      Consumer<ProfilProvider>(
                         builder: (context, provider, _) {
                           switch (provider.myState) {
                             case MyState.loading:
@@ -193,17 +194,8 @@ class _HomePageState extends State<HomePage> {
                                   fontSize: 23)),
                         );
                         case MyState.loaded:
-                        if(provider.balance==null){
+                        if(provider.profil!.data!.wallet!.balance==null){
                           return Padding(
-                          padding: EdgeInsets.only(top: heightt * 5 / 800),
-                          child: Text("Rp. 0",
-                              style: GoogleFonts.inter(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 23)),
-                        );
-                        }else if(provider.balance!.balance == null){
-                         return Padding(
                           padding: EdgeInsets.only(top: heightt * 5 / 800),
                           child: Text("Rp. 0",
                               style: GoogleFonts.inter(
@@ -214,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                         }else{
                            return Padding(
                             padding: EdgeInsets.only(top: heightt * 5 / 800),
-                            child: Text("Rp."+ provider.balance!.balance.toString(),
+                            child: Text("Rp."+ provider.profil!.data!.wallet!.balance.toString(),
                                 style: GoogleFonts.inter(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,

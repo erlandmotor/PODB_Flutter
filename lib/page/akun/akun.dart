@@ -379,10 +379,11 @@ class _ProfilState extends State<Profil> {
                           
                         ),
                       ),
-                      Consumer<BalanceProvider>(
+                      Consumer<ProfilProvider>(
                         builder: (context, provider, _) {
                           switch (provider.myState) {
                             case MyState.loading:
+                            //print(provider.profil!.data!.wallet!.balance);
                               return Boxsaldo(
                             child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -439,7 +440,7 @@ class _ProfilState extends State<Profil> {
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 18)),
+                                                  fontSize: 16)),
                                         ),
                                       ],
                                     ),
@@ -496,7 +497,7 @@ class _ProfilState extends State<Profil> {
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 18)),
+                                                  fontSize: 16)),
                                         ),
                                       ],
                                     ),
@@ -507,7 +508,7 @@ class _ProfilState extends State<Profil> {
                           ],
                         ));
                         case MyState.loaded:
-                        if(provider.balance!.balance== null&&provider.balance!.historiesWallet== null){
+                        if(provider.profil!.data!.wallet!.balance== null&&provider.profil!.data!.wallet!.historiesWallet== null){
                           return Boxsaldo(
                             child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -564,7 +565,7 @@ class _ProfilState extends State<Profil> {
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 18)),
+                                                  fontSize: 16)),
                                         ),
                                       ],
                                     ),
@@ -621,7 +622,255 @@ class _ProfilState extends State<Profil> {
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 18)),
+                                                  fontSize: 16)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ));
+                        }else if(provider.profil!.data!.wallet!.balance==null){
+                          return Boxsaldo(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Container(
+                                          height: 33,
+                                          width: 33,
+                                          decoration: BoxDecoration(
+                                              color: sideSukes,
+                                              borderRadius:
+                                                  BorderRadius.circular(400)),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.asset(
+                                              "assets/icon/atas.png",
+                                              height: 15,
+                                              width: 15,
+                                              color: colorSukses,
+                                            ),
+                                          )),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        //     Text("Total Saldo",
+                                        //     style: GoogleFonts.inter(
+                                        //   color: Colors.black,
+                                        //   fontWeight: FontWeight.w500,
+                                        //   fontSize: 12
+                                        //     )
+                                        //     ),
+                          
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text("Uang Masuk",
+                                            style: GoogleFonts.inter(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14)),
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 5),
+                                          child: Text("Rp.0",
+                                              style: GoogleFonts.inter(
+                                                  color: warnaHarga,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Container(
+                                          height: 33,
+                                          width: 33,
+                                          decoration: BoxDecoration(
+                                              color: sideError,
+                                              borderRadius:
+                                                  BorderRadius.circular(400)),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.asset(
+                                              "assets/icon/bawah.png",
+                                              height: 15,
+                                              width: 15,
+                                              color: colorError,
+                                            ),
+                                          )),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        //     Text("Total Saldo",
+                                        //     style: GoogleFonts.inter(
+                                        //   color: Colors.black,
+                                        //   fontWeight: FontWeight.w500,
+                                        //   fontSize: 12
+                                        //     )
+                                        //     ),
+                          
+                                        SizedBox(width: 5),
+                                        Text("Uang Keluar",
+                                            style: GoogleFonts.inter(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14)),
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 5),
+                                          child: Text("Rp."+provider.profil!.data!.wallet!.historiesWallet.toString(),
+                                              style: GoogleFonts.inter(
+                                                  color: warnaHarga,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ));
+                        }else if(provider.profil!.data!.wallet!.historiesWallet==null){
+                          return Boxsaldo(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Container(
+                                          height: 33,
+                                          width: 33,
+                                          decoration: BoxDecoration(
+                                              color: sideSukes,
+                                              borderRadius:
+                                                  BorderRadius.circular(400)),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.asset(
+                                              "assets/icon/atas.png",
+                                              height: 15,
+                                              width: 15,
+                                              color: colorSukses,
+                                            ),
+                                          )),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        //     Text("Total Saldo",
+                                        //     style: GoogleFonts.inter(
+                                        //   color: Colors.black,
+                                        //   fontWeight: FontWeight.w500,
+                                        //   fontSize: 12
+                                        //     )
+                                        //     ),
+                          
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text("Uang Masuk",
+                                            style: GoogleFonts.inter(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14)),
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 5),
+                                          child: Text("Rp."+provider.profil!.data!.wallet!.balance.toString(),
+                                              style: GoogleFonts.inter(
+                                                  color: warnaHarga,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: ListTile(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 8),
+                                      child: Container(
+                                          height: 33,
+                                          width: 33,
+                                          decoration: BoxDecoration(
+                                              color: sideError,
+                                              borderRadius:
+                                                  BorderRadius.circular(400)),
+                                          child: IconButton(
+                                            onPressed: () {},
+                                            icon: Image.asset(
+                                              "assets/icon/bawah.png",
+                                              height: 15,
+                                              width: 15,
+                                              color: colorError,
+                                            ),
+                                          )),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        //     Text("Total Saldo",
+                                        //     style: GoogleFonts.inter(
+                                        //   color: Colors.black,
+                                        //   fontWeight: FontWeight.w500,
+                                        //   fontSize: 12
+                                        //     )
+                                        //     ),
+                          
+                                        SizedBox(width: 5),
+                                        Text("Uang Keluar",
+                                            style: GoogleFonts.inter(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14)),
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 5),
+                                          child: Text("Rp.0",
+                                              style: GoogleFonts.inter(
+                                                  color: warnaHarga,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16)),
                                         ),
                                       ],
                                     ),
@@ -684,11 +933,11 @@ class _ProfilState extends State<Profil> {
                                                 fontSize: 14)),
                                         Padding(
                                           padding: EdgeInsets.only(top: 5),
-                                          child: Text("Rp."+provider.balance!.balance.toString(),
+                                          child: Text("Rp."+provider.profil!.data!.wallet!.balance.toString(),
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 18)),
+                                                  fontSize: 16)),
                                         ),
                                       ],
                                     ),
@@ -741,11 +990,11 @@ class _ProfilState extends State<Profil> {
                                                 fontSize: 14)),
                                         Padding(
                                           padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp."+provider.balance!.historiesWallet.toString(),
+                                          child: Text("Rp."+provider.profil!.data!.wallet!.historiesWallet.toString(),
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 18)),
+                                                  fontSize: 16)),
                                         ),
                                       ],
                                     ),
@@ -813,7 +1062,7 @@ class _ProfilState extends State<Profil> {
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 18)),
+                                                  fontSize: 16)),
                                         ),
                                       ],
                                     ),
@@ -870,7 +1119,7 @@ class _ProfilState extends State<Profil> {
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 18)),
+                                                  fontSize: 16)),
                                         ),
                                       ],
                                     ),

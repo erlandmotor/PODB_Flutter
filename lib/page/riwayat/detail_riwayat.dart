@@ -2,24 +2,36 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:ppodb_2/page/widgets/box_detail_riwayat.dart';
 import 'package:ppodb_2/page/widgets/button_costume.dart';
 import 'package:ppodb_2/page/widgets/card_field_item_text.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart';
+import 'package:ppodb_2/page/widgets/finite_state.dart';
+import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
+import 'package:provider/provider.dart';
 
 class DetailRiwayat extends StatefulWidget {
-  const DetailRiwayat({super.key,required this.dompetDigital,required this.nominal,required this.statusTransaksi,required this.title,required this.total});
+  const DetailRiwayat({super.key,required this.tgl,required this.dompetDigital,required this.feeAdmin,required this.nominal,required this.statusTransaksi,required this.title,required this.total});
   final String title;
   final String nominal;
   final String total;
   final String statusTransaksi;
   final String dompetDigital;
+  final String feeAdmin;
+  final DateTime? tgl;
 
   @override
   State<DetailRiwayat> createState() => _DetailRiwayatState();
 }
 
 class _DetailRiwayatState extends State<DetailRiwayat> {
+  @override
+  void initState() {
+    initializeDateFormatting();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
      double heightt = MediaQuery.of(context).size.height;
@@ -62,11 +74,15 @@ class _DetailRiwayatState extends State<DetailRiwayat> {
                         width: 16,)
                       ],
                     ),
-                    subtitle: Text("18 Desember 2022 (08:18 wib)",
-                    style: GoogleFonts.inter(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400
-                    ),),
+                    subtitle:  Text(DateFormat(
+                                    'EEEE, dd MMMM yyyy', 'id').format(
+                                      DateTime.parse(widget.tgl.toString()
+                                    )
+                                  ).toString(),
+                                style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12
+                                ),),
                     trailing: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,7 +91,7 @@ class _DetailRiwayatState extends State<DetailRiwayat> {
                     style: GoogleFonts.inter(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
-                      color: widget.statusTransaksi == "Berhasil"?Colors.green:widget.statusTransaksi == "Dibatalkan"?Colors.red:Colors.yellow
+                      color: Colors.green
                     ),),
                       ],
                     ),
@@ -92,7 +108,7 @@ class _DetailRiwayatState extends State<DetailRiwayat> {
                         ListTile(
                           //contentPadding: EdgeInsets.only(left: widthh*16/360,right: widthh*16/360),
                           title:ListTile(                        
-                            leading: Image.asset( "assets/icon/telkomsel.png",
+                            leading: Image.asset( "assets/icon/c.png",
                             height: 32,
                             width: 32,),
                             title: Text(widget.title +" "+widget.nominal, 
@@ -100,11 +116,40 @@ class _DetailRiwayatState extends State<DetailRiwayat> {
                             fontSize: 14,
                             fontWeight: FontWeight.w700
                            )),
-                           subtitle: Text("089789879890",style: GoogleFonts.inter(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          
-                        ),),                    
+                           subtitle: Consumer<ProfilProvider>(
+                            builder: (context, provider, _) {
+                              switch (provider.myState){
+                                case MyState.loading:
+                                return Text("-",style: GoogleFonts.inter(
+                                                     fontSize: 14,
+                                                     fontWeight: FontWeight.w400,
+                                                     
+                                                   ),);
+                                case MyState.loaded:
+                                if(provider.profil!.data!.phoneNumber ==null){
+                                  return Text("-",style: GoogleFonts.inter(
+                                                     fontSize: 14,
+                                                     fontWeight: FontWeight.w400,
+                                                     
+                                                   ),);
+                                }else{
+                                  return Text(provider.profil!.data!.phoneNumber.toString(),style: GoogleFonts.inter(
+                                                     fontSize: 14,
+                                                     fontWeight: FontWeight.w400,
+                                                     
+                                                   ),);
+                                }
+                                default:
+                                 return Text("-",style: GoogleFonts.inter(
+                                                     fontSize: 14,
+                                                     fontWeight: FontWeight.w400,
+                                                     
+                                                   ),);
+                              }
+                              
+                            },
+                             
+                           ),                    
                           ) ,
                          subtitle: Padding(
                           padding: EdgeInsets.only(top: 5),
@@ -120,7 +165,7 @@ class _DetailRiwayatState extends State<DetailRiwayat> {
                                  SizedBox(height: heightt*16/800),
                                  CardFieldItemText(
                                 label: "Biaya Admin", 
-                                contentData: "Gratis!",
+                                contentData: widget.feeAdmin,
                                 flexLeftRow: 25, 
                                 flexRightRow: 10),
                                  SizedBox(height: heightt*16/800),
@@ -131,7 +176,7 @@ class _DetailRiwayatState extends State<DetailRiwayat> {
                                  SizedBox(height: heightt*16/800),
                                   CardFieldItemText(
                                 label: "Voucher ######", 
-                                contentData: "-"+widget.nominal,
+                                contentData: "-12000",
                                 flexLeftRow: 25, 
                                 flexRightRow: 10),
                                 SizedBox(height: heightt*16/800),
@@ -150,8 +195,8 @@ class _DetailRiwayatState extends State<DetailRiwayat> {
                                     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15),bottomRight: Radius.circular(15))
                                   ),
                                   child: CardFieldItemText(
-                                label: "Voucher ######", 
-                                contentData: "-"+widget.nominal,
+                                label: "Total", 
+                                contentData: widget.nominal,
                                 flexLeftRow: 25, 
                                 flexRightRow: 10),
                                 ),
