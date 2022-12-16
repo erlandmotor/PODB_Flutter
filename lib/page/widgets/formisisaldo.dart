@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
+import 'package:ppodb_2/page/widgets/qrCode.dart';
 
 class Isiformsaldo extends StatefulWidget {
   Dummymethod metod;
@@ -20,7 +23,7 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Isi Saldo",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -36,7 +39,7 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
             right: size.width * .0444),
         child: Column(
           children: [
-            Align(
+            const Align(
               alignment: Alignment.topLeft,
               child: Text.rich(
                   textAlign: TextAlign.left,
@@ -54,14 +57,14 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               keyboardType: TextInputType.phone,
               controller: jumlah,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color(0xff0D40C6),
                   fontSize: 30,
                   fontWeight: FontWeight.w600),
               decoration: jumlah.text == ""
                   ? InputDecoration(
                       hintText: "0",
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                           color: Color(0xff0D40C6),
                           fontSize: 30,
                           fontWeight: FontWeight.w600),
@@ -70,7 +73,7 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
                           padding: EdgeInsets.only(
                               top: size.height * .015,
                               bottom: size.height * .015),
-                          child: Text.rich(
+                          child: const Text.rich(
                               textAlign: TextAlign.left,
                               TextSpan(
                                   text: "Rp",
@@ -82,7 +85,7 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
                     )
                   : InputDecoration(
                       hintText: "0",
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                           color: Color(0xff0D40C6),
                           fontSize: 30,
                           fontWeight: FontWeight.w600),
@@ -93,7 +96,7 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
                               jumlah.clear();
                             });
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.cancel,
                             color: Color(0xff0D40C6),
                           )),
@@ -101,7 +104,7 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
                           padding: EdgeInsets.only(
                               top: size.height * .015,
                               bottom: size.height * .015),
-                          child: Text.rich(
+                          child: const Text.rich(
                               textAlign: TextAlign.left,
                               TextSpan(
                                   text: "Rp",
@@ -137,7 +140,7 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
             SizedBox(
               height: size.height * .02,
             ),
-            Align(
+            const Align(
                 alignment: Alignment.topLeft,
                 child: Text.rich(
                     textAlign: TextAlign.left,
@@ -151,15 +154,14 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
               height: size.height * .01,
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  top: size.height * .02, bottom: size.height * .02, left: 0),
+              padding: EdgeInsets.only(top: size.height * .02, left: 0),
               child: ListTile(
                 leading: Image.asset(
                   widget.metod.gambar,
                   width: 24,
                   height: 24,
                 ),
-                trailing: Icon(
+                trailing: const Icon(
                   Icons.navigate_next_rounded,
                   color: Colors.black,
                 ),
@@ -170,13 +172,13 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
                     textAlign: TextAlign.left,
                     TextSpan(
                         text: widget.metod.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 14,
                         ))),
               ),
             ),
-            Divider(),
+            const Divider(),
             SizedBox(
               height: size.height * .02,
             ),
@@ -184,7 +186,7 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
               height: size.height * .08,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0),
-                color: Color(0xff0D40C614),
+                color: const Color(0xff0d40c614),
               ),
               width: size.width * .9111,
               child: Padding(
@@ -196,7 +198,7 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text.rich(TextSpan(
+                    const Text.rich(TextSpan(
                         text: "Total Pembayaran",
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
@@ -204,9 +206,17 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
                         ))),
                     Text.rich(TextSpan(
                         text: jumlah.text != ""
-                            ? "${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(int.parse(jumlah.text))}"
-                            : "${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(0)}",
-                        style: TextStyle(
+                            ? NumberFormat.currency(
+                                    locale: 'id',
+                                    symbol: 'Rp',
+                                    decimalDigits: 0)
+                                .format(int.parse(jumlah.text))
+                            : NumberFormat.currency(
+                                    locale: 'id',
+                                    symbol: 'Rp',
+                                    decimalDigits: 0)
+                                .format(0),
+                        style: const TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 14,
                         ))),
@@ -225,10 +235,20 @@ class _IsiformsaldoState extends State<Isiformsaldo> {
                       height: size.height * .06,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff0D40C6),
-                            shape: StadiumBorder()),
-                        onPressed: () {},
-                        child: Text.rich(
+                            backgroundColor: const Color(0xff0D40C6),
+                            shape: const StadiumBorder()),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => QRScreen(
+                                    code:
+                                        "${Random().nextInt(899999999) + 100000000}",
+                                    data: widget.metod,
+                                    total: int.parse(jumlah.text))),
+                          );
+                        },
+                        child: const Text.rich(
                           TextSpan(
                             text: "Bayar Sekarang",
                           ),

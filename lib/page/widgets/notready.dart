@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../transaction/categoryhome.dart';
+import '../product/categoryhome.dart';
 
 class Notready extends StatelessWidget {
   const Notready({super.key});

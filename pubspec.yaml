@@ -43,13 +43,16 @@ dependencies:
   open_file: ^3.2.1
   url_launcher: ^6.1.7
   flutter_rating_bar: ^4.0.1
+  shared_preferences: ^2.0.15
+  slide_countdown: ^0.3.4
+  qr_flutter: ^4.0.0
   flutter:
     sdk: flutter
 
 
 
   intl: ^0.17.0
-  shared_preferences: ^2.0.15
+
 
 dev_dependencies:
   flutter_lints: ^2.0.0

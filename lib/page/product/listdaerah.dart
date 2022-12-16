@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 
 class Wilayahpicker extends StatefulWidget {
-  Wilayahpicker({super.key});
+  const Wilayahpicker({super.key});
 
   @override
   State<Wilayahpicker> createState() => _WilayahpickerState();
@@ -69,7 +69,7 @@ class _WilayahpickerState extends State<Wilayahpicker> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Pilih Wilayah",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -92,12 +92,12 @@ class _WilayahpickerState extends State<Wilayahpicker> {
               TextField(
                 decoration: koko == ""
                     ? InputDecoration(
-                        prefixIcon: Icon(Icons.search),
+                        prefixIcon: const Icon(Icons.search),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10)),
                         hintText: "Cari wilayah kamu!")
                     : InputDecoration(
-                        prefix: Icon(Icons.search),
+                        prefix: const Icon(Icons.search),
                         suffixIcon: IconButton(
                             onPressed: () {
                               setState(() {
@@ -105,7 +105,7 @@ class _WilayahpickerState extends State<Wilayahpicker> {
                                 bambang.clear();
                               });
                             },
-                            icon: Icon(Icons.cancel)),
+                            icon: const Icon(Icons.cancel)),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10)),
                       ),
@@ -126,13 +126,13 @@ class _WilayahpickerState extends State<Wilayahpicker> {
                   ? Column(
                       children: [
                         for (var i = 0; i < daerah.length; i++)
-                          Container(
+                          SizedBox(
                             width: size.width * .911,
                             child: Column(
                               children: [
                                 Container(
                                     width: size.width * .911,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(10),
                                           topLeft: Radius.circular(10),
@@ -145,7 +145,7 @@ class _WilayahpickerState extends State<Wilayahpicker> {
                                           bottom: size.height * .015),
                                       child: Text.rich(
                                         TextSpan(text: daerah[i].provinsi),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 16),
                                         textAlign: TextAlign.left,
@@ -153,7 +153,7 @@ class _WilayahpickerState extends State<Wilayahpicker> {
                                     )),
                                 ListView.separated(
                                   separatorBuilder: (context, index) {
-                                    return Divider();
+                                    return const Divider();
                                   },
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
@@ -162,7 +162,8 @@ class _WilayahpickerState extends State<Wilayahpicker> {
                                       (BuildContext context, int index) {
                                     return ListTile(
                                       onTap: () {
-                                        Navigator.pop(context, wilayah[index]);
+                                        Navigator.pop(
+                                            context, daerah[i].wilayah[index]);
                                       },
                                       title: Text(daerah[i].wilayah[index]),
                                     );
@@ -173,12 +174,12 @@ class _WilayahpickerState extends State<Wilayahpicker> {
                           )
                       ],
                     )
-                  : Container(
+                  : SizedBox(
                       width: size.width * .911,
                       child: Column(children: [
                         Container(
                           width: size.width * .911,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(
                               topRight: Radius.circular(10),
                               topLeft: Radius.circular(10),
@@ -186,7 +187,7 @@ class _WilayahpickerState extends State<Wilayahpicker> {
                           ),
                           child: ListView.separated(
                               separatorBuilder: (context, index) {
-                                return Divider();
+                                return const Divider();
                               },
                               shrinkWrap: true,
                               itemCount: wilayahs.length,

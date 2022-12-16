@@ -8,7 +8,7 @@ import 'package:ppodb_2/page/akun/edit_password.dart';
 import 'package:ppodb_2/page/akun/syarat_dan_ketentuan/syarat_dan_ketentuan.dart';
 import 'package:ppodb_2/page/login_register/login_page.dart';
 import 'package:ppodb_2/page/login_register/register1_page.dart';
-import 'package:ppodb_2/page/transaction/voucher_picker_screen.dart';
+import 'package:ppodb_2/page/transaction/vouchertele.dart';
 import 'package:ppodb_2/page/widgets/alert.dart';
 
 import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
@@ -53,11 +53,13 @@ class _ProfilState extends State<Profil> {
   @override
   void initState() {
     _pageController = PageController(viewportFraction: 0.8, initialPage: 1);
-     Future.delayed(
+    Future.delayed(
       Duration.zero,
       () {
         final _provider = Provider.of<ProfilProvider>(context, listen: false);
-         final _balanceprovider = Provider.of<BalanceProvider>(context, listen: false);
+        final _balanceprovider =
+            Provider.of<BalanceProvider>(context, listen: false);
+
         /// Fetch users data
         _provider.fetchProfil();
         _balanceprovider.fetchBalance();
@@ -91,7 +93,8 @@ class _ProfilState extends State<Profil> {
                 final String token = prefs.getString('token') ?? "";
                 prefs.remove("token");
                 prefs.setBool("login", false);
-                 Navigator.push(context, MaterialPageRoute(builder: ((context) => LoginPage())));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => LoginPage())));
                 // if (_postProses == "berhasil") {
                 //   Get.offAll(const SuratJalanView());
                 // }
@@ -117,7 +120,6 @@ class _ProfilState extends State<Profil> {
               colorButton: color,
               gambar: gambar,
               onClicked: () async {
-                 
                 // if (_postProses == "berhasil") {
                 //   Get.offAll(const SuratJalanView());
                 // }
@@ -145,6 +147,7 @@ class _ProfilState extends State<Profil> {
                             left: widthh * 16 / 360, right: widthh * 16 / 360),
                         child: Consumer<ProfilProvider>(
                           builder: (context, provider, _) {
+
                           switch(provider.myState){
                             case MyState.loading:
                               return Row(
@@ -395,108 +398,75 @@ class _ProfilState extends State<Profil> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideSukes,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/atas.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorSukses,
-                                            ),
-                                          )),
+                                    Container(
+                                      height: heightt * 80 / 800,
+                                      width: widthh * 80 / 360,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(400),
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  "assets/icon/person.png"))),
+                                    ),
+                                    SizedBox(
+                                      width: widthh * 20 / 360,
                                     ),
                                     Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text("Uang Masuk",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
                                         Padding(
+
                                           padding: EdgeInsets.only(top: 5),
                                           child: Text("Rp.0",
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
                                                   fontWeight: FontWeight.w600,
                                                   fontSize: 16)),
+
                                         ),
                                       ],
-                                    ),
+                                    )
                                   ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideError,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/bawah.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorError,
+                                );
+                              case MyState.loaded:
+                                if (provider.profil == null) {
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        height: heightt * 80 / 800,
+                                        width: widthh * 80 / 360,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(400),
+                                            image: DecorationImage(
+                                                image: AssetImage(
+                                                    "assets/icon/person.png"))),
+                                      ),
+                                      SizedBox(
+                                        width: widthh * 20 / 360,
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              top: heightt * 13 / 800,
                                             ),
-                                          )),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        SizedBox(width: 5),
-                                        Text("Uang Keluar",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp.0",
+                                            child: Text(
+                                              "-",
                                               style: GoogleFonts.inter(
-                                                  color: warnaHarga,
+                                                  fontSize: 20,
                                                   fontWeight: FontWeight.w600,
+
                                                   fontSize: 16)),
                                         ),
                                       ],
@@ -536,35 +506,111 @@ class _ProfilState extends State<Profil> {
                                               height: 15,
                                               width: 15,
                                               color: colorSukses,
+
                                             ),
-                                          )),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text("Uang Masuk",
+                                          ),
+                                          Text(
+                                            "-",
                                             style: GoogleFonts.inter(
-                                                color: Colors.black,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 5),
-                                          child: Text("Rp.0",
+                                                color: colorwhite),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  );
+                                } else {
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Consumer<ProfilProvider>(
+                                        builder: (context, provider, _) {
+                                          switch (provider.myState) {
+                                            case MyState.loading:
+                                              return Container(
+                                                height: heightt * 80 / 800,
+                                                width: widthh * 80 / 360,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            400),
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                            "assets/icon/person.png"))),
+                                              );
+                                            case MyState.loaded:
+                                              if (provider
+                                                      .profil!.data!.image ==
+                                                  null) {
+                                                return Container(
+                                                  height: heightt * 80 / 800,
+                                                  width: widthh * 80 / 360,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              400),
+                                                      image: DecorationImage(
+                                                          image: AssetImage(
+                                                              "assets/icon/person.png"))),
+                                                );
+                                              } else {
+                                                return Container(
+                                                  height: heightt * 80 / 800,
+                                                  width: widthh * 80 / 360,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              400),
+                                                      image: DecorationImage(
+                                                        image: NetworkImage(
+                                                          provider.profil!.data!
+                                                              .image
+                                                              .toString(),
+                                                        ),
+                                                      )),
+                                                );
+                                              }
+                                            case MyState.failed:
+                                              return Container(
+                                                height: heightt * 80 / 800,
+                                                width: widthh * 80 / 360,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            400),
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                            "assets/icon/person.png"))),
+                                              );
+
+                                            default:
+                                              return CircularProgressIndicator();
+                                          }
+                                        },
+                                      ),
+                                      SizedBox(
+                                        width: widthh * 20 / 360,
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              top: heightt * 13 / 800,
+                                            ),
+                                            child: Text(
+                                              provider.profil!.data!.name
+                                                  .toString(),
                                               style: GoogleFonts.inter(
-                                                  color: warnaHarga,
+                                                  fontSize: 20,
                                                   fontWeight: FontWeight.w600,
+
                                                   fontSize: 16)),
                                         ),
                                       ],
@@ -595,26 +641,16 @@ class _ProfilState extends State<Profil> {
                                               height: 15,
                                               width: 15,
                                               color: colorError,
+
                                             ),
-                                          )),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        SizedBox(width: 5),
-                                        Text("Uang Keluar",
+                                          ),
+                                          Text(
+                                            provider.profil!.data!.phoneNumber
+                                                .toString(),
                                             style: GoogleFonts.inter(
-                                                color: Colors.black,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.w400,
+
                                                 fontSize: 14)),
                                         Padding(
                                           padding: const EdgeInsets.only(top: 5),
@@ -890,86 +926,124 @@ class _ProfilState extends State<Profil> {
                               child: ListTile(
                                 title: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
+
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideSukes,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/atas.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorSukses,
-                                            ),
-                                          )),
+                                    Container(
+                                      height: heightt * 80 / 800,
+                                      width: widthh * 80 / 360,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(400),
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  "assets/icon/person.png"))),
+                                    ),
+                                    SizedBox(
+                                      width: widthh * 20 / 360,
                                     ),
                                     Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text("Uang Masuk",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
                                         Padding(
+
                                           padding: EdgeInsets.only(top: 5),
                                           child: Text("Rp."+provider.profil!.data!.wallet!.balance.toString(),
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
                                                   fontWeight: FontWeight.w600,
                                                   fontSize: 16)),
+
                                         ),
                                       ],
-                                    ),
+                                    )
                                   ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideError,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/bawah.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorError,
-                                            ),
-                                          )),
+                                );
+                              default:
+                                return CircularProgressIndicator();
+                            }
+                          },
+                        ),
+                      ),
+                      Consumer<BalanceProvider>(
+                        builder: (context, provider, _) {
+                          switch (provider.myState) {
+                            case MyState.loading:
+                              return Boxsaldo(
+                                  child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: ListTile(
+                                      title: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(right: 8),
+                                            child: Container(
+                                                height: 33,
+                                                width: 33,
+                                                decoration: BoxDecoration(
+                                                    color: sideSukes,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            400)),
+                                                child: IconButton(
+                                                  onPressed: () {},
+                                                  icon: Image.asset(
+                                                    "assets/icon/atas.png",
+                                                    height: 15,
+                                                    width: 15,
+                                                    color: colorSukses,
+                                                  ),
+                                                )),
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              //     Text("Total Saldo",
+                                              //     style: GoogleFonts.inter(
+                                              //   color: Colors.black,
+                                              //   fontWeight: FontWeight.w500,
+                                              //   fontSize: 12
+                                              //     )
+                                              //     ),
+
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text("Uang Masuk",
+                                                  style: GoogleFonts.inter(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 14)),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 5),
+                                                child: Text("Rp.0",
+                                                    style: GoogleFonts.inter(
+                                                        color: warnaHarga,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 18)),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
+
                                     Column(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -997,43 +1071,49 @@ class _ProfilState extends State<Profil> {
                                                   fontSize: 16)),
                                         ),
                                       ],
+
                                     ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ));
-                        }
-                        case MyState.failed:
-                        return Boxsaldo(
-                            child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  )
+                                ],
+                              ));
+                            case MyState.loaded:
+                              if (provider.balance!.balance == null &&
+                                  provider.balance!.historiesWallet == null) {
+                                return Boxsaldo(
+                                    child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideSukes,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/atas.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorSukses,
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 8),
+                                              child: Container(
+                                                  height: 33,
+                                                  width: 33,
+                                                  decoration: BoxDecoration(
+                                                      color: sideSukes,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              400)),
+                                                  child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Image.asset(
+                                                      "assets/icon/atas.png",
+                                                      height: 15,
+                                                      width: 15,
+                                                      color: colorSukses,
+                                                    ),
+                                                  )),
                                             ),
+
                                           )),
                                     ),
                                     Column(
@@ -1063,36 +1143,115 @@ class _ProfilState extends State<Profil> {
                                                   color: warnaHarga,
                                                   fontWeight: FontWeight.w600,
                                                   fontSize: 16)),
+
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideError,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/bawah.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorError,
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 8),
+                                              child: Container(
+                                                  height: 33,
+                                                  width: 33,
+                                                  decoration: BoxDecoration(
+                                                      color: sideError,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              400)),
+                                                  child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Image.asset(
+                                                      "assets/icon/bawah.png",
+                                                      height: 15,
+                                                      width: 15,
+                                                      color: colorError,
+                                                    ),
+                                                  )),
                                             ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                //     Text("Total Saldo",
+                                                //     style: GoogleFonts.inter(
+                                                //   color: Colors.black,
+                                                //   fontWeight: FontWeight.w500,
+                                                //   fontSize: 12
+                                                //     )
+                                                //     ),
+
+                                                SizedBox(width: 5),
+                                                Text("Uang Keluar",
+                                                    style: GoogleFonts.inter(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Text("Rp.0",
+                                                      style: GoogleFonts.inter(
+                                                          color: warnaHarga,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 18)),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ));
+                              } else {
+                                return Boxsaldo(
+                                    child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 8),
+                                              child: Container(
+                                                  height: 33,
+                                                  width: 33,
+                                                  decoration: BoxDecoration(
+                                                      color: sideSukes,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              400)),
+                                                  child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Image.asset(
+                                                      "assets/icon/atas.png",
+                                                      height: 15,
+                                                      width: 15,
+                                                      color: colorSukses,
+                                                    ),
+                                                  )),
+                                            ),
+
                                           )),
                                     ),
                                     Column(
@@ -1120,23 +1279,228 @@ class _ProfilState extends State<Profil> {
                                                   color: warnaHarga,
                                                   fontWeight: FontWeight.w600,
                                                   fontSize: 16)),
+
                                         ),
-                                      ],
+                                      ),
                                     ),
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 8),
+                                              child: Container(
+                                                  height: 33,
+                                                  width: 33,
+                                                  decoration: BoxDecoration(
+                                                      color: sideError,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              400)),
+                                                  child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Image.asset(
+                                                      "assets/icon/bawah.png",
+                                                      height: 15,
+                                                      width: 15,
+                                                      color: colorError,
+                                                    ),
+                                                  )),
+                                            ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                //     Text("Total Saldo",
+                                                //     style: GoogleFonts.inter(
+                                                //   color: Colors.black,
+                                                //   fontWeight: FontWeight.w500,
+                                                //   fontSize: 12
+                                                //     )
+                                                //     ),
+
+                                                SizedBox(width: 5),
+                                                Text("Uang Keluar",
+                                                    style: GoogleFonts.inter(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Text(
+                                                      "Rp." +
+                                                          provider.balance!
+                                                              .historiesWallet
+                                                              .toString(),
+                                                      style: GoogleFonts.inter(
+                                                          color: warnaHarga,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 18)),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
                                   ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ));
-                           default:
-                            return CircularProgressIndicator();
-                         
-                           
+                                ));
+                              }
+                            case MyState.failed:
+                              return Boxsaldo(
+                                  child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: ListTile(
+                                      title: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(right: 8),
+                                            child: Container(
+                                                height: 33,
+                                                width: 33,
+                                                decoration: BoxDecoration(
+                                                    color: sideSukes,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            400)),
+                                                child: IconButton(
+                                                  onPressed: () {},
+                                                  icon: Image.asset(
+                                                    "assets/icon/atas.png",
+                                                    height: 15,
+                                                    width: 15,
+                                                    color: colorSukses,
+                                                  ),
+                                                )),
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              //     Text("Total Saldo",
+                                              //     style: GoogleFonts.inter(
+                                              //   color: Colors.black,
+                                              //   fontWeight: FontWeight.w500,
+                                              //   fontSize: 12
+                                              //     )
+                                              //     ),
+
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text("Uang Masuk",
+                                                  style: GoogleFonts.inter(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 14)),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 5),
+                                                child: Text("Rp.0",
+                                                    style: GoogleFonts.inter(
+                                                        color: warnaHarga,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 18)),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: ListTile(
+                                      title: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(right: 8),
+                                            child: Container(
+                                                height: 33,
+                                                width: 33,
+                                                decoration: BoxDecoration(
+                                                    color: sideError,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            400)),
+                                                child: IconButton(
+                                                  onPressed: () {},
+                                                  icon: Image.asset(
+                                                    "assets/icon/bawah.png",
+                                                    height: 15,
+                                                    width: 15,
+                                                    color: colorError,
+                                                  ),
+                                                )),
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              //     Text("Total Saldo",
+                                              //     style: GoogleFonts.inter(
+                                              //   color: Colors.black,
+                                              //   fontWeight: FontWeight.w500,
+                                              //   fontSize: 12
+                                              //     )
+                                              //     ),
+
+                                              SizedBox(width: 5),
+                                              Text("Uang Keluar",
+                                                  style: GoogleFonts.inter(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 14)),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 5),
+                                                child: Text("Rp.0",
+                                                    style: GoogleFonts.inter(
+                                                        color: warnaHarga,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 18)),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ));
+                            default:
+                              return CircularProgressIndicator();
                           }
-                         
                         },
-                     
                       ),
                       Padding(
                         padding: EdgeInsets.only(
@@ -1163,16 +1527,34 @@ class _ProfilState extends State<Profil> {
                               return GestureDetector(
                                 onTap: () {
                                   if (namaTopup[index] == "Isi Saldo") {
-                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => Isisaldo())));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                Isisaldo())));
                                   }
                                   if (namaTopup[index] == "Kirim Uang") {
-                                      Navigator.push(context, MaterialPageRoute(builder: ((context) => Notready())));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                Notready())));
                                   }
                                   if (namaTopup[index] == "Kartu Saya") {
-                                     Navigator.push(context, MaterialPageRoute(builder: ((context) => Notready())));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                Notready())));
                                   }
                                   if (namaTopup[index] == "Voucher Saya") {
-                                     Navigator.push(context, MaterialPageRoute(builder: ((context) => Voucherpicker())));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                Vouchertelepick(
+                                                  type: 1,
+                                                ))));
                                   }
                                 },
                                 child: Column(
@@ -1268,7 +1650,8 @@ class _ProfilState extends State<Profil> {
                                 width: widthh,
                                 child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(
@@ -1292,52 +1675,23 @@ class _ProfilState extends State<Profil> {
                                             Consumer<ProfilProvider>(
                                               builder: (context, provider, _) {
                                                 return ListTile(
-                                                contentPadding: EdgeInsets.only(
-                                                    left: 30, right: 30),
-                                                leading: ShaderMask(
-                                                    shaderCallback: (Rect bounds) {
-                                                      return const LinearGradient(
-                                                        begin: Alignment.centerLeft,
-                                                        end: Alignment.centerRight,
-                                                        colors: <Color>[
-                                                          primaryColor,
-                                                          secondaryColor,
-                                                        ],
-                                                        tileMode: TileMode.mirror,
-                                                      ).createShader(bounds);
-                                                    },
-                                                    child: Container(
-                                                      width: 24,
-                                                      height: 24,
-                                                      decoration: BoxDecoration(
-                                                          image: DecorationImage(
-                                                              image: AssetImage(
-                                                                  "assets/icon/person.png"))),
-                                                    )),
-                                                title: Transform.translate(
-                                                  offset: const Offset(-20, 0),
-                                                  child: const Text(
-                                                    "Ubah Data Akun",
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 16),
-                                                  ),
-                                                ),
-                                                trailing: Transform.translate(
-                                                  offset: const Offset(-12, 0),
-                                                  child: ShaderMask(
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          left: 30, right: 30),
+                                                  leading: ShaderMask(
                                                       shaderCallback:
                                                           (Rect bounds) {
                                                         return const LinearGradient(
-                                                          begin:
-                                                              Alignment.centerLeft,
-                                                          end:
-                                                              Alignment.centerRight,
+                                                          begin: Alignment
+                                                              .centerLeft,
+                                                          end: Alignment
+                                                              .centerRight,
                                                           colors: <Color>[
                                                             primaryColor,
                                                             secondaryColor,
                                                           ],
-                                                          tileMode: TileMode.mirror,
+                                                          tileMode:
+                                                              TileMode.mirror,
                                                         ).createShader(bounds);
                                                       },
                                                       child: Container(
@@ -1346,39 +1700,135 @@ class _ProfilState extends State<Profil> {
                                                         decoration: BoxDecoration(
                                                             image: DecorationImage(
                                                                 image: AssetImage(
-                                                                    "assets/icon/kanan.png"))),
+                                                                    "assets/icon/person.png"))),
                                                       )),
-                                                ),
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: ((context) =>
-                                                              EditAkun(
-                                                                emailProfile: provider.profil!.data!.email.toString(),
-                                                                namaProfile: provider.profil!.data!.name.toString(),
-                                                                noProfile: provider.profil!.data!.phoneNumber.toString(),                                                               
-                                                                pass: provider.profil!.data!.password.toString(),
-                                                                gam: provider.profil!.data!.image.toString(),
-                                                              ))));
-                                                },
-                                              );
+                                                  title: Transform.translate(
+                                                    offset:
+                                                        const Offset(-20, 0),
+                                                    child: const Text(
+                                                      "Ubah Data Akun",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16),
+                                                    ),
+                                                  ),
+                                                  trailing: Transform.translate(
+                                                    offset:
+                                                        const Offset(-12, 0),
+                                                    child: ShaderMask(
+                                                        shaderCallback:
+                                                            (Rect bounds) {
+                                                          return const LinearGradient(
+                                                            begin: Alignment
+                                                                .centerLeft,
+                                                            end: Alignment
+                                                                .centerRight,
+                                                            colors: <Color>[
+                                                              primaryColor,
+                                                              secondaryColor,
+                                                            ],
+                                                            tileMode:
+                                                                TileMode.mirror,
+                                                          ).createShader(
+                                                              bounds);
+                                                        },
+                                                        child: Container(
+                                                          width: 24,
+                                                          height: 24,
+                                                          decoration: BoxDecoration(
+                                                              image: DecorationImage(
+                                                                  image: AssetImage(
+                                                                      "assets/icon/kanan.png"))),
+                                                        )),
+                                                  ),
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                ((context) =>
+                                                                    EditAkun(
+                                                                      emailProfile: provider
+                                                                          .profil!
+                                                                          .data!
+                                                                          .email
+                                                                          .toString(),
+                                                                      namaProfile: provider
+                                                                          .profil!
+                                                                          .data!
+                                                                          .name
+                                                                          .toString(),
+                                                                      noProfile: provider
+                                                                          .profil!
+                                                                          .data!
+                                                                          .phoneNumber
+                                                                          .toString(),
+                                                                      pass: provider
+                                                                          .profil!
+                                                                          .data!
+                                                                          .password
+                                                                          .toString(),
+                                                                      gam: provider
+                                                                          .profil!
+                                                                          .data!
+                                                                          .image
+                                                                          .toString(),
+                                                                    ))));
+                                                  },
+                                                );
                                               },
-                                              
                                             ),
                                             ListTile(
-                                                contentPadding: EdgeInsets.only(
-                                                    left: 30, right: 30),
-                                                leading: ShaderMask(
-                                                    shaderCallback: (Rect bounds) {
+                                              contentPadding: EdgeInsets.only(
+                                                  left: 30, right: 30),
+                                              leading: ShaderMask(
+                                                  shaderCallback:
+                                                      (Rect bounds) {
+                                                    return const LinearGradient(
+                                                      begin:
+                                                          Alignment.centerLeft,
+                                                      end:
+                                                          Alignment.centerRight,
+                                                      colors: <Color>[
+                                                        primaryColor,
+                                                        secondaryColor,
+                                                      ],
+                                                      tileMode: TileMode.mirror,
+                                                    ).createShader(bounds);
+                                                  },
+                                                  child: Container(
+                                                    width: 24,
+                                                    height: 24,
+                                                    decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                            image: AssetImage(
+                                                                "assets/icon/lock.png"))),
+                                                  )),
+                                              title: Transform.translate(
+                                                offset: const Offset(-20, 0),
+                                                child: const Text(
+                                                  "Ubah Kata Sandi",
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 16),
+                                                ),
+                                              ),
+                                              trailing: Transform.translate(
+                                                offset: const Offset(-12, 0),
+                                                child: ShaderMask(
+                                                    shaderCallback:
+                                                        (Rect bounds) {
                                                       return const LinearGradient(
-                                                        begin: Alignment.centerLeft,
-                                                        end: Alignment.centerRight,
+                                                        begin: Alignment
+                                                            .centerLeft,
+                                                        end: Alignment
+                                                            .centerRight,
                                                         colors: <Color>[
                                                           primaryColor,
                                                           secondaryColor,
                                                         ],
-                                                        tileMode: TileMode.mirror,
+                                                        tileMode:
+                                                            TileMode.mirror,
                                                       ).createShader(bounds);
                                                     },
                                                     child: Container(
@@ -1387,55 +1837,17 @@ class _ProfilState extends State<Profil> {
                                                       decoration: BoxDecoration(
                                                           image: DecorationImage(
                                                               image: AssetImage(
-                                                                  "assets/icon/lock.png"))),
+                                                                  "assets/icon/kanan.png"))),
                                                     )),
-                                                title: Transform.translate(
-                                                  offset: const Offset(-20, 0),
-                                                  child: const Text(
-                                                    "Ubah Kata Sandi",
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 16),
-                                                  ),
-                                                ),
-                                                trailing: Transform.translate(
-                                                  offset: const Offset(-12, 0),
-                                                  child: ShaderMask(
-                                                      shaderCallback:
-                                                          (Rect bounds) {
-                                                        return const LinearGradient(
-                                                          begin:
-                                                              Alignment.centerLeft,
-                                                          end:
-                                                              Alignment.centerRight,
-                                                          colors: <Color>[
-                                                            primaryColor,
-                                                            secondaryColor,
-                                                          ],
-                                                          tileMode: TileMode.mirror,
-                                                        ).createShader(bounds);
-                                                      },
-                                                      child: Container(
-                                                        width: 24,
-                                                        height: 24,
-                                                        decoration: BoxDecoration(
-                                                            image: DecorationImage(
-                                                                image: AssetImage(
-                                                                    "assets/icon/kanan.png"))),
-                                                      )),
-                                                ),
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: ((context) =>
-                                                              EditPassword(
-                                                                
-                                                              ))));
-                                                },
                                               ),
-                                              
-                                            
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: ((context) =>
+                                                            EditPassword())));
+                                              },
+                                            ),
                                             Padding(
                                               padding: EdgeInsets.only(
                                                   left: widthh * 16 / 360,
@@ -1444,7 +1856,8 @@ class _ProfilState extends State<Profil> {
                                                 "Lainnya",
                                                 style: GoogleFonts.inter(
                                                     fontSize: 14,
-                                                    fontWeight: FontWeight.w400),
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
                                             ),
                                             SizedBox(
@@ -1458,7 +1871,8 @@ class _ProfilState extends State<Profil> {
                                                   ListTile(
                                                     contentPadding:
                                                         EdgeInsets.only(
-                                                            left: 30, right: 30),
+                                                            left: 30,
+                                                            right: 30),
                                                     leading: ShaderMask(
                                                         shaderCallback:
                                                             (Rect bounds) {
@@ -1473,7 +1887,8 @@ class _ProfilState extends State<Profil> {
                                                             ],
                                                             tileMode:
                                                                 TileMode.mirror,
-                                                          ).createShader(bounds);
+                                                          ).createShader(
+                                                              bounds);
                                                         },
                                                         child: Container(
                                                           width: 24,
@@ -1493,7 +1908,8 @@ class _ProfilState extends State<Profil> {
                                                             fontSize: 16),
                                                       ),
                                                     ),
-                                                    trailing: Transform.translate(
+                                                    trailing:
+                                                        Transform.translate(
                                                       offset:
                                                           const Offset(-12, 0),
                                                       child: ShaderMask(
@@ -1508,8 +1924,8 @@ class _ProfilState extends State<Profil> {
                                                                 primaryColor,
                                                                 secondaryColor,
                                                               ],
-                                                              tileMode:
-                                                                  TileMode.mirror,
+                                                              tileMode: TileMode
+                                                                  .mirror,
                                                             ).createShader(
                                                                 bounds);
                                                           },
@@ -1532,7 +1948,8 @@ class _ProfilState extends State<Profil> {
                                                   ListTile(
                                                     contentPadding:
                                                         EdgeInsets.only(
-                                                            left: 30, right: 30),
+                                                            left: 30,
+                                                            right: 30),
                                                     leading: ShaderMask(
                                                         shaderCallback:
                                                             (Rect bounds) {
@@ -1547,7 +1964,8 @@ class _ProfilState extends State<Profil> {
                                                             ],
                                                             tileMode:
                                                                 TileMode.mirror,
-                                                          ).createShader(bounds);
+                                                          ).createShader(
+                                                              bounds);
                                                         },
                                                         child: Container(
                                                           width: 24,
@@ -1567,7 +1985,8 @@ class _ProfilState extends State<Profil> {
                                                             fontSize: 16),
                                                       ),
                                                     ),
-                                                    trailing: Transform.translate(
+                                                    trailing:
+                                                        Transform.translate(
                                                       offset:
                                                           const Offset(-12, 0),
                                                       child: ShaderMask(
@@ -1582,8 +2001,8 @@ class _ProfilState extends State<Profil> {
                                                                 primaryColor,
                                                                 secondaryColor,
                                                               ],
-                                                              tileMode:
-                                                                  TileMode.mirror,
+                                                              tileMode: TileMode
+                                                                  .mirror,
                                                             ).createShader(
                                                                 bounds);
                                                           },
@@ -1597,56 +2016,25 @@ class _ProfilState extends State<Profil> {
                                                           )),
                                                     ),
                                                     onTap: () {
-                                                        Navigator.push(context, MaterialPageRoute(builder: ((context) => SyaratKetentuan())));
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: ((context) =>
+                                                                  SyaratKetentuan())));
                                                     },
                                                   ),
                                                   Consumer<AuthViewModel>(
-                                                    builder: (context, provider, _) {
+                                                    builder:
+                                                        (context, provider, _) {
                                                       return ListTile(
-                                                      tileColor: colorSaldo,
-                                                      shape: RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  100)),
-                                                      //contentPadding: EdgeInsets.only(left: 30, right: 30),
-                                                      leading: ShaderMask(
-                                                          shaderCallback:
-                                                              (Rect bounds) {
-                                                            return const LinearGradient(
-                                                              begin: Alignment
-                                                                  .centerLeft,
-                                                              end: Alignment
-                                                                  .centerRight,
-                                                              colors: <Color>[
-                                                                primaryColor,
-                                                                secondaryColor,
-                                                              ],
-                                                              tileMode:
-                                                                  TileMode.mirror,
-                                                            ).createShader(bounds);
-                                                          },
-                                                          child: Container(
-                                                            width: 24,
-                                                            height: 24,
-                                                            decoration: BoxDecoration(
-                                                                image: DecorationImage(
-                                                                    image: AssetImage(
-                                                                        "assets/icon/logout.png"))),
-                                                          )),
-                                                      title: Transform.translate(
-                                                        offset:
-                                                            const Offset(-20, 0),
-                                                        child: const Text(
-                                                          "Keluar",
-                                                          style: TextStyle(
-                                                              color: Colors.black,
-                                                              fontSize: 16),
-                                                        ),
-                                                      ),
-                                                      trailing: Transform.translate(
-                                                        offset:
-                                                            const Offset(-12, 0),
-                                                        child: ShaderMask(
+                                                        tileColor: colorSaldo,
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        100)),
+                                                        //contentPadding: EdgeInsets.only(left: 30, right: 30),
+                                                        leading: ShaderMask(
                                                             shaderCallback:
                                                                 (Rect bounds) {
                                                               return const LinearGradient(
@@ -1659,7 +2047,8 @@ class _ProfilState extends State<Profil> {
                                                                   secondaryColor,
                                                                 ],
                                                                 tileMode:
-                                                                    TileMode.mirror,
+                                                                    TileMode
+                                                                        .mirror,
                                                               ).createShader(
                                                                   bounds);
                                                             },
@@ -1669,25 +2058,68 @@ class _ProfilState extends State<Profil> {
                                                               decoration: BoxDecoration(
                                                                   image: DecorationImage(
                                                                       image: AssetImage(
-                                                                          "assets/icon/kanan.png"))),
+                                                                          "assets/icon/logout.png"))),
                                                             )),
-                                                      ),
-                                                      onTap: () {
-                                                        showAlertDialog(
-                                                            "Tidak",
-                                                            primaryColor,
-                                                            "Apakah Kamu Yakin Ingin Keluar?",
-                                                            "Iya",
-                                                            "assets/icon/amico.png");
-                                                      },
-                                                      
-                                                    );
+                                                        title:
+                                                            Transform.translate(
+                                                          offset: const Offset(
+                                                              -20, 0),
+                                                          child: const Text(
+                                                            "Keluar",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 16),
+                                                          ),
+                                                        ),
+                                                        trailing:
+                                                            Transform.translate(
+                                                          offset: const Offset(
+                                                              -12, 0),
+                                                          child: ShaderMask(
+                                                              shaderCallback:
+                                                                  (Rect
+                                                                      bounds) {
+                                                                return const LinearGradient(
+                                                                  begin: Alignment
+                                                                      .centerLeft,
+                                                                  end: Alignment
+                                                                      .centerRight,
+                                                                  colors: <
+                                                                      Color>[
+                                                                    primaryColor,
+                                                                    secondaryColor,
+                                                                  ],
+                                                                  tileMode:
+                                                                      TileMode
+                                                                          .mirror,
+                                                                ).createShader(
+                                                                    bounds);
+                                                              },
+                                                              child: Container(
+                                                                width: 24,
+                                                                height: 24,
+                                                                decoration: BoxDecoration(
+                                                                    image: DecorationImage(
+                                                                        image: AssetImage(
+                                                                            "assets/icon/kanan.png"))),
+                                                              )),
+                                                        ),
+                                                        onTap: () {
+                                                          showAlertDialog(
+                                                              "Tidak",
+                                                              primaryColor,
+                                                              "Apakah Kamu Yakin Ingin Keluar?",
+                                                              "Iya",
+                                                              "assets/icon/amico.png");
+                                                        },
+                                                      );
                                                     },
-                                                    
                                                   ),
                                                   Padding(
                                                     padding: EdgeInsets.only(
-                                                        top: heightt * 40 / 800),
+                                                        top:
+                                                            heightt * 40 / 800),
                                                     child: Container(
                                                       child: Row(
                                                         mainAxisAlignment:
@@ -1699,8 +2131,9 @@ class _ProfilState extends State<Profil> {
                                                             height: 30,
                                                           ),
                                                           SizedBox(
-                                                            width:
-                                                                widthh * 6 / 360,
+                                                            width: widthh *
+                                                                6 /
+                                                                360,
                                                           ),
                                                           Image.asset(
                                                             "assets/icon/MYCUAN.png",

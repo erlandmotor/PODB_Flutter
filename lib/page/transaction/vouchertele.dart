@@ -111,13 +111,12 @@ class _VouchertelepickState extends State<Vouchertelepick> {
   TextEditingController pakai = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    if (viewlist.length == 0) {
+    if (viewlist.isEmpty) {
       for (int i = 0; i < voucher.length; i++) {
         if (widget.type == voucher[i].tipe) {
           viewlist.add(voucher[i]);
           tersedia = true;
         }
-        ;
       }
     }
     var size = MediaQuery.of(context).size;
@@ -126,7 +125,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "Voucher",
             selectionColor: Color(0xff5C5D61),
           ),
@@ -152,7 +151,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                           ),
                           Container(
                             alignment: Alignment.topLeft,
-                            child: Text.rich(
+                            child: const Text.rich(
                                 textAlign: TextAlign.left,
                                 TextSpan(
                                     text: "Voucher",
@@ -171,7 +170,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                             decoration: pakai.text == ""
                                 ? InputDecoration(
                                     prefixIcon: Padding(
-                                      padding: EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(8.0),
                                       child: Image.asset(
                                         "assets/image/mdi_voucher.png",
                                         width: size.width * .02,
@@ -186,7 +185,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                         : "Maaf Voucher Sudah Habis")
                                 : InputDecoration(
                                     prefixIcon: Padding(
-                                      padding: EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(8.0),
                                       child: Image.asset(
                                         "assets/image/mdi_voucher.png",
                                         width: size.width * .02,
@@ -199,7 +198,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                             pakai.clear();
                                           });
                                         },
-                                        icon: Icon(Icons.cancel)),
+                                        icon: const Icon(Icons.cancel)),
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(10)),
@@ -225,12 +224,12 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                 : "",
                                     style: pakai.text == "" ||
                                             checkvou(pakai.text, viewlist)
-                                        ? TextStyle(
+                                        ? const TextStyle(
                                             fontWeight: FontWeight.w400,
                                             color: Color(0xff5C5D61),
                                             fontSize: 12,
                                           )
-                                        : TextStyle(
+                                        : const TextStyle(
                                             fontWeight: FontWeight.w800,
                                             color: Colors.red,
                                             fontSize: 12)),
@@ -240,7 +239,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                   SizedBox(
                                     height: size.height * .02,
                                   ),
-                                  Align(
+                                  const Align(
                                     alignment: Alignment.topLeft,
                                     child: Text.rich(
                                         textAlign: TextAlign.left,
@@ -288,12 +287,13 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                               color: Colors
                                                                   .black38, // Set border color
                                                               width: 1.0),
-                                                          color: viewlist[i]
+                                                          color: viewlist[
+                                                                          i]
                                                                       .stock !=
                                                                   0
-                                                              ? Color(
+                                                              ? const Color(
                                                                   0xff0D40C6)
-                                                              : Color(
+                                                              : const Color(
                                                                   0xff8C8E93)),
                                                       child: Center(
                                                         child: Text.rich(
@@ -301,8 +301,9 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                                 .center,
                                                             TextSpan(
                                                                 text:
-                                                                    "${viewlist[i].nama}",
-                                                                style: TextStyle(
+                                                                    viewlist[i]
+                                                                        .nama,
+                                                                style: const TextStyle(
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w700,
@@ -325,7 +326,8 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                               .1583333,
                                                           decoration:
                                                               BoxDecoration(
-                                                            borderRadius: BorderRadius.only(
+                                                            borderRadius: const BorderRadius
+                                                                    .only(
                                                                 topRight: Radius
                                                                     .circular(
                                                                         10),
@@ -342,9 +344,9 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                             color: viewlist[i]
                                                                         .stock !=
                                                                     0
-                                                                ? Color(
+                                                                ? const Color(
                                                                     0xffE61010)
-                                                                : Color(
+                                                                : const Color(
                                                                     0xff8C8E93),
                                                           ),
                                                           child: Text.rich(
@@ -356,7 +358,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                                       viewlist[
                                                                               i]
                                                                           .tipe),
-                                                                  style: TextStyle(
+                                                                  style: const TextStyle(
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500,
@@ -385,15 +387,16 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                                   TextAlign
                                                                       .left,
                                                               TextSpan(
-                                                                  text:
-                                                                      "${viewlist[i].namavoucher}",
+                                                                  text: viewlist[
+                                                                          i]
+                                                                      .namavoucher,
                                                                   style:
                                                                       TextStyle(
                                                                     color: viewlist[i].tipe !=
                                                                             0
-                                                                        ? Color(
+                                                                        ? const Color(
                                                                             0xff262729)
-                                                                        : Color(
+                                                                        : const Color(
                                                                             0xff8C8E93),
                                                                     fontWeight:
                                                                         FontWeight
@@ -422,9 +425,9 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                                       TextStyle(
                                                                     color: viewlist[i].tipe !=
                                                                             0
-                                                                        ? Color(
+                                                                        ? const Color(
                                                                             0xff262729)
-                                                                        : Color(
+                                                                        : const Color(
                                                                             0xff8C8E93),
                                                                     fontWeight:
                                                                         FontWeight
@@ -452,18 +455,18 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                                         .stock !=
                                                                     0
                                                                 ? Colors.white
-                                                                : Color(
+                                                                : const Color(
                                                                     0xff8C8E93),
                                                             shape:
-                                                                StadiumBorder(),
+                                                                const StadiumBorder(),
                                                             side: BorderSide(
                                                                 width: 1,
                                                                 color: viewlist[i]
                                                                             .stock !=
                                                                         0
-                                                                    ? Color(
+                                                                    ? const Color(
                                                                         0xff0D40C6)
-                                                                    : Color(
+                                                                    : const Color(
                                                                         0xff8C8E93))),
                                                         onPressed: () {
                                                           if (viewlist[i]
@@ -479,7 +482,6 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                                   viewlist[i]
                                                                       .nama;
                                                             });
-                                                            ;
                                                           }
                                                         },
                                                         child: Text.rich(
@@ -497,7 +499,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                               color: viewlist[i]
                                                                           .stock !=
                                                                       0
-                                                                  ? Color(
+                                                                  ? const Color(
                                                                       0xff0D40C6)
                                                                   : Colors
                                                                       .white,
@@ -527,7 +529,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                       SizedBox(
                                         height: size.height * .05,
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: size.width * .9138,
                                         child: Column(
                                           children: [
@@ -536,7 +538,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                               height: size.height * .3,
                                               width: size.width * .66666,
                                             ),
-                                            Text.rich(
+                                            const Text.rich(
                                                 textAlign: TextAlign.center,
                                                 TextSpan(
                                                     text:
@@ -549,7 +551,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                             SizedBox(
                                               height: size.height * .02,
                                             ),
-                                            Text.rich(
+                                            const Text.rich(
                                                 textAlign: TextAlign.center,
                                                 TextSpan(
                                                     text:
@@ -577,16 +579,16 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                                                 width: size.width * 3.28,
                                                 height: size.height * .07,
                                                 child: ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                          backgroundColor:
-                                                              Color(0xff0D40C6),
-                                                          shape:
-                                                              StadiumBorder()),
+                                                  style: ElevatedButton.styleFrom(
+                                                      backgroundColor:
+                                                          const Color(
+                                                              0xff0D40C6),
+                                                      shape:
+                                                          const StadiumBorder()),
                                                   onPressed: () {
                                                     Navigator.pop(context);
                                                   },
-                                                  child: Text.rich(
+                                                  child: const Text.rich(
                                                     TextSpan(
                                                       text:
                                                           "Lanjutkan Transaksi",
@@ -614,7 +616,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                             color: Colors.white,
                           )),
                     ))
-                : SizedBox(),
+                : const SizedBox(),
             tersedia == true && checkvou(pakai.text, viewlist)
                 ? Padding(
                     padding: EdgeInsets.only(
@@ -630,13 +632,13 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Color(
                                     status != "" ? 0xff0D40C6 : 0xffD9DCE3),
-                                shape: StadiumBorder()),
+                                shape: const StadiumBorder()),
                             onPressed: () {
-                              if (pakai.text.isNotEmpty && simpanan != null) {
+                              if (pakai.text.isNotEmpty) {
                                 Navigator.pop(context, simpanan);
                               }
                             },
-                            child: Text.rich(
+                            child: const Text.rich(
                               TextSpan(
                                 text: "Terapkan Voucher",
                               ),
@@ -646,7 +648,7 @@ class _VouchertelepickState extends State<Vouchertelepick> {
                           ),
                         )),
                   )
-                : SizedBox()
+                : const SizedBox()
           ],
         ));
   }

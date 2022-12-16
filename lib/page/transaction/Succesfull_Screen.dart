@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ppodb_2/page/product/categoryhome.dart';
+// ignore: unused_import
+import 'package:ppodb_2/page/product/detail_product.dart';
 import 'package:ppodb_2/page/home/home.dart';
 import 'package:ppodb_2/page/main_page/main_page.dart';
-import 'package:ppodb_2/page/transaction/detail_product.dart';
+import 'package:ppodb_2/page/product/detail_product.dart';
 import 'package:ppodb_2/page/login_register/welcome_page.dart';
 
 class SuccesPage extends StatefulWidget {
@@ -23,17 +26,21 @@ class _SuccesPageState extends State<SuccesPage> {
         child: Column(
           children: [
             SizedBox(
-              height: size.height * .2125,
+              height: size.height * .2225,
             ),
-            Container(
+            SizedBox(
               width: size.width * .9138,
               child: Column(
                 children: [
-                  Image.asset("assets/image/cuate.png"),
-                  Text.rich(
+                  Image.asset(
+                    "assets/image/bro.png",
+                    width: size.width * .6667,
+                    height: size.height * .3,
+                  ),
+                  const Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(
-                          text: "Pembayaran Berhasil!",
+                          text: "Isi Saldo Berhasil!",
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 24,
@@ -41,20 +48,20 @@ class _SuccesPageState extends State<SuccesPage> {
                   SizedBox(
                     height: size.height * .02,
                   ),
-                  Text.rich(
+                  const Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(
                           text:
-                              "Tekan Transaksi lagi untuk melakukan \ntransaksi lain atau Kembali ke beranda",
+                              "Yeay... saldo kamu udah terisi! yuk ulangi\ntransaksi.",
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 16,
-                              color: Colors.black))),
+                              color: Color(0xff5C5D61)))),
                 ],
               ),
             ),
             SizedBox(
-              height: size.height * .1575,
+              height: size.height * .145,
             ),
             Padding(
                 padding: EdgeInsets.only(
@@ -68,20 +75,18 @@ class _SuccesPageState extends State<SuccesPage> {
                       height: size.height * .07,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff0D40C6),
-                            shape: StadiumBorder()),
+                            backgroundColor: const Color(0xff0D40C6),
+                            shape: const StadiumBorder()),
                         onPressed: () {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DetailProduct(
-                                        code: 1,
-                                      )),
-                              (route) => route.isFirst);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CategoryProduct()),
+                          );
                         },
-                        child: Text.rich(
+                        child: const Text.rich(
                           TextSpan(
-                            text: "Transaksi lagi",
+                            text: "Ulangi Transaksi",
                           ),
                           style: TextStyle(
                               fontWeight: FontWeight.w600, fontSize: 16),
@@ -108,7 +113,7 @@ class _SuccesPageState extends State<SuccesPage> {
                             MaterialPageRoute(builder: (context) => MainPage()),
                           );
                         },
-                        child: Text.rich(
+                        child: const Text.rich(
                           TextSpan(
                             text: "Kembali ke beranda",
                           ),

@@ -5,9 +5,10 @@ import 'package:ppodb_2/page/akun/akun.dart';
 import 'package:ppodb_2/page/akun/background.dart';
 import 'package:ppodb_2/page/faq/faq.dart';
 import 'package:ppodb_2/page/home/background.dart';
+import 'package:ppodb_2/page/product/categoryhome.dart';
 import 'package:ppodb_2/page/produk/pulsa.dart';
 import 'package:ppodb_2/page/riwayat/riwayat.dart';
-import 'package:ppodb_2/page/transaction/categoryhome.dart';
+import 'package:ppodb_2/page/product/categoryhome.dart';
 import 'package:ppodb_2/page/widgets/botton_navigation_box.dart';
 import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
 import 'package:ppodb_2/page/widgets/box_besar.dart';
@@ -18,9 +19,10 @@ import 'package:ppodb_2/page/widgets/finite_state.dart';
 import 'package:ppodb_2/page/widgets/isisaldo.dart';
 import 'package:ppodb_2/page/widgets/listrik_pln.dart';
 import 'package:ppodb_2/page/widgets/notready.dart';
-import 'package:ppodb_2/page/widgets/paketdata.dart';
+
 import 'package:ppodb_2/page/widgets/pdams.dart';
-import 'package:ppodb_2/page/widgets/pulsa.dart';
+
+import 'package:ppodb_2/page/widgets/tampilantelekom.dart';
 import 'package:ppodb_2/page/widgets/textIconMenu.dart';
 import 'package:ppodb_2/service/database/myCuan_Api.dart';
 import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
@@ -29,13 +31,13 @@ import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-  
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-   List<Dummypaket> dummy = [
+  List<Dummypaket> dummy = [
     Dummypaket(
         desc:
             "Langganan Disney+ Hotstar 1 bulan (Kuota Maxstream 3GB). Masa berlaku 30 hari. Jika kuota MAXstream habis pelanggan dapat membeli kuota tambahan. \n\nJika masa aktif paket ini belum berakhir, pembelian paket Disney+ Hotstar selanjutnya akan gagal dan tidak menambah masa aktif paket yang sudah ada.",
@@ -66,7 +68,7 @@ class _HomePageState extends State<HomePage> {
         id: 4,
         name: "[New] Paket Internet Bulanan OMG + Vidio 65K")
   ];
-   List<ProductDummyModel> fafa = [
+  List<ProductDummyModel> fafa = [
     ProductDummyModel(
         id: 1, name: "5.000", diskon: 2000, harga: 6000, status: "diskon"),
     ProductDummyModel(
@@ -94,7 +96,7 @@ class _HomePageState extends State<HomePage> {
         _provider.fetchBalance();
       },
     );
-   
+
     super.initState();
   }
 
@@ -186,6 +188,7 @@ class _HomePageState extends State<HomePage> {
                           switch (provider.myState) {
                             case MyState.loading:
                               return Padding(
+
                           padding: EdgeInsets.only(top: heightt * 5 / 800),
                           child: Text("Rp. 0",
                               style: GoogleFonts.inter(
@@ -222,9 +225,10 @@ class _HomePageState extends State<HomePage> {
                                   fontWeight: FontWeight.w500,
                                   fontSize: 23)),
                         );
+
                               
                             default:
-                            return CircularProgressIndicator();
+                              return CircularProgressIndicator();
                           }
                         },
                         child: Padding(
@@ -243,25 +247,24 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                          height: heightt * 36 / 800,
-                          width: widthh * 33 / 360,
-                          decoration: BoxDecoration(
-                              color: primaryColor,
-                              borderRadius: BorderRadius.circular(400)),
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => Isisaldo())));
-                            },
-                            icon: Image.asset(
-                              "assets/icon/Plus.png",
-                              height: 20,
-                            ),
-                            
+                        height: heightt * 36 / 800,
+                        width: widthh * 33 / 360,
+                        decoration: BoxDecoration(
+                            color: primaryColor,
+                            borderRadius: BorderRadius.circular(400)),
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => Isisaldo())));
+                          },
+                          icon: Image.asset(
+                            "assets/icon/Plus.png",
+                            height: 20,
                           ),
-                          ),
+                        ),
+                      ),
                       SizedBox(
                         width: widthh * 5 / 360,
                       ),
@@ -296,31 +299,39 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => Pulsa_provider(popo: fafa,type: 1,))));
+                                  builder: ((context) =>
+                                      Tampilan_telekom(type: 1))));
                         }
                         if (modulName[index] == "Paket Data") {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => Paketdatas(type: 2,popo: dummy,))));
+                                  builder: ((context) =>
+                                      Tampilan_telekom(type: 2))));
                         }
                         if (modulName[index] == "PDAM") {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => PDAMS(type: 7,))));
+                                  builder: ((context) => PDAMS(
+                                        type: 7,
+                                      ))));
                         }
                         if (modulName[index] == "Listrik") {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => Listrik_Pln_screen(tipe: 5,))));
+                                  builder: ((context) => Listrik_Pln_screen(
+                                        tipe: 5,
+                                      ))));
                         }
                         if (modulName[index] == "BPJS") {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => BPJSScreen(tipe: 4,))));
+                                  builder: ((context) => BPJSScreen(
+                                        tipe: 4,
+                                      ))));
                         }
                         if (modulName[index] == "Indihome") {
                           Navigator.push(

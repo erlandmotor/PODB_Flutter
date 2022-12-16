@@ -22,33 +22,32 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AuthViewModel(),
         ),
-          ChangeNotifierProvider(
+        ChangeNotifierProvider(
           create: (context) => BalanceProvider(),
-          ),
-          ChangeNotifierProvider(
+        ),
+        ChangeNotifierProvider(
           create: (context) => ProfilProvider(),
-          ),
-           ChangeNotifierProvider(
+        ),
+        ChangeNotifierProvider(
           create: (context) => RiwayatProvider(),
-          ),
+        ),
       ],
       child: GestureDetector(
         onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);//???
-        if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
-          FocusManager.instance.primaryFocus!.unfocus();
-        }
-      },
-        child:  MaterialApp(
-            
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              backgroundColor: whiteColor,
-            ),
-            home: WelcomePage(),
+          FocusScopeNode currentFocus = FocusScope.of(context); //???
+          if (!currentFocus.hasPrimaryFocus &&
+              currentFocus.focusedChild != null) {
+            FocusManager.instance.primaryFocus!.unfocus();
+          }
+        },
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            backgroundColor: whiteColor,
           ),
+          home: WelcomePage(),
         ),
-      );
-    
+      ),
+    );
   }
 }
