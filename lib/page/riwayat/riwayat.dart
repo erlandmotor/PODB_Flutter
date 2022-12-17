@@ -87,17 +87,7 @@ class _RiwayatState extends State<Riwayat> {
       )
     ]),
 
-    DummyproFilter(id: 2, name: "Status", pro: [
-      DummyFilter(
-        id: 5,
-        name: "Belum Bayar",
-      ),
-      DummyFilter(id: 6, name: "Berhasil"),
-      DummyFilter(
-        id: 7,
-        name: "Dibatalkan",
-      ),
-    ]),
+   
 
     DummyproFilter(id: 3, name: "Kategori", pro: [
       DummyFilter(
@@ -138,22 +128,16 @@ class _RiwayatState extends State<Riwayat> {
     List nominal = ["100000", "200000", "1000000"];
     List total = ["101000", "201000", "1001000"];
     List dompetDigital = ["Gopay", "Mycuan Saldo", "Dana"];
-    List statusTransaksi = ["Belum Bayar", "Berhasil", "Dibatalkan"];
+    
 
-    late Color iscolor;
-    if (statusTransaksi == "Belum Bayar") {
-      iscolor = Colors.yellow;
-    } else if (statusTransaksi == "Berhasil") {
-      iscolor = Colors.green;
-    } else {
-      iscolor = Colors.red;
-    }
+   
 
     var size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
+         automaticallyImplyLeading: false, 
         title: Text(
           "Riwayat Transaksi",
           selectionColor: Color(0xff5C5D61),
@@ -163,140 +147,141 @@ class _RiwayatState extends State<Riwayat> {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: SlidingUpPanel(
-        parallaxEnabled: true,
-        controller: _panelController,
-        maxHeight: heightt * 0.5,
-        minHeight: heightt * 0,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-        panelBuilder: (controller) {
-          return ListView(
-            controller: controller,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  togglePanel();
-                },
-                child: Center(
-                  child: Container(
-                    margin: EdgeInsets.only(top: 15),
-                    height: 10,
-                    width: 65,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: secondaryColor),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: heightt * 16 / 800,
-              ),
-              ListTile(
-                leading: Text(
-                  "Filter",
-                  style: GoogleFonts.inter(
-                      fontWeight: FontWeight.w600, fontSize: 18),
-                ),
-                trailing: InkWell(
-                  child: Text(
-                    "RESET",
-                    style: GoogleFonts.inter(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                        color: Color.fromRGBO(13, 64, 198, 1)),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: heightt * 16 / 800,
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: widthh * 16 / 360, right: widthh * 16 / 360),
-                child: Column(children: <Widget>[
-                  for (var i = 0; i < prod.length; i++)
-                    status == ""
-                        ? Container(
-                            child: Column(
-                              children: [
-                                Align(
-                                  child: Text(prod[i].name,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16,
-                                      )),
-                                  alignment: Alignment.topLeft,
-                                ),
-                                SizedBox(
-                                  height: size.height * .01,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: GridView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      mainAxisExtent: 50,
-                                      crossAxisSpacing: size.width * .0444,
-                                      mainAxisSpacing: size.height * .02,
-                                    ),
-                                    itemCount: prod[i].pro.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              // Navigator.push(
-                                              //   context,
-                                              //   MaterialPageRoute(
-                                              //       builder: (context) =>
-                                              //           DetailProduct(
-                                              //             code: prod[i].pro[index].id,
-                                              //           )),
-                                              // );
-                                            },
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  border: Border.all(
-                                                      color: Colors
-                                                          .black38, // Set border color
-                                                      width: 1)),
-                                              child: Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 10,
-                                                    right: 10,
-                                                    bottom: 10,
-                                                    top: 10),
-                                                child: Text(
-                                                    prod[i].pro[index].name,
-                                                    style: TextStyle(
-                                                      color: Color(0xff5C5D61),
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 16,
-                                                    )),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : Container()
+       
+      // SlidingUpPanel(
+      //   parallaxEnabled: true,
+      //   controller: _panelController,
+      //   maxHeight: heightt * 0.5,
+      //   minHeight: heightt * 0,
+      //   borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+      //   panelBuilder: (controller) {
+      //     return ListView(
+      //       controller: controller,
+      //       children: [
+      //         GestureDetector(
+      //           onTap: () {
+      //             togglePanel();
+      //           },
+      //           child: Center(
+      //             child: Container(
+      //               margin: EdgeInsets.only(top: 15),
+      //               height: 10,
+      //               width: 65,
+      //               decoration: BoxDecoration(
+      //                   borderRadius: BorderRadius.circular(10),
+      //                   color: secondaryColor),
+      //             ),
+      //           ),
+      //         ),
+      //         SizedBox(
+      //           height: heightt * 16 / 800,
+      //         ),
+      //         ListTile(
+      //           leading: Text(
+      //             "Filter",
+      //             style: GoogleFonts.inter(
+      //                 fontWeight: FontWeight.w600, fontSize: 18),
+      //           ),
+      //           trailing: InkWell(
+      //             child: Text(
+      //               "RESET",
+      //               style: GoogleFonts.inter(
+      //                   fontWeight: FontWeight.w600,
+      //                   fontSize: 18,
+      //                   color: Color.fromRGBO(13, 64, 198, 1)),
+      //             ),
+      //           ),
+      //         ),
+      //         SizedBox(
+      //           height: heightt * 16 / 800,
+      //         ),
+      //         Padding(
+      //           padding: EdgeInsets.only(
+      //               left: widthh * 16 / 360, right: widthh * 16 / 360),
+      //           child: Column(children: <Widget>[
+      //             for (var i = 0; i < prod.length; i++)
+      //               status == ""
+      //                   ? Container(
+      //                       child: Column(
+      //                         children: [
+      //                           Align(
+      //                             child: Text(prod[i].name,
+      //                                 style: TextStyle(
+      //                                   color: Colors.black,
+      //                                   fontWeight: FontWeight.w600,
+      //                                   fontSize: 16,
+      //                                 )),
+      //                             alignment: Alignment.topLeft,
+      //                           ),
+      //                           SizedBox(
+      //                             height: size.height * .01,
+      //                           ),
+      //                           Padding(
+      //                             padding: const EdgeInsets.only(left: 10),
+      //                             child: GridView.builder(
+      //                               physics: NeverScrollableScrollPhysics(),
+      //                               shrinkWrap: true,
+      //                               gridDelegate:
+      //                                   SliverGridDelegateWithFixedCrossAxisCount(
+      //                                 crossAxisCount: 2,
+      //                                 mainAxisExtent: 50,
+      //                                 crossAxisSpacing: size.width * .0444,
+      //                                 mainAxisSpacing: size.height * .02,
+      //                               ),
+      //                               itemCount: prod[i].pro.length,
+      //                               itemBuilder:
+      //                                   (BuildContext context, int index) {
+      //                                 return Row(
+      //                                   mainAxisAlignment:
+      //                                       MainAxisAlignment.start,
+      //                                   crossAxisAlignment:
+      //                                       CrossAxisAlignment.start,
+      //                                   children: [
+      //                                     InkWell(
+      //                                       onTap: () {
+      //                                         // Navigator.push(
+      //                                         //   context,
+      //                                         //   MaterialPageRoute(
+      //                                         //       builder: (context) =>
+      //                                         //           DetailProduct(
+      //                                         //             code: prod[i].pro[index].id,
+      //                                         //           )),
+      //                                         // );
+      //                                       },
+      //                                       child: Container(
+      //                                         decoration: BoxDecoration(
+      //                                             borderRadius:
+      //                                                 BorderRadius.circular(20),
+      //                                             border: Border.all(
+      //                                                 color: Colors
+      //                                                     .black38, // Set border color
+      //                                                 width: 1)),
+      //                                         child: Padding(
+      //                                           padding: EdgeInsets.only(
+      //                                               left: 10,
+      //                                               right: 10,
+      //                                               bottom: 10,
+      //                                               top: 10),
+      //                                           child: Text(
+      //                                               prod[i].pro[index].name,
+      //                                               style: TextStyle(
+      //                                                 color: Color(0xff5C5D61),
+      //                                                 fontWeight:
+      //                                                     FontWeight.w500,
+      //                                                 fontSize: 16,
+      //                                               )),
+      //                                         ),
+      //                                       ),
+      //                                     ),
+      //                                   ],
+      //                                 );
+      //                               },
+      //                             ),
+      //                           ),
+      //                         ],
+      //                       ),
+      //                     )
+      //                   : Container()
                   // : status == prod[i].name
                   //     ? Container(
                   //         child: Column(
@@ -373,11 +358,11 @@ class _RiwayatState extends State<Riwayat> {
                   //         ),
                   //       )
                   //     : Container()
-                ]),
-              ),
-            ],
-          );
-        },
+        //         ]),
+        //       ),
+        //     ],
+        //   );
+        // },
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
@@ -436,25 +421,25 @@ class _RiwayatState extends State<Riwayat> {
                   SingleChildScrollView(
                     child: Row(
                       children: <Widget>[
-                        Padding(
-                          padding:  EdgeInsets.only(right: size.width * .044),
-                          child: InkWell(
-                            child: Container(
-                              height: 24,
-                              width: 24,
-                              child: Image.asset("assets/icon/sort.png")),
-                              onTap: () {
-                                togglePanel();
-                              },
-                          ),
-                        ),
+                        // Padding(
+                        //   padding:  EdgeInsets.only(right: size.width * .044),
+                        //   child: InkWell(
+                        //     child: Container(
+                        //       height: 24,
+                        //       width: 24,
+                        //       child: Image.asset("assets/icon/sort.png")),
+                        //       onTap: () {
+                        //         togglePanel();
+                        //       },
+                        //   ),
+                        // ),
                         for (int i = 0; i < prods.length; i++)
                           InkWell(
                               onTap: () {
                                 setState(() {
                                   status == prods[i].name
                                       ? status = ""
-                                      : status = prods[i].name;
+                                      : status = prods[0].name;
                                 });
                               },
                               child: Row(
@@ -495,6 +480,9 @@ class _RiwayatState extends State<Riwayat> {
                   SizedBox(
                     height: size.height * .02,
                   ),
+                   for (var i = 0; i < 1; i++)
+                    status == ""
+                        ?
                   Container(
                     height: heightt*500/800,
                     width: widthh,
@@ -576,6 +564,90 @@ class _RiwayatState extends State<Riwayat> {
                       
                     ),
                   )
+                  // :status == prod[0].name?
+                  // Container(
+                  //   height: heightt*500/800,
+                  //   width: widthh,
+                  //   child: ListView.builder(
+                  //     shrinkWrap: true,
+                  //     itemBuilder: (context, index) {
+                  //       return Padding(
+                  //         padding:  EdgeInsets.only( bottom: heightt*16/800),
+                  //         child: ListTile(
+                  //           contentPadding: EdgeInsets.all(16),
+                  //         shape: RoundedRectangleBorder(
+                  //           side: BorderSide(color: Colors.grey, ),
+                  //           borderRadius: BorderRadius.circular(15),
+                  //         ), 
+                  //           leading: Image.asset("assets/icon/c.png",
+                  //           height: 24,
+                  //           width: 24,),
+                  //           title: Text(provider.riwayat!.data![index].productName!+" "+ provider.riwayat!.data![index].productPrice.toString(),
+                  //           style: GoogleFonts.inter(
+                  //             fontWeight: FontWeight.w700,
+                  //             fontSize: 14
+                  //           ),),
+                  //           subtitle: Column(
+                  //             mainAxisAlignment: MainAxisAlignment.start,
+                  //             crossAxisAlignment: CrossAxisAlignment.start,
+                  //             children: [
+                  //               Text("Melalui MyCuan Saldo",
+                  //               style: GoogleFonts.inter(
+                  //                 fontWeight: FontWeight.w400,
+                  //                 fontSize: 12
+                  //               ),),
+                  //                Text(DateFormat(
+                  //                   'EEEE, dd MMMM yyyy', 'id').format(
+                  //                     DateTime.parse(provider.riwayat!.data![index].transactionDate.toString()
+                  //                   )
+                  //                 ).toString(),
+                  //               style: GoogleFonts.inter(
+                  //                 fontWeight: FontWeight.w400,
+                  //                 fontSize: 12
+                  //               ),),
+                  //             ],
+                  //           ),
+                            
+                  //           trailing: Padding(
+                  //             padding: EdgeInsets.only(top: 5),
+                  //             child: Column(
+                  //               mainAxisAlignment: MainAxisAlignment.start,
+                  //               crossAxisAlignment: CrossAxisAlignment.end,
+                  //               children: [
+                  //                  Text("Rp "+provider.riwayat!.data![index].totalPrice.toString(),
+                  //                 style: GoogleFonts.inter(
+                  //                   fontWeight: FontWeight.w400,
+                  //                   fontSize: 12
+                  //                 ),),
+                  //                  Text("Berhasil",
+                  //                 style: GoogleFonts.inter(
+                  //                   fontWeight: FontWeight.w400,
+                  //                   fontSize: 12,
+                  //                   color: Colors.green
+                  //                 ),),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //           onTap: () {
+                  //              Navigator.push(context, MaterialPageRoute(builder: ((context) => DetailRiwayat(
+                  //               dompetDigital: "MyCuan Saldo",
+                  //               nominal: provider.riwayat!.data![index].productPrice.toString(),
+                  //               statusTransaksi: "Berhasil",
+                  //               title: provider.riwayat!.data![index].productName.toString(),
+                  //               total: provider.riwayat!.data![index].totalPrice.toString(),
+                  //               feeAdmin: provider.riwayat!.data![index].adminFee.toString(),
+                  //               tgl: provider.riwayat!.data![index].transactionDate,
+                  //              ))));
+                  //           },
+                  //         ),
+                  //       );
+                  //     },
+                  //     itemCount: provider.riwayat!.data!.length,
+                      
+                  //   ),
+                  // ):
+                  :
+                  Container()
                   // Column(
                   //   children: <Widget>[
                   //     for (var i = 0; i < prod.length; i++)
@@ -768,7 +840,7 @@ class _RiwayatState extends State<Riwayat> {
             ),
           ),
         ),
-      ),
+      
     );
   }
 }
