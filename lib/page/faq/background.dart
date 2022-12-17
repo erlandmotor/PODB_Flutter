@@ -12,6 +12,7 @@ class BackgroundFaq extends StatelessWidget {
     resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
+         automaticallyImplyLeading: false, 
         flexibleSpace: Image(
           image: AssetImage("assets/image/FAQ.png"),
           fit: BoxFit.cover,
