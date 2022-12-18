@@ -75,7 +75,7 @@ class MyCuanAPI {
     }
   }
 
-  Future updatetransaksi(int type, String nomor) async {
+  Future<String> updatetransaksi(int type, String nomor) async {
     final prefs = await SharedPreferences.getInstance();
     final String token = prefs.getString('token') ?? "";
     try {
@@ -88,6 +88,8 @@ class MyCuanAPI {
             "product_id": type,
             "target_phone_number": nomor,
           });
+      String status = response.data["status"];
+      return status;
     } on DioError catch (e) {
       print(e.response!.data['message']);
       print('data bermasalah');
@@ -161,7 +163,7 @@ class MyCuanAPI {
     }
   }
 
-  Future addbalance(int nomor) async {
+  Future<String> addbalance(int nomor) async {
     final prefs = await SharedPreferences.getInstance();
     final String token = prefs.getString('token') ?? "";
     try {
@@ -173,6 +175,8 @@ class MyCuanAPI {
           data: {
             "balance": nomor,
           });
+      String res = response.data["status"];
+      return res;
     } on DioError catch (e) {
       print(e.response!.data['message']);
       print('data bermasalah');

@@ -43,7 +43,7 @@ class _Detail_telkomwithprovidersState
             body: Center(
             child: CircularProgressIndicator(),
           ))
-        : isError || product == null
+        : isError || product == null || product.data == null
             ? Scaffold(
                 backgroundColor: Colors.white,
                 body: Padding(

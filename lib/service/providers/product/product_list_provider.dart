@@ -6,7 +6,8 @@ class ProductListProviders extends ChangeNotifier {
   late MyCuanAPI service;
   late Productda product;
   late Productda bambang;
-
+  late String status;
+  late String bstatus;
   Productstate _state = Productstate.none;
   Productstate get state => _state;
 
@@ -18,6 +19,16 @@ class ProductListProviders extends ChangeNotifier {
     notifyListeners();
   }
 
+  String get statusres {
+    var temp = status;
+    return temp;
+  }
+
+  String get statatusballance {
+    var temp = bstatus;
+    return temp;
+  }
+
   Productda get isicategory {
     var temp = product;
     print(temp);
@@ -27,7 +38,7 @@ class ProductListProviders extends ChangeNotifier {
   addtransaksi(int tipe, String nomor) async {
     changeState(Productstate.loading);
     try {
-      await service.updatetransaksi(tipe, nomor);
+      status = await service.updatetransaksi(tipe, nomor);
       changeState(Productstate.none);
     } catch (error) {
       changeState(Productstate.error);
@@ -37,7 +48,7 @@ class ProductListProviders extends ChangeNotifier {
   addnominal(int nomor) async {
     changeState(Productstate.loading);
     try {
-      await service.addbalance(nomor);
+      bstatus = await service.addbalance(nomor);
       changeState(Productstate.none);
     } catch (error) {
       changeState(Productstate.error);

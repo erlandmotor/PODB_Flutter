@@ -259,9 +259,10 @@ class _QRScreenState extends State<QRScreen> {
                                     )),
                             (route) => false);
                       } else {
-                        Provider.of<ProductListProviders>(context,
+                        await Provider.of<ProductListProviders>(context,
                                 listen: false)
                             .addnominal(widget.total);
+
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(

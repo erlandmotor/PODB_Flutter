@@ -7,12 +7,12 @@ import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:ppodb_2/page/transaction/vouchertele.dart';
 import 'package:ppodb_2/page/widgets/checkstatus.dart';
 import 'package:ppodb_2/page/widgets/finite_state.dart';
+import 'package:ppodb_2/page/widgets/isisaldo.dart';
 import 'package:ppodb_2/page/widgets/qrCode.dart';
 import 'package:ppodb_2/service/providers/product/product_list_provider.dart';
 import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
 
 import 'package:provider/provider.dart';
-
 
 class PembayranTelekScreen extends StatefulWidget {
   DummyTransTelekom trans;
@@ -34,6 +34,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
   String gambar = "";
   late int total;
   late DummyVoucher vou;
+  int salds = 0;
 
   TextEditingController nomor = TextEditingController();
   TextEditingController voucher = TextEditingController();
@@ -465,10 +466,10 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                       if (provider
                                               .profil!.data!.wallet!.balance ==
                                           null) {
-                                        return const Text.rich(
+                                        return Text.rich(
                                             textAlign: TextAlign.left,
                                             TextSpan(
-                                                text: "-",
+                                                text: "${salds = 0}",
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 12,
@@ -482,11 +483,11 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                                             locale: 'id',
                                                             symbol: 'Rp',
                                                             decimalDigits: 0)
-                                                        .format(provider
+                                                        .format(salds = provider
                                                             .profil!
                                                             .data!
                                                             .wallet!
-                                                            .balance),
+                                                            .balance!),
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 12,
@@ -650,18 +651,126 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                         shape: const StadiumBorder()),
                     onPressed: () async {
                       if (status == "Mycuan saldo") {
-                        await Provider.of<ProductListProviders>(context,
-                                listen: false)
-                            .addtransaksi(widget.tipe!, nomor.text);
-                        isloading || isError
-                            ? print("tunggu")
-                            : Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SuccesPages(
-                                          type: widget.trans.type,
-                                        )),
-                                (route) => false);
+                        if (widget.trans.harga > salds) {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  content: SingleChildScrollView(
+                                    child: Column(
+                                      children: <Widget>[
+                                        Image.asset(
+                                          "assets/image/rafiki.png",
+                                          height: size.height * .15,
+                                          width: size.width * .416,
+                                        ),
+                                        SizedBox(
+                                          height: size.height * .02875,
+                                        ),
+                                        const Text.rich(
+                                          TextSpan(
+                                            text:
+                                                "yaah, saldo kamu tidak mencukupi",
+                                          ),
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16),
+                                        ),
+                                        const Text.rich(
+                                          TextSpan(
+                                            text: "transaksi tersebut",
+                                          ),
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            elevation: 0,
+                                            backgroundColor: Colors.white,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(999),
+                                            ),
+                                          ),
+                                          child: const Text.rich(
+                                            TextSpan(
+                                              text: "Metode lain",
+                                            ),
+                                            style: TextStyle(
+                                                color: Color(0xff0D40C6),
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const Isisaldo()));
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            elevation: 0,
+                                            backgroundColor:
+                                                const Color(0xff0D40C6),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(9999),
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                              top: size.height * .01625,
+                                              bottom: size.height * .01625,
+                                            ),
+                                            child: Text.rich(
+                                              TextSpan(
+                                                text: "Isi Saldo",
+                                              ),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                );
+                              });
+                        } else {
+                          await Provider.of<ProductListProviders>(context,
+                                  listen: false)
+                              .addtransaksi(widget.tipe!, nomor.text);
+                          String respon = Provider.of<ProductListProviders>(
+                                  context,
+                                  listen: false)
+                              .statusres;
+
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SuccesPages(
+                                        type: widget.trans.type,
+                                      )),
+                              (route) => false);
+                        }
                       } else {
                         Navigator.pushAndRemoveUntil(
                             context,
