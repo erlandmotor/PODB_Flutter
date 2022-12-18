@@ -2,9 +2,9 @@ part of 'shared.dart';
 
 
 
-Color primaryColor = Color(0xff0D40C6);
-Color blackColor = Color(0xff050522);
-Color dengerColor = Color(0xff5C5D61);
+Color primaryColor = const Color(0xff0D40C6);
+Color blackColor = const Color(0xff050522);
+Color dengerColor = const Color(0xff5C5D61);
 Color whiteColor = Colors.white;
 
 TextStyle blackTextStyle = GoogleFonts.inter(

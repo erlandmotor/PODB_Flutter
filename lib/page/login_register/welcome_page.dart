@@ -82,51 +82,51 @@ class _WelcomePageState extends State<WelcomePage> {
               SizedBox(
                 height: Size.height * 0.065,
               ),
-              Container(
+              SizedBox(
                 height: Size.height * 0.06,
                 width: Size.width * 0.911,
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Register1Page(),
+                        builder: (context) => const Register1Page(),
                       ));
                     },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: primaryColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30))),
                     child: Text(
                       'Daftar',
                       style: whiteTextStyle.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           color: whiteColor),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: primaryColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30)))),
+                    )),
               ),
               SizedBox(
                 height: Size.height * 0.02,
               ),
-              Container(
+              SizedBox(
                 height: Size.height * 0.06,
                 width: Size.width * 0.911,
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => LoginPage(),
+                        builder: (context) => const LoginPage(),
                       ));
                     },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: whiteColor,
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(color: primaryColor, width: 1.5),
+                            borderRadius: BorderRadius.circular(30))),
                     child: Text(
                       'Masuk',
                       style: whiteTextStyle.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           color: primaryColor),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: whiteColor,
-                        shape: RoundedRectangleBorder(
-                            side: BorderSide(color: primaryColor, width: 1.5),
-                            borderRadius: BorderRadius.circular(30)))),
+                    )),
               ),
               SizedBox(
                 height: Size.height * 0.06,

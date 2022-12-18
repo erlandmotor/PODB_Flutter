@@ -1,15 +1,12 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:ppodb_2/page/home.dart';
+import 'package:ppodb_2/page/home/home.dart';
 import 'package:ppodb_2/page/login_register/register1_page.dart';
-import 'package:ppodb_2/page/login_register/welcome_page.dart';
+import 'package:ppodb_2/page/main_page/main_page.dart';
 import 'package:ppodb_2/shared/shared.dart';
 import 'package:ppodb_2/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/data_login_model.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -23,7 +20,6 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _katasandiController = TextEditingController();
 
-
   // @override
   // void initState() {
   //   WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -34,14 +30,14 @@ class _LoginPageState extends State<LoginPage> {
   //     _katasandiController.text = Provider.of<AuthViewModel>(context).data2.katasandi;
   //   }
   //   });
-   
+
   //   super.initState();
   // }
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<AuthViewModel>(context,listen: false);
-     final providerKonfirmasi = Provider.of<AuthViewModel>(context);
+    final provider = Provider.of<AuthViewModel>(context, listen: false);
+    final providerKonfirmasi = Provider.of<AuthViewModel>(context);
     var Size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: whiteColor,
@@ -151,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                             if(providerKonfirmasi.message == "success"){
                               if(!mounted)return;
                               Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-                          builder: (context) => Home(),
+                          builder: (context) => HomePage(),
                         ),(route)=>false);
                             }
                             

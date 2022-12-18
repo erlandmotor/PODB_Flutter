@@ -52,17 +52,15 @@ class _Register1PageState extends State<Register1Page> {
                     SizedBox(
                       height: Size.height * 0.02,
                     ),
-                    Container(
-                      child: LinearPercentIndicator(
-                        padding: EdgeInsets.zero,
-                        width: 150,
-                        lineHeight: 10,
-                        animation: true,
-                        percent: 50 / 100,
-                        animationDuration: 1000,
-                        progressColor: primaryColor,
-                        barRadius: Radius.circular(10),
-                      ),
+                    LinearPercentIndicator(
+                      padding: EdgeInsets.zero,
+                      width: 150,
+                      lineHeight: 10,
+                      animation: true,
+                      percent: 50 / 100,
+                      animationDuration: 1000,
+                      progressColor: primaryColor,
+                      barRadius: const Radius.circular(10),
                     ),
                     SizedBox(
                       height: Size.height * 0.01,
@@ -144,7 +142,7 @@ class _Register1PageState extends State<Register1Page> {
                         controller: _nomortelponController,
                         validator: (value) {
                           String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                          RegExp regExp = new RegExp(patttern);
+                          RegExp regExp = RegExp(patttern);
                           if (value!.isEmpty) {
                             return "Harus diisi";
                           } else if (!regExp.hasMatch(value)) {
@@ -158,7 +156,7 @@ class _Register1PageState extends State<Register1Page> {
                           hintText: "Nomor Aktif Kamu",
                           labelText: "Nomor Aktif Kamu",
                         )),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -169,7 +167,7 @@ class _Register1PageState extends State<Register1Page> {
                     SizedBox(
                       height: Size.height * 0.125,
                     ),
-                    Container(
+                    SizedBox(
                       height: Size.height * 0.06,
                       width: Size.width * 0.911,
                       child: ElevatedButton(
@@ -190,17 +188,17 @@ class _Register1PageState extends State<Register1Page> {
                               
                             }
                           },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: primaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30))),
                           child: Text(
                             'Lanjut',
                             style: whiteTextStyle.copyWith(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                                 color: whiteColor),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30)))),
+                          )),
                     ),
                     SizedBox(
                       height: Size.height * 0.025,
@@ -219,7 +217,7 @@ class _Register1PageState extends State<Register1Page> {
                         TextButton(
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LoginPage(),
+                                builder: (context) => const LoginPage(),
                               ));
                             },
                             child: Text(

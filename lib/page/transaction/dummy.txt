@@ -1,0 +1,106 @@
+showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      content: SingleChildScrollView(
+                                        child: Column(
+                                          children: <Widget>[
+                                            Image.asset(
+                                              "assets/image/rafiki.png",
+                                              height: size.height * .15,
+                                              width: size.width * .416,
+                                            ),
+                                            SizedBox(
+                                              height: size.height * .02875,
+                                            ),
+                                            const Text.rich(
+                                              TextSpan(
+                                                text:
+                                                    "yaah, saldo kamu tidak mencukupi",
+                                              ),
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16),
+                                            ),
+                                            const Text.rich(
+                                              TextSpan(
+                                                text: "transaksi tersebut",
+                                              ),
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                elevation: 0,
+                                                backgroundColor: Colors.white,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          999),
+                                                ),
+                                              ),
+                                              child: const Text.rich(
+                                                TextSpan(
+                                                  text: "Metode lain",
+                                                ),
+                                                style: TextStyle(
+                                                    color: Color(0xff0D40C6),
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 16),
+                                              ),
+                                            ),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const Isisaldo()));
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                elevation: 0,
+                                                backgroundColor:
+                                                    const Color(0xff0D40C6),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          9999),
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                  top: size.height * .01625,
+                                                  bottom: size.height * .01625,
+                                                ),
+                                                child: Text.rich(
+                                                  TextSpan(
+                                                    text: "Isi Saldo",
+                                                  ),
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 16),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    );
+                                  });
