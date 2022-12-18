@@ -762,14 +762,85 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                   context,
                                   listen: false)
                               .statusres;
-
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SuccesPages(
-                                        type: widget.trans.type,
-                                      )),
-                              (route) => false);
+                          if (respon == "success") {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SuccesPages(
+                                          type: widget.trans.type,
+                                        )),
+                                (route) => false);
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    content: SingleChildScrollView(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Image.asset(
+                                            "assets/image/rafiki.png",
+                                            height: size.height * .15,
+                                            width: size.width * .416,
+                                          ),
+                                          SizedBox(
+                                            height: size.height * .02875,
+                                          ),
+                                          const Text.rich(
+                                            TextSpan(
+                                              text: "Transaksi gagal :(",
+                                            ),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16),
+                                          ),
+                                          const Text.rich(
+                                            TextSpan(
+                                              text: "Coba cek koneksimu !!",
+                                            ),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 16),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              elevation: 0,
+                                              backgroundColor: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(999),
+                                              ),
+                                            ),
+                                            child: const Text.rich(
+                                              TextSpan(
+                                                text: "oke",
+                                              ),
+                                              style: TextStyle(
+                                                  color: Color(0xff0D40C6),
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 16),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  );
+                                });
+                          }
                         }
                       } else {
                         Navigator.pushAndRemoveUntil(

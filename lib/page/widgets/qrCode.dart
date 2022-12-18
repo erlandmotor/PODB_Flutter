@@ -262,12 +262,17 @@ class _QRScreenState extends State<QRScreen> {
                         await Provider.of<ProductListProviders>(context,
                                 listen: false)
                             .addnominal(widget.total);
-
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SuccesPage()),
-                            (route) => false);
+                        String status = Provider.of<ProductListProviders>(
+                                context,
+                                listen: false)
+                            .statatusballance;
+                        if (status == "success") {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SuccesPage()),
+                              (route) => false);
+                        }
                       }
                     },
                     child: const Text.rich(

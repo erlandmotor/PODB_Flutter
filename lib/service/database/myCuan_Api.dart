@@ -91,10 +91,9 @@ class MyCuanAPI {
       String status = response.data["status"];
       return status;
     } on DioError catch (e) {
-      print(e.response!.data['message']);
-      print('data bermasalah');
+      String failed = "failed";
 
-      rethrow;
+      return failed;
     }
   }
 
