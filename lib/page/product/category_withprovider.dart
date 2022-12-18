@@ -20,13 +20,6 @@ class _CategoryProductproviderState extends State<CategoryProductprovider> {
   late List<Datacate> prod;
   @override
   void initState() {
-    Future.delayed(
-      Duration.zero,
-      () {
-        prod = Provider.of<ProductcateProviders>(context).isicategory;
-      },
-    );
-
     super.initState();
   }
 
@@ -36,9 +29,9 @@ class _CategoryProductproviderState extends State<CategoryProductprovider> {
         Provider.of<ProductcateProviders>(context).state == Catestate.loading;
     final isError =
         Provider.of<ProductcateProviders>(context).state == Catestate.error;
-
+    prod = Provider.of<ProductcateProviders>(context).isicategory;
     var size = MediaQuery.of(context).size;
-    return isloading
+    return isloading || prod == []
         ? const Center(
             child: CircularProgressIndicator(),
           )

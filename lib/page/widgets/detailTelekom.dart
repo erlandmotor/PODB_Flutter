@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/product/product_data_model.dart';
-import 'package:ppodb_2/models/product/product_detail.dart';
 import 'package:ppodb_2/models/product/productcate.dart';
 import 'package:ppodb_2/page/transaction/pembayaran_telekomunikasi.dart';
 import 'package:ppodb_2/page/widgets/checkstatus.dart';

@@ -9,18 +9,18 @@ class ProductcateProviders extends ChangeNotifier {
   Catestate get state => _state;
 
   ProductcateProviders() {
-    _fetchcate();
+    fetchcate();
   }
   changeState(Catestate s) {
     _state = s;
     notifyListeners();
   }
 
-  void _fetchcate() async {
+  fetchcate() async {
     changeState(Catestate.loading);
     try {
       category = await service.getcate();
-
+      print(category);
       changeState(Catestate.none);
     } catch (error) {
       changeState(Catestate.error);

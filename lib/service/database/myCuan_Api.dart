@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ppodb_2/models/product/product_data_model.dart';
-import 'package:ppodb_2/models/product/product_detail.dart';
 import 'package:ppodb_2/models/product/productcate.dart';
 import 'package:ppodb_2/models/profil/list_profil.dart';
 import 'package:ppodb_2/models/register_model.dart';
@@ -43,11 +42,11 @@ class MyCuanAPI {
             "Authorization": "Bearer $token",
           }));
       _isNext = "berhasil";
-      print(response.data["data"]);
+      print("\n\n${response.data["data"]}");
       List<Datacate> fina = List<Datacate>.from(response.data["data"]
           .map((data) => Datacate.fromJson(data))
           .toList());
-      print(fina);
+      print("$fina");
       return fina;
     } on DioError catch (e) {
       print(e.response!.data['message']);
