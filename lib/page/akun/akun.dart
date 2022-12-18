@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ppodb_2/page/akun/background.dart';
@@ -14,8 +13,8 @@ import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
 import 'package:ppodb_2/page/widgets/boxSaldo.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart';
 import 'package:ppodb_2/page/widgets/finite_state.dart';
-import 'package:ppodb_2/page/widgets/isisaldo.dart';
-import 'package:ppodb_2/page/widgets/notready.dart';
+import 'package:ppodb_2/page/transaction/isisaldo.dart';
+import 'package:ppodb_2/page/product/notready.dart';
 import 'package:ppodb_2/page/widgets/rating.dart';
 import 'package:ppodb_2/page/widgets/textIconMenu.dart';
 import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
@@ -90,8 +89,11 @@ class _ProfilState extends State<Profil> {
                 final String token = prefs.getString('token') ?? "";
                 prefs.remove("token");
                 prefs.setBool("login", false);
-                Navigator.pushAndRemoveUntil(context,
-                    MaterialPageRoute(builder: ((context) => const WelcomePage())),(route)=>false);
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => const WelcomePage())),
+                    (route) => false);
                 // if (_postProses == "berhasil") {
                 //   Get.offAll(const SuratJalanView());
                 // }
@@ -404,750 +406,892 @@ class _ProfilState extends State<Profil> {
                         builder: (context, provider, _) {
                           switch (provider.myState) {
                             case MyState.loading:
-                            //print(provider.profil!.data!.wallet!.balance);
+                              //print(provider.profil!.data!.wallet!.balance);
                               return Boxsaldo(
-                            child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideSukes,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/atas.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorSukses,
-                                            ),
-                                          )),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text("Uang Masuk",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp.0",
-                                              style: GoogleFonts.inter(
-                                                  color: warnaHarga,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16)),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideError,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/bawah.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorError,
-                                            ),
-                                          )),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        const SizedBox(width: 5),
-                                        Text("Uang Keluar",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp.0",
-                                              style: GoogleFonts.inter(
-                                                  color: warnaHarga,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16)),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ));
-                        case MyState.loaded:
-                        if(provider.profil!.data!.wallet!.balance== null&&provider.profil!.data!.wallet!.historiesWallet== null){
-                          return Boxsaldo(
-                            child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideSukes,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/atas.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorSukses,
-                                            ),
-                                          )),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text("Uang Masuk",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp.0",
-                                              style: GoogleFonts.inter(
-                                                  color: warnaHarga,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16)),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideError,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/bawah.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorError,
-                                            ),
-                                          )),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        const SizedBox(width: 5),
-                                        Text("Uang Keluar",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp.0",
-                                              style: GoogleFonts.inter(
-                                                  color: warnaHarga,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16)),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ));
-                        }else if(provider.profil!.data!.wallet!.balance==null){
-                          return Boxsaldo(
-                            child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideSukes,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/atas.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorSukses,
-                                            ),
-                                          )),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text("Uang Masuk",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp.0",
-                                              style: GoogleFonts.inter(
-                                                  color: warnaHarga,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16)),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideError,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/bawah.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorError,
-                                            ),
-                                          )),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        const SizedBox(width: 5),
-                                        Text("Uang Keluar",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp."+provider.profil!.data!.wallet!.historiesWallet.toString(),
-                                              style: GoogleFonts.inter(
-                                                  color: warnaHarga,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16)),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ));
-                        }else if(provider.profil!.data!.wallet!.historiesWallet==null){
-                          return Boxsaldo(
-                            child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                        height: 33,
-                                        width: 33,
-                                        decoration: BoxDecoration(
-                                            color: sideSukes,
-                                            borderRadius:
-                                                BorderRadius.circular(400)),
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Image.asset(
-                                            "assets/icon/atas.png",
-                                            height: 15,
-                                            width: 15,
-                                            color: colorSukses,
+                                  child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: ListTile(
+                                      title: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 8),
+                                            child: Container(
+                                                height: 33,
+                                                width: 33,
+                                                decoration: BoxDecoration(
+                                                    color: sideSukes,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            400)),
+                                                child: IconButton(
+                                                  onPressed: () {},
+                                                  icon: Image.asset(
+                                                    "assets/icon/atas.png",
+                                                    height: 15,
+                                                    width: 15,
+                                                    color: colorSukses,
+                                                  ),
+                                                )),
                                           ),
-                                        )),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text("Uang Masuk",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp."+provider.profil!.data!.wallet!.balance.toString(),
-                                              style: GoogleFonts.inter(
-                                                  color: warnaHarga,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16)),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                        height: 33,
-                                        width: 33,
-                                        decoration: BoxDecoration(
-                                            color: sideError,
-                                            borderRadius:
-                                                BorderRadius.circular(400)),
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Image.asset(
-                                            "assets/icon/bawah.png",
-                                            height: 15,
-                                            width: 15,
-                                            color: colorError,
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              //     Text("Total Saldo",
+                                              //     style: GoogleFonts.inter(
+                                              //   color: Colors.black,
+                                              //   fontWeight: FontWeight.w500,
+                                              //   fontSize: 12
+                                              //     )
+                                              //     ),
+
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text("Uang Masuk",
+                                                  style: GoogleFonts.inter(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 14)),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 5),
+                                                child: Text("Rp.0",
+                                                    style: GoogleFonts.inter(
+                                                        color: warnaHarga,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 16)),
+                                              ),
+                                            ],
                                           ),
-                                        )),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        const SizedBox(width: 5),
-                                        Text("Uang Keluar",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp.0",
-                                              style: GoogleFonts.inter(
-                                                  color: warnaHarga,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16)),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ));
-                        }else{
-                          return Boxsaldo(
-                            child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  ),
+                                  Expanded(
+                                    child: ListTile(
+                                      title: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 8),
+                                            child: Container(
+                                                height: 33,
+                                                width: 33,
+                                                decoration: BoxDecoration(
+                                                    color: sideError,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            400)),
+                                                child: IconButton(
+                                                  onPressed: () {},
+                                                  icon: Image.asset(
+                                                    "assets/icon/bawah.png",
+                                                    height: 15,
+                                                    width: 15,
+                                                    color: colorError,
+                                                  ),
+                                                )),
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              //     Text("Total Saldo",
+                                              //     style: GoogleFonts.inter(
+                                              //   color: Colors.black,
+                                              //   fontWeight: FontWeight.w500,
+                                              //   fontSize: 12
+                                              //     )
+                                              //     ),
+
+                                              const SizedBox(width: 5),
+                                              Text("Uang Keluar",
+                                                  style: GoogleFonts.inter(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 14)),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 5),
+                                                child: Text("Rp.0",
+                                                    style: GoogleFonts.inter(
+                                                        color: warnaHarga,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 16)),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ));
+                            case MyState.loaded:
+                              if (provider.profil!.data!.wallet!.balance ==
+                                      null &&
+                                  provider.profil!.data!.wallet!
+                                          .historiesWallet ==
+                                      null) {
+                                return Boxsaldo(
+                                    child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideSukes,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/atas.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorSukses,
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 8),
+                                              child: Container(
+                                                  height: 33,
+                                                  width: 33,
+                                                  decoration: BoxDecoration(
+                                                      color: sideSukes,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              400)),
+                                                  child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Image.asset(
+                                                      "assets/icon/atas.png",
+                                                      height: 15,
+                                                      width: 15,
+                                                      color: colorSukses,
+                                                    ),
+                                                  )),
                                             ),
-                                          )),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        const SizedBox(
-                                          width: 5,
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                //     Text("Total Saldo",
+                                                //     style: GoogleFonts.inter(
+                                                //   color: Colors.black,
+                                                //   fontWeight: FontWeight.w500,
+                                                //   fontSize: 12
+                                                //     )
+                                                //     ),
+
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text("Uang Masuk",
+                                                    style: GoogleFonts.inter(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Text("Rp.0",
+                                                      style: GoogleFonts.inter(
+                                                          color: warnaHarga,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 16)),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                        Text("Uang Masuk",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp."+provider.profil!.data!.wallet!.balance.toString(),
-                                              style: GoogleFonts.inter(
-                                                  color: warnaHarga,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16)),
-                                        ),
-                                      ],
+                                      ),
                                     ),
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 8),
+                                              child: Container(
+                                                  height: 33,
+                                                  width: 33,
+                                                  decoration: BoxDecoration(
+                                                      color: sideError,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              400)),
+                                                  child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Image.asset(
+                                                      "assets/icon/bawah.png",
+                                                      height: 15,
+                                                      width: 15,
+                                                      color: colorError,
+                                                    ),
+                                                  )),
+                                            ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                //     Text("Total Saldo",
+                                                //     style: GoogleFonts.inter(
+                                                //   color: Colors.black,
+                                                //   fontWeight: FontWeight.w500,
+                                                //   fontSize: 12
+                                                //     )
+                                                //     ),
+
+                                                const SizedBox(width: 5),
+                                                Text("Uang Keluar",
+                                                    style: GoogleFonts.inter(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Text("Rp.0",
+                                                      style: GoogleFonts.inter(
+                                                          color: warnaHarga,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 16)),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
                                   ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                ));
+                              } else if (provider
+                                      .profil!.data!.wallet!.balance ==
+                                  null) {
+                                return Boxsaldo(
+                                    child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideError,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/bawah.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorError,
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 8),
+                                              child: Container(
+                                                  height: 33,
+                                                  width: 33,
+                                                  decoration: BoxDecoration(
+                                                      color: sideSukes,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              400)),
+                                                  child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Image.asset(
+                                                      "assets/icon/atas.png",
+                                                      height: 15,
+                                                      width: 15,
+                                                      color: colorSukses,
+                                                    ),
+                                                  )),
                                             ),
-                                          )),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        const SizedBox(width: 5),
-                                        Text("Uang Keluar",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp."+provider.profil!.data!.wallet!.historiesWallet.toString(),
-                                              style: GoogleFonts.inter(
-                                                  color: warnaHarga,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16)),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                //     Text("Total Saldo",
+                                                //     style: GoogleFonts.inter(
+                                                //   color: Colors.black,
+                                                //   fontWeight: FontWeight.w500,
+                                                //   fontSize: 12
+                                                //     )
+                                                //     ),
+
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text("Uang Masuk",
+                                                    style: GoogleFonts.inter(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Text("Rp.0",
+                                                      style: GoogleFonts.inter(
+                                                          color: warnaHarga,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 16)),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                      ],
+                                      ),
                                     ),
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 8),
+                                              child: Container(
+                                                  height: 33,
+                                                  width: 33,
+                                                  decoration: BoxDecoration(
+                                                      color: sideError,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              400)),
+                                                  child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Image.asset(
+                                                      "assets/icon/bawah.png",
+                                                      height: 15,
+                                                      width: 15,
+                                                      color: colorError,
+                                                    ),
+                                                  )),
+                                            ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                //     Text("Total Saldo",
+                                                //     style: GoogleFonts.inter(
+                                                //   color: Colors.black,
+                                                //   fontWeight: FontWeight.w500,
+                                                //   fontSize: 12
+                                                //     )
+                                                //     ),
+
+                                                const SizedBox(width: 5),
+                                                Text("Uang Keluar",
+                                                    style: GoogleFonts.inter(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Text(
+                                                      "Rp." +
+                                                          provider
+                                                              .profil!
+                                                              .data!
+                                                              .wallet!
+                                                              .historiesWallet
+                                                              .toString(),
+                                                      style: GoogleFonts.inter(
+                                                          color: warnaHarga,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 16)),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
                                   ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ));
-                        }
-                        case MyState.failed:
-                        return Boxsaldo(
-                            child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                ));
+                              } else if (provider
+                                      .profil!.data!.wallet!.historiesWallet ==
+                                  null) {
+                                return Boxsaldo(
+                                    child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideSukes,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/atas.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorSukses,
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                                height: 33,
+                                                width: 33,
+                                                decoration: BoxDecoration(
+                                                    color: sideSukes,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            400)),
+                                                child: IconButton(
+                                                  onPressed: () {},
+                                                  icon: Image.asset(
+                                                    "assets/icon/atas.png",
+                                                    height: 15,
+                                                    width: 15,
+                                                    color: colorSukses,
+                                                  ),
+                                                )),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                //     Text("Total Saldo",
+                                                //     style: GoogleFonts.inter(
+                                                //   color: Colors.black,
+                                                //   fontWeight: FontWeight.w500,
+                                                //   fontSize: 12
+                                                //     )
+                                                //     ),
+
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text("Uang Masuk",
+                                                    style: GoogleFonts.inter(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Text(
+                                                      "Rp." +
+                                                          provider.profil!.data!
+                                                              .wallet!.balance
+                                                              .toString(),
+                                                      style: GoogleFonts.inter(
+                                                          color: warnaHarga,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 16)),
+                                                ),
+                                              ],
                                             ),
-                                          )),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        const SizedBox(
-                                          width: 5,
+                                          ],
                                         ),
-                                        Text("Uang Masuk",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp.0",
-                                              style: GoogleFonts.inter(
-                                                  color: warnaHarga,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16)),
-                                        ),
-                                      ],
+                                      ),
                                     ),
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                                height: 33,
+                                                width: 33,
+                                                decoration: BoxDecoration(
+                                                    color: sideError,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            400)),
+                                                child: IconButton(
+                                                  onPressed: () {},
+                                                  icon: Image.asset(
+                                                    "assets/icon/bawah.png",
+                                                    height: 15,
+                                                    width: 15,
+                                                    color: colorError,
+                                                  ),
+                                                )),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                //     Text("Total Saldo",
+                                                //     style: GoogleFonts.inter(
+                                                //   color: Colors.black,
+                                                //   fontWeight: FontWeight.w500,
+                                                //   fontSize: 12
+                                                //     )
+                                                //     ),
+
+                                                const SizedBox(width: 5),
+                                                Text("Uang Keluar",
+                                                    style: GoogleFonts.inter(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Text("Rp.0",
+                                                      style: GoogleFonts.inter(
+                                                          color: warnaHarga,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 16)),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
                                   ],
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: ListTile(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                ));
+                              } else {
+                                return Boxsaldo(
+                                    child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideError,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/bawah.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorError,
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 8),
+                                              child: Container(
+                                                  height: 33,
+                                                  width: 33,
+                                                  decoration: BoxDecoration(
+                                                      color: sideSukes,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              400)),
+                                                  child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Image.asset(
+                                                      "assets/icon/atas.png",
+                                                      height: 15,
+                                                      width: 15,
+                                                      color: colorSukses,
+                                                    ),
+                                                  )),
                                             ),
-                                          )),
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        //     Text("Total Saldo",
-                                        //     style: GoogleFonts.inter(
-                                        //   color: Colors.black,
-                                        //   fontWeight: FontWeight.w500,
-                                        //   fontSize: 12
-                                        //     )
-                                        //     ),
-                          
-                                        const SizedBox(width: 5),
-                                        Text("Uang Keluar",
-                                            style: GoogleFonts.inter(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 14)),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5),
-                                          child: Text("Rp.0",
-                                              style: GoogleFonts.inter(
-                                                  color: warnaHarga,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16)),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                //     Text("Total Saldo",
+                                                //     style: GoogleFonts.inter(
+                                                //   color: Colors.black,
+                                                //   fontWeight: FontWeight.w500,
+                                                //   fontSize: 12
+                                                //     )
+                                                //     ),
+
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text("Uang Masuk",
+                                                    style: GoogleFonts.inter(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Text(
+                                                      "Rp." +
+                                                          provider.profil!.data!
+                                                              .wallet!.balance
+                                                              .toString(),
+                                                      style: GoogleFonts.inter(
+                                                          color: warnaHarga,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 16)),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                      ],
+                                      ),
                                     ),
+                                    Expanded(
+                                      child: ListTile(
+                                        title: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 8),
+                                              child: Container(
+                                                  height: 33,
+                                                  width: 33,
+                                                  decoration: BoxDecoration(
+                                                      color: sideError,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              400)),
+                                                  child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Image.asset(
+                                                      "assets/icon/bawah.png",
+                                                      height: 15,
+                                                      width: 15,
+                                                      color: colorError,
+                                                    ),
+                                                  )),
+                                            ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                //     Text("Total Saldo",
+                                                //     style: GoogleFonts.inter(
+                                                //   color: Colors.black,
+                                                //   fontWeight: FontWeight.w500,
+                                                //   fontSize: 12
+                                                //     )
+                                                //     ),
+
+                                                const SizedBox(width: 5),
+                                                Text("Uang Keluar",
+                                                    style: GoogleFonts.inter(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Text(
+                                                      "Rp." +
+                                                          provider
+                                                              .profil!
+                                                              .data!
+                                                              .wallet!
+                                                              .historiesWallet
+                                                              .toString(),
+                                                      style: GoogleFonts.inter(
+                                                          color: warnaHarga,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 16)),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
                                   ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ));
-                           default:
-                            return const CircularProgressIndicator();
-                         
-                           
+                                ));
+                              }
+                            case MyState.failed:
+                              return Boxsaldo(
+                                  child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: ListTile(
+                                      title: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 8),
+                                            child: Container(
+                                                height: 33,
+                                                width: 33,
+                                                decoration: BoxDecoration(
+                                                    color: sideSukes,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            400)),
+                                                child: IconButton(
+                                                  onPressed: () {},
+                                                  icon: Image.asset(
+                                                    "assets/icon/atas.png",
+                                                    height: 15,
+                                                    width: 15,
+                                                    color: colorSukses,
+                                                  ),
+                                                )),
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              //     Text("Total Saldo",
+                                              //     style: GoogleFonts.inter(
+                                              //   color: Colors.black,
+                                              //   fontWeight: FontWeight.w500,
+                                              //   fontSize: 12
+                                              //     )
+                                              //     ),
+
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text("Uang Masuk",
+                                                  style: GoogleFonts.inter(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 14)),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 5),
+                                                child: Text("Rp.0",
+                                                    style: GoogleFonts.inter(
+                                                        color: warnaHarga,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 16)),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: ListTile(
+                                      title: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 8),
+                                            child: Container(
+                                                height: 33,
+                                                width: 33,
+                                                decoration: BoxDecoration(
+                                                    color: sideError,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            400)),
+                                                child: IconButton(
+                                                  onPressed: () {},
+                                                  icon: Image.asset(
+                                                    "assets/icon/bawah.png",
+                                                    height: 15,
+                                                    width: 15,
+                                                    color: colorError,
+                                                  ),
+                                                )),
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              //     Text("Total Saldo",
+                                              //     style: GoogleFonts.inter(
+                                              //   color: Colors.black,
+                                              //   fontWeight: FontWeight.w500,
+                                              //   fontSize: 12
+                                              //     )
+                                              //     ),
+
+                                              const SizedBox(width: 5),
+                                              Text("Uang Keluar",
+                                                  style: GoogleFonts.inter(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 14)),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 5),
+                                                child: Text("Rp.0",
+                                                    style: GoogleFonts.inter(
+                                                        color: warnaHarga,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 16)),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ));
+                            default:
+                              return const CircularProgressIndicator();
                           }
                         },
                       ),
@@ -1428,8 +1572,9 @@ class _ProfilState extends State<Profil> {
                                               },
                                             ),
                                             ListTile(
-                                              contentPadding: const EdgeInsets.only(
-                                                  left: 30, right: 30),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 30, right: 30),
                                               leading: ShaderMask(
                                                   shaderCallback:
                                                       (Rect bounds) {

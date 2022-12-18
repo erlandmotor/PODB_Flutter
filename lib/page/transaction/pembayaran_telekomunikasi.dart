@@ -3,12 +3,13 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
+import 'package:ppodb_2/page/transaction/failtransaksi.dart';
 import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:ppodb_2/page/transaction/vouchertele.dart';
 import 'package:ppodb_2/page/widgets/checkstatus.dart';
 import 'package:ppodb_2/page/widgets/finite_state.dart';
-import 'package:ppodb_2/page/widgets/isisaldo.dart';
-import 'package:ppodb_2/page/widgets/qrCode.dart';
+import 'package:ppodb_2/page/transaction/isisaldo.dart';
+import 'package:ppodb_2/page/transaction/qrCode.dart';
 import 'package:ppodb_2/service/providers/product/product_list_provider.dart';
 import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
 
@@ -771,75 +772,11 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                         )),
                                 (route) => false);
                           } else {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    content: SingleChildScrollView(
-                                      child: Column(
-                                        children: <Widget>[
-                                          Image.asset(
-                                            "assets/image/rafiki.png",
-                                            height: size.height * .15,
-                                            width: size.width * .416,
-                                          ),
-                                          SizedBox(
-                                            height: size.height * .02875,
-                                          ),
-                                          const Text.rich(
-                                            TextSpan(
-                                              text: "Transaksi gagal :(",
-                                            ),
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 16),
-                                          ),
-                                          const Text.rich(
-                                            TextSpan(
-                                              text: "Coba cek koneksimu !!",
-                                            ),
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 16),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    actions: <Widget>[
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              elevation: 0,
-                                              backgroundColor: Colors.white,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(999),
-                                              ),
-                                            ),
-                                            child: const Text.rich(
-                                              TextSpan(
-                                                text: "oke",
-                                              ),
-                                              style: TextStyle(
-                                                  color: Color(0xff0D40C6),
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 16),
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  );
-                                });
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Failtransaction()),
+                                (route) => false);
                           }
                         }
                       } else {

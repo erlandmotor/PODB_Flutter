@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
-import 'package:ppodb_2/page/widgets/qrCode.dart';
+import 'package:ppodb_2/page/transaction/qrCode.dart';
 
 class Isiformsaldo extends StatefulWidget {
   Dummymethod metod;

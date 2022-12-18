@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../product/categoryhome.dart';
+import 'package:ppodb_2/page/main_page/main_page.dart';
+import 'package:ppodb_2/page/product/category_withprovider.dart';
 
 class Notready extends StatelessWidget {
   const Notready({super.key});
@@ -24,15 +24,16 @@ class Notready extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: size.height * .2125,
+              height: size.height * .2,
             ),
             SizedBox(
               width: size.width * .9138,
               child: Column(
                 children: [
                   Image.asset(
-                    "assets/image/amico.png",
+                    "assets/image/Construction.png",
                     height: size.height * .3,
+                    width: size.width * .66,
                   ),
                   const Text.rich(
                       textAlign: TextAlign.center,
@@ -48,16 +49,17 @@ class Notready extends StatelessWidget {
                   const Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(
-                          text: "Fitur belum tersedia nih !! Stay tune ya ",
+                          text:
+                              "Maaf fitur ini belum tersedia, yuk pilih\ntransaksi lain.",
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 16,
-                              color: Colors.black))),
+                              color: Color(0xff5C5D61)))),
                 ],
               ),
             ),
             SizedBox(
-              height: size.height * .1575,
+              height: size.height * .17,
             ),
             Padding(
                 padding: EdgeInsets.only(
@@ -77,12 +79,13 @@ class Notready extends StatelessWidget {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const CategoryProduct()),
+                                  builder: (context) =>
+                                      const CategoryProductprovider()),
                               (route) => route.isFirst);
                         },
                         child: const Text.rich(
                           TextSpan(
-                            text: "Transaksi Lain",
+                            text: "Transaksi Ulang",
                           ),
                           style: TextStyle(
                               fontWeight: FontWeight.w600, fontSize: 16),
@@ -107,7 +110,7 @@ class Notready extends StatelessWidget {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const CategoryProduct()),
+                                  builder: (context) => const MainPage()),
                               ((route) => route.isFirst));
                         },
                         child: const Text.rich(

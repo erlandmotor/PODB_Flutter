@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 
-import '../product/listdaerah.dart';
+import '../widgets/listdaerah.dart';
 import '../transaction/pembayaran.dart';
 
 class PDAMS extends StatefulWidget {

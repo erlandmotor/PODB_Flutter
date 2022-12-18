@@ -8,11 +8,10 @@ import 'package:ppodb_2/page/widgets/box_besar.dart';
 import 'package:ppodb_2/page/widgets/box_kecil.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart';
 import 'package:ppodb_2/page/widgets/finite_state.dart';
-import 'package:ppodb_2/page/widgets/isisaldo.dart';
-import 'package:ppodb_2/page/widgets/notready.dart';
+import 'package:ppodb_2/page/transaction/isisaldo.dart';
+import 'package:ppodb_2/page/product/notready.dart';
 
-
-import 'package:ppodb_2/page/widgets/tampilantelekom.dart';
+import 'package:ppodb_2/page/product/tampilantelekom.dart';
 import 'package:ppodb_2/page/widgets/textIconMenu.dart';
 import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
 import 'package:provider/provider.dart';

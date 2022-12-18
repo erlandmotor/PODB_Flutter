@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/Succesfull_Screen.dart';
+import 'package:ppodb_2/page/transaction/failtransaksi.dart';
 import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -271,6 +272,13 @@ class _QRScreenState extends State<QRScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => const SuccesPage()),
+                              (route) => false);
+                        } else {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const Failtransaction()),
                               (route) => false);
                         }
                       }
