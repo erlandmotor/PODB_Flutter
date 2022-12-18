@@ -480,9 +480,15 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                             textAlign: TextAlign.left,
                                             TextSpan(
                                                 text: "Saldo:" +
-                                                    provider.profil!.data!
-                                                        .wallet!.balance
-                                                        .toString(),
+                                                    NumberFormat.currency(
+                                                            locale: 'id',
+                                                            symbol: 'Rp',
+                                                            decimalDigits: 0)
+                                                        .format(provider
+                                                            .profil!
+                                                            .data!
+                                                            .wallet!
+                                                            .balance),
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 12,

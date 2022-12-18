@@ -18,6 +18,17 @@ class _CategoryProductproviderState extends State<CategoryProductprovider> {
   String status = "";
 
   late List<Datacate> prod;
+  @override
+  void initState() {
+    Future.delayed(
+      Duration.zero,
+      () {
+        prod = Provider.of<ProductcateProviders>(context).isicategory;
+      },
+    );
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +36,6 @@ class _CategoryProductproviderState extends State<CategoryProductprovider> {
         Provider.of<ProductcateProviders>(context).state == Catestate.loading;
     final isError =
         Provider.of<ProductcateProviders>(context).state == Catestate.error;
-    prod = Provider.of<ProductcateProviders>(context).isicategory;
 
     var size = MediaQuery.of(context).size;
     return isloading

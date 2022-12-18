@@ -43,9 +43,12 @@ class MyCuanAPI {
             "Authorization": "Bearer $token",
           }));
       _isNext = "berhasil";
-      return List<Datacate>.from(response.data["data"]
+      print(response.data["data"]);
+      List<Datacate> fina = List<Datacate>.from(response.data["data"]
           .map((data) => Datacate.fromJson(data))
           .toList());
+      print(fina);
+      return fina;
     } on DioError catch (e) {
       print(e.response!.data['message']);
       print('category bermasalah');
@@ -71,32 +74,6 @@ class MyCuanAPI {
       Productda dataWallet = Productda.fromJson(response.data);
       print("berhasil $dataWallet");
       return dataWallet;
-    } on DioError catch (e) {
-      print(e.response!.data['message']);
-      print('data bermasalah');
-      _isNext = "gagal";
-      rethrow;
-    }
-  }
-
-  Future<DataProduct> getproduct(int tipe, String nomor) async {
-    final prefs = await SharedPreferences.getInstance();
-    final String token = prefs.getString('token') ?? "";
-    var formdata = FormData.fromMap({"phone_number": nomor});
-    try {
-      final response =
-          await _dio.post('/users/product-types/$tipe/providers/phone',
-              options: Options(headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer $token",
-              }),
-              data: formdata);
-      print("Sebelum ${response.data["data"]}");
-      final jaja = DataProduct.fromJson(response.data["data"]);
-
-      print("Sesudah $jaja");
-
-      return jaja;
     } on DioError catch (e) {
       print(e.response!.data['message']);
       print('data bermasalah');

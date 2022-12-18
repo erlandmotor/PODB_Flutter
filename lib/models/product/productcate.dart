@@ -88,7 +88,7 @@ class ProductType {
         image: json["image"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        deletedAt: json["deleted_at"],
+        deletedAt: DateTime.parse(json["deleted_at"]),
       );
 
   Map<String, dynamic> toJson() => {

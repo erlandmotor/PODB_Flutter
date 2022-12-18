@@ -25,7 +25,7 @@ class Detail_telkomwithproviders extends StatefulWidget {
 
 class _Detail_telkomwithprovidersState
     extends State<Detail_telkomwithproviders> {
-  Productda product = Productda();
+  late Productda product;
 
   String status = "";
   late int harga;
@@ -47,11 +47,81 @@ class _Detail_telkomwithprovidersState
           ))
         : isError || product == null
             ? Scaffold(
-                body: Container(
-                    color: Colors.white,
-                    child: Center(
-                      child: Text("Silahkan cek nomor anda lagi"),
-                    )),
+                backgroundColor: Colors.white,
+                body: Padding(
+                  padding: EdgeInsets.only(
+                      right: size.width * .044, left: size.width * .044),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: size.height * .25,
+                      ),
+                      SizedBox(
+                        width: size.width * .9138,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              "assets/image/Penasaran 2.png",
+                              height: size.height * .3,
+                              width: size.width * .66666,
+                            ),
+                            const Text.rich(
+                                textAlign: TextAlign.center,
+                                TextSpan(
+                                    text:
+                                        "Maaf, Nomor yang Anda Cari\nBelum Tersedia Untuk Sekarang!",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 24,
+                                        color: Colors.black))),
+                            SizedBox(
+                              height: size.height * .02,
+                            ),
+                            const Text.rich(
+                                textAlign: TextAlign.center,
+                                TextSpan(
+                                    text:
+                                        "Kamu bisa memeriksa ulang nomormu lagi\n atau bisa mencoba nomor lain!",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 16,
+                                        color: Color(0xff5C5D61)))),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.height * .1,
+                      ),
+                      Padding(
+                          padding: EdgeInsets.only(
+                            left: size.width * .016,
+                            right: size.width * .016,
+                          ),
+                          child: Container(
+                              alignment: Alignment.bottomCenter,
+                              child: SizedBox(
+                                width: size.width * 3.28,
+                                height: size.height * .07,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xff0D40C6),
+                                      shape: const StadiumBorder()),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text.rich(
+                                    TextSpan(
+                                      text: "Kembali",
+                                    ),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16),
+                                  ),
+                                ),
+                              ))),
+                    ],
+                  ),
+                ),
               )
             : Scaffold(
                 resizeToAvoidBottomInset: false,
