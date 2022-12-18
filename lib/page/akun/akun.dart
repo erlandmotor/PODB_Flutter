@@ -792,25 +792,22 @@ class _ProfilState extends State<Profil> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideSukes,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/atas.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorSukses,
-                                            ),
-                                          )),
-                                    ),
+                                    Container(
+                                        height: 33,
+                                        width: 33,
+                                        decoration: BoxDecoration(
+                                            color: sideSukes,
+                                            borderRadius:
+                                                BorderRadius.circular(400)),
+                                        child: IconButton(
+                                          onPressed: () {},
+                                          icon: Image.asset(
+                                            "assets/icon/atas.png",
+                                            height: 15,
+                                            width: 15,
+                                            color: colorSukses,
+                                          ),
+                                        )),
                                     Column(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -851,25 +848,22 @@ class _ProfilState extends State<Profil> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 8),
-                                      child: Container(
-                                          height: 33,
-                                          width: 33,
-                                          decoration: BoxDecoration(
-                                              color: sideError,
-                                              borderRadius:
-                                                  BorderRadius.circular(400)),
-                                          child: IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              "assets/icon/bawah.png",
-                                              height: 15,
-                                              width: 15,
-                                              color: colorError,
-                                            ),
-                                          )),
-                                    ),
+                                    Container(
+                                        height: 33,
+                                        width: 33,
+                                        decoration: BoxDecoration(
+                                            color: sideError,
+                                            borderRadius:
+                                                BorderRadius.circular(400)),
+                                        child: IconButton(
+                                          onPressed: () {},
+                                          icon: Image.asset(
+                                            "assets/icon/bawah.png",
+                                            height: 15,
+                                            width: 15,
+                                            color: colorError,
+                                          ),
+                                        )),
                                     Column(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       crossAxisAlignment: CrossAxisAlignment.start,

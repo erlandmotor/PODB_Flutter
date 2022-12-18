@@ -24,7 +24,7 @@ class Boxkecil extends StatelessWidget {
         ),
         
         child: Padding(
-          padding: EdgeInsets.only(top: widthh*16/328,bottom: widthh*16/328,left: widthh*5/328,right: widthh*5/328),
+          padding: EdgeInsets.only(top: widthh*16/328,bottom: widthh*16/328,),
           child: child,
           
         ),
