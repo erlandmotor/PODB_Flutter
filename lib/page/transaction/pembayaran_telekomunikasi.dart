@@ -14,6 +14,8 @@ import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
 
 import 'package:provider/provider.dart';
 
+import '../../service/providers/wallet/wallet_provider.dart';
+
 class PembayranTelekScreen extends StatefulWidget {
   DummyTransTelekom trans;
   String? gambar;
@@ -37,6 +39,20 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
 
   TextEditingController nomor = TextEditingController();
   TextEditingController voucher = TextEditingController();
+  @override
+  void initState() {
+    Future.delayed(
+      Duration.zero,
+      () {
+        final _provider = Provider.of<BalanceProvider>(context, listen: false);
+
+        _provider.fetchBalance();
+      },
+    );
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final isloading = Provider.of<ProductListProviders>(context).state ==

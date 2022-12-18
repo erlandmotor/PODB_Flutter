@@ -32,19 +32,20 @@ class _Detail_telkomwithprovidersState
   TextEditingController bambang = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    product = Provider.of<ProductListProviders>(context).isicategory;
     final isloading = Provider.of<ProductListProviders>(context).state ==
         Productstate.loading;
     final isError =
         Provider.of<ProductListProviders>(context).state == Productstate.error;
-    product = Provider.of<ProductListProviders>(context).isicategory;
+
     var size = MediaQuery.of(context).size;
     bambang.text = widget.nomor;
-    return isloading || product == null
+    return isloading
         ? Scaffold(
             body: Center(
             child: CircularProgressIndicator(),
           ))
-        : isError
+        : isError || product == null
             ? Scaffold(
                 body: Container(
                     color: Colors.white,

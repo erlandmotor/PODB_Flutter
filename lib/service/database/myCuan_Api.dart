@@ -191,6 +191,26 @@ class MyCuanAPI {
     }
   }
 
+  Future addbalance(int nomor) async {
+    final prefs = await SharedPreferences.getInstance();
+    final String token = prefs.getString('token') ?? "";
+    try {
+      final response = await _dio.post('/user/wallet/topup-balance',
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token",
+          }),
+          data: {
+            "balance": nomor,
+          });
+    } on DioError catch (e) {
+      print(e.response!.data['message']);
+      print('data bermasalah');
+      _isNext = "gagal";
+      rethrow;
+    }
+  }
+
   Future updateUser(
     String name,
     String phone_number,
