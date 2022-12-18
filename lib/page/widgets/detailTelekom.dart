@@ -25,7 +25,7 @@ class Detail_telkomwithproviders extends StatefulWidget {
 
 class _Detail_telkomwithprovidersState
     extends State<Detail_telkomwithproviders> {
-  late Productda product;
+  Productda product = Productda();
 
   String status = "";
   late int harga;

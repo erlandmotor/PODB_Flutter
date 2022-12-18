@@ -39,14 +39,15 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
 
   TextEditingController nomor = TextEditingController();
   TextEditingController voucher = TextEditingController();
+
   @override
   void initState() {
     Future.delayed(
       Duration.zero,
       () {
-        final _provider = Provider.of<BalanceProvider>(context, listen: false);
+        final _provider = Provider.of<ProfilProvider>(context, listen: false);
 
-        _provider.fetchBalance();
+        _provider.fetchProfil();
       },
     );
 
@@ -459,59 +460,50 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                       ))),
                               subtitle: Consumer<ProfilProvider>(
                                 builder: (context, provider, _) {
-                                  switch (provider.myState){
+                                  switch (provider.myState) {
                                     case MyState.loading:
-                                  return  Text.rich(
-                                    textAlign: TextAlign.left,
-                                    TextSpan(
-                                        text:
-                                            "-",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 12,
-                                        )));
-                                        case MyState.loaded:
-                                        if(provider.profil!.data!.wallet!.balance==null){
-                                          return Text.rich(
-                                            textAlign: TextAlign.left,
-                                            TextSpan(
-                                                text:
-                                                    "-",
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 12,
-                                                )));
-                                        }else{
-                                          return Text.rich(
-                                            textAlign: TextAlign.left,
-                                            TextSpan(
-                                                text:
-                                                    "Saldo:"+provider.profil!.data!.wallet!.balance.toString(),
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 12,
-                                        )));
-                                        }
-                                        case MyState.failed:
+                                      return CircularProgressIndicator();
+                                    case MyState.loaded:
+                                      if (provider
+                                              .profil!.data!.wallet!.balance ==
+                                          null) {
                                         return Text.rich(
                                             textAlign: TextAlign.left,
                                             TextSpan(
-                                                text:
-                                                    "error",
+                                                text: "-",
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 12,
                                                 )));
-                                            
-                                        default:
-                                        return Center(
-                                          child: CircularProgressIndicator(),
-                                        );
-                                        
+                                      } else {
+                                        return Text.rich(
+                                            textAlign: TextAlign.left,
+                                            TextSpan(
+                                                text: "Saldo:" +
+                                                    provider.profil!.data!
+                                                        .wallet!.balance
+                                                        .toString(),
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 12,
+                                                )));
+                                      }
+                                    case MyState.failed:
+                                      return Text.rich(
+                                          textAlign: TextAlign.left,
+                                          TextSpan(
+                                              text: "error",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 12,
+                                              )));
+
+                                    default:
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
                                   }
-                                  
                                 },
-                                
                               ),
                               trailing: IconButton(
                                 onPressed: () {
