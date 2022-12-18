@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                   controller: _emailController,
                   validator: (email) {
-                    if (email != null && !EmailValidator.validate(email)) {
+                    if (email!.isEmpty) {
                       return "email tidak valid";
                     }
                   },
@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _katasandiController,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Sandi salah";
+                      return "Sandi tidak boleh";
                     }
                   },
                   decoration: InputDecoration(
@@ -136,16 +136,26 @@ class _LoginPageState extends State<LoginPage> {
                 height: Size.height * 0.06,
                 width: Size.width * 0.911,
                 child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async{
                       final isValidForm = formKey.currentState!.validate();
                       if (isValidForm) {
-                        final users = LoginModel(
-                            email: _emailController.text,
-                            katasandi: _katasandiController.text);
-                            Provider.of<AuthViewModel>(context, listen: false).getToken( _emailController.text, _katasandiController.text);
-                        Navigator.of(context).push(MaterialPageRoute(
+                        
+                            await Provider.of<AuthViewModel>(context, listen: false).getToken( _emailController.text, _katasandiController.text);
+                            if(providerKonfirmasi.message == "invalid email or password"){
+                              print("email dan kata sandi salah");
+                             
+                            }
+                            if(providerKonfirmasi.message == "validation failed"){
+                              print("validasi gagal");
+                            }
+                            if(providerKonfirmasi.message == "success"){
+                              if(!mounted)return;
+                              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
                           builder: (context) => Home(),
-                        ));
+                        ),(route)=>false);
+                            }
+                            
+                        
                       }
                     },
                     child: Text(
