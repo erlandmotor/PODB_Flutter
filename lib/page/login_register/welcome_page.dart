@@ -1,12 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:ppodb_2/page/home/home.dart';
 import 'package:ppodb_2/page/login_register/login_page.dart';
 import 'package:ppodb_2/page/login_register/register1_page.dart';
+import 'package:ppodb_2/page/main_page/main_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../shared/shared.dart';
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
 
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  @override
+  void initState() {
+    checkLogin();
+    super.initState();
+  }
+  void checkLogin() async {
+    final helper = await SharedPreferences.getInstance();
+    final token = helper.getString('token');
+    if (token != null) {
+      if (mounted) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MainPage(),
+            ),
+            (route) => false);
+      }
+    }
+    return null;
+  }
   @override
   Widget build(BuildContext context) {
     var Size = MediaQuery.of(context).size;

@@ -12,6 +12,7 @@ class AuthViewModel with ChangeNotifier {
   static final _shared = SharedPreferences.getInstance();
   static const _token = 'token';
   String? isNext;
+  String? message;
 
   bool _is8Digit = false;
   bool _isHurufKecil = false;
@@ -75,12 +76,19 @@ class AuthViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void getToken(String email, String password) async {
+  Future <void> getToken(String email, String password) async {
     try {
       final result = await _dioService.getToken(email, password);
-
+      print('$result data result');
+      message = "success";
       saveToken(result);
-    } catch (e) {}
+    } catch (e) {
+      if(e is DioError){
+        print(e.response!.data['message']);
+        message = e.response!.data['message'];
+      }
+      print(e);
+    }
     notifyListeners();
   }
 

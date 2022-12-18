@@ -26,15 +26,15 @@ class _Register2PageState extends State<Register2Page> {
   void tampilkanBottom(String errorText) {
     showModalBottomSheet<void>(
       context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(40),
+          topLeft: Radius.circular(40),
+        ),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (BuildContext context) {
-        return Container(
-          decoration: const BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(40),
-              topLeft: Radius.circular(40),
-            ),
-          ),
+        return SizedBox(
           height: 300,
           child: Center(
             child: Column(
@@ -69,7 +69,14 @@ class _Register2PageState extends State<Register2Page> {
                   height: 5,
                 ),
                 ElevatedButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                        (route) => false);
+                  },
                   child: Text(
                     'Masuk ke Akun MyCuan',
                     style: whiteTextStyle.copyWith(
@@ -95,15 +102,15 @@ class _Register2PageState extends State<Register2Page> {
   void tampilkanBottom2(String errorText) {
     showModalBottomSheet<void>(
       context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(40),
+          topLeft: Radius.circular(40),
+        ),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (BuildContext context) {
-        return Container(
-          decoration: const BoxDecoration(
-            // color: Colors.transparent,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(40),
-              topLeft: Radius.circular(40),
-            ),
-          ),
+        return SizedBox(
           height: 350,
           child: Center(
             child: Column(
@@ -139,7 +146,14 @@ class _Register2PageState extends State<Register2Page> {
                   height: 5,
                 ),
                 ElevatedButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                        (route) => false);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primaryColor,
                     shape: RoundedRectangleBorder(
@@ -182,7 +196,7 @@ class _Register2PageState extends State<Register2Page> {
       ),
       body: SafeArea(
         child: Form(
-          // autovalidateMode: AutovalidateMode.onUserInteraction,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           key: formKey,
           child: Padding(
             padding: EdgeInsets.only(
@@ -239,21 +253,41 @@ class _Register2PageState extends State<Register2Page> {
                           final kapitalRegExp = RegExp('(?=.*[A-Z])');
                           final angkaRegExp = RegExp('(?=.*[0-9])');
                           if (value!.isEmpty) {
-                            provider.setIfValueEmpty();
+                            WidgetsBinding.instance
+                                .addPostFrameCallback((duration) {
+                              provider.setIfValueEmpty();
+                            });
+
                             return "Harus diisi";
                           } else {
-                            provider.setIfValueNotEmpty();
+                            WidgetsBinding.instance
+                                .addPostFrameCallback((duration) {
+                              provider.setIfValueNotEmpty();
+                            });
+
                             if (!karakterRegExp.hasMatch(value)) {
-                              provider.setIf8DigitNotMatch();
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((duration) {
+                                provider.setIf8DigitNotMatch();
+                              });
                             }
                             if (!hurufkecilRegExp.hasMatch(value)) {
-                              provider.setIfHurufKecilNotMatch();
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((duration) {
+                                provider.setIfHurufKecilNotMatch();
+                              });
                             }
                             if (!kapitalRegExp.hasMatch(value)) {
-                              provider.setIfHurufKapitalNotMatch();
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((duration) {
+                                provider.setIfHurufKapitalNotMatch();
+                              });
                             }
                             if (!angkaRegExp.hasMatch(value)) {
-                              provider.setIfAngkaNotMatch();
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((duration) {
+                                provider.setIfAngkaNotMatch();
+                              });
                             }
                           }
                           _simpanData = value;
