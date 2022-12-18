@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/models/product/productcate.dart';
 import 'package:ppodb_2/service/providers/product/productcate_provider.dart';
 import 'package:provider/provider.dart';
@@ -65,6 +64,7 @@ class _CategoryProductproviderState extends State<CategoryProductprovider> {
                           height: size.height * .02,
                         ),
                         SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
                           child: Row(
                             children: <Widget>[
                               for (int i = 0; i < prod.length; i++)
@@ -111,7 +111,6 @@ class _CategoryProductproviderState extends State<CategoryProductprovider> {
                                     )),
                             ],
                           ),
-                          scrollDirection: Axis.horizontal,
                         ),
                         SizedBox(
                           height: size.height * .02,

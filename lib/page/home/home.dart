@@ -1,34 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ppodb_2/models/dummymodel.dart';
-import 'package:ppodb_2/page/akun/akun.dart';
-import 'package:ppodb_2/page/akun/background.dart';
-import 'package:ppodb_2/page/faq/faq.dart';
 import 'package:ppodb_2/page/home/background.dart';
 import 'package:ppodb_2/page/product/category_withprovider.dart';
-import 'package:ppodb_2/page/product/categoryhome.dart';
 import 'package:ppodb_2/page/product/detail_product.dart';
-import 'package:ppodb_2/page/produk/pulsa.dart';
-import 'package:ppodb_2/page/riwayat/riwayat.dart';
-import 'package:ppodb_2/page/product/categoryhome.dart';
-import 'package:ppodb_2/page/widgets/botton_navigation_box.dart';
 import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
 import 'package:ppodb_2/page/widgets/box_besar.dart';
 import 'package:ppodb_2/page/widgets/box_kecil.dart';
-import 'package:ppodb_2/page/widgets/bpjs.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart';
 import 'package:ppodb_2/page/widgets/finite_state.dart';
 import 'package:ppodb_2/page/widgets/isisaldo.dart';
-import 'package:ppodb_2/page/widgets/listrik_pln.dart';
 import 'package:ppodb_2/page/widgets/notready.dart';
 
-import 'package:ppodb_2/page/widgets/pdams.dart';
 
 import 'package:ppodb_2/page/widgets/tampilantelekom.dart';
 import 'package:ppodb_2/page/widgets/textIconMenu.dart';
-import 'package:ppodb_2/service/database/myCuan_Api.dart';
 import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
-import 'package:ppodb_2/service/providers/wallet/wallet_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -66,7 +52,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> indicators(imagesLength, currentIndex) {
     return List<Widget>.generate(imagesLength, (index) {
       return Container(
-        margin: EdgeInsets.only(bottom: 3, left: 3, right: 3),
+        margin: const EdgeInsets.only(bottom: 3, left: 3, right: 3),
         width: 10,
         height: 10,
         decoration: BoxDecoration(
@@ -168,9 +154,7 @@ class _HomePageState extends State<HomePage> {
                                   padding:
                                       EdgeInsets.only(top: heightt * 5 / 800),
                                   child: Text(
-                                      "Rp." +
-                                          provider.profil!.data!.wallet!.balance
-                                              .toString(),
+                                      "Rp.${provider.profil!.data!.wallet!.balance}",
                                       style: GoogleFonts.inter(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w500,
@@ -189,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                               );
 
                             default:
-                              return CircularProgressIndicator();
+                              return const CircularProgressIndicator();
                           }
                         },
                         child: Padding(
@@ -218,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: ((context) => Isisaldo())));
+                                    builder: ((context) => const Isisaldo())));
                           },
                           icon: Image.asset(
                             "assets/icon/Plus.png",
@@ -239,11 +223,11 @@ class _HomePageState extends State<HomePage> {
                 )),
               ),
               Boxbesar(
-                  child: Container(
+                  child: SizedBox(
                 width: double.infinity,
                 height: heightt * 205 / 800,
                 child: GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.only(
                     top: heightt * 16 / 800,
                   ),
@@ -298,20 +282,20 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => Notready())));
+                                  builder: ((context) => const Notready())));
                         }
                         if (modulName[index] == "Voucher Game") {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => Notready())));
+                                  builder: ((context) => const Notready())));
                         }
                         if (modulName[index] == "Lainnya") {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: ((context) =>
-                                      CategoryProductprovider())));
+                                      const CategoryProductprovider())));
                         }
                       },
                       child: Column(
@@ -354,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               )),
-              Container(
+              SizedBox(
                 height: heightt * 228 / 800,
                 width: widthh,
                 child: Column(
@@ -427,7 +411,7 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                   width: widthh * 328 / 360,
                   height: heightt * 140 / 800,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
                       "assets/image/Hotline.png",

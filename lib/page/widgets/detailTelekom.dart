@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/product/product_data_model.dart';
-import 'package:ppodb_2/models/product/productcate.dart';
 import 'package:ppodb_2/page/transaction/pembayaran_telekomunikasi.dart';
 import 'package:ppodb_2/page/widgets/checkstatus.dart';
 import 'package:ppodb_2/service/providers/product/product_list_provider.dart';
@@ -40,7 +39,7 @@ class _Detail_telkomwithprovidersState
     var size = MediaQuery.of(context).size;
     bambang.text = widget.nomor;
     return isloading
-        ? Scaffold(
+        ? const Scaffold(
             body: Center(
             child: CircularProgressIndicator(),
           ))
@@ -209,7 +208,7 @@ class _Detail_telkomwithprovidersState
                               textAlign: TextAlign.left,
                               TextSpan(
                                   text: product.data!.name,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xff5C5D61),
                                     fontSize: 12,

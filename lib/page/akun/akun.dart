@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,14 +6,11 @@ import 'package:ppodb_2/page/akun/edit_data_akun.dart';
 import 'package:ppodb_2/page/akun/edit_password.dart';
 import 'package:ppodb_2/page/akun/syarat_dan_ketentuan/syarat_dan_ketentuan.dart';
 import 'package:ppodb_2/page/login_register/login_page.dart';
-import 'package:ppodb_2/page/login_register/register1_page.dart';
 import 'package:ppodb_2/page/transaction/vouchertele.dart';
 import 'package:ppodb_2/page/widgets/alert.dart';
 
 import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
 import 'package:ppodb_2/page/widgets/boxSaldo.dart';
-import 'package:ppodb_2/page/widgets/box_besar.dart';
-import 'package:ppodb_2/page/widgets/box_kecil.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart';
 import 'package:ppodb_2/page/widgets/finite_state.dart';
 import 'package:ppodb_2/page/widgets/isisaldo.dart';
@@ -37,7 +33,7 @@ class Profil extends StatefulWidget {
 List<Widget> indicators(imagesLength, currentIndex) {
   return List<Widget>.generate(imagesLength, (index) {
     return Container(
-      margin: EdgeInsets.only(bottom: 3, left: 3, right: 3),
+      margin: const EdgeInsets.only(bottom: 3, left: 3, right: 3),
       width: 10,
       height: 10,
       decoration: BoxDecoration(
@@ -94,7 +90,7 @@ class _ProfilState extends State<Profil> {
                 prefs.remove("token");
                 prefs.setBool("login", false);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => LoginPage())));
+                    MaterialPageRoute(builder: ((context) => const LoginPage())));
                 // if (_postProses == "berhasil") {
                 //   Get.offAll(const SuratJalanView());
                 // }
@@ -159,7 +155,7 @@ class _ProfilState extends State<Profil> {
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(400),
-                                          image: DecorationImage(
+                                          image: const DecorationImage(
                                               image: AssetImage(
                                                   "assets/icon/person.png"))),
                                     ),
@@ -208,7 +204,7 @@ class _ProfilState extends State<Profil> {
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(400),
-                                            image: DecorationImage(
+                                            image: const DecorationImage(
                                                 image: AssetImage(
                                                     "assets/icon/person.png"))),
                                       ),
@@ -261,7 +257,7 @@ class _ProfilState extends State<Profil> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             400),
-                                                    image: DecorationImage(
+                                                    image: const DecorationImage(
                                                         image: AssetImage(
                                                             "assets/icon/person.png"))),
                                               );
@@ -276,7 +272,7 @@ class _ProfilState extends State<Profil> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               400),
-                                                      image: DecorationImage(
+                                                      image: const DecorationImage(
                                                           image: AssetImage(
                                                               "assets/icon/person.png"))),
                                                 );
@@ -305,13 +301,13 @@ class _ProfilState extends State<Profil> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             400),
-                                                    image: DecorationImage(
+                                                    image: const DecorationImage(
                                                         image: AssetImage(
                                                             "assets/icon/person.png"))),
                                               );
 
                                             default:
-                                              return CircularProgressIndicator();
+                                              return const CircularProgressIndicator();
                                           }
                                         },
                                       ),
@@ -361,7 +357,7 @@ class _ProfilState extends State<Profil> {
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(400),
-                                          image: DecorationImage(
+                                          image: const DecorationImage(
                                               image: AssetImage(
                                                   "assets/icon/person.png"))),
                                     ),
@@ -398,7 +394,7 @@ class _ProfilState extends State<Profil> {
                                   ],
                                 );
                               default:
-                                return CircularProgressIndicator();
+                                return const CircularProgressIndicator();
                             }
                           },
                         ),
@@ -420,7 +416,7 @@ class _ProfilState extends State<Profil> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(right: 8),
+                                      padding: const EdgeInsets.only(right: 8),
                                       child: Container(
                                           height: 33,
                                           width: 33,
@@ -450,7 +446,7 @@ class _ProfilState extends State<Profil> {
                                         //     )
                                         //     ),
                           
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
                                         Text("Uang Masuk",
@@ -459,7 +455,7 @@ class _ProfilState extends State<Profil> {
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 14)),
                                         Padding(
-                                          padding: EdgeInsets.only(top: 5),
+                                          padding: const EdgeInsets.only(top: 5),
                                           child: Text("Rp.0",
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
@@ -479,7 +475,7 @@ class _ProfilState extends State<Profil> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(right: 8),
+                                      padding: const EdgeInsets.only(right: 8),
                                       child: Container(
                                           height: 33,
                                           width: 33,
@@ -509,7 +505,7 @@ class _ProfilState extends State<Profil> {
                                         //     )
                                         //     ),
                           
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Text("Uang Keluar",
                                             style: GoogleFonts.inter(
                                                 color: Colors.black,
@@ -545,7 +541,7 @@ class _ProfilState extends State<Profil> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(right: 8),
+                                      padding: const EdgeInsets.only(right: 8),
                                       child: Container(
                                           height: 33,
                                           width: 33,
@@ -575,7 +571,7 @@ class _ProfilState extends State<Profil> {
                                         //     )
                                         //     ),
                           
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
                                         Text("Uang Masuk",
@@ -584,7 +580,7 @@ class _ProfilState extends State<Profil> {
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 14)),
                                         Padding(
-                                          padding: EdgeInsets.only(top: 5),
+                                          padding: const EdgeInsets.only(top: 5),
                                           child: Text("Rp.0",
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
@@ -604,7 +600,7 @@ class _ProfilState extends State<Profil> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(right: 8),
+                                      padding: const EdgeInsets.only(right: 8),
                                       child: Container(
                                           height: 33,
                                           width: 33,
@@ -634,7 +630,7 @@ class _ProfilState extends State<Profil> {
                                         //     )
                                         //     ),
                           
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Text("Uang Keluar",
                                             style: GoogleFonts.inter(
                                                 color: Colors.black,
@@ -669,7 +665,7 @@ class _ProfilState extends State<Profil> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(right: 8),
+                                      padding: const EdgeInsets.only(right: 8),
                                       child: Container(
                                           height: 33,
                                           width: 33,
@@ -699,7 +695,7 @@ class _ProfilState extends State<Profil> {
                                         //     )
                                         //     ),
                           
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
                                         Text("Uang Masuk",
@@ -708,7 +704,7 @@ class _ProfilState extends State<Profil> {
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 14)),
                                         Padding(
-                                          padding: EdgeInsets.only(top: 5),
+                                          padding: const EdgeInsets.only(top: 5),
                                           child: Text("Rp.0",
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
@@ -728,7 +724,7 @@ class _ProfilState extends State<Profil> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(right: 8),
+                                      padding: const EdgeInsets.only(right: 8),
                                       child: Container(
                                           height: 33,
                                           width: 33,
@@ -758,7 +754,7 @@ class _ProfilState extends State<Profil> {
                                         //     )
                                         //     ),
                           
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Text("Uang Keluar",
                                             style: GoogleFonts.inter(
                                                 color: Colors.black,
@@ -820,7 +816,7 @@ class _ProfilState extends State<Profil> {
                                         //     )
                                         //     ),
                           
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
                                         Text("Uang Masuk",
@@ -829,7 +825,7 @@ class _ProfilState extends State<Profil> {
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 14)),
                                         Padding(
-                                          padding: EdgeInsets.only(top: 5),
+                                          padding: const EdgeInsets.only(top: 5),
                                           child: Text("Rp."+provider.profil!.data!.wallet!.balance.toString(),
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
@@ -876,7 +872,7 @@ class _ProfilState extends State<Profil> {
                                         //     )
                                         //     ),
                           
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Text("Uang Keluar",
                                             style: GoogleFonts.inter(
                                                 color: Colors.black,
@@ -911,7 +907,7 @@ class _ProfilState extends State<Profil> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(right: 8),
+                                      padding: const EdgeInsets.only(right: 8),
                                       child: Container(
                                           height: 33,
                                           width: 33,
@@ -941,7 +937,7 @@ class _ProfilState extends State<Profil> {
                                         //     )
                                         //     ),
                           
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
                                         Text("Uang Masuk",
@@ -950,7 +946,7 @@ class _ProfilState extends State<Profil> {
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 14)),
                                         Padding(
-                                          padding: EdgeInsets.only(top: 5),
+                                          padding: const EdgeInsets.only(top: 5),
                                           child: Text("Rp."+provider.profil!.data!.wallet!.balance.toString(),
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
@@ -970,7 +966,7 @@ class _ProfilState extends State<Profil> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(right: 8),
+                                      padding: const EdgeInsets.only(right: 8),
                                       child: Container(
                                           height: 33,
                                           width: 33,
@@ -1000,7 +996,7 @@ class _ProfilState extends State<Profil> {
                                         //     )
                                         //     ),
                           
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Text("Uang Keluar",
                                             style: GoogleFonts.inter(
                                                 color: Colors.black,
@@ -1036,7 +1032,7 @@ class _ProfilState extends State<Profil> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(right: 8),
+                                      padding: const EdgeInsets.only(right: 8),
                                       child: Container(
                                           height: 33,
                                           width: 33,
@@ -1066,7 +1062,7 @@ class _ProfilState extends State<Profil> {
                                         //     )
                                         //     ),
                           
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
                                         Text("Uang Masuk",
@@ -1075,7 +1071,7 @@ class _ProfilState extends State<Profil> {
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 14)),
                                         Padding(
-                                          padding: EdgeInsets.only(top: 5),
+                                          padding: const EdgeInsets.only(top: 5),
                                           child: Text("Rp.0",
                                               style: GoogleFonts.inter(
                                                   color: warnaHarga,
@@ -1095,7 +1091,7 @@ class _ProfilState extends State<Profil> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(right: 8),
+                                      padding: const EdgeInsets.only(right: 8),
                                       child: Container(
                                           height: 33,
                                           width: 33,
@@ -1125,7 +1121,7 @@ class _ProfilState extends State<Profil> {
                                         //     )
                                         //     ),
                           
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Text("Uang Keluar",
                                             style: GoogleFonts.inter(
                                                 color: Colors.black,
@@ -1148,7 +1144,7 @@ class _ProfilState extends State<Profil> {
                           ],
                         ));
                            default:
-                            return CircularProgressIndicator();
+                            return const CircularProgressIndicator();
                          
                            
                           }
@@ -1159,11 +1155,11 @@ class _ProfilState extends State<Profil> {
                           left: widthh * 16 / 360,
                           right: widthh * 16 / 360,
                         ),
-                        child: Container(
+                        child: SizedBox(
                           width: double.infinity,
                           height: heightt * 100 / 800,
                           child: GridView.builder(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             padding: EdgeInsets.only(
                               top: heightt * 16 / 800,
                             ),
@@ -1183,21 +1179,21 @@ class _ProfilState extends State<Profil> {
                                         context,
                                         MaterialPageRoute(
                                             builder: ((context) =>
-                                                Isisaldo())));
+                                                const Isisaldo())));
                                   }
                                   if (namaTopup[index] == "Kirim Uang") {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: ((context) =>
-                                                Notready())));
+                                                const Notready())));
                                   }
                                   if (namaTopup[index] == "Kartu Saya") {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: ((context) =>
-                                                Notready())));
+                                                const Notready())));
                                   }
                                   if (namaTopup[index] == "Voucher Saya") {
                                     Navigator.push(
@@ -1238,14 +1234,14 @@ class _ProfilState extends State<Profil> {
                           ),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: heightt * 400 / 800,
                         child: ListView(
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
-                          padding: EdgeInsets.all(2),
+                          padding: const EdgeInsets.all(2),
                           children: [
-                            Container(
+                            SizedBox(
                               height: heightt * 200 / 800,
                               width: widthh,
                               child: Column(
@@ -1298,7 +1294,7 @@ class _ProfilState extends State<Profil> {
                                 ],
                               ),
                             ),
-                            Container(
+                            SizedBox(
                                 width: widthh,
                                 child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -1328,7 +1324,7 @@ class _ProfilState extends State<Profil> {
                                               builder: (context, provider, _) {
                                                 return ListTile(
                                                   contentPadding:
-                                                      EdgeInsets.only(
+                                                      const EdgeInsets.only(
                                                           left: 30, right: 30),
                                                   leading: ShaderMask(
                                                       shaderCallback:
@@ -1349,7 +1345,7 @@ class _ProfilState extends State<Profil> {
                                                       child: Container(
                                                         width: 24,
                                                         height: 24,
-                                                        decoration: BoxDecoration(
+                                                        decoration: const BoxDecoration(
                                                             image: DecorationImage(
                                                                 image: AssetImage(
                                                                     "assets/icon/person.png"))),
@@ -1387,7 +1383,7 @@ class _ProfilState extends State<Profil> {
                                                         child: Container(
                                                           width: 24,
                                                           height: 24,
-                                                          decoration: BoxDecoration(
+                                                          decoration: const BoxDecoration(
                                                               image: DecorationImage(
                                                                   image: AssetImage(
                                                                       "assets/icon/kanan.png"))),
@@ -1431,7 +1427,7 @@ class _ProfilState extends State<Profil> {
                                               },
                                             ),
                                             ListTile(
-                                              contentPadding: EdgeInsets.only(
+                                              contentPadding: const EdgeInsets.only(
                                                   left: 30, right: 30),
                                               leading: ShaderMask(
                                                   shaderCallback:
@@ -1451,7 +1447,7 @@ class _ProfilState extends State<Profil> {
                                                   child: Container(
                                                     width: 24,
                                                     height: 24,
-                                                    decoration: BoxDecoration(
+                                                    decoration: const BoxDecoration(
                                                         image: DecorationImage(
                                                             image: AssetImage(
                                                                 "assets/icon/lock.png"))),
@@ -1486,7 +1482,7 @@ class _ProfilState extends State<Profil> {
                                                     child: Container(
                                                       width: 24,
                                                       height: 24,
-                                                      decoration: BoxDecoration(
+                                                      decoration: const BoxDecoration(
                                                           image: DecorationImage(
                                                               image: AssetImage(
                                                                   "assets/icon/kanan.png"))),
@@ -1497,7 +1493,7 @@ class _ProfilState extends State<Profil> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: ((context) =>
-                                                            EditPassword())));
+                                                            const EditPassword())));
                                               },
                                             ),
                                             Padding(
@@ -1522,7 +1518,7 @@ class _ProfilState extends State<Profil> {
                                                 children: <Widget>[
                                                   ListTile(
                                                     contentPadding:
-                                                        EdgeInsets.only(
+                                                        const EdgeInsets.only(
                                                             left: 30,
                                                             right: 30),
                                                     leading: ShaderMask(
@@ -1545,7 +1541,7 @@ class _ProfilState extends State<Profil> {
                                                         child: Container(
                                                           width: 24,
                                                           height: 24,
-                                                          decoration: BoxDecoration(
+                                                          decoration: const BoxDecoration(
                                                               image: DecorationImage(
                                                                   image: AssetImage(
                                                                       "assets/icon/star.png"))),
@@ -1584,7 +1580,7 @@ class _ProfilState extends State<Profil> {
                                                           child: Container(
                                                             width: 24,
                                                             height: 24,
-                                                            decoration: BoxDecoration(
+                                                            decoration: const BoxDecoration(
                                                                 image: DecorationImage(
                                                                     image: AssetImage(
                                                                         "assets/icon/kanan.png"))),
@@ -1599,7 +1595,7 @@ class _ProfilState extends State<Profil> {
                                                   ),
                                                   ListTile(
                                                     contentPadding:
-                                                        EdgeInsets.only(
+                                                        const EdgeInsets.only(
                                                             left: 30,
                                                             right: 30),
                                                     leading: ShaderMask(
@@ -1622,7 +1618,7 @@ class _ProfilState extends State<Profil> {
                                                         child: Container(
                                                           width: 24,
                                                           height: 24,
-                                                          decoration: BoxDecoration(
+                                                          decoration: const BoxDecoration(
                                                               image: DecorationImage(
                                                                   image: AssetImage(
                                                                       "assets/icon/doc.png"))),
@@ -1661,7 +1657,7 @@ class _ProfilState extends State<Profil> {
                                                           child: Container(
                                                             width: 24,
                                                             height: 24,
-                                                            decoration: BoxDecoration(
+                                                            decoration: const BoxDecoration(
                                                                 image: DecorationImage(
                                                                     image: AssetImage(
                                                                         "assets/icon/kanan.png"))),
@@ -1672,7 +1668,7 @@ class _ProfilState extends State<Profil> {
                                                           context,
                                                           MaterialPageRoute(
                                                               builder: ((context) =>
-                                                                  SyaratKetentuan())));
+                                                                  const SyaratKetentuan())));
                                                     },
                                                   ),
                                                   Consumer<AuthViewModel>(
@@ -1707,7 +1703,7 @@ class _ProfilState extends State<Profil> {
                                                             child: Container(
                                                               width: 24,
                                                               height: 24,
-                                                              decoration: BoxDecoration(
+                                                              decoration: const BoxDecoration(
                                                                   image: DecorationImage(
                                                                       image: AssetImage(
                                                                           "assets/icon/logout.png"))),
@@ -1751,7 +1747,7 @@ class _ProfilState extends State<Profil> {
                                                               child: Container(
                                                                 width: 24,
                                                                 height: 24,
-                                                                decoration: BoxDecoration(
+                                                                decoration: const BoxDecoration(
                                                                     image: DecorationImage(
                                                                         image: AssetImage(
                                                                             "assets/icon/kanan.png"))),

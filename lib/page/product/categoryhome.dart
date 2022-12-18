@@ -67,6 +67,7 @@ class _CategoryProductState extends State<CategoryProduct> {
                 height: size.height * .02,
               ),
               SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
                 child: Row(
                   children: <Widget>[
                     for (int i = 0; i < prod.length; i++)
@@ -111,7 +112,6 @@ class _CategoryProductState extends State<CategoryProduct> {
                           )),
                   ],
                 ),
-                scrollDirection: Axis.horizontal,
               ),
               SizedBox(
                 height: size.height * .02,

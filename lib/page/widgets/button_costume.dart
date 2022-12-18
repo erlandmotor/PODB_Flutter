@@ -23,6 +23,12 @@ class ButtonCostume extends StatelessWidget {
             Expanded(
               child: ElevatedButton(                
                   onPressed: onClickedShare,
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: whiteColor,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                           side: BorderSide(color: primaryColor, width: 1.5),
+                          borderRadius: BorderRadius.circular(30))),
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Row(
@@ -42,18 +48,18 @@ class ButtonCostume extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: whiteColor,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                           side: BorderSide(color: primaryColor, width: 1.5),
-                          borderRadius: BorderRadius.circular(30)))),
+                  )),
             ),
             const SizedBox(width: 10),
             Expanded(
               child: ElevatedButton(                
                   onPressed:onClickedUnduh,
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: whiteColor,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                           side: BorderSide(color: primaryColor, width: 1.5),
+                          borderRadius: BorderRadius.circular(30))),
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Row(
@@ -73,19 +79,19 @@ class ButtonCostume extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: whiteColor,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                           side: BorderSide(color: primaryColor, width: 1.5),
-                          borderRadius: BorderRadius.circular(30)))),
+                  )),
             ),
           ],
         ),
           const SizedBox(height: 15),
        ElevatedButton(                
                   onPressed: onClickedLagi,
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: whiteColor,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                           side: BorderSide(color: primaryColor, width: 1.5),
+                          borderRadius: BorderRadius.circular(30))),
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Text(
@@ -94,13 +100,7 @@ class ButtonCostume extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           color: primaryColor)
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: whiteColor,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                           side: BorderSide(color: primaryColor, width: 1.5),
-                          borderRadius: BorderRadius.circular(30)))),
+                  )),
       
         
       ],

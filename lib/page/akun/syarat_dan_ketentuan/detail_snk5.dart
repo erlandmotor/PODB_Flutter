@@ -1,9 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ppodb_2/page/widgets/box_artikel.dart';
-import 'package:ppodb_2/page/widgets/box_search.dart';
-import 'package:ppodb_2/page/widgets/constanta.dart';
 
 class DetailSnk5 extends StatefulWidget {
   const DetailSnk5({super.key});
@@ -45,12 +42,11 @@ class _DetailSnk5State extends State<DetailSnk5> {
 
 
     ];
-    int jumlah = var1.length;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Ketentuan Refund",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -66,7 +62,7 @@ class _DetailSnk5State extends State<DetailSnk5> {
            
             children: [
               SizedBox(height:heightt *5/800,),
-              Container(
+              SizedBox(
                 height: 900,
                 width: widthh,
                 child: Column(

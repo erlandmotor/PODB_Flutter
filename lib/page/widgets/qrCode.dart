@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/Succesfull_Screen.dart';
-import 'package:ppodb_2/page/product/categoryhome.dart';
 import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';

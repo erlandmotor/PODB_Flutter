@@ -1,17 +1,11 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:ppodb_2/models/product/product_data_model.dart';
 import 'package:ppodb_2/models/product/productcate.dart';
 import 'package:ppodb_2/models/profil/list_profil.dart';
-import 'package:ppodb_2/models/register_model.dart';
 import 'package:ppodb_2/models/riwayat/rmodel_riwayat.dart';
-import 'package:ppodb_2/models/wallet/data_wallet.dart';
 
-import 'package:ppodb_2/page/akun/akun.dart';
-import 'package:ppodb_2/page/product/categoryhome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final _dio = Dio(

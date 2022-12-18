@@ -5,7 +5,6 @@ import 'package:email_validator/email_validator.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ppodb_2/page/akun/akun.dart';
 import 'package:ppodb_2/page/main_page/main_page.dart';
 import 'package:ppodb_2/page/widgets/alert.dart';
 import 'package:ppodb_2/service/database/myCuan_Api.dart';
@@ -67,11 +66,9 @@ class _EditAkunState extends State<EditAkun> {
             gambar: gambar,
             onClicked: () async {
              
-              final users =await MyCuanAPI().updateUser(_namalengkapController.text, _nomortelponController.text, _emailController.text);
-               final gambars = await MyCuanAPI().updateGambar(display);
            
                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => MainPage(),
+                                    builder: (context) => const MainPage(),
                                   )
                                   );
                      
@@ -90,7 +87,7 @@ class _EditAkunState extends State<EditAkun> {
     
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.black
         ),
         centerTitle: true,
@@ -257,7 +254,7 @@ class _EditAkunState extends State<EditAkun> {
                     ),
                      Padding(
                        padding:  EdgeInsets.only(top: heightt*160/800),
-                       child: Container(
+                       child: SizedBox(
                         height: heightt * 0.06,
                         width: widthh * 0.911,
                         child: ElevatedButton(
@@ -276,17 +273,17 @@ class _EditAkunState extends State<EditAkun> {
                            
                                
                             },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: primaryColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30))),
                             child: Text(
                               'Simpan Perubahan',
                               style: whiteTextStyle.copyWith(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   color: whiteColor),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: primaryColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)))),
+                            )),
                     ),
                      ),
                     // Text(

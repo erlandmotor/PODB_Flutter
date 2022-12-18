@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
-import 'package:ppodb_2/models/wallet/data_wallet.dart';
 import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:ppodb_2/page/transaction/vouchertele.dart';
 import 'package:ppodb_2/page/widgets/checkstatus.dart';
@@ -14,7 +13,6 @@ import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../service/providers/wallet/wallet_provider.dart';
 
 class PembayranTelekScreen extends StatefulWidget {
   DummyTransTelekom trans;
@@ -354,7 +352,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                 ),
                               ),
                               Container(
-                                color: const Color(0xff0D40C614),
+                                color: const Color(0xff0d40c614),
                                 height: size.height * .0725,
                                 width: size.width * 3.28,
                                 child: Padding(
@@ -462,12 +460,12 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                 builder: (context, provider, _) {
                                   switch (provider.myState) {
                                     case MyState.loading:
-                                      return CircularProgressIndicator();
+                                      return const CircularProgressIndicator();
                                     case MyState.loaded:
                                       if (provider
                                               .profil!.data!.wallet!.balance ==
                                           null) {
-                                        return Text.rich(
+                                        return const Text.rich(
                                             textAlign: TextAlign.left,
                                             TextSpan(
                                                 text: "-",
@@ -489,13 +487,13 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                                             .data!
                                                             .wallet!
                                                             .balance),
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 12,
                                                 )));
                                       }
                                     case MyState.failed:
-                                      return Text.rich(
+                                      return const Text.rich(
                                           textAlign: TextAlign.left,
                                           TextSpan(
                                               text: "error",
@@ -505,7 +503,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                               )));
 
                                     default:
-                                      return Center(
+                                      return const Center(
                                         child: CircularProgressIndicator(),
                                       );
                                   }

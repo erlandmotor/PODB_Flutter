@@ -101,7 +101,7 @@ class ProductType {
         "id": id,
         "name": name,
         "category_id": categoryId,
-        "providers": providers == null ? null : providers,
+        "providers": providers ?? null,
         "image": image,
         "created_at": createdAt == null ? null : createdAt!.toIso8601String(),
         "updated_at": updatedAt == null ? null : updatedAt!.toIso8601String(),

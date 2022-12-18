@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/page/main_page/main_page.dart';
-import 'package:ppodb_2/page/product/categoryhome.dart';
 import 'package:ppodb_2/page/product/detail_product.dart';
 
 class SuccesPages extends StatefulWidget {

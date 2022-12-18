@@ -40,7 +40,7 @@ class _DetailRiwayatState extends State<DetailRiwayat> {
        resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Riwayat Transaksi",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -68,7 +68,7 @@ class _DetailRiwayatState extends State<DetailRiwayat> {
                           fontSize: 14,
                           fontWeight: FontWeight.w700
                         ),),
-                        SizedBox(width: 5,),
+                        const SizedBox(width: 5,),
                         Image.asset( "assets/icon/copy.png",
                         height: 16,
                         width: 16,)
@@ -152,7 +152,7 @@ class _DetailRiwayatState extends State<DetailRiwayat> {
                            ),                    
                           ) ,
                          subtitle: Padding(
-                          padding: EdgeInsets.only(top: 5),
+                          padding: const EdgeInsets.only(top: 5),
                           child: Column(
                             // mainAxisAlignment: MainAxisAlignment.start,
                             // crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,12 +169,12 @@ class _DetailRiwayatState extends State<DetailRiwayat> {
                                 flexLeftRow: 25, 
                                 flexRightRow: 10),
                                  SizedBox(height: heightt*16/800),
-                                 Divider(
+                                 const Divider(
                                   color: secondaryColor,
                                   height: 2,thickness: 1,
                                  ),
                                  SizedBox(height: heightt*16/800),
-                                  CardFieldItemText(
+                                  const CardFieldItemText(
                                 label: "Voucher ######", 
                                 contentData: "-12000",
                                 flexLeftRow: 25, 
@@ -187,10 +187,10 @@ class _DetailRiwayatState extends State<DetailRiwayat> {
                          ),
                         ),
                          Container(
-                                  padding: EdgeInsets.only(top: 16,bottom: 16,left: 12,right: 12),
+                                  padding: const EdgeInsets.only(top: 16,bottom: 16,left: 12,right: 12),
                                   height: heightt*58/800,
                                   
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: secondaryColor,
                                     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15),bottomRight: Radius.circular(15))
                                   ),

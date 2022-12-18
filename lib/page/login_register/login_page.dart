@@ -1,17 +1,11 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:ppodb_2/page/home.dart';
 import 'package:ppodb_2/page/login_register/register1_page.dart';
-import 'package:ppodb_2/page/login_register/welcome_page.dart';
 import 'package:ppodb_2/page/main_page/main_page.dart';
 import 'package:ppodb_2/shared/shared.dart';
 import 'package:ppodb_2/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/data_login_model.dart';
-import '../main_page/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -135,35 +129,32 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: Size.height * 0.09,
             ),
-            Container(
+            SizedBox(
               height: Size.height * 0.06,
               width: Size.width * 0.911,
               child: ElevatedButton(
                   onPressed: () {
                     final isValidForm = formKey.currentState!.validate();
                     if (isValidForm) {
-                      final users = LoginModel(
-                          email: _emailController.text,
-                          katasandi: _katasandiController.text);
                       Provider.of<AuthViewModel>(context, listen: false)
                           .getToken(_emailController.text,
                               _katasandiController.text);
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => MainPage(),
+                        builder: (context) => const MainPage(),
                       ));
                     }
                   },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30))),
                   child: Text(
                     'Masuk',
                     style: whiteTextStyle.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: whiteColor),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)))),
+                  )),
             ),
             SizedBox(
               height: Size.height * 0.025,
@@ -182,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                 TextButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Register1Page(),
+                        builder: (context) => const Register1Page(),
                       ));
                     },
                     child: Text(

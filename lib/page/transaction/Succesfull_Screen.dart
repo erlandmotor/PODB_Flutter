@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ppodb_2/page/product/categoryhome.dart';
 // ignore: unused_import
 import 'package:ppodb_2/page/product/detail_product.dart';
-import 'package:ppodb_2/page/home/home.dart';
 import 'package:ppodb_2/page/main_page/main_page.dart';
-import 'package:ppodb_2/page/product/detail_product.dart';
-import 'package:ppodb_2/page/login_register/welcome_page.dart';
 
 class SuccesPage extends StatefulWidget {
   const SuccesPage({super.key});
@@ -110,7 +107,7 @@ class _SuccesPageState extends State<SuccesPage> {
                         onPressed: () {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => MainPage()),
+                            MaterialPageRoute(builder: (context) => const MainPage()),
                           );
                         },
                         child: const Text.rich(

@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:ppodb_2/models/register_model.dart';
 
 final _dio = Dio(

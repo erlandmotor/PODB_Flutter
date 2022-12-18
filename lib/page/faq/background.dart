@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/page/widgets/constanta.dart';
 
 class BackgroundFaq extends StatelessWidget {
   const BackgroundFaq({super.key, required this.child});
@@ -7,17 +6,16 @@ class BackgroundFaq extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double heightt = MediaQuery.of(context).size.height;
-    double widthh = MediaQuery.of(context).size.width;
    return Scaffold(
     resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
          automaticallyImplyLeading: false, 
-        flexibleSpace: Image(
+        flexibleSpace: const Image(
           image: AssetImage("assets/image/FAQ.png"),
           fit: BoxFit.cover,
         ),
-        title: Text(
+        title: const Text(
           "FAQ",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -31,7 +29,7 @@ class BackgroundFaq extends StatelessWidget {
           Container(
             width: double.infinity,
             height: heightt ,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("assets/image/FAQ.png"), fit: BoxFit.cover),
                 ),
@@ -41,7 +39,7 @@ class BackgroundFaq extends StatelessWidget {
             child: Container(
               height: heightt*595/800,
               
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                  borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40)),

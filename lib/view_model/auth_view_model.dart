@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ppodb_2/models/data_register_model.dart';
 import 'package:ppodb_2/models/register_model.dart';
-import 'package:ppodb_2/page/login_register/register1_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../service/database/auth_service.dart';

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/models/product.dart';
 import 'package:ppodb_2/models/product/product_data_model.dart';
-import 'package:ppodb_2/models/product/productcate.dart';
 import 'package:ppodb_2/service/database/myCuan_Api.dart';
 
 class ProductListProviders extends ChangeNotifier {

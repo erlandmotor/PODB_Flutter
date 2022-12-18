@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/models/profil/list_profil.dart';
 
-import 'package:ppodb_2/page/akun/akun.dart';
 import 'package:ppodb_2/page/widgets/finite_state.dart';
 import 'package:ppodb_2/service/database/myCuan_Api.dart';
 

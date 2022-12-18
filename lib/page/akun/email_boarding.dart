@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/page/login_register/login_page.dart';
+// ignore: unused_import
 import 'package:ppodb_2/page/login_register/register1_page.dart';
 
 import '../../shared/shared.dart';
@@ -46,7 +46,7 @@ class EmailBoarding extends StatelessWidget {
             SizedBox(
               height: Size.height * 100/800,
             ),
-            Container(
+            SizedBox(
               height: Size.height * 0.06,
               width: Size.width * 0.911,
               child: ElevatedButton(
@@ -55,22 +55,22 @@ class EmailBoarding extends StatelessWidget {
                     //   builder: (context) => Register1Page(),
                     // ));
                   },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30))),
                   child: Text(
                     'Buka Email',
                     style: whiteTextStyle.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: whiteColor),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)))),
+                  )),
             ),
             SizedBox(
               height: Size.height * 0.02,
             ),
-            Container(
+            SizedBox(
               height: Size.height * 0.06,
               width: Size.width * 0.911,
               child: ElevatedButton(                
@@ -79,19 +79,19 @@ class EmailBoarding extends StatelessWidget {
                     //   builder: (context) => LoginPage(),
                     // ));
                   },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: whiteColor,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          // side: BorderSide(color: primaryColor, width: 1.5),
+                          borderRadius: BorderRadius.circular(30))),
                   child: Text(
                     'Lewati',
                     style: whiteTextStyle.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: primaryColor),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: whiteColor,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                          // side: BorderSide(color: primaryColor, width: 1.5),
-                          borderRadius: BorderRadius.circular(30)))),
+                  )),
             ),
             SizedBox(
               height: Size.height * 0.06,

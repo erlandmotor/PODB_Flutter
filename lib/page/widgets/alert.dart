@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/page/widgets/button_alert.dart';
@@ -52,7 +51,7 @@ class Alert extends StatelessWidget {
             //   ),
             // ),
                SizedBox(height:heightt*32/800),
-            Container(
+            SizedBox(
               height: heightt*160/800,
               width: widthh*150/360,
               child: Image.asset(gambar),

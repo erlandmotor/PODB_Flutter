@@ -11,7 +11,7 @@ class Notready extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        leading: BackButton(
+        leading: const BackButton(
           color: Colors.black,
         ),
         elevation: 0,
@@ -26,7 +26,7 @@ class Notready extends StatelessWidget {
             SizedBox(
               height: size.height * .2125,
             ),
-            Container(
+            SizedBox(
               width: size.width * .9138,
               child: Column(
                 children: [
@@ -34,7 +34,7 @@ class Notready extends StatelessWidget {
                     "assets/image/amico.png",
                     height: size.height * .3,
                   ),
-                  Text.rich(
+                  const Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(
                           text: "Fitur Belum Tersedia!",
@@ -45,7 +45,7 @@ class Notready extends StatelessWidget {
                   SizedBox(
                     height: size.height * .02,
                   ),
-                  Text.rich(
+                  const Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(
                           text: "Fitur belum tersedia nih !! Stay tune ya ",
@@ -71,16 +71,16 @@ class Notready extends StatelessWidget {
                       height: size.height * .07,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff0D40C6),
-                            shape: StadiumBorder()),
+                            backgroundColor: const Color(0xff0D40C6),
+                            shape: const StadiumBorder()),
                         onPressed: () {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => CategoryProduct()),
+                                  builder: (context) => const CategoryProduct()),
                               (route) => route.isFirst);
                         },
-                        child: Text.rich(
+                        child: const Text.rich(
                           TextSpan(
                             text: "Transaksi Lain",
                           ),
@@ -107,10 +107,10 @@ class Notready extends StatelessWidget {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => CategoryProduct()),
+                                  builder: (context) => const CategoryProduct()),
                               ((route) => route.isFirst));
                         },
-                        child: Text.rich(
+                        child: const Text.rich(
                           TextSpan(
                             text: "Kembali ke beranda",
                           ),

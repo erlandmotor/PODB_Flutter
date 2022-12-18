@@ -68,7 +68,7 @@ class _MainPageState extends State<MainPage> {
           items: bottomItems.map(
             (item) => BottomNavigationBarItem(
               icon: Padding(
-                padding: EdgeInsets.symmetric(vertical: 7),
+                padding: const EdgeInsets.symmetric(vertical: 7),
                 child: Image.asset(
                   item.icon,
                   width:25,
