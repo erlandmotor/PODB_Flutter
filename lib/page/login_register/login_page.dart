@@ -20,22 +20,42 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _katasandiController = TextEditingController();
 
-  // @override
-  // void initState() {
-  //   WidgetsBinding.instance.addPostFrameCallback((_) {
-  //      if(Provider.of<AuthViewModel>(context, listen: false).data1 != null){
-  //     _emailController.text = Provider.of<AuthViewModel>(context).data1.email;
-  //   }
-  //   if(Provider.of<AuthViewModel>(context, listen: false).data2 != null){
-  //     _katasandiController.text = Provider.of<AuthViewModel>(context).data2.katasandi;
-  //   }
-  //   });
-
-  //   super.initState();
-  // }
+  
 
   @override
   Widget build(BuildContext context) {
+void showAlertDialog (){
+  showDialog(context: context, builder: (context) {
+    return Dialog(
+      backgroundColor: Color.fromARGB(255, 242, 167, 167),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      alignment: Alignment.topCenter,
+      child: Container(
+        height: 80,
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Icon(Icons.info, color: Colors.red, size: 30,),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Email, nomor handphone, atau kata sandi salah. Mohon cek lagi."),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  },);
+}
+
     final provider = Provider.of<AuthViewModel>(context, listen: false);
     final providerKonfirmasi = Provider.of<AuthViewModel>(context);
     var Size = MediaQuery.of(context).size;
@@ -139,15 +159,16 @@ class _LoginPageState extends State<LoginPage> {
                             await Provider.of<AuthViewModel>(context, listen: false).getToken( _emailController.text, _katasandiController.text);
                             if(providerKonfirmasi.message == "invalid email or password"){
                               print("email dan kata sandi salah");
-                             
+                             showAlertDialog();
                             }
                             if(providerKonfirmasi.message == "validation failed"){
                               print("validasi gagal");
+                              showAlertDialog();
                             }
                             if(providerKonfirmasi.message == "success"){
                               if(!mounted)return;
                               Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-                          builder: (context) => HomePage(),
+                          builder: (context) => MainPage(),
                         ),(route)=>false);
                             }
                             

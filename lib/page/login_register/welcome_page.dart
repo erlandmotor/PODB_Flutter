@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/page/home.dart';
+import 'package:ppodb_2/page/home/home.dart';
 import 'package:ppodb_2/page/login_register/login_page.dart';
 import 'package:ppodb_2/page/login_register/register1_page.dart';
+import 'package:ppodb_2/page/main_page/main_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../shared/shared.dart';
@@ -27,7 +28,7 @@ class _WelcomePageState extends State<WelcomePage> {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => const Home(),
+              builder: (context) => const MainPage(),
             ),
             (route) => false);
       }

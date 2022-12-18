@@ -6,6 +6,7 @@ import 'package:ppodb_2/page/akun/edit_data_akun.dart';
 import 'package:ppodb_2/page/akun/edit_password.dart';
 import 'package:ppodb_2/page/akun/syarat_dan_ketentuan/syarat_dan_ketentuan.dart';
 import 'package:ppodb_2/page/login_register/login_page.dart';
+import 'package:ppodb_2/page/login_register/welcome_page.dart';
 import 'package:ppodb_2/page/transaction/vouchertele.dart';
 import 'package:ppodb_2/page/widgets/alert.dart';
 
@@ -89,8 +90,8 @@ class _ProfilState extends State<Profil> {
                 final String token = prefs.getString('token') ?? "";
                 prefs.remove("token");
                 prefs.setBool("login", false);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => const LoginPage())));
+                Navigator.pushAndRemoveUntil(context,
+                    MaterialPageRoute(builder: ((context) => const WelcomePage())),(route)=>false);
                 // if (_postProses == "berhasil") {
                 //   Get.offAll(const SuratJalanView());
                 // }
