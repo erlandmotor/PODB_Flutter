@@ -37,6 +37,16 @@ class ProductListProviders extends ChangeNotifier {
     }
   }
 
+  addnominal(int nomor) async {
+    changeState(Productstate.loading);
+    try {
+      await service.addbalance(nomor);
+      changeState(Productstate.none);
+    } catch (error) {
+      changeState(Productstate.error);
+    }
+  }
+
   getdatabaru(int tipe, String nomor) async {
     changeState(Productstate.loading);
     try {

@@ -162,6 +162,7 @@ class _Tampilan_telekomState extends State<Tampilan_telekom> {
                                     listen: false);
 
                                 prov.getdatabaru(widget.type, bambang.text);
+
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

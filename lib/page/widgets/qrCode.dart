@@ -4,6 +4,7 @@ import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/Succesfull_Screen.dart';
 import 'package:ppodb_2/page/product/categoryhome.dart';
 import 'package:ppodb_2/page/transaction/succes.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
@@ -249,7 +250,7 @@ class _QRScreenState extends State<QRScreen> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xff0D40C6),
                         shape: const StadiumBorder()),
-                    onPressed: () {
+                    onPressed: () async {
                       if (widget.tipe != null) {
                         Navigator.pushAndRemoveUntil(
                             context,
@@ -259,6 +260,9 @@ class _QRScreenState extends State<QRScreen> {
                                     )),
                             (route) => false);
                       } else {
+                        Provider.of<ProductListProviders>(context,
+                                listen: false)
+                            .addnominal(widget.total);
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(

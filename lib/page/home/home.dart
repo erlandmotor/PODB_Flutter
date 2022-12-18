@@ -39,51 +39,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Dummypaket> dummy = [
-    Dummypaket(
-        desc:
-            "Langganan Disney+ Hotstar 1 bulan (Kuota Maxstream 3GB). Masa berlaku 30 hari. Jika kuota MAXstream habis pelanggan dapat membeli kuota tambahan. \n\nJika masa aktif paket ini belum berakhir, pembelian paket Disney+ Hotstar selanjutnya akan gagal dan tidak menambah masa aktif paket yang sudah ada.",
-        harga: 22000,
-        id: 1,
-        name: "Paket Disney+ Hotstar\n(30 Hari)"),
-    Dummypaket(
-        desc:
-            "Kuota 1,5GB untuk akses aplikasi Zoom. Langganan akun Zoom Pro berlaku untuk 3 hari. Akun Zoom Pro bisa melakukan hostmeeting lebih dari 40 menit dengan partisipan hingga 300 orang. Kuota internet Zoom dan akun Zoom Pro berlaku berlaku hingga pukul 23.59 pada hari terakhir masa aktif paket.",
-        harga: 25000,
-        id: 2,
-        name: "Paket Zoom Pro 1.5GB\n(3 Hari)"),
-    Dummypaket(
-        desc: "Kuota MaxStream 12GB + Kuota Utama 3GB. Masa Berlaku 30 Hari.",
-        harga: 50000,
-        id: 3,
-        name: "Paket Gigamax Basic 15GB"),
-    Dummypaket(
-        desc:
-            "Kuota utama mulai 3.3 GB hingga 7GB + 1GB OMG! dengan masa berlaku 30 hari. (Kuota internet sesuai zona user, silahkan cek di *363*46#)",
-        harga: 54000,
-        id: 3,
-        name: "Paket Internet Bulanan OMG! 55rb"),
-    Dummypaket(
-        desc:
-            "Kuota Utama mulai 3.3GB hingga 7GB + 1GB OMG!. Bonus berlangganan Vidio. Masa berlaku 30 hari. Kuota internet sesuai zona user, silahkan cek di *363*46#",
-        harga: 64000,
-        id: 4,
-        name: "[New] Paket Internet Bulanan OMG + Vidio 65K")
-  ];
-  List<ProductDummyModel> fafa = [
-    ProductDummyModel(
-        id: 1, name: "5.000", diskon: 2000, harga: 6000, status: "diskon"),
-    ProductDummyModel(
-        id: 2, name: "10.000", diskon: 0, harga: 10200, status: "tersedia"),
-    ProductDummyModel(
-        id: 3, name: "20.000", diskon: 0, harga: 22000, status: "tersedia"),
-    ProductDummyModel(
-        id: 4, name: "50.000", diskon: 0, harga: 51000, status: "tersedia"),
-    ProductDummyModel(
-        id: 5, name: "100.000", diskon: 2000, harga: 100000, status: "diskon"),
-    ProductDummyModel(
-        id: 5, name: "200.000", diskon: 0, harga: 200000, status: "habis"),
-  ];
   late PageController _pageController;
   int activePage = 1;
   @override
@@ -127,8 +82,6 @@ class _HomePageState extends State<HomePage> {
     double widthh = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        // extendBodyBehindAppBar: ,
-
         body: BackgroundHome(
       child: SizedBox(
         height: heightt,
@@ -190,43 +143,51 @@ class _HomePageState extends State<HomePage> {
                           switch (provider.myState) {
                             case MyState.loading:
                               return Padding(
-                          padding: EdgeInsets.only(top: heightt * 5 / 800),
-                          child: Text("Rp. 0",
-                              style: GoogleFonts.inter(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 23)),
-                        );
-                        case MyState.loaded:
-                        if(provider.profil!.data!.wallet!.balance==null){
-                          return Padding(
-                          padding: EdgeInsets.only(top: heightt * 5 / 800),
-                          child: Text("Rp. 0",
-                              style: GoogleFonts.inter(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 23)),
-                        );
-                        }else{
-                           return Padding(
-                            padding: EdgeInsets.only(top: heightt * 5 / 800),
-                            child: Text("Rp."+ provider.profil!.data!.wallet!.balance.toString(),
-                                style: GoogleFonts.inter(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 23)),
-                                                  );
-                        }
-                        case MyState.failed:
-                        return Padding(
-                          padding: EdgeInsets.only(top: heightt * 5 / 800),
-                          child: Text("Error",
-                              style: GoogleFonts.inter(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 23)),
-                        );
-                              
+                                padding:
+                                    EdgeInsets.only(top: heightt * 5 / 800),
+                                child: Text("Rp. 0",
+                                    style: GoogleFonts.inter(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 23)),
+                              );
+                            case MyState.loaded:
+                              if (provider.profil!.data!.wallet!.balance ==
+                                  null) {
+                                return Padding(
+                                  padding:
+                                      EdgeInsets.only(top: heightt * 5 / 800),
+                                  child: Text("Rp. 0",
+                                      style: GoogleFonts.inter(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 23)),
+                                );
+                              } else {
+                                return Padding(
+                                  padding:
+                                      EdgeInsets.only(top: heightt * 5 / 800),
+                                  child: Text(
+                                      "Rp." +
+                                          provider.profil!.data!.wallet!.balance
+                                              .toString(),
+                                      style: GoogleFonts.inter(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 23)),
+                                );
+                              }
+                            case MyState.failed:
+                              return Padding(
+                                padding:
+                                    EdgeInsets.only(top: heightt * 5 / 800),
+                                child: Text("Error",
+                                    style: GoogleFonts.inter(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 23)),
+                              );
+
                             default:
                               return CircularProgressIndicator();
                           }
