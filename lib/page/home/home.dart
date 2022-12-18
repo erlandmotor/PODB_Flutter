@@ -92,10 +92,10 @@ class _HomePageState extends State<HomePage> {
     Future.delayed(
       Duration.zero,
       () {
-        final _provider = Provider.of<BalanceProvider>(context, listen: false);
+        final _provider = Provider.of<ProfilProvider>(context, listen: false);
 
         /// Fetch users data
-        _provider.fetchBalance();
+        _provider.fetchProfil();
       },
     );
 
