@@ -7,8 +7,10 @@ import 'package:ppodb_2/models/wallet/data_wallet.dart';
 import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:ppodb_2/page/transaction/vouchertele.dart';
 import 'package:ppodb_2/page/widgets/checkstatus.dart';
+import 'package:ppodb_2/page/widgets/finite_state.dart';
 import 'package:ppodb_2/page/widgets/qrCode.dart';
 import 'package:ppodb_2/service/providers/product/product_list_provider.dart';
+import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
 
 import 'package:provider/provider.dart';
 
@@ -439,15 +441,62 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                         fontWeight: FontWeight.w700,
                                         fontSize: 14,
                                       ))),
-                              subtitle: Text.rich(
-                                  textAlign: TextAlign.left,
-                                  TextSpan(
-                                      text:
-                                          "Saldo: ${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(80000)}",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12,
-                                      ))),
+                              subtitle: Consumer<ProfilProvider>(
+                                builder: (context, provider, _) {
+                                  switch (provider.myState){
+                                    case MyState.loading:
+                                  return  Text.rich(
+                                    textAlign: TextAlign.left,
+                                    TextSpan(
+                                        text:
+                                            "-",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 12,
+                                        )));
+                                        case MyState.loaded:
+                                        if(provider.profil!.data!.wallet!.balance==null){
+                                          return Text.rich(
+                                            textAlign: TextAlign.left,
+                                            TextSpan(
+                                                text:
+                                                    "-",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 12,
+                                                )));
+                                        }else{
+                                          return Text.rich(
+                                            textAlign: TextAlign.left,
+                                            TextSpan(
+                                                text:
+                                                    "Saldo:"+provider.profil!.data!.wallet!.balance.toString(),
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 12,
+                                        )));
+                                        }
+                                        case MyState.failed:
+                                        return Text.rich(
+                                            textAlign: TextAlign.left,
+                                            TextSpan(
+                                                text:
+                                                    "error",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 12,
+                                                )));
+                                            
+                                        default:
+                                        return Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                        
+                                  }
+                                  
+                                },
+                                
+                              ),
                               trailing: IconButton(
                                 onPressed: () {
                                   setState(() {
