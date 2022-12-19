@@ -6,7 +6,6 @@ import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/failtransaksi.dart';
 import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:ppodb_2/page/transaction/vouchertele.dart';
-import 'package:ppodb_2/page/widgets/checkstatus.dart';
 import 'package:ppodb_2/page/widgets/finite_state.dart';
 import 'package:ppodb_2/page/transaction/isisaldo.dart';
 import 'package:ppodb_2/page/transaction/qrCode.dart';
@@ -253,7 +252,7 @@ class _PembayranTelekScreenState extends State<PembayranTelekScreen> {
                                             textAlign: TextAlign.left,
                                             TextSpan(
                                                 text: widget.trans.type == 7
-                                                    ? "${checkprovider(nomor.text)} ${widget.trans.nama}"
+                                                    ? "${widget.provider} ${widget.trans.nama}"
                                                     : widget.trans.nama,
                                                 style: const TextStyle(
                                                   fontWeight: FontWeight.w700,
