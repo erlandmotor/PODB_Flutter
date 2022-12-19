@@ -105,12 +105,12 @@ class _CategoryProductproviderState extends State<CategoryProductprovider> {
                                       backgroundColor: const Color(0xff0D40C6),
                                       shape: const StadiumBorder()),
                                   onPressed: () {
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const MainPage()),
-                                        (route) => route.isFirst);
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const MainPage()),
+                                    );
                                   },
                                   child: const Text.rich(
                                     TextSpan(

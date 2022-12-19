@@ -76,12 +76,12 @@ class Failtransaction extends StatelessWidget {
                             backgroundColor: const Color(0xff0D40C6),
                             shape: const StadiumBorder()),
                         onPressed: () {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const CategoryProductprovider()),
-                              (route) => route.isFirst);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const CategoryProductprovider()),
+                          );
                         },
                         child: const Text.rich(
                           TextSpan(
@@ -107,11 +107,11 @@ class Failtransaction extends StatelessWidget {
                       height: size.height * .07,
                       child: TextButton(
                         onPressed: () {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const MainPage()),
-                              ((route) => route.isFirst));
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MainPage()),
+                          );
                         },
                         child: const Text.rich(
                           TextSpan(

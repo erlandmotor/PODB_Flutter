@@ -355,19 +355,25 @@ class _Detail_telkomwithprovidersState
                                                     alignment:
                                                         Alignment.centerLeft,
                                                     child: Text.rich(TextSpan(
-                                                        text:
-                                                            "Bayar: ${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(
-                                                          product
-                                                                  .data!
-                                                                  .products![
-                                                                      index]
-                                                                  .price! -
-                                                              product
-                                                                  .data!
-                                                                  .products![
-                                                                      index]
-                                                                  .discount!,
-                                                        )}",
+                                                        text: product
+                                                                    .data!
+                                                                    .products![
+                                                                        index]
+                                                                    .isPromoActive ==
+                                                                true
+                                                            ? "Bayar: ${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(
+                                                                product
+                                                                        .data!
+                                                                        .products![
+                                                                            index]
+                                                                        .price! -
+                                                                    product
+                                                                        .data!
+                                                                        .products![
+                                                                            index]
+                                                                        .discount!,
+                                                              )}"
+                                                            : "Bayar: ${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(product.data!.products![index].price!)}",
                                                         style: const TextStyle(
                                                           fontWeight:
                                                               FontWeight.w500,
