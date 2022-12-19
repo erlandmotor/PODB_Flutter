@@ -5,8 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ppodb_2/page/akun/email_boarding.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart' as color;
 import 'package:ppodb_2/shared/shared.dart';
-import 'package:ppodb_2/view_model/auth_view_model.dart';
-import 'package:provider/provider.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});
@@ -22,14 +20,13 @@ class _ResetPasswordState extends State<ResetPassword> {
      
      double heightt = MediaQuery.of(context).size.height;
    double widthh = MediaQuery.of(context).size.width;
-    final _namalengkapController = TextEditingController();
      final _emailController = TextEditingController();
-  final _nomortelponController = TextEditingController();
+   // ignore: unused_local_variable
    final _katasandiController = TextEditingController();
   
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.black
         ),
         centerTitle: true,
@@ -108,7 +105,7 @@ class _ResetPasswordState extends State<ResetPassword> {
              
                      Padding(
                        padding:  EdgeInsets.only(top: heightt*160/800),
-                       child: Container(
+                       child: SizedBox(
                         height: heightt * 0.06,
                         width: widthh * 0.911,
                         child: ElevatedButton(
@@ -126,19 +123,19 @@ class _ResetPasswordState extends State<ResetPassword> {
                               // }
                               // String emaildata =_emailController.text;
                               // final  url =await 'mailto:$emaildata';
-                              Navigator.push(context, MaterialPageRoute(builder: ((context) => EmailBoarding())));
+                              Navigator.push(context, MaterialPageRoute(builder: ((context) => const EmailBoarding())));
                             },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: primaryColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30))),
                             child: Text(
                               'Lanjutkan',
                               style: whiteTextStyle.copyWith(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   color: whiteColor),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: primaryColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)))),
+                            )),
                     ),
                      ),
                     // Text(

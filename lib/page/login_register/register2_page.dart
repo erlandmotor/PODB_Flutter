@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import '../../shared/shared.dart';
 
 class Register2Page extends StatefulWidget {
-  Register2Page({required this.register1model, super.key});
+  const Register2Page({required this.register1model, super.key});
   final Register1Model register1model;
 
   @override
@@ -26,20 +26,20 @@ class _Register2PageState extends State<Register2Page> {
   void tampilkanBottom(String errorText) {
     showModalBottomSheet<void>(
       context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(40),
+          topLeft: Radius.circular(40),
+        ),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (BuildContext context) {
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(40),
-              topLeft: Radius.circular(40),
-            ),
-          ),
+        return SizedBox(
           height: 300,
           child: Center(
             child: Column(
               children: <Widget>[
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Center(
@@ -53,12 +53,11 @@ class _Register2PageState extends State<Register2Page> {
                   ),
                 ),
                 Image.asset("assets/pop_up_email.png"),
-                
                 Text(
                   "${errorText} ",
                   style: blackTextStyle.copyWith(fontSize: 20),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Text(
@@ -66,11 +65,18 @@ class _Register2PageState extends State<Register2Page> {
                   style: dengerTextStyle.copyWith(fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 ElevatedButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                        (route) => false);
+                  },
                   child: Text(
                     'Masuk ke Akun MyCuan',
                     style: whiteTextStyle.copyWith(
@@ -96,20 +102,20 @@ class _Register2PageState extends State<Register2Page> {
   void tampilkanBottom2(String errorText) {
     showModalBottomSheet<void>(
       context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(40),
+          topLeft: Radius.circular(40),
+        ),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (BuildContext context) {
-        return Container(
-          decoration: BoxDecoration(
-            // color: Colors.transparent,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(40),
-              topLeft: Radius.circular(40),
-            ),
-          ),
+        return SizedBox(
           height: 350,
           child: Center(
             child: Column(
               children: <Widget>[
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Center(
@@ -124,11 +130,11 @@ class _Register2PageState extends State<Register2Page> {
                 ),
                 Image.asset("assets/pop_up_number.png"),
                 Text(
-                  "${errorText} ",
+                  "$errorText ",
                   style: blackTextStyle.copyWith(fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Text(
@@ -136,23 +142,30 @@ class _Register2PageState extends State<Register2Page> {
                   style: dengerTextStyle.copyWith(fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 ElevatedButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                        (route) => false);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
                   child: Text(
                     'Masuk ke Akun MyCuan',
                     style: whiteTextStyle.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: whiteColor),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
                   ),
                 ),
               ],
@@ -183,7 +196,7 @@ class _Register2PageState extends State<Register2Page> {
       ),
       body: SafeArea(
         child: Form(
-          // autovalidateMode: AutovalidateMode.onUserInteraction,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           key: formKey,
           child: Padding(
             padding: EdgeInsets.only(
@@ -204,7 +217,7 @@ class _Register2PageState extends State<Register2Page> {
                         percent: 100 / 100,
                         animationDuration: 1000,
                         progressColor: primaryColor,
-                        barRadius: Radius.circular(10),
+                        barRadius: const Radius.circular(10),
                       ),
                     ),
                     SizedBox(
@@ -235,26 +248,46 @@ class _Register2PageState extends State<Register2Page> {
                         obscureText: providerKonfirmasi.passVissible,
                         controller: _katasandiController,
                         validator: (value) {
-                          final karakterRegExp = new RegExp(r'^.{8,}$');
-                          final hurufkecilRegExp = new RegExp('(?=.*[a-z])');
-                          final kapitalRegExp = new RegExp('(?=.*[A-Z])');
-                          final angkaRegExp = new RegExp('(?=.*[0-9])');
+                          final karakterRegExp = RegExp(r'^.{8,}$');
+                          final hurufkecilRegExp = RegExp('(?=.*[a-z])');
+                          final kapitalRegExp = RegExp('(?=.*[A-Z])');
+                          final angkaRegExp = RegExp('(?=.*[0-9])');
                           if (value!.isEmpty) {
-                            provider.setIfValueEmpty();
+                            WidgetsBinding.instance
+                                .addPostFrameCallback((duration) {
+                              provider.setIfValueEmpty();
+                            });
+
                             return "Harus diisi";
                           } else {
-                            provider.setIfValueNotEmpty();
+                            WidgetsBinding.instance
+                                .addPostFrameCallback((duration) {
+                              provider.setIfValueNotEmpty();
+                            });
+
                             if (!karakterRegExp.hasMatch(value)) {
-                              provider.setIf8DigitNotMatch();
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((duration) {
+                                provider.setIf8DigitNotMatch();
+                              });
                             }
                             if (!hurufkecilRegExp.hasMatch(value)) {
-                              provider.setIfHurufKecilNotMatch();
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((duration) {
+                                provider.setIfHurufKecilNotMatch();
+                              });
                             }
                             if (!kapitalRegExp.hasMatch(value)) {
-                              provider.setIfHurufKapitalNotMatch();
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((duration) {
+                                provider.setIfHurufKapitalNotMatch();
+                              });
                             }
                             if (!angkaRegExp.hasMatch(value)) {
-                              provider.setIfAngkaNotMatch();
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((duration) {
+                                provider.setIfAngkaNotMatch();
+                              });
                             }
                           }
                           _simpanData = value;
@@ -334,7 +367,7 @@ class _Register2PageState extends State<Register2Page> {
                                       color: whiteColor,
                                     ),
                             ),
-                            Text('8 Karakter'),
+                            const Text('8 Karakter'),
                           ],
                         ),
                         Column(
@@ -355,7 +388,7 @@ class _Register2PageState extends State<Register2Page> {
                                       color: whiteColor,
                                     ),
                             ),
-                            Text('Huruf Kecil'),
+                            const Text('Huruf Kecil'),
                           ],
                         ),
                         Column(
@@ -376,7 +409,7 @@ class _Register2PageState extends State<Register2Page> {
                                       color: whiteColor,
                                     ),
                             ),
-                            Text('Huruf Kapital'),
+                            const Text('Huruf Kapital'),
                           ],
                         ),
                         Column(
@@ -397,7 +430,7 @@ class _Register2PageState extends State<Register2Page> {
                                       color: whiteColor,
                                     ),
                             ),
-                            Text('Angka'),
+                            const Text('Angka'),
                           ],
                         ),
                       ],
@@ -405,7 +438,7 @@ class _Register2PageState extends State<Register2Page> {
                     SizedBox(
                       height: Size.height * 0.1875,
                     ),
-                    Container(
+                    SizedBox(
                       height: Size.height * 0.06,
                       width: Size.width * 0.911,
                       child: ElevatedButton(
@@ -434,7 +467,7 @@ class _Register2PageState extends State<Register2Page> {
 
                                 // print("pindah halaman");
                                 Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => LoginPage(),
+                                  builder: (context) => const LoginPage(),
                                 ));
                               }
                               if (providerKonfirmasi.isNext == "email") {
@@ -446,17 +479,17 @@ class _Register2PageState extends State<Register2Page> {
                               }
                             }
                           },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: primaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30))),
                           child: Text(
                             'Daftar',
                             style: whiteTextStyle.copyWith(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                                 color: whiteColor),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30)))),
+                          )),
                     ),
                     SizedBox(
                       height: Size.height * 0.0125,
@@ -475,7 +508,7 @@ class _Register2PageState extends State<Register2Page> {
                         TextButton(
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LoginPage(),
+                                builder: (context) => const LoginPage(),
                               ));
                             },
                             child: Text(

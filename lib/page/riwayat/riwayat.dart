@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,8 +5,6 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/riwayat/detail_riwayat.dart';
-import 'package:ppodb_2/page/product/detail_product.dart';
-import 'package:ppodb_2/page/widgets/constanta.dart';
 import 'package:ppodb_2/page/widgets/finite_state.dart';
 import 'package:ppodb_2/service/providers/riwayat/riwayat_provider.dart';
 import 'package:ppodb_2/shared/shared.dart';
@@ -37,7 +34,7 @@ class _RiwayatState extends State<Riwayat> {
     super.initState();
   }
 
-  PanelController _panelController = PanelController();
+  final PanelController _panelController = PanelController();
   String status = "";
   List<Dummypro> prods = [
     Dummypro(id: 1, name: "Telekomunikasi", pro: [
@@ -124,7 +121,6 @@ class _RiwayatState extends State<Riwayat> {
   Widget build(BuildContext context) {
     double heightt = MediaQuery.of(context).size.height;
     double widthh = MediaQuery.of(context).size.width;
-    List title = ["Telkomsel", "Tri", "Byu"];
     List nominal = ["100000", "200000", "1000000"];
     List total = ["101000", "201000", "1001000"];
     List dompetDigital = ["Gopay", "Mycuan Saldo", "Dana"];
@@ -138,7 +134,7 @@ class _RiwayatState extends State<Riwayat> {
       backgroundColor: Colors.white,
       appBar: AppBar(
          automaticallyImplyLeading: false, 
-        title: Text(
+        title: const Text(
           "Riwayat Transaksi",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -371,7 +367,7 @@ class _RiwayatState extends State<Riwayat> {
               builder: (context, provider, _) {
                 switch (provider.myState) {
                   case MyState.loading:
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   case MyState.loaded:
                   if(provider.riwayat!.data!.isEmpty){
                     return Padding(
@@ -419,6 +415,7 @@ class _RiwayatState extends State<Riwayat> {
                     height: size.height * .02,
                   ),
                   SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
                     child: Row(
                       children: <Widget>[
                         // Padding(
@@ -461,7 +458,7 @@ class _RiwayatState extends State<Riwayat> {
                                           textAlign: TextAlign.left,
                                           TextSpan(
                                               text: prods[i].name,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: Color(0xff5C5D61),
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 16,
@@ -475,7 +472,6 @@ class _RiwayatState extends State<Riwayat> {
                               )),
                       ],
                     ),
-                    scrollDirection: Axis.horizontal,
                   ),
                   SizedBox(
                     height: size.height * .02,
@@ -483,7 +479,7 @@ class _RiwayatState extends State<Riwayat> {
                    for (var i = 0; i < 1; i++)
                     status == ""
                         ?
-                  Container(
+                  SizedBox(
                     height: heightt*500/800,
                     width: widthh,
                     child: ListView.builder(
@@ -492,15 +488,15 @@ class _RiwayatState extends State<Riwayat> {
                         return Padding(
                           padding:  EdgeInsets.only( bottom: heightt*16/800),
                           child: ListTile(
-                            contentPadding: EdgeInsets.all(16),
+                            contentPadding: const EdgeInsets.all(16),
                           shape: RoundedRectangleBorder(
-                            side: BorderSide(color: Colors.grey, ),
+                            side: const BorderSide(color: Colors.grey, ),
                             borderRadius: BorderRadius.circular(15),
                           ), 
                             leading: Image.asset("assets/icon/c.png",
                             height: 24,
                             width: 24,),
-                            title: Text(provider.riwayat!.data![index].productName!+" "+ provider.riwayat!.data![index].productPrice.toString(),
+                            title: Text("${provider.riwayat!.data![index].productName!} ${provider.riwayat!.data![index].productPrice}",
                             style: GoogleFonts.inter(
                               fontWeight: FontWeight.w700,
                               fontSize: 14
@@ -527,12 +523,12 @@ class _RiwayatState extends State<Riwayat> {
                             ),
                             
                             trailing: Padding(
-                              padding: EdgeInsets.only(top: 5),
+                              padding: const EdgeInsets.only(top: 5),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                   Text("Rp "+provider.riwayat!.data![index].totalPrice.toString(),
+                                   Text("Rp ${provider.riwayat!.data![index].totalPrice}",
                                   style: GoogleFonts.inter(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 12
@@ -831,10 +827,10 @@ class _RiwayatState extends State<Riwayat> {
               );
                   }
               case MyState.failed:
-              return CircularProgressIndicator();        
+              return const CircularProgressIndicator();        
                   
                   default:
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                 }
               },
             ),

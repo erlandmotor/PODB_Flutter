@@ -1,18 +1,11 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:ppodb_2/models/product/product_data_model.dart';
-import 'package:ppodb_2/models/product/product_detail.dart';
 import 'package:ppodb_2/models/product/productcate.dart';
 import 'package:ppodb_2/models/profil/list_profil.dart';
-import 'package:ppodb_2/models/register_model.dart';
 import 'package:ppodb_2/models/riwayat/rmodel_riwayat.dart';
-import 'package:ppodb_2/models/wallet/data_wallet.dart';
 
-import 'package:ppodb_2/page/akun/akun.dart';
-import 'package:ppodb_2/page/product/categoryhome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final _dio = Dio(
@@ -43,9 +36,12 @@ class MyCuanAPI {
             "Authorization": "Bearer $token",
           }));
       _isNext = "berhasil";
-      return List<Datacate>.from(response.data["data"]
+      print("\n\n${response.data["data"]}");
+      List<Datacate> fina = List<Datacate>.from(response.data["data"]
           .map((data) => Datacate.fromJson(data))
           .toList());
+      print("$fina");
+      return fina;
     } on DioError catch (e) {
       print(e.response!.data['message']);
       print('category bermasalah');
@@ -79,33 +75,7 @@ class MyCuanAPI {
     }
   }
 
-  Future<DataProduct> getproduct(int tipe, String nomor) async {
-    final prefs = await SharedPreferences.getInstance();
-    final String token = prefs.getString('token') ?? "";
-    var formdata = FormData.fromMap({"phone_number": nomor});
-    try {
-      final response =
-          await _dio.post('/users/product-types/$tipe/providers/phone',
-              options: Options(headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer $token",
-              }),
-              data: formdata);
-      print("Sebelum ${response.data["data"]}");
-      final jaja = DataProduct.fromJson(response.data["data"]);
-
-      print("Sesudah $jaja");
-
-      return jaja;
-    } on DioError catch (e) {
-      print(e.response!.data['message']);
-      print('data bermasalah');
-      _isNext = "gagal";
-      rethrow;
-    }
-  }
-
-  Future updatetransaksi(int type, String nomor) async {
+  Future<String> updatetransaksi(int type, String nomor) async {
     final prefs = await SharedPreferences.getInstance();
     final String token = prefs.getString('token') ?? "";
     try {
@@ -118,11 +88,12 @@ class MyCuanAPI {
             "product_id": type,
             "target_phone_number": nomor,
           });
+      String status = response.data["status"];
+      return status;
     } on DioError catch (e) {
-      print(e.response!.data['message']);
-      print('data bermasalah');
+      String failed = "failed";
 
-      rethrow;
+      return failed;
     }
   }
 
@@ -183,6 +154,28 @@ class MyCuanAPI {
       _isNext = "berhasil";
       RiwayatData datariwayat = RiwayatData.fromJson(response.data);
       return datariwayat;
+    } on DioError catch (e) {
+      print(e.response!.data['message']);
+      print('data bermasalah');
+      _isNext = "gagal";
+      rethrow;
+    }
+  }
+
+  Future<String> addbalance(int nomor) async {
+    final prefs = await SharedPreferences.getInstance();
+    final String token = prefs.getString('token') ?? "";
+    try {
+      final response = await _dio.post('/user/wallet/topup-balance',
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token",
+          }),
+          data: {
+            "balance": nomor,
+          });
+      String res = response.data["status"];
+      return res;
     } on DioError catch (e) {
       print(e.response!.data['message']);
       print('data bermasalah');

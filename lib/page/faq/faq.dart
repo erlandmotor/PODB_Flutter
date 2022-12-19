@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ppodb_2/page/akun/background.dart';
-import 'package:ppodb_2/page/akun/edit_data_akun.dart';
-import 'package:ppodb_2/page/akun/edit_password.dart';
 import 'package:ppodb_2/page/faq/background.dart';
 import 'package:ppodb_2/page/faq/detail_faq1.dart';
 import 'package:ppodb_2/page/faq/detail_faq2.dart';
@@ -12,18 +9,9 @@ import 'package:ppodb_2/page/faq/detail_faq5.dart';
 import 'package:ppodb_2/page/faq/detail_faq6.dart';
 import 'package:ppodb_2/page/faq/detail_faq7.dart';
 import 'package:ppodb_2/page/faq/detail_faq8.dart';
-import 'package:ppodb_2/page/login_register/login_page.dart';
-import 'package:ppodb_2/page/login_register/register1_page.dart';
-import 'package:ppodb_2/page/widgets/alert.dart';
 
-import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
-import 'package:ppodb_2/page/widgets/boxSaldo.dart';
-import 'package:ppodb_2/page/widgets/box_besar.dart';
-import 'package:ppodb_2/page/widgets/box_kecil.dart';
 import 'package:ppodb_2/page/widgets/box_search.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart';
-import 'package:ppodb_2/page/widgets/rating.dart';
-import 'package:ppodb_2/page/widgets/textIconMenu.dart';
 import 'package:ppodb_2/service/providers/profil/profil_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +25,7 @@ class FAQ extends StatefulWidget {
 List<Widget> indicators(imagesLength, currentIndex) {
   return List<Widget>.generate(imagesLength, (index) {
     return Container(
-      margin: EdgeInsets.only(bottom: 3, left: 3, right: 3),
+      margin: const EdgeInsets.only(bottom: 3, left: 3, right: 3),
       width: 10,
       height: 10,
       decoration: BoxDecoration(
@@ -78,7 +66,6 @@ class _FAQState extends State<FAQ> {
     double heightt = MediaQuery.of(context).size.height;
     double widthh = MediaQuery.of(context).size.width;
      final _namalengkapController = TextEditingController();
-    String nama = "Agus Juniartha";
     return BackgroundFaq(
         child: SizedBox(
             height: double.infinity,
@@ -91,14 +78,14 @@ class _FAQState extends State<FAQ> {
                     builder: (context, provider, _) {
                       return Padding(
                      padding:  EdgeInsets.only(left: widthh*16/360,right: widthh*16/360),
-                      child: Container(
+                      child: SizedBox(
                         height: heightt*71/800,
                         width: widthh*271/360,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Halo "+provider.profil!.data!.name.toString(),
+                            Text("Halo ${provider.profil!.data!.name}",
                             style: GoogleFonts.inter(
                               fontSize: 24,
                               fontWeight: FontWeight.w700,
@@ -118,7 +105,7 @@ class _FAQState extends State<FAQ> {
                   ),
                    Padding(
                    padding:  EdgeInsets.only(left: widthh*16/360,right: widthh*16/360),
-                    child: Container(
+                    child: SizedBox(
                       height: heightt*45/800,
                       width: widthh*328/360,
                       child: Column(
@@ -216,14 +203,14 @@ class _FAQState extends State<FAQ> {
                  
                         Padding(
                            padding:  EdgeInsets.only(top: heightt*48/800,),
-                          child: Container(
+                          child: SizedBox(
                              height: heightt * 350 / 800,
                             child: ListView(
                                shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
-                                padding: EdgeInsets.all(2),
+                                padding: const EdgeInsets.all(2),
                               children: [
-                                Container(
+                                SizedBox(
                                     width: widthh,
                                     child: Column(
                                         mainAxisAlignment: MainAxisAlignment.start,
@@ -284,7 +271,7 @@ class _FAQState extends State<FAQ> {
                                                         child: Container(
                                                           width: 24,
                                                           height: 24,
-                                                          decoration: BoxDecoration(
+                                                          decoration: const BoxDecoration(
                                                               image: DecorationImage(
                                                                   image: AssetImage(
                                                                       "assets/icon/kanan.png"))),
@@ -295,7 +282,7 @@ class _FAQState extends State<FAQ> {
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: ((context) =>
-                                                                DEtailFAQ())));
+                                                                const DEtailFAQ())));
                                                   },
                                                 ),
                                                 ListTile(
@@ -334,7 +321,7 @@ class _FAQState extends State<FAQ> {
                                                         child: Container(
                                                           width: 24,
                                                           height: 24,
-                                                          decoration: BoxDecoration(
+                                                          decoration: const BoxDecoration(
                                                               image: DecorationImage(
                                                                   image: AssetImage(
                                                                       "assets/icon/kanan.png"))),
@@ -345,7 +332,7 @@ class _FAQState extends State<FAQ> {
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: ((context) =>
-                                                                DEtailFAQ2())));
+                                                                const DEtailFAQ2())));
                                                   },
                                                 ),
                                                
@@ -385,7 +372,7 @@ class _FAQState extends State<FAQ> {
                                                         child: Container(
                                                           width: 24,
                                                           height: 24,
-                                                          decoration: BoxDecoration(
+                                                          decoration: const BoxDecoration(
                                                               image: DecorationImage(
                                                                   image: AssetImage(
                                                                       "assets/icon/kanan.png"))),
@@ -396,7 +383,7 @@ class _FAQState extends State<FAQ> {
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: ((context) =>
-                                                                DEtailFAQ3())));
+                                                                const DEtailFAQ3())));
                                                   },
                                                 ),
                                                ListTile(
@@ -435,7 +422,7 @@ class _FAQState extends State<FAQ> {
                                                         child: Container(
                                                           width: 24,
                                                           height: 24,
-                                                          decoration: BoxDecoration(
+                                                          decoration: const BoxDecoration(
                                                               image: DecorationImage(
                                                                   image: AssetImage(
                                                                       "assets/icon/kanan.png"))),
@@ -446,7 +433,7 @@ class _FAQState extends State<FAQ> {
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: ((context) =>
-                                                                DEtailFAQ4())));
+                                                                const DEtailFAQ4())));
                                                   },
                                                 ),
                                                ListTile(
@@ -485,7 +472,7 @@ class _FAQState extends State<FAQ> {
                                                         child: Container(
                                                           width: 24,
                                                           height: 24,
-                                                          decoration: BoxDecoration(
+                                                          decoration: const BoxDecoration(
                                                               image: DecorationImage(
                                                                   image: AssetImage(
                                                                       "assets/icon/kanan.png"))),
@@ -496,7 +483,7 @@ class _FAQState extends State<FAQ> {
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: ((context) =>
-                                                                DEtailFAQ5())));
+                                                                const DEtailFAQ5())));
                                                   },
                                                 ),
                                                  ListTile(
@@ -535,7 +522,7 @@ class _FAQState extends State<FAQ> {
                                                         child: Container(
                                                           width: 24,
                                                           height: 24,
-                                                          decoration: BoxDecoration(
+                                                          decoration: const BoxDecoration(
                                                               image: DecorationImage(
                                                                   image: AssetImage(
                                                                       "assets/icon/kanan.png"))),
@@ -546,7 +533,7 @@ class _FAQState extends State<FAQ> {
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: ((context) =>
-                                                                DEtailFAQ6())));
+                                                                const DEtailFAQ6())));
                                                   },
                                                 ),
                                                 ListTile(
@@ -585,7 +572,7 @@ class _FAQState extends State<FAQ> {
                                                         child: Container(
                                                           width: 24,
                                                           height: 24,
-                                                          decoration: BoxDecoration(
+                                                          decoration: const BoxDecoration(
                                                               image: DecorationImage(
                                                                   image: AssetImage(
                                                                       "assets/icon/kanan.png"))),
@@ -635,7 +622,7 @@ class _FAQState extends State<FAQ> {
                                                         child: Container(
                                                           width: 24,
                                                           height: 24,
-                                                          decoration: BoxDecoration(
+                                                          decoration: const BoxDecoration(
                                                               image: DecorationImage(
                                                                   image: AssetImage(
                                                                       "assets/icon/kanan.png"))),
@@ -646,7 +633,7 @@ class _FAQState extends State<FAQ> {
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: ((context) =>
-                                                                DEtailFAQ7())));
+                                                                const DEtailFAQ7())));
                                                   },
                                                 ),
                             
@@ -686,7 +673,7 @@ class _FAQState extends State<FAQ> {
                                                         child: Container(
                                                           width: 24,
                                                           height: 24,
-                                                          decoration: BoxDecoration(
+                                                          decoration: const BoxDecoration(
                                                               image: DecorationImage(
                                                                   image: AssetImage(
                                                                       "assets/icon/kanan.png"))),
@@ -697,7 +684,7 @@ class _FAQState extends State<FAQ> {
                                                         context,
                                                         MaterialPageRoute(
                                                             builder: ((context) =>
-                                                                DEtailFAQ8())));
+                                                                const DEtailFAQ8())));
                                                   },
                                                 ),
                                                             Padding(
@@ -715,7 +702,7 @@ class _FAQState extends State<FAQ> {
                                                   child: Container(
                                                 width: widthh * 328 / 360,
                                                 height: heightt * 140 / 800,
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                   image: DecorationImage(
                                                       image: AssetImage(
                                                     "assets/image/Hotline.png",

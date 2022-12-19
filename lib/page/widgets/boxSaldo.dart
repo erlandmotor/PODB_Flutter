@@ -8,7 +8,6 @@ class Boxsaldo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     double heightt = MediaQuery.of(context).size.height;
    double widthh = MediaQuery.of(context).size.width;
     return Padding(
       padding: EdgeInsets.only(left: widthh*16/360,right: widthh*16/360,),

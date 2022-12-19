@@ -66,39 +66,45 @@ class ProductType {
     required this.categoryId,
     required this.providers,
     required this.image,
-    required this.createdAt,
-    required this.updatedAt,
+    this.createdAt,
+    this.updatedAt,
     this.deletedAt,
   });
 
   int id;
   String name;
   int categoryId;
-  dynamic providers;
+  String? providers;
   String image;
-  DateTime createdAt;
-  DateTime updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
   DateTime? deletedAt;
 
   factory ProductType.fromJson(Map<String, dynamic> json) => ProductType(
         id: json["id"],
         name: json["name"],
         categoryId: json["category_id"],
-        providers: json["providers"],
+        providers: json["[providers"] == null ? null : json["providers"],
         image: json["image"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        deletedAt: json["deleted_at"],
+        createdAt: json["created_at"] == null
+            ? null
+            : DateTime.parse(json["updated_at"]),
+        updatedAt: json["updated_at"] == null
+            ? null
+            : DateTime.parse(json["updated_at"]),
+        deletedAt: json["deleted_at"] == null
+            ? null
+            : DateTime.parse(json["deleted_at"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "category_id": categoryId,
-        "providers": providers,
+        "providers": providers ?? null,
         "image": image,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
+        "created_at": createdAt == null ? null : createdAt!.toIso8601String(),
+        "updated_at": updatedAt == null ? null : updatedAt!.toIso8601String(),
         "deleted_at": deletedAt == null ? null : deletedAt!.toIso8601String(),
       };
 }

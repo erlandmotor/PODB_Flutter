@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ppodb_2/page/widgets/box_artikel.dart';
-import 'package:ppodb_2/page/widgets/box_search.dart';
 import 'package:ppodb_2/page/widgets/constanta.dart';
 
 class DEtailFAQ7 extends StatefulWidget {
@@ -27,12 +26,11 @@ class _DEtailFAQ7State extends State<DEtailFAQ7> {
 "4. Pada menu FAQ gulirkan layar ke arah bawah, Kamu bisa masuk ke Chat bantuan dengan menekan card yang bertulisakan layanan bantuan 24 jam.",
 
     ];
-    int jumlah = var1.length;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Topik",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -48,7 +46,7 @@ class _DEtailFAQ7State extends State<DEtailFAQ7> {
            
             children: [
               SizedBox(height:heightt *5/800,),
-              Container(
+              SizedBox(
                 height: 800,
                 width: widthh,
                 child: Column(
@@ -167,7 +165,7 @@ class _DEtailFAQ7State extends State<DEtailFAQ7> {
                           child: Container(
                         width: widthh * 328 / 360,
                         height: heightt * 140 / 800,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(
                             "assets/image/Hotline.png",

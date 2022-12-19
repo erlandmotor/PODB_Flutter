@@ -1,11 +1,6 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:ppodb_2/page/widgets/boxIconMenu.dart';
-import 'package:ppodb_2/page/widgets/button_alert.dart';
-import 'package:ppodb_2/page/widgets/button_confrim.dart';
-import 'package:ppodb_2/page/widgets/constanta.dart';
 
 
 
@@ -54,7 +49,7 @@ class AlertRating extends StatelessWidget {
             //   ),
             // ),
                SizedBox(height:heightt*47/800),
-            Container(
+            SizedBox(
               height: heightt*160/800,
               width: widthh*150/360,
               child: Image.asset(gambar),
@@ -80,7 +75,7 @@ class AlertRating extends StatelessWidget {
             ),
             Padding(
               padding:  EdgeInsets.only(left: widthh*35/360,right: widthh*16/360),
-              child: Container(
+              child: SizedBox(
                 width: widthh*230/360,
                 height: heightt*40/800,
                 child: RatingBar.builder(
@@ -90,7 +85,7 @@ class AlertRating extends StatelessWidget {
                 allowHalfRating: true,
                 itemCount: 5,
                 itemPadding: EdgeInsets.symmetric(horizontal:widthh* 4/360),
-                itemBuilder: (context, _) => Icon(
+                itemBuilder: (context, _) => const Icon(
                   Icons.star,
                   color: Colors.amber,
                 ),

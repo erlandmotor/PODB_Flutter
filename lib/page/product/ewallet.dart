@@ -36,7 +36,7 @@ class _TopupwalletState extends State<Topupwallet> {
                       : widget.type == 13
                           ? "linkaja"
                           : "Ovo",
-          selectionColor: Color(0xff5C5D61),
+          selectionColor: const Color(0xff5C5D61),
         ),
         centerTitle: true,
         foregroundColor: Colors.black,
@@ -86,13 +86,13 @@ class _TopupwalletState extends State<Topupwallet> {
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: bambang.text == ""
                           ? InputDecoration(
-                              prefixIcon: Icon(Icons.phone_android),
+                              prefixIcon: const Icon(Icons.phone_android),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
                               hintText: "0853xxxxxxxx")
                           : InputDecoration(
-                              prefixIcon: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                              prefixIcon: const Padding(
+                                  padding: EdgeInsets.all(8.0),
                                   child: Icon(Icons.phone_android)),
                               suffixIcon: IconButton(
                                   onPressed: () {
@@ -137,13 +137,13 @@ class _TopupwalletState extends State<Topupwallet> {
                 SizedBox(
                   height: size.height * .03125,
                 ),
-                Align(
+                const Align(
                   alignment: Alignment.topLeft,
                   child: Text.rich(
                       textAlign: TextAlign.left,
                       TextSpan(
                           text: "Transaksi Terakhir",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.w400,
                             color: Colors.black,
                             fontSize: 16,
@@ -174,7 +174,7 @@ class _TopupwalletState extends State<Topupwallet> {
                             onPressed: (() {
                               bambang.text = "0${dummy[index].nomor}";
                             }),
-                            icon: Icon(Icons.navigate_next_outlined)),
+                            icon: const Icon(Icons.navigate_next_outlined)),
                       );
                     }),
                     separatorBuilder: (context, index) {

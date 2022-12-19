@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:ppodb_2/models/register_model.dart';
 
 final _dio = Dio(
@@ -40,9 +39,13 @@ class RegisterDioService {
     try {
       final response = await _dio
           .post('/v1/auth/login', data: {"email":email, "password":password});
-        return response.data['token'];
+         
+            return response.data['token'];
+          
+        
       
-    } catch (e) {
+    } on DioError catch (e) {
+      
       rethrow;
     }
   }

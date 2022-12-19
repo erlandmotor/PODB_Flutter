@@ -96,7 +96,7 @@ class _PembayaranWalletState extends State<PembayaranWallet> {
                       bottom: size.height * .02),
                   child: Column(
                     children: [
-                      Align(
+                      const Align(
                         alignment: Alignment.topLeft,
                         child: Text.rich(
                           textAlign: TextAlign.left,
@@ -139,7 +139,7 @@ class _PembayaranWalletState extends State<PembayaranWallet> {
                       bottom: size.height * .02),
                   child: Column(
                     children: [
-                      Align(
+                      const Align(
                           alignment: Alignment.topLeft,
                           child: Text.rich(
                             textAlign: TextAlign.left,
@@ -276,11 +276,11 @@ class _PembayaranWalletState extends State<PembayaranWallet> {
                     Align(
                       alignment: Alignment.topLeft,
                       child: RichText(
-                        text: TextSpan(
+                        text: const TextSpan(
                           children: [
                             TextSpan(
                                 text: "Metode Pembayaran",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black,
                                   fontSize: 16,
@@ -304,11 +304,11 @@ class _PembayaranWalletState extends State<PembayaranWallet> {
                         ),
                         Column(
                           children: [
-                            Text.rich(
+                            const Text.rich(
                                 textAlign: TextAlign.left,
                                 TextSpan(
                                     text: "MyCuan saldo",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       color: Colors.black,
                                       fontSize: 16,
@@ -316,11 +316,11 @@ class _PembayaranWalletState extends State<PembayaranWallet> {
                             SizedBox(
                               height: size.height * .01,
                             ),
-                            Text.rich(
+                            const Text.rich(
                                 textAlign: TextAlign.left,
                                 TextSpan(
                                     text: "Saldo: Rp 800.000",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.black,
                                       fontSize: 12,
@@ -329,7 +329,7 @@ class _PembayaranWalletState extends State<PembayaranWallet> {
                         )
                       ],
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 2,
                     ),
                   ])),

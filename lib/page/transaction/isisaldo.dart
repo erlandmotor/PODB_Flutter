@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ppodb_2/models/dummymodel.dart';
-import 'package:ppodb_2/page/widgets/formisisaldo.dart';
+import 'package:ppodb_2/page/product/formisisaldo.dart';
 
 class Isisaldo extends StatefulWidget {
   const Isisaldo({super.key});

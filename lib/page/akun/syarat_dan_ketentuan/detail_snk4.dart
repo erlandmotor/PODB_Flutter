@@ -1,9 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ppodb_2/page/widgets/box_artikel.dart';
-import 'package:ppodb_2/page/widgets/box_search.dart';
-import 'package:ppodb_2/page/widgets/constanta.dart';
 
 class DetailSnk4 extends StatefulWidget {
   const DetailSnk4({super.key});
@@ -47,12 +44,11 @@ class _DetailSnk4State extends State<DetailSnk4> {
 
 
     ];
-    int jumlah = var1.length;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Privasi dan Keamanan",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -68,7 +64,7 @@ class _DetailSnk4State extends State<DetailSnk4> {
            
             children: [
               SizedBox(height:heightt *5/800,),
-              Container(
+              SizedBox(
                 height: 800,
                 width: widthh,
                 child: Column(

@@ -124,7 +124,7 @@ class _BPJSScreenState extends State<BPJSScreen> {
                 child: Text.rich(
                     textAlign: TextAlign.left,
                     TextSpan(
-                        text: bambang.text.length == 0
+                        text: bambang.text.isEmpty
                             ? "Silahkan masukkan nomor VA keluarga anda"
                             : bambang.text.length != 13
                                 ? "Silahkan masukkan nomor yang valid"

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/page/product/category_withprovider.dart';
-// ignore: unused_import
-import 'package:ppodb_2/page/product/detail_product.dart';
 import 'package:ppodb_2/page/main_page/main_page.dart';
+import 'package:ppodb_2/page/product/category_withprovider.dart';
 
-class SuccesPage extends StatefulWidget {
-  const SuccesPage({super.key});
+class Failtransaction extends StatelessWidget {
+  const Failtransaction({super.key});
 
-  @override
-  State<SuccesPage> createState() => _SuccesPageState();
-}
-
-class _SuccesPageState extends State<SuccesPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        leading: const BackButton(
+          color: Colors.black,
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
       backgroundColor: Colors.white,
       body: Padding(
         padding:
@@ -23,21 +24,21 @@ class _SuccesPageState extends State<SuccesPage> {
         child: Column(
           children: [
             SizedBox(
-              height: size.height * .2225,
+              height: size.height * .2,
             ),
             SizedBox(
               width: size.width * .9138,
               child: Column(
                 children: [
                   Image.asset(
-                    "assets/image/bro.png",
-                    width: size.width * .6667,
+                    "assets/image/Gagal_Pandangan_Bawah.png",
                     height: size.height * .3,
+                    width: size.width * .66,
                   ),
                   const Text.rich(
                       textAlign: TextAlign.center,
                       TextSpan(
-                          text: "Isi Saldo Berhasil!",
+                          text: "Transaksi Kamu Gagal :(",
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 24,
@@ -49,7 +50,7 @@ class _SuccesPageState extends State<SuccesPage> {
                       textAlign: TextAlign.center,
                       TextSpan(
                           text:
-                              "Yeay... saldo kamu udah terisi! yuk ulangi\ntransaksi.",
+                              "Maaf, terjadi kendala dengan transaksi\nkamu.  Yuk transaksi ulang!",
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 16,
@@ -58,7 +59,7 @@ class _SuccesPageState extends State<SuccesPage> {
               ),
             ),
             SizedBox(
-              height: size.height * .145,
+              height: size.height * .17,
             ),
             Padding(
                 padding: EdgeInsets.only(
@@ -75,16 +76,16 @@ class _SuccesPageState extends State<SuccesPage> {
                             backgroundColor: const Color(0xff0D40C6),
                             shape: const StadiumBorder()),
                         onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const CategoryProductprovider()),
-                          );
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const CategoryProductprovider()),
+                              (route) => route.isFirst);
                         },
                         child: const Text.rich(
                           TextSpan(
-                            text: "Ulangi Transaksi",
+                            text: "Transaksi Lain",
                           ),
                           style: TextStyle(
                               fontWeight: FontWeight.w600, fontSize: 16),
@@ -106,11 +107,11 @@ class _SuccesPageState extends State<SuccesPage> {
                       height: size.height * .07,
                       child: TextButton(
                         onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MainPage()),
-                          );
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const MainPage()),
+                              ((route) => route.isFirst));
                         },
                         child: const Text.rich(
                           TextSpan(

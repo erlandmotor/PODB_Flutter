@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/pembayranwallet.dart';
 
 class KirimUang extends StatefulWidget {
@@ -78,7 +77,7 @@ class _KirimUangState extends State<KirimUang> {
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: bambang.text == ""
                           ? InputDecoration(
-                              prefixIcon: Icon(
+                              prefixIcon: const Icon(
                                 Icons.phone_android,
                                 color: Colors.black,
                               ),
@@ -86,8 +85,8 @@ class _KirimUangState extends State<KirimUang> {
                                   borderRadius: BorderRadius.circular(10)),
                               hintText: "0853xxxxxxxx")
                           : InputDecoration(
-                              prefixIcon: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                              prefixIcon: const Padding(
+                                  padding: EdgeInsets.all(8.0),
                                   child: Icon(
                                     Icons.phone_android,
                                     color: Colors.black,
@@ -141,13 +140,13 @@ class _KirimUangState extends State<KirimUang> {
                 SizedBox(
                   height: size.height * .02,
                 ),
-                Align(
+                const Align(
                   alignment: Alignment.topLeft,
                   child: Text.rich(
                       textAlign: TextAlign.left,
                       TextSpan(
                           text: "Masukkan Jumlah (Rp)",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.w500,
                             color: Colors.black,
                             fontSize: 16,
@@ -174,7 +173,7 @@ class _KirimUangState extends State<KirimUang> {
                               color: Color(0xff0D40C6),
                               fontSize: 30,
                               fontWeight: FontWeight.w600),
-                          fillColor: Color(0xffE7ECF9),
+                          fillColor: const Color(0xffE7ECF9),
                           prefixIcon: Padding(
                               padding: EdgeInsets.only(
                                   top: size.height * .015,
@@ -198,7 +197,7 @@ class _KirimUangState extends State<KirimUang> {
                               color: Color(0xff0D40C6),
                               fontSize: 30,
                               fontWeight: FontWeight.w600),
-                          fillColor: Color(0xffE7ECF9),
+                          fillColor: const Color(0xffE7ECF9),
                           suffixIcon: IconButton(
                               onPressed: () {
                                 jumlah.clear();
@@ -237,11 +236,11 @@ class _KirimUangState extends State<KirimUang> {
                     ),
                     Column(
                       children: [
-                        Text.rich(
+                        const Text.rich(
                             textAlign: TextAlign.left,
                             TextSpan(
                                 text: "MyCuan saldo",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.w700,
                                   color: Colors.black,
                                   fontSize: 16,
@@ -249,11 +248,11 @@ class _KirimUangState extends State<KirimUang> {
                         SizedBox(
                           height: size.height * .01,
                         ),
-                        Text.rich(
+                        const Text.rich(
                             textAlign: TextAlign.left,
                             TextSpan(
                                 text: "Saldo: Rp 800.000",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.black,
                                   fontSize: 12,
@@ -262,19 +261,19 @@ class _KirimUangState extends State<KirimUang> {
                     )
                   ],
                 ),
-                Divider(
+                const Divider(
                   thickness: 2,
                 ),
                 SizedBox(
                   height: size.height * .02,
                 ),
-                Align(
+                const Align(
                     alignment: Alignment.topLeft,
                     child: Text.rich(
                         textAlign: TextAlign.left,
                         TextSpan(
                             text: "Tulis Pesan (optional)",
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.w500,
                               color: Colors.black,
                               fontSize: 16,
@@ -299,11 +298,11 @@ class _KirimUangState extends State<KirimUang> {
                 ),
                 Container(
                   alignment: Alignment.topLeft,
-                  child: Text.rich(
+                  child: const Text.rich(
                       textAlign: TextAlign.left,
                       TextSpan(
                           text: "Maksimal 50 karakter yah",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.w400,
                             color: Color(0xff5C5D61),
                             fontSize: 12,

@@ -1,12 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:ppodb_2/page/home/home.dart';
 import 'package:ppodb_2/page/login_register/login_page.dart';
 import 'package:ppodb_2/page/login_register/register1_page.dart';
+import 'package:ppodb_2/page/main_page/main_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../shared/shared.dart';
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
 
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  @override
+  void initState() {
+    checkLogin();
+    super.initState();
+  }
+  void checkLogin() async {
+    final helper = await SharedPreferences.getInstance();
+    final token = helper.getString('token');
+    if (token != null) {
+      if (mounted) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MainPage(),
+            ),
+            (route) => false);
+      }
+    }
+    return null;
+  }
   @override
   Widget build(BuildContext context) {
     var Size = MediaQuery.of(context).size;
@@ -55,51 +83,51 @@ class WelcomePage extends StatelessWidget {
               SizedBox(
                 height: Size.height * 0.065,
               ),
-              Container(
+              SizedBox(
                 height: Size.height * 0.06,
                 width: Size.width * 0.911,
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Register1Page(),
+                        builder: (context) => const Register1Page(),
                       ));
                     },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: primaryColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30))),
                     child: Text(
                       'Daftar',
                       style: whiteTextStyle.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           color: whiteColor),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: primaryColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30)))),
+                    )),
               ),
               SizedBox(
                 height: Size.height * 0.02,
               ),
-              Container(
+              SizedBox(
                 height: Size.height * 0.06,
                 width: Size.width * 0.911,
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => LoginPage(),
+                        builder: (context) => const LoginPage(),
                       ));
                     },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: whiteColor,
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(color: primaryColor, width: 1.5),
+                            borderRadius: BorderRadius.circular(30))),
                     child: Text(
                       'Masuk',
                       style: whiteTextStyle.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           color: primaryColor),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: whiteColor,
-                        shape: RoundedRectangleBorder(
-                            side: BorderSide(color: primaryColor, width: 1.5),
-                            borderRadius: BorderRadius.circular(30)))),
+                    )),
               ),
               SizedBox(
                 height: Size.height * 0.06,

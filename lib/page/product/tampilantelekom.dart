@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ppodb_2/page/widgets/detailTelekom.dart';
+import 'package:ppodb_2/page/product/detailTelekom.dart';
 import 'package:ppodb_2/service/providers/product/product_list_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -162,6 +162,7 @@ class _Tampilan_telekomState extends State<Tampilan_telekom> {
                                     listen: false);
 
                                 prov.getdatabaru(widget.type, bambang.text);
+
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

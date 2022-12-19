@@ -1,5 +1,4 @@
 
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ppodb_2/page/akun/reset_password.dart';
@@ -51,7 +50,7 @@ class _EditPasswordState extends State<EditPassword> {
            final passUpdate =await MyCuanAPI().updatePassowrd(_pastPassController.text, _katasandibaruController.text);
             print(passUpdate);
             Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => MainPage(),
+                                    builder: (context) => const MainPage(),
                                   )
                                   );
             // if (_postProses == "berhasil") {
@@ -70,7 +69,7 @@ class _EditPasswordState extends State<EditPassword> {
     final providerKonfirmasi = Provider.of<AuthViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.black
         ),
         centerTitle: true,
@@ -144,7 +143,7 @@ class _EditPasswordState extends State<EditPassword> {
                           
                         ),
                         onTap: () {
-                           Navigator.push(context, MaterialPageRoute(builder: ((context) => ResetPassword())));
+                           Navigator.push(context, MaterialPageRoute(builder: ((context) => const ResetPassword())));
                         },
                       ),
                     ),
@@ -227,7 +226,7 @@ class _EditPasswordState extends State<EditPassword> {
               ),
                      Padding(
                        padding:  EdgeInsets.only(top: heightt*160/800),
-                       child: Container(
+                       child: SizedBox(
                         height: heightt * 0.06,
                         width: widthh * 0.911,
                         child: ElevatedButton(
@@ -251,17 +250,17 @@ class _EditPasswordState extends State<EditPassword> {
                                "assets/icon/cuate.png");
                             
                             },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: primaryColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30))),
                             child: Text(
                               'Konfirmasi',
                               style: whiteTextStyle.copyWith(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   color: whiteColor),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: primaryColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)))),
+                            )),
                     ),
                      ),
                     // Text(

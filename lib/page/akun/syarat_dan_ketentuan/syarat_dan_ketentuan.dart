@@ -6,7 +6,6 @@ import 'package:ppodb_2/page/akun/syarat_dan_ketentuan/detail_snk3.dart';
 import 'package:ppodb_2/page/akun/syarat_dan_ketentuan/detail_snk4.dart';
 import 'package:ppodb_2/page/akun/syarat_dan_ketentuan/detail_snk5.dart';
 import 'package:ppodb_2/page/akun/syarat_dan_ketentuan/detail_snk6.dart';
-import 'package:ppodb_2/page/widgets/constanta.dart';
 
 class SyaratKetentuan extends StatefulWidget {
   const SyaratKetentuan({super.key});
@@ -24,7 +23,7 @@ class _SyaratKetentuanState extends State<SyaratKetentuan> {
        resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Syarat dan Ketentuan",
           selectionColor: Color(0xff5C5D61),
         ),
@@ -44,14 +43,14 @@ class _SyaratKetentuanState extends State<SyaratKetentuan> {
                     child: Container(
                   width: widthh * 328 / 360,
                   height: heightt * 175 / 800,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
                     "assets/icon/snk1.png",
                     )),
                   ),
                 ),onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: ((context) => DetailSnk1())));
+                  Navigator.push(context, MaterialPageRoute(builder: ((context) => const DetailSnk1())));
                 },
                 ),              
               ),
@@ -61,14 +60,14 @@ class _SyaratKetentuanState extends State<SyaratKetentuan> {
                     child: Container(
                   width: widthh * 328 / 360,
                   height: heightt * 175 / 800,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
                     "assets/icon/snk2.png",
                     )),
                   ),
                 ),onTap: () {
-                   Navigator.push(context, MaterialPageRoute(builder: ((context) => DetailSnk2())));
+                   Navigator.push(context, MaterialPageRoute(builder: ((context) => const DetailSnk2())));
                 },
                 ),
               ),
@@ -78,7 +77,7 @@ class _SyaratKetentuanState extends State<SyaratKetentuan> {
                     child: Container(
                   width: widthh * 328 / 360,
                   height: heightt * 175 / 800,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
                     "assets/icon/snk3.png",
@@ -86,7 +85,7 @@ class _SyaratKetentuanState extends State<SyaratKetentuan> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: ((context) => DetailSnk3())));
+                  Navigator.push(context, MaterialPageRoute(builder: ((context) => const DetailSnk3())));
                 },
                 ),
               ),
@@ -96,14 +95,14 @@ class _SyaratKetentuanState extends State<SyaratKetentuan> {
                     child: Container(
                   width: widthh * 328 / 360,
                   height: heightt * 175 / 800,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
                     "assets/icon/snk4.png",
                     )),
                   ),
                 ),onTap: () {
-                   Navigator.push(context, MaterialPageRoute(builder: ((context) => DetailSnk4())));
+                   Navigator.push(context, MaterialPageRoute(builder: ((context) => const DetailSnk4())));
                 },),
               ),
               Padding(
@@ -112,7 +111,7 @@ class _SyaratKetentuanState extends State<SyaratKetentuan> {
                     child: Container(
                   width: widthh * 328 / 360,
                   height: heightt * 175 / 800,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
                     "assets/icon/snk5.png",
@@ -120,7 +119,7 @@ class _SyaratKetentuanState extends State<SyaratKetentuan> {
                   ),
                 ),
                 onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: ((context) => DetailSnk5())));
+                    Navigator.push(context, MaterialPageRoute(builder: ((context) => const DetailSnk5())));
                 },),
               ),
               Padding(
@@ -129,7 +128,7 @@ class _SyaratKetentuanState extends State<SyaratKetentuan> {
                     child: Container(
                   width: widthh * 328 / 360,
                   height: heightt * 175 / 800,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
                     "assets/icon/snk6.png",
@@ -137,7 +136,7 @@ class _SyaratKetentuanState extends State<SyaratKetentuan> {
                   ),
                 ),
                 onTap: () {
-                   Navigator.push(context, MaterialPageRoute(builder: ((context) => DetailSnk6())));
+                   Navigator.push(context, MaterialPageRoute(builder: ((context) => const DetailSnk6())));
                 },),
               ),
           ],

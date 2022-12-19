@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ppodb_2/models/data_register_model.dart';
 import 'package:ppodb_2/models/register_model.dart';
-import 'package:ppodb_2/page/login_register/register1_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../service/database/auth_service.dart';
@@ -13,6 +12,7 @@ class AuthViewModel with ChangeNotifier {
   static final _shared = SharedPreferences.getInstance();
   static const _token = 'token';
   String? isNext;
+  String? message;
 
   bool _is8Digit = false;
   bool _isHurufKecil = false;
@@ -76,12 +76,19 @@ class AuthViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void getToken(String email, String password) async {
+  Future <void> getToken(String email, String password) async {
     try {
       final result = await _dioService.getToken(email, password);
-
+      print('$result data result');
+      message = "success";
       saveToken(result);
-    } catch (e) {}
+    } catch (e) {
+      if(e is DioError){
+        print(e.response!.data['message']);
+        message = e.response!.data['message'];
+      }
+      print(e);
+    }
     notifyListeners();
   }
 

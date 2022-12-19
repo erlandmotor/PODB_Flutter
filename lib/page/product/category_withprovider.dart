@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/models/dummymodel.dart';
 import 'package:ppodb_2/models/product/productcate.dart';
+import 'package:ppodb_2/page/main_page/main_page.dart';
 import 'package:ppodb_2/service/providers/product/productcate_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +18,10 @@ class _CategoryProductproviderState extends State<CategoryProductprovider> {
   String status = "";
 
   late List<Datacate> prod;
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +30,100 @@ class _CategoryProductproviderState extends State<CategoryProductprovider> {
     final isError =
         Provider.of<ProductcateProviders>(context).state == Catestate.error;
     prod = Provider.of<ProductcateProviders>(context).isicategory;
-
     var size = MediaQuery.of(context).size;
-    return isloading
+    return isloading || prod == []
         ? const Center(
             child: CircularProgressIndicator(),
           )
         : isError
-            ? Container(
-                color: Colors.white,
-                child: const Center(
-                  child: Text("Saat ini anda sedang dalam mode offline"),
+            ? Scaffold(
+                extendBodyBehindAppBar: true,
+                appBar: AppBar(
+                  leading: const BackButton(
+                    color: Colors.black,
+                  ),
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                ),
+                backgroundColor: Colors.white,
+                body: Padding(
+                  padding: EdgeInsets.only(
+                      right: size.width * .044, left: size.width * .044),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: size.height * .2,
+                      ),
+                      SizedBox(
+                        width: size.width * .9138,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              "assets/image/Server Error.png",
+                              height: size.height * .3,
+                              width: size.width * .66,
+                            ),
+                            const Text.rich(
+                                textAlign: TextAlign.center,
+                                TextSpan(
+                                    text:
+                                        "Yah, Server MyCuan\nSedang Ganggunan!",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 24,
+                                        color: Colors.black))),
+                            SizedBox(
+                              height: size.height * .02,
+                            ),
+                            const Text.rich(
+                                textAlign: TextAlign.center,
+                                TextSpan(
+                                    text:
+                                        "Maaf ya, kegiatan kamu jadi terganggu.\nKamu bisa coba lagi beberapa saat.",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 16,
+                                        color: Color(0xff5C5D61)))),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.height * .205,
+                      ),
+                      Padding(
+                          padding: EdgeInsets.only(
+                            left: size.width * .016,
+                            right: size.width * .016,
+                          ),
+                          child: Container(
+                              alignment: Alignment.bottomCenter,
+                              child: SizedBox(
+                                width: size.width * 3.28,
+                                height: size.height * .07,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xff0D40C6),
+                                      shape: const StadiumBorder()),
+                                  onPressed: () {
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const MainPage()),
+                                        (route) => route.isFirst);
+                                  },
+                                  child: const Text.rich(
+                                    TextSpan(
+                                      text: "Coba Lagi",
+                                    ),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16),
+                                  ),
+                                ),
+                              ))),
+                    ],
+                  ),
                 ),
               )
             : Scaffold(
@@ -62,6 +149,7 @@ class _CategoryProductproviderState extends State<CategoryProductprovider> {
                           height: size.height * .02,
                         ),
                         SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
                           child: Row(
                             children: <Widget>[
                               for (int i = 0; i < prod.length; i++)
@@ -108,7 +196,6 @@ class _CategoryProductproviderState extends State<CategoryProductprovider> {
                                     )),
                             ],
                           ),
-                          scrollDirection: Axis.horizontal,
                         ),
                         SizedBox(
                           height: size.height * .02,

@@ -7,7 +7,7 @@ import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:ppodb_2/page/transaction/token_succes.dart';
 import 'package:ppodb_2/page/transaction/vouchertele.dart';
 
-import '../widgets/qrCode.dart';
+import 'qrCode.dart';
 
 class Pembayaranscreen extends StatefulWidget {
   KirimanKonfirm terima;
