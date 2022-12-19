@@ -175,6 +175,7 @@ class _Detail_telkomwithprovidersState
                               color: Colors.white,
                             ),
                             TextField(
+                              readOnly: true,
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly
                               ],
