@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:badges/badges.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -118,14 +119,23 @@ class _EditAkunState extends State<EditAkun> {
                    Padding(
                      padding:  EdgeInsets.only(left: widthh*108/360,top: heightt*16/800,),
                      child: InkWell(
-                       child: Container(
-                                height: 91,
-                                width: 112,                      
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(400),                        
-                                  image: DecorationImage(image: NetworkImage(widget.gam,),)
+                       child: Badge(
+                        child: Container(
+                                  height: 91,
+                                  width: 112,                      
+                                  decoration: BoxDecoration(
+                                    border: Border.all(width: 1),
+                                    borderRadius: BorderRadius.circular(400),                        
+                                    image: DecorationImage(image: NetworkImage(widget.gam,),)
+                                  ),
                                 ),
-                              ),
+                          badgeColor: primaryColor,
+                          position: BadgePosition.bottomEnd(),
+                         badgeContent: SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: Image.asset("assets/icon/edit.png",color: Colors.white,))
+                       ),
                               onTap: () {
                                  _pickFile();
                               },
