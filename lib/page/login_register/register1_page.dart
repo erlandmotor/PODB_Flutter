@@ -1,7 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:ppodb_2/models/data_register_model.dart';
+import 'package:ppodb_2/models/login/data_register_model.dart';
 import 'package:ppodb_2/page/login_register/login_page.dart';
 import 'package:ppodb_2/page/login_register/register2_page.dart';
 import 'package:provider/provider.dart';
@@ -21,8 +21,6 @@ class _Register1PageState extends State<Register1Page> {
   final _namalengkapController = TextEditingController();
   final _emailController = TextEditingController();
   final _nomortelponController = TextEditingController();
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -179,13 +177,14 @@ class _Register1PageState extends State<Register1Page> {
                                   namalengkap: _namalengkapController.text,
                                   email: _emailController.text,
                                   nomortelpon: _nomortelponController.text);
-                                  Provider.of<AuthViewModel>(context, listen: false).saveData1(users);
-                                 
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Register2Page(register1model: users,),
+                              Provider.of<AuthViewModel>(context, listen: false)
+                                  .saveData1(users);
+
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Register2Page(
+                                  register1model: users,
+                                ),
                               ));
-                                 
-                              
                             }
                           },
                           style: ElevatedButton.styleFrom(

@@ -7,7 +7,7 @@ import 'package:ppodb_2/page/widgets/checkstatus.dart';
 import 'package:ppodb_2/service/providers/product/product_list_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/dummymodel.dart';
+import '../../models/login/dummymodel.dart';
 
 class Detail_telkomwithproviders extends StatefulWidget {
   int type;

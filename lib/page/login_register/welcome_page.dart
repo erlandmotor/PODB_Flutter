@@ -20,6 +20,7 @@ class _WelcomePageState extends State<WelcomePage> {
     checkLogin();
     super.initState();
   }
+
   void checkLogin() async {
     final helper = await SharedPreferences.getInstance();
     final token = helper.getString('token');
@@ -35,6 +36,7 @@ class _WelcomePageState extends State<WelcomePage> {
     }
     return null;
   }
+
   @override
   Widget build(BuildContext context) {
     var Size = MediaQuery.of(context).size;

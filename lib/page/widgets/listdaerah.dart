@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ppodb_2/models/dummymodel.dart';
+import 'package:ppodb_2/models/login/dummymodel.dart';
 
 class Wilayahpicker extends StatefulWidget {
   const Wilayahpicker({super.key});

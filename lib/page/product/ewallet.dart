@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ppodb_2/models/dummymodel.dart';
+import 'package:ppodb_2/models/login/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/kirimuang.dart';
 
 class Topupwallet extends StatefulWidget {

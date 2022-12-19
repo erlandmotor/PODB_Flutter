@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-import '../../models/dummymodel.dart';
+import '../../models/login/dummymodel.dart';
 import '../transaction/pembayaran.dart';
 
 class Token_listrik extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:ppodb_2/models/dummymodel.dart';
+import 'package:ppodb_2/models/login/dummymodel.dart';
 import 'package:ppodb_2/page/transaction/succes.dart';
 import 'package:ppodb_2/page/transaction/token_succes.dart';
 import 'package:ppodb_2/page/transaction/vouchertele.dart';

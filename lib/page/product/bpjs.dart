@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../models/dummymodel.dart';
+import '../../models/login/dummymodel.dart';
 import '../transaction/pembayaran.dart';
 
 class BPJSScreen extends StatefulWidget {

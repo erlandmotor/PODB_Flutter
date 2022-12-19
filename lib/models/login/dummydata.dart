@@ -1,4 +1,4 @@
-import 'package:ppodb_2/models/dummymodel.dart';
+import 'package:ppodb_2/models/login/dummymodel.dart';
 
 List<ProductDummyModel> dummydata = [
   ProductDummyModel(

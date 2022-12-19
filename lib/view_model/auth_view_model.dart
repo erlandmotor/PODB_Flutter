@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:ppodb_2/models/data_register_model.dart';
-import 'package:ppodb_2/models/register_model.dart';
+import 'package:ppodb_2/models/login/data_register_model.dart';
+import 'package:ppodb_2/models/login/register_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../service/database/auth_service.dart';
@@ -24,7 +24,6 @@ class AuthViewModel with ChangeNotifier {
   Register1Model? _data1;
   Register2Model? _data2;
 
-
   bool get is8Digit => _is8Digit;
   bool get isHurufKecil => _isHurufKecil;
   bool get isHurufKapital => _isHurufKapital;
@@ -34,10 +33,11 @@ class AuthViewModel with ChangeNotifier {
   bool get passVissible2 => _passVissible2;
   Register1Model get data1 => _data1!;
   Register2Model get data2 => _data2!;
-  void saveData1(Register1Model dataRegister1){
+  void saveData1(Register1Model dataRegister1) {
     _data1 = dataRegister1;
   }
-  void saveData2(Register2Model dataRegister2){
+
+  void saveData2(Register2Model dataRegister2) {
     _data2 = dataRegister2;
   }
   // String get isNext => isNext;
@@ -55,18 +55,15 @@ class AuthViewModel with ChangeNotifier {
       if (e is DioError) {
         //  print("gagal");
         print(e.response!.data["message"]);
-       if(e.response!.data["message"] == "email already registered"){
-        isNext = "email";
-        print("response email");
-       }
-       
-       if(e.response!.data["message"] == "Number already registered"){
-        isNext = "number";
-         print("response number");
-       }
+        if (e.response!.data["message"] == "email already registered") {
+          isNext = "email";
+          print("response email");
+        }
 
-
-        
+        if (e.response!.data["message"] == "Number already registered") {
+          isNext = "number";
+          print("response number");
+        }
       } else {
         //  print(e.response!.data["message"]);
         print("berhasil");
@@ -76,14 +73,14 @@ class AuthViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future <void> getToken(String email, String password) async {
+  Future<void> getToken(String email, String password) async {
     try {
       final result = await _dioService.getToken(email, password);
       print('$result data result');
       message = "success";
       saveToken(result);
     } catch (e) {
-      if(e is DioError){
+      if (e is DioError) {
         print(e.response!.data['message']);
         message = e.response!.data['message'];
       }
